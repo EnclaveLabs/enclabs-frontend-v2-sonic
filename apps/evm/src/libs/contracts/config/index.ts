@@ -8,7 +8,8 @@ import { abi as PoolLensAbi } from '@venusprotocol/isolated-pools/artifacts/cont
 import { abi as PoolRegistryAbi } from '@venusprotocol/isolated-pools/artifacts/contracts/Pool/PoolRegistry.sol/PoolRegistry.json';
 import { abi as RewardsDistributorAbi } from '@venusprotocol/isolated-pools/artifacts/contracts/Rewards/RewardsDistributor.sol/RewardsDistributor.json';
 import { abi as VBep20Abi } from '@venusprotocol/isolated-pools/artifacts/contracts/VToken.sol/VToken.json';
-import isolatedPoolsArbitrumOneDeployments from '@venusprotocol/isolated-pools/deployments/arbitrumone_addresses.json';
+// import isolatedPoolsArbitrumOneDeployments from '@venusprotocol/isolated-pools/deployments/arbitrumone_addresses.json';
+import isolatedPoolsArbitrumOneDeployments from './abis/arbitrumone_addresses.json';
 import isolatedPoolsArbitrumSepoliaDeployments from '@venusprotocol/isolated-pools/deployments/arbitrumsepolia_addresses.json';
 import isolatedPoolsBscMainnetDeployments from '@venusprotocol/isolated-pools/deployments/bscmainnet_addresses.json';
 import isolatedPoolsBscTestnetDeployments from '@venusprotocol/isolated-pools/deployments/bsctestnet_addresses.json';
@@ -21,7 +22,8 @@ import isolatedPoolsSepoliaDeployments from '@venusprotocol/isolated-pools/deplo
 import isolatedPoolsZkSyncMainnetDeployments from '@venusprotocol/isolated-pools/deployments/zksyncmainnet_addresses.json';
 import isolatedPoolsZkSyncSepoliaDeployments from '@venusprotocol/isolated-pools/deployments/zksyncsepolia_addresses.json';
 import { abi as ResilientOracleAbi } from '@venusprotocol/oracle/artifacts/contracts/ResilientOracle.sol/ResilientOracle.json';
-import venusOracleArbitrumOneDeployments from '@venusprotocol/oracle/deployments/arbitrumone_addresses.json';
+// import venusOracleArbitrumOneDeployments from '@venusprotocol/oracle/deployments/arbitrumone_addresses.json';
+import venusOracleArbitrumOneDeployments from './abis/arbitrumone_addresses.json';
 import venusOracleArbitrumSepoliaDeployments from '@venusprotocol/oracle/deployments/arbitrumsepolia_addresses.json';
 import venusOracleBscMainnetDeployments from '@venusprotocol/oracle/deployments/bscmainnet_addresses.json';
 import venusOracleBscTestnetDeployments from '@venusprotocol/oracle/deployments/bsctestnet_addresses.json';
@@ -65,7 +67,7 @@ import { abi as XvsVestingAbi } from '@venusprotocol/venus-protocol/artifacts/co
 import { abi as VaiVaultAbi } from '@venusprotocol/venus-protocol/artifacts/contracts/VAIVault/VAIVault.sol/VAIVault.json';
 import { abi as XvsStoreAbi } from '@venusprotocol/venus-protocol/artifacts/contracts/XVSVault/XVSStore.sol/XVSStore.json';
 import { abi as XvsVaultAbi } from '@venusprotocol/venus-protocol/artifacts/contracts/XVSVault/XVSVault.sol/XVSVault.json';
-import venusProtocolArbitrumOneDeployments from '@venusprotocol/venus-protocol/deployments/arbitrumone_addresses.json';
+import venusProtocolArbitrumOneDeployments from './abis/arbitrumone_addresses.json';
 import venusProtocolArbitrumSepoliaDeployments from '@venusprotocol/venus-protocol/deployments/arbitrumsepolia_addresses.json';
 import venusProtocolBscMainnetDeployments from '@venusprotocol/venus-protocol/deployments/bscmainnet_addresses.json';
 import venusProtocolBscTestnetDeployments from '@venusprotocol/venus-protocol/deployments/bsctestnet_addresses.json';

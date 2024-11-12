@@ -9,7 +9,7 @@ export const featureFlags = {
     ChainId.SEPOLIA,
     ChainId.ETHEREUM,
     ChainId.ARBITRUM_SEPOLIA,
-    ChainId.ARBITRUM_ONE,
+    // ChainId.ARBITRUM_ONE,
     ChainId.ZKSYNC_SEPOLIA,
     ChainId.ZKSYNC_MAINNET,
     ChainId.OPTIMISM_MAINNET,

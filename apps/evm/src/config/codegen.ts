@@ -4,7 +4,8 @@ const plugins = ['typescript', 'typed-document-node', 'typescript-operations'];
 
 export const projects = {
   isolatedPools: {
-    schema: 'https://api.studio.thegraph.com/query/77761/venus-isolated-pools/version/latest',
+    // schema: 'https://api.studio.thegraph.com/query/77761/venus-isolated-pools/version/latest',
+    schema: 'https://api.studio.thegraph.com/query/91097/enclabs-arb-test/version/latest',
     documents: ['../clients/subgraph/queries/isolatedPools/**/*.graphql'],
     extensions: {
       codegen: {

@@ -146,8 +146,11 @@ const PoolTable = () => {
   // Filter out core pool (on some chains the core pool is one of the isolated pools)
   const pools = useMemo(
     () =>
+      
       (poolData?.pools || []).filter(
-        pool => !areAddressesEqual(pool.comptrollerAddress, corePoolComptrollerContractAddress),
+        // Remove filter to have all pool in isolated pool table
+        // pool => !areAddressesEqual(pool.comptrollerAddress, corePoolComptrollerContractAddress),
+        pool => pool,
       ),
     [poolData?.pools, corePoolComptrollerContractAddress],
   );
