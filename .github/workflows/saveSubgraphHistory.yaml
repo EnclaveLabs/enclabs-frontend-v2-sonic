@@ -17,9 +17,14 @@ jobs:
         with:
           node-version: '16' # Spécifiez la version de Node.js requise
 
+      - name: Log node version
+        run: node -v
+
+      - name: Check files in script directory
+        run: ls -la apps/evm/src/scripts
+
       - name: Install dependencies
         run: npm install
 
       - name: Run script
-      
         run: npx ts-node apps/evm/src/scripts/fetchGraphInfo.ts
