@@ -25,7 +25,7 @@ jobs:
         run: ls -la apps/evm/src/scripts
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Run script
         run: npx ts-node apps/evm/src/scripts/fetchGraphInfo.ts
