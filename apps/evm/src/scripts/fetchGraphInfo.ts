@@ -82,9 +82,10 @@ async function saveDataToSupabase(markets: FetchedMarketData[]) {
 }
 
 async function run() {
-    const data = await fetchGraphQLData();
+    // const data = await fetchGraphQLData();
     // console.log(data);
-    await saveDataToSupabase(data.markets);
+    // await saveDataToSupabase(data.markets);
+    console.log("hi")
 }
 
 
