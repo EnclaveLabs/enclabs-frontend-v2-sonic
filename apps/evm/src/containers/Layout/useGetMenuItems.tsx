@@ -38,23 +38,23 @@ const useGetMenuItems = () => {
       });
     }
 
-    if (lstPoolComptrollerContractAddress && lstPoolVWstEthContractAddress) {
-      menuItems.push({
-        to: routes.lidoMarket.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.lidoMarket')
-        i18nKey: 'layout.menuItems.lidoMarket',
-        iconName: 'lido',
-      });
-    }
+    // if (lstPoolComptrollerContractAddress && lstPoolVWstEthContractAddress) {
+    //   menuItems.push({
+    //     to: routes.lidoMarket.path,
+    //     // Translation key: do not remove this comment
+    //     // t('layout.menuItems.lidoMarket')
+    //     i18nKey: 'layout.menuItems.lidoMarket',
+    //     iconName: 'lido',
+    //   });
+    // }
 
-    menuItems.push({
-      to: routes.corePool.path,
-      // Translation key: do not remove this comment
-      // t('layout.menuItems.corePool')
-      i18nKey: 'layout.menuItems.corePool',
-      iconName: 'venus',
-    });
+    // menuItems.push({
+    //   to: routes.corePool.path,
+    //   // Translation key: do not remove this comment
+    //   // t('layout.menuItems.corePool')
+    //   i18nKey: 'layout.menuItems.corePool',
+    //   iconName: 'venus',
+    // });
 
     if (isolatedPoolsRouteEnabled) {
       menuItems.push({
@@ -66,51 +66,51 @@ const useGetMenuItems = () => {
       });
     }
 
-    menuItems.push({
-      to: routes.vaults.path,
-      // Translation key: do not remove this comment
-      // t('layout.menuItems.vaults')
-      i18nKey: 'layout.menuItems.vaults',
-      iconName: 'vault',
-    });
+    // menuItems.push({
+    //   to: routes.vaults.path,
+    //   // Translation key: do not remove this comment
+    //   // t('layout.menuItems.vaults')
+    //   i18nKey: 'layout.menuItems.vaults',
+    //   iconName: 'vault',
+    // });
 
-    if (swapRouteEnabled) {
-      menuItems.push({
-        to: routes.swap.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.swap')
-        i18nKey: 'layout.menuItems.swap',
-        iconName: 'convert',
-      });
-    }
+    // if (swapRouteEnabled) {
+    //   menuItems.push({
+    //     to: routes.swap.path,
+    //     // Translation key: do not remove this comment
+    //     // t('layout.menuItems.swap')
+    //     i18nKey: 'layout.menuItems.swap',
+    //     iconName: 'convert',
+    //   });
+    // }
 
-    menuItems.push({
-      to: routes.governance.path,
-      // Translation key: do not remove this comment
-      // t('layout.menuItems.governance')
-      i18nKey: 'layout.menuItems.governance',
-      iconName: 'market',
-    });
+    // menuItems.push({
+    //   to: routes.governance.path,
+    //   // Translation key: do not remove this comment
+    //   // t('layout.menuItems.governance')
+    //   i18nKey: 'layout.menuItems.governance',
+    //   iconName: 'market',
+    // });
 
-    if (vaiRouteEnabled) {
-      menuItems.push({
-        to: routes.vai.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.vai')
-        i18nKey: 'layout.menuItems.vai',
-        iconName: 'vaiOutline',
-      });
-    }
+    // if (vaiRouteEnabled) {
+    //   menuItems.push({
+    //     to: routes.vai.path,
+    //     // Translation key: do not remove this comment
+    //     // t('layout.menuItems.vai')
+    //     i18nKey: 'layout.menuItems.vai',
+    //     iconName: 'vaiOutline',
+    //   });
+    // }
 
-    if (bridgeRouteEnabled) {
-      menuItems.push({
-        to: routes.bridge.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.bridge')
-        i18nKey: 'layout.menuItems.bridge',
-        iconName: 'bridge',
-      });
-    }
+    // if (bridgeRouteEnabled) {
+    //   menuItems.push({
+    //     to: routes.bridge.path,
+    //     // Translation key: do not remove this comment
+    //     // t('layout.menuItems.bridge')
+    //     i18nKey: 'layout.menuItems.bridge',
+    //     iconName: 'bridge',
+    //   });
+    // }
 
     return menuItems;
   }, [
