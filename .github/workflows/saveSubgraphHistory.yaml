@@ -1,8 +1,9 @@
 name: Fetch Subgraph history and save it to remote database
 
 on:
-  schedule:
-    - cron: '*/1 * * * *' # every minutes
+  push:
+    branches:
+      - main
 
 jobs:
   run-script:
