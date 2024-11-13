@@ -21,7 +21,5 @@ jobs:
         run: npm install
 
       - name: Run script
-        env:
-          DB_URL: ${{ secrets.DB_URL }}
-          DB_API_KEY: ${{ secrets.DB_API_KEY }}
+      
         run: npx ts-node apps/evm/src/scripts/fetchGraphInfo.ts
