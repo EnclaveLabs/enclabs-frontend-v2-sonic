@@ -25,6 +25,10 @@ export interface Config {
     hostUrl: string;
   };
   zyFiApiKey: string;
+  database: {
+    dbUrl: string;
+    dbApiKey: string;
+  };
 }
 
 let environment: Environment = 'preview';
@@ -93,6 +97,10 @@ const config: Config = {
     hostUrl: ENV_VARIABLES.VITE_POSTHOG_HOST_URL || '',
   },
   zyFiApiKey: ENV_VARIABLES.VITE_ZYFI_API_KEY || '',
+  database: {
+    dbUrl: ENV_VARIABLES.VITE_DB_URL || '',
+    dbApiKey: ENV_VARIABLES.VITE_DB_API_KEY || '',
+  }
 };
 
 export { ENV_VARIABLES } from './envVariables';

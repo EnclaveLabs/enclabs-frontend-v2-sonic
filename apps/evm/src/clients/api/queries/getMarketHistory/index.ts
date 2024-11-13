@@ -1,6 +1,8 @@
 import { VError } from 'libs/errors';
 import type { MarketSnapshot, VToken } from 'types';
 import { restService } from 'utilities';
+import config from 'config';
+import { createClient } from '@supabase/supabase-js';
 
 export type MarketHistoryPeriodType = 'year' | 'halfyear' | 'month';
 
@@ -21,29 +23,56 @@ export type GetMarketHistoryOutput = {
   marketSnapshots: MarketSnapshot[];
 };
 
+const supabase = createClient(config.database.dbUrl, config.database.dbApiKey);
+
 const getMarketHistory = async ({
   vToken,
   period,
 }: GetMarketHistoryInput): Promise<GetMarketHistoryOutput> => {
-  const endpoint = `/markets/history?asset=${vToken.address}&period=${period}`;
+  // const endpoint = `/markets/history?asset=${vToken.address}&period=${period}`;
+  
+  // const response = await restService<GetMarketHistoryResponse>({
+  //   endpoint,
+  //   method: 'GET',
+  // });
 
-  const response = await restService<GetMarketHistoryResponse>({
-    endpoint,
-    method: 'GET',
-  });
+  let { data, error } = await supabase
+    .from('History')
+    .select()
+    // Filters
+    .eq('market_address', vToken.address.toLowerCase());
 
-  const payload = response.data;
-
-  // @todo Add specific api error handling
-  if (payload && 'error' in payload) {
+  if(!data || error){
     throw new VError({
       type: 'unexpected',
       code: 'somethingWentWrong',
-      data: { message: payload.error },
+      data: error!,
     });
   }
 
-  const marketSnapshots = payload?.result?.data || [];
+  const marketSnapshots: MarketSnapshot[] = data.map(market => ({
+    blockNumber: market.block_number,
+    blockTimestamp: market.block_timestamp,
+    borrowApy: market.borrow_apy,
+    supplyApy: market.supply_apy,
+    totalBorrowCents: market.total_borrow_cents,
+    totalSupplyCents: market.total_supply_cents,
+  }));  
+
+    
+  // const payload = response.data;
+
+  // // @todo Add specific api error handling
+  // if (payload && 'error' in payload) {
+  //   throw new VError({
+  //     type: 'unexpected',
+  //     code: 'somethingWentWrong',
+  //     data: { message: payload.error },
+  //   });
+  // }
+
+
+  // const marketSnapshots = payload?.result?.data || [];
 
   return {
     marketSnapshots,

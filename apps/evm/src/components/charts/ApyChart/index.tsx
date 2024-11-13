@@ -60,6 +60,7 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type, selec
           </defs>
 
           <CartesianGrid vertical={false} stroke={sharedStyles.gridLineColor} />
+          
           <XAxis
             dataKey="timestampMs"
             axisLine={false}
@@ -68,7 +69,7 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type, selec
             stroke={sharedStyles.accessoryColor}
             tickMargin={sharedStyles.tickMargin}
             tickCount={data.length}
-            interval={data.length / 5}
+            interval={data.length < 5 ? 5 : data.length}
             style={sharedStyles.axis}
           />
           <YAxis

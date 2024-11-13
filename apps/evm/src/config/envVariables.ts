@@ -188,4 +188,15 @@ export const ENV_VARIABLES = {
     typeof process !== 'undefined'
       ? process.env.VITE_ZYFI_API_KEY
       : import.meta.env.VITE_ZYFI_API_KEY,
+
+    // Database
+    VITE_DB_URL:
+      typeof process !== 'undefined'
+        ? process.env.VITE_DB_URL
+        : import.meta.env.VITE_DB_URL,
+
+    VITE_DB_API_KEY:
+      typeof process !== 'undefined'
+          ? process.env.VITE_DB_API_KEY
+          : import.meta.env.VITE_DB_API_KEY,
 };
