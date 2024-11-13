@@ -1,0 +1,27 @@
+name: Fetch Subgraph history and save it to remote database
+
+on:
+  schedule:
+    - cron: '*/1 * * * *' # every minutes
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # Spécifiez la version de Node.js requise
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run script
+        env:
+          SUPABASE_URL: ${{ secrets.DB_URL }}
+          SUPABASE_API_KEY: ${{ secrets.DB_API_KEY }}
+        run: npx ts-node apps/evm/src/scripts/fetchGraphInfo.ts
