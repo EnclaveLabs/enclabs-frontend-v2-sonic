@@ -63,8 +63,8 @@ async function saveDataToSupabase(markets: FetchedMarketData[]) {
         market_address: market.id,
         block_number: market.accrualBlockNumber.toString(),
         block_timestamp: market.blockTimestamp.toString(),
-        borrow_apy: '1',
-        supply_apy: '2',
+        borrow_apy: market.borrowRateMantissa,
+        supply_apy: market.supplyRateMantissa,
         total_borrow_cents: market.totalBorrowsMantissa,
         total_supply_cents: market.totalSupplyVTokenMantissa,
     }));
