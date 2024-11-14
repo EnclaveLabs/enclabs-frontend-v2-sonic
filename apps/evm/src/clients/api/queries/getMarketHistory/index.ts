@@ -36,11 +36,27 @@ const getMarketHistory = async ({
   //   method: 'GET',
   // });
 
+  const currentDate = new Date();
+  let startDate = new Date();
+
+  switch (period) {
+    case 'year':
+      startDate.setFullYear(currentDate.getFullYear() - 1);
+      break;
+    case 'halfyear':
+      startDate.setMonth(currentDate.getMonth() - 6);
+      break;
+    case 'month':
+      startDate.setMonth(currentDate.getMonth() - 1);
+      break;
+  }
+
   let { data, error } = await supabase
     .from('History')
     .select()
     // Filters
-    .eq('market_address', vToken.address.toLowerCase());
+    .eq('market_address', vToken.address.toLowerCase())
+    .gte('created_at', startDate.toISOString());;
 
   if(!data || error){
     throw new VError({
