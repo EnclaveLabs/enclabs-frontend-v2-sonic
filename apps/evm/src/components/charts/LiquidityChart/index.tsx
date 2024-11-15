@@ -85,7 +85,7 @@ export const LiquidityChart: React.FC<LiquidityChartProps> = ({
           <YAxis
             axisLine={false}
             tickLine={false}
-            tickFormatter={value => formatCentsToReadableValue({value})}
+            tickFormatter={value => value}
             tickMargin={sharedStyles.tickMargin}
             stroke={sharedStyles.accessoryColor}
             style={sharedStyles.axis}
@@ -100,15 +100,11 @@ export const LiquidityChart: React.FC<LiquidityChartProps> = ({
                   items={[
                     {
                       label: t('liquidityChart.tooltipItemLabels.totalSupply'),
-                      value: formatCentsToReadableValue(
-                        {value: (payload[0].payload as LiquidityItem).totalSupply},
-                      ),
+                      value: (payload[0].payload as LiquidityItem).totalSupply.toFixed(2).toString()
                     },
                     {
                       label: t('liquidityChart.tooltipItemLabels.totalLiquidity'),
-                      value: formatCentsToReadableValue(
-                        {value: (payload[0].payload as LiquidityItem).totalLiquidity},
-                      ),
+                      value: (payload[0].payload as LiquidityItem).totalLiquidity.toFixed(2).toString()
                     },
                     {
                       label: t('liquidityChart.tooltipItemLabels.date'),
