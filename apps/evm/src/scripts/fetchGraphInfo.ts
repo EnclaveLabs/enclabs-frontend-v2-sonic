@@ -110,13 +110,13 @@ const calculateSupplyBorrowValues = (
 
 
     // Total borrowed tokens
-    const totalBorrowVToken = new BigNumber(market.totalBorrowsMantissa).dividedBy(10 ** 18);
+    const totalBorrowVToken = new BigNumber(market.totalBorrowsMantissa).dividedBy(10 ** market.underlyingDecimals);
     // Total borrowed price
     const totalBorrowInUSD = totalBorrowVToken.multipliedBy(underlyingPriceUSD).decimalPlaces(market.underlyingDecimals).toString();
 
 
     // Total liquidity price
-    const totalLiquidityToken = new BigNumber(market.cashMantissa).dividedBy(10 ** 18);
+    const totalLiquidityToken = new BigNumber(market.cashMantissa).dividedBy(10 ** market.underlyingDecimals);
     // Total liquidity price
     const totalLiquidityInUSD = totalLiquidityToken.multipliedBy(underlyingPriceUSD).decimalPlaces(market.underlyingDecimals).toString();
 
@@ -155,7 +155,9 @@ async function saveDataToSupabase(markets: FetchedMarketData[]) {
         };
     });
 
-    // Save in Database
+    // console.log(historyMarket);
+
+    //Save in Database
     const { data, error } = await supabase
         .from('History')
         .insert(historyMarket);
