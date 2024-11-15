@@ -71,8 +71,8 @@ const getMarketHistory = async ({
     blockTimestamp: market.block_timestamp,
     borrowApy: market.borrow_apy,
     supplyApy: market.supply_apy,
-    totalBorrowCents: market.total_borrow_cents,
-    totalSupplyCents: market.total_supply_cents,
+    totalBorrowCents: market.total_borrow_price_usd,
+    totalSupplyCents: market.total_supply_price_usd,
   }));  
 
     
