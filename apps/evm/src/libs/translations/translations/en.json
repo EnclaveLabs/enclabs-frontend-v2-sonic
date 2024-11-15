@@ -420,6 +420,9 @@
     },
     "supplyInfo": {
       "title": "Supply info"
+    },
+    "liquidityInfo": {
+      "title": "Liquidity info"
     }
   },
   "markets": {

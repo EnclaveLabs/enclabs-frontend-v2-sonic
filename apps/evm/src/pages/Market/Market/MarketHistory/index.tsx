@@ -18,7 +18,7 @@ export const MarketHistory: React.FC<MarketHistoryProps> = ({
   const [selectedPeriod, setSelectedPeriod] = useState<MarketHistoryPeriodType>('month');
 
   const {
-    data: { supplyChartData, borrowChartData },
+    data: { supplyChartData, borrowChartData, liquidityChartData },
     isLoading: isChartDataLoading,
   } = useGetChartData({
     vToken: asset.vToken,
@@ -27,6 +27,18 @@ export const MarketHistory: React.FC<MarketHistoryProps> = ({
 
   return (
     <div className="space-y-6">
+
+      <Card
+        asset={asset}
+        type="liquidity"
+        testId={TEST_IDS.supplyInfo}
+        data={liquidityChartData ?? []}
+        isLoading={isChartDataLoading}
+        poolComptrollerContractAddress={poolComptrollerContractAddress}
+        selectedPeriod={selectedPeriod}
+        setSelectedPeriod={setSelectedPeriod}
+      />
+
       <Card
         asset={asset}
         type="supply"

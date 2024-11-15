@@ -5,6 +5,7 @@ import { type MarketHistoryPeriodType, useGetMarketHistory } from 'clients/api';
 import type { ApyChartProps } from 'components/charts/ApyChart';
 import { useIsFeatureEnabled } from 'hooks/useIsFeatureEnabled';
 import type { VToken } from 'types';
+import { LiquidityChartProps } from 'components/charts/LiquidityChart';
 
 const useGetChartData = ({
   vToken,
@@ -29,6 +30,7 @@ const useGetChartData = ({
   const data = useMemo(() => {
     const supplyChartData: ApyChartProps['data'] = [];
     const borrowChartData: ApyChartProps['data'] = [];
+    const liquidityChartData: LiquidityChartProps['data'] = [];
 
     [...marketSnapshotsData.marketSnapshots]
       // Snapshots are already reversed, due to the negative slice
@@ -46,9 +48,15 @@ const useGetChartData = ({
           timestampMs,
           balanceCents: new BigNumber(marketSnapshot.totalBorrowCents),
         });
+
+        liquidityChartData.push({
+          totalSupply: new BigNumber(marketSnapshot.totalSupplyCents),
+          totalLiquidity: new BigNumber(marketSnapshot.totalLiquidityCents),
+          timestampMs,
+        });
       });
 
-    return { supplyChartData, borrowChartData };
+    return { supplyChartData, borrowChartData, liquidityChartData };
   }, [marketSnapshotsData]);
 
   return {

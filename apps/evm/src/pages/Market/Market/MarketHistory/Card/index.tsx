@@ -11,11 +11,14 @@ import { useIsFeatureEnabled } from 'hooks/useIsFeatureEnabled';
 import { MarketCard, type MarketCardProps } from '../../MarketCard';
 import { CapThreshold } from './CapThreshold';
 import { useGetLiquidationThresholdPercentage } from './useGetLiquidationThresholdPercentage';
+import { LiquidityChart, LiquidityChartProps } from 'components/charts/LiquidityChart';
+
+export type ChartType = 'supply' | 'borrow' | 'liquidity';
 
 export interface CardProps {
-  type: ApyChartProps['type'];
+  type: ChartType;
   asset: Asset;
-  data: ApyChartProps['data'];
+  data: ApyChartProps['data'] | LiquidityChartProps['data'];
   poolComptrollerContractAddress: string;
   isLoading: boolean;
   testId: string;
@@ -138,17 +141,20 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <MarketCard
-      title={type === 'supply' ? t('market.supplyInfo.title') : t('market.borrowInfo.title')}
+      title={type === 'supply' ? t('market.supplyInfo.title') : type === 'liquidity' ? t('market.liquidityInfo.title')  : t('market.borrowInfo.title')}
       stats={stats}
       legends={isApyChartsFeatureEnabled ? legends : undefined}
       topContent={
-        <CapThreshold
-          type={type}
-          tokenPriceCents={asset.tokenPriceCents}
-          capTokens={type === 'supply' ? asset.supplyCapTokens : asset.borrowCapTokens}
-          balanceTokens={type === 'supply' ? asset.supplyBalanceTokens : asset.borrowBalanceTokens}
-          token={asset.vToken.underlyingToken}
-        />
+        
+          type != 'liquidity' &&
+            <CapThreshold
+              type={type as ApyChartProps['type']}
+              tokenPriceCents={asset.tokenPriceCents}
+              capTokens={type === 'supply' ? asset.supplyCapTokens : asset.borrowCapTokens}
+              balanceTokens={type === 'supply' ? asset.supplyBalanceTokens : asset.borrowBalanceTokens}
+              token={asset.vToken.underlyingToken}
+            />
+        
       }
       rightContent={
         isApyChartsFeatureEnabled ? (
@@ -163,7 +169,12 @@ export const Card: React.FC<CardProps> = ({
     >
       {isLoading && data.length === 0 && <Spinner />}
 
-      {data.length > 0 && <ApyChart data={data} type={type} selectedPeriod={selectedPeriod} />}
+      {data.length > 0 && 
+        type === 'liquidity' ?  
+        <LiquidityChart data={data as LiquidityChartProps['data']} selectedPeriod={selectedPeriod} />
+        :
+        <ApyChart data={data as ApyChartProps['data']} type={type as ApyChartProps['type']} selectedPeriod={selectedPeriod} />
+      }
     </MarketCard>
   );
 };

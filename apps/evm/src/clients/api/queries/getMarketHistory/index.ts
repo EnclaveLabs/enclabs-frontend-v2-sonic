@@ -73,6 +73,7 @@ const getMarketHistory = async ({
     supplyApy: market.supply_apy,
     totalBorrowCents: market.total_borrow_price_usd,
     totalSupplyCents: market.total_supply_price_usd,
+    totalLiquidityCents: market.total_liquidity_price_usd,
   }));  
 
     

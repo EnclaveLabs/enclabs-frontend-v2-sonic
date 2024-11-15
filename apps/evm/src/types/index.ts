@@ -325,6 +325,7 @@ export interface MarketSnapshot {
   supplyApy: string;
   totalBorrowCents: string;
   totalSupplyCents: string;
+  totalLiquidityCents: string;
 }
 
 export type TransactionEvent =
