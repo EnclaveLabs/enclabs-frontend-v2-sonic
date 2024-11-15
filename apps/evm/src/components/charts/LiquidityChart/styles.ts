@@ -11,6 +11,7 @@ export const useStyles = () => {
     lineSupplyApyColor: theme.palette.interactive.success,
     lineLiquidityApyColor: theme.palette.interactive.error,
     lineActiveDot: { r: SPACING * 1.5, strokeWidth: 0 },
+    areaActiveDot: { r: SPACING * 2, strokeWidth: SPACING },
     container: css`
       width: 100%;
       height: ${theme.spacing(95)};

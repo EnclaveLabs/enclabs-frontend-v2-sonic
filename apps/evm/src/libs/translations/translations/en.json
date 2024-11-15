@@ -104,6 +104,13 @@
       "totalSupply": "Total supply"
     }
   },
+  "liquidityChart": {
+    "tooltipItemLabels": {
+      "totalSupply": "Total supply",
+      "totalLiquidity": "Total liquidity",
+      "date": "Date"
+    }
+  },
   "asset": {
     "marketInfo": {
       "title": "Market info"
@@ -384,7 +391,9 @@
     "legends": {
       "borrowApy": "Borrow APY",
       "supplyApy": "Supply APY",
-      "utilizationRate": "Utilization rate"
+      "utilizationRate": "Utilization rate",
+      "supply": "Supply",
+      "liquidity": "Liquidity"
     },
     "marketInfo": {
       "stats": {
@@ -412,7 +421,9 @@
       "apy": "APY",
       "distributionApy": "Distribution APY",
       "liquidationPenalty": "Liquidation Penalty",
-      "liquidationThreshold": "Liquidation Threshold"
+      "liquidationThreshold": "Liquidation Threshold",
+      "totalSupplyLabel": "Total Supply",
+      "totalLiquidityLabel": "Total Liquidity"
     },
     "supplyCapThreshold": {
       "title": "Total supplied",

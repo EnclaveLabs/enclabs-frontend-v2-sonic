@@ -4,7 +4,7 @@ import { ButtonGroup, Spinner } from 'components';
 import { ApyChart, type ApyChartProps } from 'components/charts/ApyChart';
 import { useTranslation } from 'libs/translations';
 import type { Asset } from 'types';
-import { formatPercentageToReadableValue, getCombinedDistributionApys } from 'utilities';
+import { formatCentsToReadableValue, formatPercentageToReadableValue, getCombinedDistributionApys } from 'utilities';
 
 import { type MarketHistoryPeriodType, useGetPoolLiquidationIncentive } from 'clients/api';
 import { useIsFeatureEnabled } from 'hooks/useIsFeatureEnabled';
@@ -87,7 +87,23 @@ export const Card: React.FC<CardProps> = ({
 
     const distributionApys = getCombinedDistributionApys({ asset });
 
-    const tmpStats: MarketCardProps['stats'] = [
+    const tmpStats: MarketCardProps['stats'] = 
+    type === 'liquidity' ?
+      [
+        {
+          label: t('market.stats.totalSupplyLabel'),
+          value: formatCentsToReadableValue(
+            {value: asset.supplyBalanceCents}
+          ),
+        },
+        {
+          label: t('market.stats.totalLiquidityLabel'),
+          value: formatCentsToReadableValue(
+            {value: asset.supplyBalanceCents.minus(asset.borrowBalanceCents)}
+          ),
+        },
+      ]
+    : [
       {
         label: t('market.stats.apy'),
         value: formatPercentageToReadableValue(
@@ -102,7 +118,7 @@ export const Card: React.FC<CardProps> = ({
             : distributionApys.borrowApyRewardsPercentage,
         ),
       },
-    ];
+      ];
 
     if (shouldDisplayLiquidationInfo) {
       tmpStats.push(
@@ -133,10 +149,20 @@ export const Card: React.FC<CardProps> = ({
           label: t('market.legends.supplyApy'),
           color: 'green',
         }
-      : {
+    : type === 'borrow' ?
+      {
           label: t('market.legends.borrowApy'),
           color: 'red',
-        },
+      }
+    : {
+        label: t('market.legends.supply'),
+        color: 'green',
+      },
+      {
+        label: t('market.legends.liquidity'),
+        color: 'red',
+      }
+
   ];
 
   return (
@@ -145,7 +171,6 @@ export const Card: React.FC<CardProps> = ({
       stats={stats}
       legends={isApyChartsFeatureEnabled ? legends : undefined}
       topContent={
-        
           type != 'liquidity' &&
             <CapThreshold
               type={type as ApyChartProps['type']}
@@ -154,7 +179,6 @@ export const Card: React.FC<CardProps> = ({
               balanceTokens={type === 'supply' ? asset.supplyBalanceTokens : asset.borrowBalanceTokens}
               token={asset.vToken.underlyingToken}
             />
-        
       }
       rightContent={
         isApyChartsFeatureEnabled ? (
