@@ -14,7 +14,8 @@ export type ColumnKey =
   | 'supplyBalance'
   | 'liquidity'
   | 'userPercentOfLimit'
-  | 'userWalletBalance';
+  | 'userWalletBalance'
+  | 'type';
 
 export interface PoolAsset extends Asset {
   pool: Pool;

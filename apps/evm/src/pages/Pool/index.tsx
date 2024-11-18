@@ -37,6 +37,7 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
         breakpoint="xl"
         columns={[
           'asset',
+          'type',
           'supplyBalance',
           'labeledSupplyApyLtv',
           'borrowBalance',

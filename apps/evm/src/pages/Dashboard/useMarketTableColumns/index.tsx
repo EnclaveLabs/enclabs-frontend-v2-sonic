@@ -8,6 +8,7 @@ export const useMarketTableColumns = () => {
   return useMemo(() => {
     const columns: MarketTableProps['columns'] = [
       'asset',
+      'type',
       'pool',
       'labeledSupplyApyLtv',
       'labeledBorrowApy',

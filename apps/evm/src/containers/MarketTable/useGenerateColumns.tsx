@@ -30,9 +30,11 @@ import {
 import { Apy } from './Apy';
 import { useStyles } from './styles';
 import type { ColumnKey, PoolAsset } from './types';
+import { getTokenType, Tag } from 'components/Tag';
 
 // Translation keys: do not remove this comment
 // t('marketTable.columnKeys.asset')
+// t('marketTable.columnKeys.type')
 // t('marketTable.columnKeys.supplyApyLtv')
 // t('marketTable.columnKeys.labeledSupplyApyLtv')
 // t('marketTable.columnKeys.borrowApy')
@@ -49,6 +51,7 @@ import type { ColumnKey, PoolAsset } from './types';
 // t('marketTable.columnKeys.price')
 
 // t('marketTable.columnSelectOptionLabel.asset')
+// t('marketTable.columnSelectOptionLabel.type')
 // t('marketTable.columnSelectOptionLabel.supplyApyLtv')
 // t('marketTable.columnSelectOptionLabel.labeledSupplyApyLtv')
 // t('marketTable.columnSelectOptionLabel.borrowApy')
@@ -120,6 +123,7 @@ const useGenerateColumns = ({
           selectOptionLabel: t(`marketTable.columnSelectOptionLabel.${column}`),
           align: index === 0 ? 'left' : 'right',
           renderCell: poolAsset => {
+
             const isPaused = isAssetPaused({
               disabledTokenActions: poolAsset.disabledTokenActions,
             });
@@ -304,6 +308,12 @@ const useGenerateColumns = ({
                 </div>
               );
             }
+            
+            if(column == 'type'){
+              return (
+                <Tag text={poolAsset.vToken.underlyingToken.address} />
+              );
+            }
           },
           sortRows:
             column === 'asset'
@@ -350,6 +360,12 @@ const useGenerateColumns = ({
 
                   if (column === 'pool') {
                     return compareStrings(rowA.pool.name, rowB.pool.name, direction);
+                  }
+
+                  if (column === 'type') {
+                    const typeA = getTokenType(rowA.vToken.underlyingToken.address);
+                    const typeB = getTokenType(rowB.vToken.underlyingToken.address);
+                    return compareStrings(typeA, typeB, direction);
                   }
 
                   if (column === 'userWalletBalance') {
