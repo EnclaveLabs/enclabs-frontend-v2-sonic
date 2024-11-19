@@ -18,6 +18,8 @@ import { matchPath, useLocation, useParams } from 'react-router';
 import { formatCentsToReadableValue } from 'utilities';
 import { useIsOnLidoMarketPage } from '../useIsOnLidoMarketPage';
 import { UtilizationRate } from './UtilizationRate';
+import { Tag } from 'components/Tag';
+import { BuyTokenButton } from 'components/BuyTokenButton';
 
 export const MarketInfo = () => {
   const { poolComptrollerAddress: poolComptrollerAddressParam = '', vTokenAddress = '' } =
@@ -98,6 +100,8 @@ export const MarketInfo = () => {
     ];
   }, [asset, t, asset, pool]);
 
+
+
   return (
     <div className="pt-4 pb-12 md:pb-10 border-b-lightGrey border-b space-y-8">
       <div className="flex items-center h-8 px-4 md:px-6 xl:px-10 max-w-[1360px] mx-auto">
@@ -118,6 +122,8 @@ export const MarketInfo = () => {
                 pool.comptrollerAddress !== corePoolComptrollerContractAddress && (
                   <Pill>{t('layout.header.isolated')}</Pill>
                 )}
+
+                <Tag text={asset.vToken.underlyingToken.address}/>
             </div>
 
             <AddTokenToWalletButton
@@ -125,6 +131,11 @@ export const MarketInfo = () => {
               isUserConnected={isUserConnected}
               token={asset.vToken.underlyingToken}
             />
+
+            <BuyTokenButton 
+             className="shrink-0 bg-background/40 hover:bg-background/40 active:bg-background/40"
+             token={asset.vToken.underlyingToken} 
+             isUserConnected={isUserConnected}/>
           </div>
         ) : (
           <Spinner className="h-full w-auto" />

@@ -346,7 +346,8 @@
       "liquidity": "Liquidity",
       "price": "Price",
       "supply": "Supply",
-      "utilizationRate": "Utilization rate"
+      "utilizationRate": "Utilization rate",
+      "buy": "Buy"
     },
     "menu": {
       "navLink": {

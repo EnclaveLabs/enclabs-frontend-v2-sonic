@@ -34,6 +34,21 @@ export enum ChainId {
   OPTIMISM_SEPOLIA = 11155420,
 }
 
+export enum ChainName {
+  BSC_MAINNET = '',
+  BSC_TESTNET = '',
+  ETHEREUM = "ethereum",
+  SEPOLIA = '',
+  OPBNB_MAINNET = '',
+  OPBNB_TESTNET = '',
+  ARBITRUM_ONE = "arbitrum",
+  ARBITRUM_SEPOLIA = '',
+  ZKSYNC_MAINNET = '',
+  ZKSYNC_SEPOLIA = '',
+  OPTIMISM_MAINNET = '',
+  OPTIMISM_SEPOLIA = '',
+}
+
 export type TransactionType = 'chain' | 'layerZero';
 
 export interface ChainMetadata {

@@ -26,41 +26,54 @@ export const tokenType = {
     ],
 };
 
-export const tokenTypeStyles: {
+export const tokenTypeInfo: {
     [key: string]: {
         color: string;
         borderColor: string;
         backgroundColor: string;
+        getUrl: (tokenAddress: string, chain: string) => string;
     };
 } = {
     LRT: {
         color: '#FF9800', // Orange
         borderColor: '#FF9800',
         backgroundColor: 'rgba(255, 152, 0, 0.1)',
+        getUrl:  (tokenAddress: string, chain: string) => 
+            `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     },
     PT: {
         color: '#4CAF50', // Green
         borderColor: '#4CAF50',
         backgroundColor: 'rgba(76, 175, 80, 0.1)',
+        getUrl:  (tokenAddress: string, chain: string) => 
+            `https://app.pendle.finance/trade/markets/${tokenAddress}/swap?view=pt&chain=${chain}`,
     },
     Wrapped: {
         color: '#FFEB3B', // Yellow
         borderColor: '#FFEB3B',
         backgroundColor: 'rgba(255, 235, 59, 0.1)',
+        getUrl: (tokenAddress: string, chain: string) =>
+            `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     },
     aToken: {
         color: '#F44336', // Red
         borderColor: '#F44336',
         backgroundColor: 'rgba(244, 67, 54, 0.1)',
+        getUrl:  (tokenAddress: string, chain: string) => 
+            ``,
     },
     Stable: {
         color: '#2196F3', // Blue
         borderColor: '#2196F3',
         backgroundColor: 'rgba(33, 150, 243, 0.1)',
+        getUrl:  (tokenAddress: string, chain: string) => 
+            `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     },
     Unknown: {
         color: 'black',
         borderColor: 'black',
         backgroundColor: 'rgba(0, 0, 0, 0.11)',
+        getUrl:  (tokenAddress: string, chain: string) => 
+            `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     }
 };

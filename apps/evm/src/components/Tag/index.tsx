@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { tokenType } from "../../constants/tokenType";
 import { TagProps } from './types';
-import { tokenTypeStyles } from 'constants/tokenType';
+import { tokenTypeInfo } from 'constants/tokenType';
 
 
 export const getTokenType = (address: string) : string => {
@@ -16,7 +16,7 @@ export const getTokenType = (address: string) : string => {
 export const Tag = ({ text }: TagProps) => {
 
     const tokenType = getTokenType(text);
-    const tokenTypeStyle = tokenTypeStyles[tokenType];
+    const tokenTypeStyle = tokenTypeInfo[tokenType];
 
     return (
         <div className="flex items-center space-x-2 justify-end">
