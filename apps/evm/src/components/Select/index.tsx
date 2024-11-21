@@ -38,7 +38,7 @@ const getVariantClasses = ({
     // primary
     default:
       return cn(
-        'border-lightGrey bg-cards hover:border-lightGrey hover:bg-lightGrey active:border-blue active:bg-lightGrey',
+        'border-lightGrey bg-cards hover:border-lightGrey hover:bg-blue active:border-blue active:bg-lightGrey',
         isMenuOpened && 'border-blue bg-lightGrey hover:border-blue',
       );
   }
@@ -101,7 +101,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
             onClick={() => handleChange(option.value)}
             type="button"
             className={cn(
-              'hover:bg-lightGrey hover:text-white active:bg-lightGrey flex min-w-full items-center justify-between py-3 text-left text-sm font-semibold',
+              'hover:bg-blue hover:text-white active:bg-blue flex min-w-full items-center justify-between py-3 text-left text-sm font-semibold',
               buttonSizeClasses,
             )}
           >
@@ -163,7 +163,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
                 buttonClassName,
                 'group'
               )}
-              contentClassName={cn('w-full justify-between text-sm font-semibold hoverable-button text-red')}
+              contentClassName={cn('w-full justify-between text-sm font-semibold text-red')}
             >
               <span className="grow overflow-hidden text-ellipsis whitespace-nowrap text-left">
                 {selectedOption &&
