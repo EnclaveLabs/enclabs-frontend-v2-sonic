@@ -106,7 +106,7 @@ export const MarketInfo = () => {
     <div className="pt-4 pb-12 md:pb-10 border-b-lightGrey border-b space-y-8">
       <div className="flex items-center h-8 px-4 md:px-6 xl:px-10 max-w-[1360px] mx-auto">
         <button type="button" onClick={handleGoBack} className="h-full pr-3 flex items-center">
-          <Icon name="chevronLeft" className="w-6 h-6 text-offWhite" />
+          <Icon name="chevronLeft" className="w-6 h-6 text-lightBlack" />
         </button>
 
         {asset && pool ? (

@@ -56,7 +56,7 @@ export const BuyTokenButton: React.FC<BuyTokenButtonButtonProps> = ({
     <TertiaryButton
       className={cn(
         'p-1 h-8 w-12',
-        'border-transparent hover:border-transparent active:border-transparent bg-background hover:bg-background active:bg-background text-grey hover:text-offWhite active:text-blue',
+        'border-transparent hover:border-transparent active:border-transparent bg-background hover:bg-background active:bg-background text-grey hover:text-lightBlack active:text-blue',
         className,
       )}
       onClick={handleOnClick}

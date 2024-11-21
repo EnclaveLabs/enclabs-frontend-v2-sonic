@@ -164,7 +164,7 @@ const VotingWallet: React.FC<VotingWalletProps> = ({ className }) => {
 
         {!isUserConnected && (
           <PrimaryButton
-            className="text-offWhite mt-6 sm:mt-0 lg:mt-6 lg:w-full"
+            className="text-lightBlack mt-6 sm:mt-0 lg:mt-6 lg:w-full"
             onClick={openAuthModal}
           >
             {t('connectWallet.connectButton')}
@@ -173,7 +173,7 @@ const VotingWallet: React.FC<VotingWalletProps> = ({ className }) => {
 
         {showDepositXvs && (
           <ButtonWrapper
-            className="text-offWhite mt-6 hover:no-underline sm:mt-0 sm:w-auto lg:mt-6 lg:w-full"
+            className="text-lightBlack mt-6 hover:no-underline sm:mt-0 sm:w-auto lg:mt-6 lg:w-full"
             asChild
           >
             <Link to={routes.vaults.path}>{t('vote.depositXvs')}</Link>
@@ -182,7 +182,7 @@ const VotingWallet: React.FC<VotingWalletProps> = ({ className }) => {
 
         {showDelegateButton && (
           <PrimaryButton
-            className="text-offWhite mt-6 sm:mt-0 sm:w-auto lg:mt-6 lg:w-full"
+            className="text-lightBlack mt-6 sm:mt-0 sm:w-auto lg:mt-6 lg:w-full"
             onClick={() => setDelegateModelIsOpen(true)}
             data-testid={TEST_IDS.delegateButton}
           >
@@ -226,7 +226,7 @@ const VotingWallet: React.FC<VotingWalletProps> = ({ className }) => {
 
           <ButtonWrapper
             variant="secondary"
-            className="text-offWhite mt-6 w-full hover:no-underline"
+            className="text-lightBlack mt-6 w-full hover:no-underline"
             asChild
           >
             <Link href={XVS_SNAPSHOT_URL}>

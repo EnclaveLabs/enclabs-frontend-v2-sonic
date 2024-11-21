@@ -82,7 +82,7 @@
 body {
   font-family: 'ProximaNova', sans-serif;
   background-color: theme('colors.background');
-  color: theme('colors.offWhite');
+  color: theme('colors.lightBlack');
 }
 
 input {
@@ -134,6 +134,6 @@ input {
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background-color: theme('colors.offWhite');
+    background-color: theme('colors.lightBlack');
   }
 }

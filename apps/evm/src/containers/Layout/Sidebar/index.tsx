@@ -22,7 +22,7 @@ export const Sidebar: React.FC = () => {
         <img
           src={venusLogoWithTextSrc}
           alt={t('layout.menu.venusLogoAlt')}
-          className="hidden h-9 xl:block"
+          className="hidden h-16 xl:block"
         />
       </Link>
 

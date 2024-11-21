@@ -37,7 +37,7 @@ export const LabeledInlineContent = ({
         <TokenIcon token={iconSrc} className="-mt-[2px] mr-2 h-5 w-5" />
       )}
 
-      <p className={cn('text-sm md:text-base', invertTextColors ? 'text-offWhite' : 'text-grey')}>
+      <p className={cn('text-sm md:text-base', invertTextColors ? 'text-lightBlack' : 'text-grey')}>
         {label}
       </p>
 
@@ -51,7 +51,7 @@ export const LabeledInlineContent = ({
     <div
       className={cn(
         'flex items-center text-sm md:text-base',
-        invertTextColors ? 'text-grey' : 'text-offWhite',
+        invertTextColors ? 'text-grey' : 'text-lightBlack',
       )}
     >
       {children}

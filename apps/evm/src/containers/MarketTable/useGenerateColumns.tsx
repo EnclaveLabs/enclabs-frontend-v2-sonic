@@ -206,7 +206,7 @@ const useGenerateColumns = ({
                     to={to}
                     className={cn(
                       'hover:text-blue text-sm underline',
-                      isPaused ? 'text-grey' : 'text-offWhite',
+                      isPaused ? 'text-grey' : 'text-lightBlack',
                     )}
                   >
                     {poolAsset.pool.name}
@@ -293,7 +293,7 @@ const useGenerateColumns = ({
             if (column === 'userPercentOfLimit') {
               return (
                 <div css={styles.userPercentOfLimit}>
-                  <span className={cn(isPaused ? 'text-grey' : 'text-offWhite')}>
+                  <span className={cn(isPaused ? 'text-grey' : 'text-lightBlack')}>
                     {formatPercentageToReadableValue(poolAsset.userPercentOfLimit)}
                   </span>
 

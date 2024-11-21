@@ -27,7 +27,7 @@ const getVariantClasses = ({
       );
     case 'tertiary':
       return cn(
-        'border-transparent bg-cards hover:bg-cards hover:border-offWhite active:bg-cards active:border-blue',
+        'border-transparent bg-cards hover:bg-cards hover:border-lightBlack active:bg-cards active:border-blue',
         isMenuOpened && 'border-blue hover:border-blue',
       );
     case 'quaternary':
@@ -101,7 +101,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
             onClick={() => handleChange(option.value)}
             type="button"
             className={cn(
-              'hover:bg-lightGrey active:bg-lightGrey flex min-w-full items-center justify-between py-3 text-left text-sm font-semibold',
+              'hover:bg-lightGrey hover:text-white active:bg-lightGrey flex min-w-full items-center justify-between py-3 text-left text-sm font-semibold',
               buttonSizeClasses,
             )}
           >
@@ -161,8 +161,9 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
                 getVariantClasses({ variant, isMenuOpened }),
                 buttonSizeClasses,
                 buttonClassName,
+                'group'
               )}
-              contentClassName={cn('w-full justify-between text-sm font-semibold')}
+              contentClassName={cn('w-full justify-between text-sm font-semibold hoverable-button text-red')}
             >
               <span className="grow overflow-hidden text-ellipsis whitespace-nowrap text-left">
                 {selectedOption &&
@@ -172,8 +173,9 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
               <Icon
                 name="arrowUp"
                 className={cn(
-                  'text-offWhite ml-2 w-5 h-5 flex-none',
-                  isMenuOpened ? 'text-blue' : 'rotate-180',
+                  'text-lightBlack ml-2 w-5 h-5 flex-none',
+                  isMenuOpened ? 'text-white' : 'rotate-180',
+                  'group-hover:text-white'
                 )}
               />
             </Button>
@@ -191,7 +193,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
                   {!!menuTitle && (
                     <div
                       className={cn(
-                        'text-grey w-full py-3 text-xs',
+                        'text-black w-full py-3 text-xs',
                         variant === 'primary' ? 'px-3 sm:px-4' : 'px-3',
                       )}
                     >

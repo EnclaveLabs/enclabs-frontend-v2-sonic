@@ -12,6 +12,6 @@ export const IconLink: React.FC<IconLinkProps> = ({ href, iconName }) => (
     target="_blank"
     rel="noreferrer"
   >
-    <Icon name={iconName} className="text-offWhite h-3 w-3" />
+    <Icon name={iconName} className="text-lightBlack h-3 w-3" />
   </a>
 );

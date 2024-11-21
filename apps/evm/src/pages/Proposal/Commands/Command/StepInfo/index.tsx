@@ -42,7 +42,7 @@ export const StepInfo: React.FC<StepInfoProps> = ({
       return 'text-red';
     }
 
-    return 'text-offWhite';
+    return 'text-lightBlack';
   };
 
   const getIconName = (): IconName => {

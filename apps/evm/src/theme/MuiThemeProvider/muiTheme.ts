@@ -14,8 +14,9 @@ export const PALETTE = {
   mode: 'dark',
   background: {
     default: theme.colors.background,
-    paper: theme.colors.cards,
+    paper: theme.colors.lightCards,
     black: '#1F2028',
+    gradient: theme.colors.gradient
   },
   secondary: {
     light: theme.colors.lightGrey,
@@ -23,8 +24,8 @@ export const PALETTE = {
     dark: 'rgba(18, 22, 32, 1)',
   },
   text: {
-    primary: theme.colors.offWhite,
-    secondary: theme.colors.grey,
+    primary: theme.colors.lightBlack,
+    secondary: theme.colors.black,
     disabled: 'rgba(161, 161, 161, 1)',
   },
   button: {

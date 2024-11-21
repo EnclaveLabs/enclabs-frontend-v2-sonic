@@ -156,7 +156,7 @@ export const Breadcrumbs: React.FC = () => {
           {pathNodes.length > 0 && index < pathNodes.length - 1 ? (
             <>
               <Link
-                className="text-grey hover:text-offWhite transition-colors hover:no-underline"
+                className="text-grey hover:text-lightBlack transition-colors hover:no-underline"
                 to={pathNode.href}
               >
                 {pathNode.dom}

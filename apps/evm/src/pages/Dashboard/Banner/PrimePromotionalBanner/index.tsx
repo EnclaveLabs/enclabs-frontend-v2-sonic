@@ -29,7 +29,7 @@ export const PrimePromotionalBanner: React.FC<PrimePromotionalBannerProps> = ({ 
         type="button"
         data-testid={TEST_IDS.closeButton}
       >
-        <Icon name="close" className="text-offWhite hover:text-grey h-6 w-6" />
+        <Icon name="close" className="text-lightBlack hover:text-grey h-6 w-6" />
       </button>
 
       <div className="sm:flex sm:flex-row">
@@ -75,12 +75,12 @@ export const PrimePromotionalBanner: React.FC<PrimePromotionalBannerProps> = ({ 
             {isPrimeCalculatorEnabled ? (
               <Link
                 to={primeCalculatorPagePath}
-                className="text-offWhite no-underline hover:no-underline"
+                className="text-lightBlack no-underline hover:no-underline"
               >
                 {t('dashboard.primePromotionalBanner.buttonLabel.primeCalculator')}
               </Link>
             ) : (
-              <Link href={PRIME_DOC_URL} className="text-offWhite no-underline hover:no-underline">
+              <Link href={PRIME_DOC_URL} className="text-lightBlack no-underline hover:no-underline">
                 {t('dashboard.primePromotionalBanner.buttonLabel.primeDoc')}
               </Link>
             )}

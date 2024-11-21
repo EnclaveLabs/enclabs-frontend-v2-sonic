@@ -32,12 +32,12 @@ const getVariantClasses = ({ variant, active }: { variant: Variant; active: bool
       );
     case 'quinary':
       return cn(
-        'border-cards border-lightGrey bg-cards active:border-blue active:bg-blue disabled:border-background disabled:bg-background h-8 rounded-full px-5 py-1',
-        active ? 'border-blue bg-blue' : 'hover:border-lightGrey hover:bg-lightGrey',
+        'border-cards border-lightGrey  bg-cards active:border-blue active:bg-blue disabled:border-background disabled:bg-background h-8 rounded-full px-5 py-1',
+        active ? 'border-blue bg-blue text-white' : 'hover:border-lightGrey hover:bg-lightGrey hover:text-white',
       );
     case 'senary':
       return cn(
-        'border-lightGrey bg-cards hover:border-blue hover:border-blue hover:bg-lightGrey disabled:border-lightGrey disabled:bg-cards h-8 px-2 py-1',
+        'border-lightGrey bg-cards   hover:border-blue hover:border-blue hover:bg-lightGrey disabled:border-lightGrey disabled:bg-cards h-8 px-2 py-1',
         active && 'border-blue bg-lightGrey',
       );
     case 'text':
@@ -48,7 +48,7 @@ const getVariantClasses = ({ variant, active }: { variant: Variant; active: bool
     // primary
     default:
       return cn(
-        'border-blue bg-blue active:border-darkBlue active:bg-darkBlue disabled:border-lightGrey disabled:bg-lightGrey',
+        'border-blue bg-blue text-white active:border-darkBlue active:bg-darkBlue disabled:border-lightGrey disabled:bg-lightGrey',
         active ? 'border-mediumBlue bg-mediumBlue' : 'hover:border-mediumBlue hover:bg-mediumBlue',
       );
   }

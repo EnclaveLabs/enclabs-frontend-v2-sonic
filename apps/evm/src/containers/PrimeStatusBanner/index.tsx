@@ -226,7 +226,7 @@ export const PrimeStatusBannerUi: React.FC<PrimeStatusBannerUiProps> = ({
                   <Trans
                     i18nKey="primeStatusBanner.description.primeCalculator"
                     components={{
-                      WhiteText: <span className="text-offWhite" />,
+                      WhiteText: <span className="text-lightBlack" />,
                       Link: <Link to={primeCalculatorPagePath} />,
                     }}
                     values={{
@@ -238,7 +238,7 @@ export const PrimeStatusBannerUi: React.FC<PrimeStatusBannerUiProps> = ({
                   <Trans
                     i18nKey="primeStatusBanner.description.primeDoc"
                     components={{
-                      WhiteText: <span className="text-offWhite" />,
+                      WhiteText: <span className="text-lightBlack" />,
                       Link: <Link href={PRIME_DOC_URL} />,
                     }}
                     values={{
@@ -267,7 +267,7 @@ export const PrimeStatusBannerUi: React.FC<PrimeStatusBannerUiProps> = ({
               <Trans
                 i18nKey="primeStatusBanner.progressBar.label"
                 components={{
-                  WhiteText: <span className="text-offWhite" />,
+                  WhiteText: <span className="text-lightBlack" />,
                 }}
                 values={{
                   minXvsToStakeForPrimeTokens: readableMinXvsToStakeForPrimeTokens,

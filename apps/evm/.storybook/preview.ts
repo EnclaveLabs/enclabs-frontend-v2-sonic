@@ -22,7 +22,7 @@ export const parameters = {
       },
       {
         name: 'White',
-        value: theme.colors.offWhite,
+        value: theme.colors.lightBlack,
       },
     ],
   },

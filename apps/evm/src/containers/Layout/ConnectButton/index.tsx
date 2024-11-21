@@ -18,7 +18,7 @@ export interface ConnectButtonProps
 }
 
 const connectedAccountButtonClasses = cn(
-  'border-offWhite hover:bg-offWhite hover:border-transparent hover:text-background active:bg-grey active:border-transparent',
+  'border-lightBlack hover:bg-lightBlack hover:border-transparent hover:text-background active:bg-grey active:border-transparent',
 );
 
 export const ConnectButton: React.FC<ConnectButtonProps> = ({
@@ -74,7 +74,7 @@ export const ConnectButton: React.FC<ConnectButtonProps> = ({
             variant === 'secondary' && accountAddress && connectedAccountButtonClasses,
             variant === 'secondary' &&
               !accountAddress &&
-              'border-transparent bg-offWhite text-background hover:border-transparent hover:bg-grey active:bg-grey active:border-transparent',
+              'border-transparent bg-lightBlack text-background hover:border-transparent hover:bg-grey active:bg-grey active:border-transparent',
           )}
           {...otherProps}
         >

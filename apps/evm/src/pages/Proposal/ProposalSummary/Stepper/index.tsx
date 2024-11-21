@@ -54,13 +54,13 @@ const Stepper: React.FC<StepperProps> = ({
   const steps = useMemo(() => {
     const SuccessIcon = () => (
       <span css={[styles.iconContainer, styles.markIconContainer]}>
-        <Icon name="mark" css={styles.markIcon} className="text-offWhite" />
+        <Icon name="mark" css={styles.markIcon} className="text-lightBlack" />
       </span>
     );
 
     const FailIcon = () => (
       <span css={[styles.iconContainer, styles.errorIconContainer]}>
-        <Icon name="close" css={styles.closeIcon} className="text-offWhite" />
+        <Icon name="close" css={styles.closeIcon} className="text-lightBlack" />
       </span>
     );
 

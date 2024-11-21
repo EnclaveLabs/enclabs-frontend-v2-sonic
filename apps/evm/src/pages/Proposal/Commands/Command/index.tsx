@@ -73,7 +73,7 @@ export const Command: React.FC<CommandProps> = ({
       <div className="flex items-center">
         <Icon name="document" className="mr-2 w-5 h-5" />
 
-        <p className="text-offWhite font-semibold">
+        <p className="text-lightBlack font-semibold">
           {t('voteProposalUi.command.operations.title')}
         </p>
       </div>
