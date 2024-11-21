@@ -21,8 +21,8 @@ export const theme = {
     black: '#0000000',
     white: '#FFFFFF',
     // lightGrey: '#2D3549', // before not light grey
-    lightGrey: '#004aad',
-    lightGrey2: '#D3D3D3',
+    lightGrey: '#D3D3D3', // blue, change with lightgrey2
+    // lightGrey2: '#D3D3D3', 
     green: '#00C38E',
     red: '#E93D66',
     lightBlack: '#1C1C1C',
