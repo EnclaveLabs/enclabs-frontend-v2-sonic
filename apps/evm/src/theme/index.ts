@@ -20,9 +20,8 @@ export const theme = {
     grey: '#AAB3CA',
     black: '#0000000',
     white: '#FFFFFF',
-    // lightGrey: '#2D3549', // before not light grey
-    lightGrey: '#D3D3D3', // blue, change with lightgrey2
-    // lightGrey2: '#D3D3D3', 
+    // lightGrey: '#2D3549', // before not light grey it's blue
+    lightGrey: '#D3D3D3', 
     green: '#00C38E',
     red: '#E93D66',
     lightBlack: '#1C1C1C',

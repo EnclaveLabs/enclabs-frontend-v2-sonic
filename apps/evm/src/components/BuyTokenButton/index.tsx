@@ -24,7 +24,7 @@ export const BuyTokenButton: React.FC<BuyTokenButtonButtonProps> = ({
   const {chainId} = useChainId();
 
   const tokenType = getTokenType(token.address);
-  const tokenTypeUrl = tokenTypeInfo[tokenType];
+  const tokenTypeInfos = tokenTypeInfo[tokenType];
 
   function getChainEnum(chainId: number): ChainId | undefined {
     return (Object.values(ChainId) as ChainId[]).find(value => value === chainId);
@@ -48,7 +48,7 @@ export const BuyTokenButton: React.FC<BuyTokenButtonButtonProps> = ({
     if(!chainName)
       return;
     
-    const url = tokenTypeUrl.getUrl(token.address, chainName);
+    const url = tokenTypeInfos.getUrl(token.address, chainName);
     window.open(url, '_blank');
   });
 
