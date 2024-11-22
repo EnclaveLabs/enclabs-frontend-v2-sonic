@@ -101,5 +101,5 @@ export const OperationForm: React.FC<OperationFormProps> = ({
     },
   ];
 
-  return <Tabs tabsContent={tabsContent} initialActiveTabIndex={initialActiveTabIndex} />;
+  return <Tabs tabsContent={tabsContent} initialActiveTabIndex={initialActiveTabIndex} tokenAddress={vToken.underlyingToken.address} />;
 };

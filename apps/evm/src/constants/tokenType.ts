@@ -34,6 +34,7 @@ export const tokenTypeInfo: {
         borderColor: string;
         backgroundColor: string;
         hoverColor: string;
+        buttonClassName: string
         getUrl: (tokenAddress: string, chain: string) => string;
     };
 } = {
@@ -42,6 +43,7 @@ export const tokenTypeInfo: {
         borderColor: theme.colors.tagTextOrange,
         backgroundColor: theme.colors.tagBgOrange,
         hoverColor: theme.colors.hoverOrange,
+        buttonClassName: 'bg-tagTextOrange bg-tagTextOrange border-tagTextOrange hover:border-tagTextOrange hover:bg-hoverOrange text-lightBlack',
         getUrl:  (tokenAddress: string, chain: string) => 
             `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     },
@@ -50,6 +52,7 @@ export const tokenTypeInfo: {
         borderColor: theme.colors.tagTextGreen,
         backgroundColor: theme.colors.tagBgGreen,
         hoverColor: theme.colors.hoverGreen,
+        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         getUrl:  (tokenAddress: string, chain: string) => 
             `https://app.pendle.finance/trade/markets/${tokenAddress}/swap?view=pt&chain=${chain}`,
     },
@@ -58,6 +61,7 @@ export const tokenTypeInfo: {
         borderColor: theme.colors.tagTextYellow,
         backgroundColor: theme.colors.tagBgYellow,
         hoverColor: theme.colors.hoverYellow,
+        buttonClassName: 'bg-tagTextYellow bg-tagTextYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
         getUrl: (tokenAddress: string, chain: string) =>
             `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     },
@@ -66,6 +70,7 @@ export const tokenTypeInfo: {
         borderColor: theme.colors.tagTextRed,
         backgroundColor: theme.colors.tagBgRed,
         hoverColor: theme.colors.hoverRed,
+        buttonClassName: 'bg-tagTextRed bg-tagTextRed border-tagTextRed hover:border-tagTextRed hover:bg-hoverRed text-lightBlack',
         getUrl:  (tokenAddress: string, chain: string) => 
             ``,
     },
@@ -74,6 +79,7 @@ export const tokenTypeInfo: {
         borderColor: theme.colors.tagTextBlue,
         backgroundColor: theme.colors.tagBgBlue,
         hoverColor: theme.colors.hoverBlue,
+        buttonClassName: 'bg-tagTextBlue bg-tagTextBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
         getUrl:  (tokenAddress: string, chain: string) => 
             `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     },
@@ -82,6 +88,7 @@ export const tokenTypeInfo: {
         borderColor: theme.colors.tagTextRed,
         backgroundColor: theme.colors.tagBgGrey,
         hoverColor: theme.colors.hoverGrey,
+        buttonClassName: 'bg-tagTextGrey bg-tagTextGrey border-tagTextGrey hover:border-tagTextGrey hover:bg-hoverGrey text-lightBlack',
         getUrl:  (tokenAddress: string, chain: string) => 
             `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     }

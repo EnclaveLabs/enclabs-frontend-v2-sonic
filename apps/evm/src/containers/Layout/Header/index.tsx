@@ -8,6 +8,8 @@ import { MarketInfo } from './MarketInfo';
 import { TopBar } from './TopBar';
 import { useIsOnLidoMarketPage } from './useIsOnLidoMarketPage';
 import { useIsOnMarketPage } from './useIsOnMarketPage';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
 
 export const Header: React.FC = () => {
   const isOnMarketPage = useIsOnMarketPage();
@@ -21,16 +23,24 @@ export const Header: React.FC = () => {
   });
   const asset = getAssetData?.asset;
 
-  const { color: gradientAccentColor } = useImageAccentColor({
+  let { color: gradientAccentColor } = useImageAccentColor({
     imagePath: asset?.vToken.underlyingToken.asset,
   });
+
+  let tokenType;
+  let tokenTypeStyle;
+  if(asset){
+    tokenType = getTokenType(asset?.vToken.underlyingToken.address);
+    tokenTypeStyle = tokenTypeInfo[tokenType];
+    gradientAccentColor = tokenTypeStyle.color;
+  }
 
   return (
     <header
       className={cn(
         // The gradient will only be visible when a background color is applied. It is built this
         // way to support gradient background using a solid background color
-        'transition-all duration-500 bg-gradient-to-b from-background/60 to-background',
+        'transition-all duration-500 bg-gradient-to-b from-background/40 to-background',
       )}
       style={
         isOnMarketPage && gradientAccentColor

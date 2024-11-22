@@ -2,6 +2,9 @@ import { useMemo } from 'react';
 
 import { ApproveDelegateSteps, type ApproveDelegateStepsProps, PrimaryButton } from 'components';
 import { useTranslation } from 'libs/translations';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
+import { cn } from 'utilities';
 
 export interface SubmitSectionProps {
   isFormValid: boolean;
@@ -10,6 +13,7 @@ export interface SubmitSectionProps {
   isApproveDelegateLoading: ApproveDelegateStepsProps['isApproveDelegateeLoading'];
   isDelegateApproved: ApproveDelegateStepsProps['isDelegateeApproved'];
   isDelegateApprovedLoading: ApproveDelegateStepsProps['isDelegateeApprovedLoading'];
+  tokenAddress?: string;
 }
 
 export const SubmitSection: React.FC<SubmitSectionProps> = ({
@@ -19,8 +23,18 @@ export const SubmitSection: React.FC<SubmitSectionProps> = ({
   isApproveDelegateLoading,
   isDelegateApproved,
   isDelegateApprovedLoading,
+  tokenAddress,
 }) => {
   const { t } = useTranslation();
+
+  const tokenTypeInfos = useMemo(
+    () => {
+      const tokenType = getTokenType(tokenAddress!);
+      return tokenTypeInfo[tokenType];
+    },
+    [tokenAddress],
+  );
+
 
   const submitButtonLabel = useMemo(() => {
     if (!isFormValid) {
@@ -43,7 +57,7 @@ export const SubmitSection: React.FC<SubmitSectionProps> = ({
         type="submit"
         loading={isFormSubmitting}
         disabled={!isFormValid || isFormSubmitting}
-        className="w-full"
+        className={cn('w-full', `${tokenTypeInfos.buttonClassName}`)}
       >
         {submitButtonLabel}
       </PrimaryButton>

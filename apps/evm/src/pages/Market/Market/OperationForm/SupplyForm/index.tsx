@@ -394,6 +394,7 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
               isRevokeFromTokenWalletSpendingLimitLoading={
                 isRevokeFromTokenWalletSpendingLimitLoading
               }
+              tokenAddress={asset.vToken.underlyingToken.address}
             />
           </div>
         </>

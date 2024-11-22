@@ -164,7 +164,6 @@ export const Card: React.FC<CardProps> = ({
       }
 
   ];
-
   return (
     <MarketCard
       title={type === 'supply' ? t('market.supplyInfo.title') : type === 'liquidity' ? t('market.liquidityInfo.title')  : t('market.borrowInfo.title')}
@@ -186,6 +185,7 @@ export const Card: React.FC<CardProps> = ({
             buttonLabels={periodOptions.map(p => p.label)}
             activeButtonIndex={periodOptions.findIndex(p => p.value === selectedPeriod)}
             onButtonClick={index => setSelectedPeriod(periodOptions[index].value)}
+            tokenAddress={asset.vToken.underlyingToken.address}
           />
         ) : undefined
       }

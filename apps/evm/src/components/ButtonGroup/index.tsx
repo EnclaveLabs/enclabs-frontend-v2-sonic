@@ -8,6 +8,7 @@ export interface ButtonGroupProps {
   onButtonClick: (newIndex: number) => void;
   fullWidth?: boolean;
   className?: string;
+  tokenAddress?: string;
 }
 
 export const ButtonGroup: React.FC<ButtonGroupProps> = ({
@@ -16,6 +17,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
   onButtonClick,
   fullWidth = false,
   className,
+  tokenAddress = '',
 }) => {
   const styles = useStyles();
 
@@ -30,6 +32,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
             last: index === buttonLabels.length - 1,
             fullWidth,
           })}
+          tokenAddress={tokenAddress}
         >
           {label}
         </TertiaryButton>

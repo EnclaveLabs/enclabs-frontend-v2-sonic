@@ -12,6 +12,7 @@ export type TabContent = {
 export interface TabsProps {
   tabsContent: TabContent[];
   initialActiveTabIndex?: number;
+  tokenAddress?: string;
   onTabChange?: (newIndex: number) => void;
   className?: string;
 }
@@ -19,6 +20,7 @@ export interface TabsProps {
 export const Tabs = ({
   tabsContent,
   initialActiveTabIndex = 0,
+  tokenAddress = '',
   onTabChange,
   className,
 }: TabsProps) => {
@@ -39,6 +41,7 @@ export const Tabs = ({
         buttonLabels={tabsContent.map(({ title }) => title)}
         css={styles.buttonsContainer}
         activeButtonIndex={activeTabIndex}
+        tokenAddress={tokenAddress}
         onButtonClick={handleChange}
         fullWidth
       />

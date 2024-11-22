@@ -10,6 +10,8 @@ import { cn } from 'utilities';
 import SwapSummary from '../../SwapSummary';
 import type { FormError } from '../../types';
 import type { FormErrorCode } from '../useForm/types';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
 
 export interface SubmitSectionProps {
   isFormValid: boolean;
@@ -25,6 +27,7 @@ export interface SubmitSectionProps {
   swap?: Swap;
   formError?: FormError<FormErrorCode>;
   isUsingSwap: boolean;
+  tokenAddress?: string;
 }
 
 export const SubmitSection: React.FC<SubmitSectionProps> = ({
@@ -39,8 +42,17 @@ export const SubmitSection: React.FC<SubmitSectionProps> = ({
   swap,
   isSwapLoading,
   isUsingSwap,
+  tokenAddress,
 }) => {
   const { t } = useTranslation();
+
+  const tokenTypeInfos = useMemo(
+    () => {
+      const tokenType = getTokenType(tokenAddress!);
+      return tokenTypeInfo[tokenType];
+    },
+    [tokenAddress],
+  );
 
   const isSwappingWithHighPriceImpact = useMemo(
     () =>
@@ -79,7 +91,7 @@ export const SubmitSection: React.FC<SubmitSectionProps> = ({
           isRevokeFromTokenWalletSpendingLimitLoading ||
           !isFromTokenApproved
         }
-        className={cn('w-full', isSwappingWithHighPriceImpact && 'border-red bg-red')}
+        className={cn('w-full', `${tokenTypeInfos.buttonClassName}` , isSwappingWithHighPriceImpact && 'border-red bg-red')}
       >
         {submitButtonLabel}
       </PrimaryButton>

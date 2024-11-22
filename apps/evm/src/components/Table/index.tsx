@@ -64,7 +64,7 @@ export function Table<R>({
   }, [data, order]);
 
   return (
-    <GradientBorder>
+    <GradientBorder css={styles.getRoot({ breakpoint })} >
       <Card css={styles.getRoot({ breakpoint })} data-testid={testId} className={className}>
         {title && (
           <h4 css={styles.getTitle({ breakpoint })} className="text-lg">

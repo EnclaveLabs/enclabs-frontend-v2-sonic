@@ -33,12 +33,6 @@ export const useStyles = () => {
         font-size: ${theme.typography.small2.fontSize};
       }
 
-      :hover:not(:disabled),
-      :active:not(:disabled) {
-        background-color: ${theme.palette.secondary.light};
-        border-color: ${theme.palette.secondary.light};
-      }
-
       ${
         fullWidth &&
         css`
@@ -59,13 +53,6 @@ export const useStyles = () => {
         background-color: transparent;
         border-color: transparent;
 
-        :not(:hover, :active) {
-          color: ${theme.palette.text.secondary};
-        }
-
-        :hover {
-          color: ${theme.palette.text.secondary};
-        }
       `
       };
 

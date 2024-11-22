@@ -52,7 +52,7 @@ export const CellGroup: React.FC<CellGroupProps> = ({
             key={`cell-group-item-${label}`}
           >
             <div className="flex items-center">
-              <span className={cn('text-blue', smallValues && 'text-sm')}>{label}</span>
+              <span className={cn('text-lightBlack', smallValues && 'text-sm')}>{label}</span>
 
               {!!tooltip && <InfoIcon tooltip={tooltip} className="ml-2" />}
             </div>

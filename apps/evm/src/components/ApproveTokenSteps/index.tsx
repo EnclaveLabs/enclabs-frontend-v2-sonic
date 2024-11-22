@@ -3,6 +3,9 @@ import type { Token } from 'types';
 
 import { ApprovalSteps, type ApprovalStepsProps } from '../ApprovalSteps';
 
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
+
 export type ApproveTokenStepsProps = {
   token: Token;
   approveToken: () => Promise<unknown>;
@@ -27,12 +30,20 @@ export const ApproveTokenSteps: React.FC<ApproveTokenStepsProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  let tokenType;
+  let tokenTypeInfos;
+  if(token.address){
+    tokenType = getTokenType(token.address!);
+    tokenTypeInfos = tokenTypeInfo[tokenType];
+  }
+
   const showApproveTokenStep =
     !hideTokenEnablingStep && !isWalletSpendingLimitLoading && !isTokenApproved;
 
   return (
     <ApprovalSteps
       className={className}
+      buttonClassName={tokenTypeInfos?.buttonClassName}
       showApprovalSteps={showApproveTokenStep}
       isApprovalActionLoading={isApproveTokenLoading}
       approvalAction={approveToken}

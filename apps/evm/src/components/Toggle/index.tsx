@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Typography } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import type { SwitchBaseProps } from '@mui/material/internal/SwitchBase';
 
@@ -18,6 +18,7 @@ export interface ToggleProps {
 
 export const switchAriaLabel = 'Switch';
 const otherSwitchProps = { inputProps: { 'aria-label': switchAriaLabel } };
+const theme = useTheme();
 
 export const Toggle = ({
   onChange,

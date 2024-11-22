@@ -33,7 +33,7 @@ export const MdUpControls: React.FC = () => {
         )}
       />
 
-      <ConnectButton className="flex-none" variant={isOnMarketPage ? 'secondary' : 'primary'} />
+      <ConnectButton className="flex-none" variant={'primary'} />
     </div>
   );
 };

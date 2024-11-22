@@ -233,6 +233,7 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
               isDelegateApprovedLoading={isDelegateApprovedLoading}
               approveDelegateAction={approveDelegateAction}
               isApproveDelegateLoading={isApproveDelegateLoading}
+              tokenAddress={asset.vToken.underlyingToken.address}
             />
           </div>
         </>

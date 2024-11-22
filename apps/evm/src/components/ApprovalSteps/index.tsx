@@ -11,6 +11,7 @@ import { useStyles } from './styles';
 export interface ApprovalStepsProps {
   children: React.ReactNode;
   className?: string;
+  buttonClassName?: string;
   secondStepButtonLabel: string;
 }
 
@@ -35,6 +36,7 @@ export const ApprovalSteps: React.FC<ApprovalStepsProps & ApprovalStepsExtraProp
   secondStepLabel,
   secondStepButtonLabel,
   className,
+  buttonClassName,
   children,
 }) => {
   const styles = useStyles();
@@ -66,7 +68,7 @@ export const ApprovalSteps: React.FC<ApprovalStepsProps & ApprovalStepsExtraProp
           <PrimaryButton
             onClick={handleApprovalAction}
             loading={isApprovalActionLoading}
-            className="mb-8 w-full"
+            className={`mb-8 w-full ${buttonClassName}`}
           >
             {firstStepButtonLabel}
           </PrimaryButton>
@@ -77,7 +79,7 @@ export const ApprovalSteps: React.FC<ApprovalStepsProps & ApprovalStepsExtraProp
             </Typography>
           </div>
 
-          <PrimaryButton className="w-full" disabled>
+          <PrimaryButton className={`w-full ${buttonClassName}`} disabled>
             {secondStepButtonLabel}
           </PrimaryButton>
         </>

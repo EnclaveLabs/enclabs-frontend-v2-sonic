@@ -18,7 +18,7 @@ export const PALETTE = {
     black: '#1F2028',
   },
   secondary: {
-    light: theme.colors.lightGrey,
+    light: theme.colors.lightBlack,
     main: theme.colors.background,
     dark: 'rgba(18, 22, 32, 1)',
   },

@@ -11,6 +11,9 @@ import type { Pool } from 'types';
 
 import TEST_IDS from '../testIds';
 import { useStyles } from './styles';
+import { useGetChainMetadata } from 'hooks/useGetChainMetadata';
+import { useParams } from 'react-router';
+import { useGetAsset } from 'clients/api';
 
 export interface TablesProps {
   pool: Pool;
@@ -24,6 +27,23 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
   const hideXlDownCss = useHideXlDownCss();
   const showXlDownCss = useShowXlDownCss();
   const hideMdDownCss = useHideMdDownCss();
+
+  const getTokenAddress = () : string | undefined => {
+    return useMemo(
+      () => {
+
+        const { vTokenAddress = '' } =
+        useParams();
+      
+        const { data: getAssetData } = useGetAsset({
+          vTokenAddress: vTokenAddress,
+        });
+
+        return getAssetData?.asset?.vToken.underlyingToken.address;
+      },
+      [],
+    );
+  };
 
   const marketTableProps: {
     supply: MarketTableProps;
@@ -96,6 +116,7 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
             ]}
             activeButtonIndex={activeTabIndex}
             onButtonClick={setActiveTabIndex}
+            tokenAddress={getTokenAddress()}
           />
         </div>
 
