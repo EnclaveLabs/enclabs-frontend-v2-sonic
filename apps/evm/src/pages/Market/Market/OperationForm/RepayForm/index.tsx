@@ -283,6 +283,7 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
           <QuaternaryButton
             key={`select-button-${percentage}`}
             className="flex-1"
+            tokenAddress={asset.vToken.underlyingToken.address}
             active={percentage === formValues.fixedRepayPercentage}
             disabled={!isUserConnected || asset.userBorrowBalanceTokens.isEqualTo(0)}
             onClick={() =>
@@ -369,8 +370,9 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
               isFromTokenApproved={isFromTokenApproved}
               isFromTokenWalletSpendingLimitLoading={isFromTokenWalletSpendingLimitLoading}
               isRevokeFromTokenWalletSpendingLimitLoading={
-                isRevokeFromTokenWalletSpendingLimitLoading
+              isRevokeFromTokenWalletSpendingLimitLoading
               }
+              tokenAddress={asset.vToken.underlyingToken.address}
             />
           </div>
         </>

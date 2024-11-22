@@ -175,7 +175,7 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
     <Accordion
       title={
         <div className="flex items-center gap-x-2">
-          <p className="text-sm md:text-base">{t('assetInfo.totalApy.label')}</p>
+          <p className="text-sm md:text-base text-lightBlack">{t('assetInfo.totalApy.label')}</p>
 
           <Tooltip
             className="inline-flex items-center"

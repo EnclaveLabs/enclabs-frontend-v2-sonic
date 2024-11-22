@@ -94,6 +94,8 @@ export const SubmitSection: React.FC<SubmitSectionProps> = ({
         className={cn('w-full', `${tokenTypeInfos.buttonClassName}` , isSwappingWithHighPriceImpact && 'border-red bg-red')}
       >
         {submitButtonLabel}
+
+        
       </PrimaryButton>
 
       {isFormValid && !isSwapLoading && !isFromTokenWalletSpendingLimitLoading && (
