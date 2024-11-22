@@ -18,7 +18,6 @@ export interface ToggleProps {
 
 export const switchAriaLabel = 'Switch';
 const otherSwitchProps = { inputProps: { 'aria-label': switchAriaLabel } };
-const theme = useTheme();
 
 export const Toggle = ({
   onChange,
