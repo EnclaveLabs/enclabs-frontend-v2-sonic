@@ -15,7 +15,7 @@ export const useStyles = () => {
     },
     supplyChartColor: theme.palette.interactive.success,
     borrowChartColor: theme.palette.interactive.error,
-    gridLineColor: theme.palette.secondary.light,
+    gridLineColor: theme.palette.primary.light,
     accessoryColor,
     cursor: { strokeDasharray: `${SPACING} ${SPACING}`, stroke: accessoryColor },
     lineStrokeWidth: theme.spacing(0.5),

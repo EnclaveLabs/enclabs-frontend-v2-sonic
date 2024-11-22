@@ -46,7 +46,7 @@ const getVariantClasses = ({ variant, active, tokenAddress = '' }: { variant: Va
     case 'quinary':
       // Filter group buttons
       return cn(
-        'border-cards border-lightGrey  bg-cards active:border-blue active:bg-blue disabled:border-background disabled:bg-background h-8 rounded-full px-5 py-1',
+        'border-cards border-lightGrey bg-cards active:border-blue active:bg-blue disabled:border-background disabled:bg-background h-8 rounded-full px-5 py-1',
         active ? 'border-blue bg-blue text-white' : 'hover:border-blue hover:bg-blue hover:text-white',
       );
     case 'senary':

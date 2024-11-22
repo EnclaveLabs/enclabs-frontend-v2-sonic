@@ -53,7 +53,7 @@ export const MarketCard: React.FC<MarketCardProps> = ({
               className="border-lightGrey border-r pr-6 last-of-type:border-0 last-of-type:pr-0 flex-shrink-0"
               key={`card-${title}-legend-${stat.label}`}
             >
-              <p className="text-grey mb-1 text-sm">{stat.label}</p>
+              <p className="text-lightBlack mb-1 text-sm">{stat.label}</p>
 
               <p className="text-sm font-semibold sm:text-lg">{stat.value}</p>
             </div>

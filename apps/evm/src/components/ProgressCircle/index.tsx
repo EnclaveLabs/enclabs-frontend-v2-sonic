@@ -44,7 +44,7 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = ({
       {...otherProps}
     >
       <circle
-        stroke="rgba(255,255,255,0.12)"
+        stroke="rgba(0,0,0,0.12)"
         strokeWidth={strokeWidthPx}
         fill="transparent"
         r={sizePx / 2 - strokeWidthPx / 2}

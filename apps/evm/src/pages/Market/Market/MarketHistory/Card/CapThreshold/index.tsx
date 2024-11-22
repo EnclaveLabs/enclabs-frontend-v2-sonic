@@ -9,6 +9,10 @@ import {
   formatPercentageToReadableValue,
   formatTokensToReadableValue,
 } from 'utilities';
+
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
+
 const THRESHOLD_GRADIENT_ID = 'cap-threshold-gradient';
 export interface CapThresholdProps {
   token: Token;
@@ -17,6 +21,8 @@ export interface CapThresholdProps {
   capTokens: BigNumber;
   balanceTokens: BigNumber;
 }
+
+
 export const CapThreshold: React.FC<CapThresholdProps> = ({
   type,
   tokenPriceCents,
@@ -25,6 +31,15 @@ export const CapThreshold: React.FC<CapThresholdProps> = ({
   token,
 }) => {
   const { t } = useTranslation();
+
+  const tokenTypeInfos = useMemo(
+    () => {
+      const tokenType = getTokenType(token.address);
+      return tokenTypeInfo[tokenType];
+    },
+    [token],
+  );
+
   const {
     readableBalanceDollars,
     readableBalanceTokens,
@@ -105,7 +120,8 @@ export const CapThreshold: React.FC<CapThresholdProps> = ({
                 y2="6.11727"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color={theme.colors.blue} />
+                {/* <stop stop-color={theme.colors.blue} /> */}
+                <stop stop-color={tokenTypeInfos.color} />
                 <stop offset="1" stop-color="#5CFFA2" />
               </linearGradient>
             }
@@ -114,7 +130,7 @@ export const CapThreshold: React.FC<CapThresholdProps> = ({
         </div>
       </Tooltip>
       <div>
-        <p className="text-grey mb-1 text-sm">
+        <p className="text-lightBlack mb-1 text-sm">
           {type === 'supply'
             ? t('market.supplyCapThreshold.title')
             : t('market.borrowCapThreshold.title')}
