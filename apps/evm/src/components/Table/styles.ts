@@ -21,7 +21,7 @@ const getHoverBackgroundColor = (tokenAddress: string) : string => {
 }
 
 export const useStyles = () => {
-  const theme = useTheme();
+  const usedTheme = useTheme();
 
   return {
     getRoot: ({ breakpoint }: { breakpoint?: keyof (typeof BREAKPOINTS)['values'] }) => css`
@@ -30,17 +30,17 @@ export const useStyles = () => {
       margin-top: 1px;
       margin-bottom: 1px;
       
-      ${breakpoint && theme.breakpoints.down(breakpoint)} {
+      ${breakpoint && usedTheme.breakpoints.down(breakpoint)} {
         background-color: transparent;
         padding-top: 0;
         padding-bottom: 0;
       }
     `,
     getTitle: ({ breakpoint }: { breakpoint?: keyof (typeof BREAKPOINTS)['values'] }) => css`
-      margin-bottom: ${theme.spacing(4)};
-      padding: ${theme.spacing(0, 6)};
+      margin-bottom: ${usedTheme.spacing(4)};
+      padding: ${usedTheme.spacing(0, 6)};
 
-      ${breakpoint && theme.breakpoints.down(breakpoint)} {
+      ${breakpoint && usedTheme.breakpoints.down(breakpoint)} {
         padding: 0;
       }
     `,
@@ -49,7 +49,7 @@ export const useStyles = () => {
     }: {
       breakpoint?: keyof (typeof BREAKPOINTS)['values'];
     }) => css`
-      ${breakpoint && theme.breakpoints.down(breakpoint)} {
+      ${breakpoint && usedTheme.breakpoints.down(breakpoint)} {
         display: none;
       }
     `,
@@ -60,16 +60,16 @@ export const useStyles = () => {
     }) => css`
       display: none;
 
-      ${breakpoint && theme.breakpoints.down(breakpoint)} {
+      ${breakpoint && usedTheme.breakpoints.down(breakpoint)} {
         display: block;
       }
     `,
     cardsSelect: css`
-      width: ${theme.spacing(56)};
-      margin-bottom: ${theme.spacing(4)};
+      width: ${usedTheme.spacing(56)};
+      margin-bottom: ${usedTheme.spacing(4)};
     `,
     link: css`
-      color: ${theme.palette.text.primary};
+      color: ${usedTheme.palette.text.primary};
 
       :hover {
         text-decoration: none;
@@ -77,10 +77,10 @@ export const useStyles = () => {
     `,
     tableWrapperMobile: ({ clickable }: { clickable: boolean }) => css`
       &:not(:last-of-type) {
-        margin-bottom: ${theme.spacing(4)};
+        margin-bottom: ${usedTheme.spacing(4)};
       }
 
-      padding: ${theme.spacing(4, 0)};
+      padding: ${usedTheme.spacing(4, 0)};
 
       ${
         clickable &&
@@ -88,20 +88,20 @@ export const useStyles = () => {
         cursor: pointer;
 
         :hover {
-          background-color: ${theme.palette.interactive.hover};
+          background-color: ${usedTheme.palette.interactive.hover};
         }
       `
       }
     `,
     rowTitleMobile: css`
-      padding-left: ${theme.spacing(4)};
-      padding-right: ${theme.spacing(4)};
+      padding-left: ${usedTheme.spacing(4)};
+      padding-right: ${usedTheme.spacing(4)};
     `,
     delimiterMobile: css`
-      margin: ${theme.spacing(4)};
+      margin: ${usedTheme.spacing(4)};
     `,
     getTableRow: ({ clickable, tokenAddress }: { clickable: boolean, tokenAddress: string }) => css`
-      height: ${theme.spacing(14)};
+      height: ${usedTheme.spacing(14)};
 
       :hover {
         background-color: ${getHoverBackgroundColor(tokenAddress)} !important;
@@ -121,20 +121,20 @@ export const useStyles = () => {
     cellMobile: css`
       display: flex;
       flex-direction: column;
-      padding-left: ${theme.spacing(4)};
-      padding-right: ${theme.spacing(4)};
+      padding-left: ${usedTheme.spacing(4)};
+      padding-right: ${usedTheme.spacing(4)};
     `,
     cellTitleMobile: css`
-      color: ${theme.palette.text.secondary};
+      color: ${usedTheme.palette.text.secondary};
     `,
     cellValueMobile: css`
-      padding-top: ${theme.spacing(2)};
+      padding-top: ${usedTheme.spacing(2)};
       overflow: hidden;
       text-overflow: ellipsis;
-      color: ${theme.palette.text.primary};
+      color: ${usedTheme.palette.text.primary};
     `,
     loader: css`
-      margin-bottom: ${theme.spacing(5)};
+      margin-bottom: ${usedTheme.spacing(5)};
     `,
     table: ({ minWidth }: { minWidth: string }) => css`
       min-width: ${minWidth};
@@ -142,18 +142,18 @@ export const useStyles = () => {
 
       .MuiTableCell-root {
         border-width: 0;
-        font-weight: ${theme.typography.body1.fontWeight};
+        font-weight: ${usedTheme.typography.body1.fontWeight};
         flex-direction: row;
-        font-size: ${theme.spacing(3.5)};
+        font-size: ${usedTheme.spacing(3.5)};
         text-transform: none;
       }
 
       .MuiTableCell-root:first-of-type {
-        padding-left: ${theme.spacing(6)};
+        padding-left: ${usedTheme.spacing(6)};
       }
 
       .MuiTableCell-root:last-child {
-        padding-right: ${theme.spacing(6)};
+        padding-right: ${usedTheme.spacing(6)};
       }
     `,
     tableSortLabel: ({ orderable }: { orderable: boolean }) => css`
@@ -161,7 +161,7 @@ export const useStyles = () => {
 
       &.MuiTableSortLabel-root {
         span {
-          color: ${theme.palette.text.secondary};
+          color: ${theme.colors.blue};
         }
       }
 
@@ -171,7 +171,7 @@ export const useStyles = () => {
 
       .MuiSvgIcon-root {
         display: block;
-        margin-left: ${theme.spacing(2)};
+        margin-left: ${usedTheme.spacing(2)};
         transform: rotate(0deg);
       }
       .MuiTableSortLabel-iconDirectionDesc {
@@ -179,7 +179,7 @@ export const useStyles = () => {
       }
 
       &.MuiTableSortLabel-root.Mui-active:hover {
-        color: ${theme.palette.text.secondary};
+        color: ${usedTheme.palette.text.secondary};
         .MuiTableSortLabel-iconDirectionDesc {
           opacity: 0.5;
         }
@@ -193,18 +193,18 @@ export const useStyles = () => {
     `,
     tableSortLabelIcon: ({ active }: { active: boolean }) => css`
       &.MuiTableSortLabel-icon {
-        fill: ${theme.palette.text.primary};
+        fill: ${usedTheme.palette.text.primary};
       }
       .Mui-active &.MuiTableSortLabel-icon {
-        fill: ${active ? theme.palette.interactive.success : theme.palette.text.primary};
-        color: ${active ? theme.palette.interactive.success : theme.palette.text.primary};
+        fill: ${active ? usedTheme.palette.interactive.success : usedTheme.palette.text.primary};
+        color: ${active ? usedTheme.palette.interactive.success : usedTheme.palette.text.primary};
       }
     `,
     cellWrapper: css`
       height: 1px;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding: ${theme.spacing(0, 4)};
+      padding: ${usedTheme.spacing(0, 4)};
 
       :first-of-type > a {
         padding-left: 0;

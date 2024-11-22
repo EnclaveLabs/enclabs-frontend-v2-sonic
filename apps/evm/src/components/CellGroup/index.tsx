@@ -47,12 +47,12 @@ export const CellGroup: React.FC<CellGroupProps> = ({
               'flex flex-col gap-y-1 whitespace-nowrap justify-center xl: xl:bg-transparent',
               variant === 'secondary'
                 ? 'px-4 md:px-6 first-of-type:pl-0 last-of-type:pr-0 border-r border-r-lightGrey last-of-type:border-r-0'
-                : 'bg-cards rounded-xl p-4 xl:py-0 xl:px-6 xl:rounded-none xl:first-of-type:pl-0 xl:last-of-type:pr-0 xl:border-r xl:last-of-type:border-r-0 xl:border-lightGrey',
+                : 'bg-cards rounded-xl p-4 xl:py-0 xl:px-6 xl:rounded-none xl:first-of-type:pl-0 xl:last-of-type:pr-0 xl:border-r xl:last-of-type:border-r-0 xl:border-lightBlack',
             )}
             key={`cell-group-item-${label}`}
           >
             <div className="flex items-center">
-              <span className={cn('text-grey', smallValues && 'text-sm')}>{label}</span>
+              <span className={cn('text-blue', smallValues && 'text-sm')}>{label}</span>
 
               {!!tooltip && <InfoIcon tooltip={tooltip} className="ml-2" />}
             </div>

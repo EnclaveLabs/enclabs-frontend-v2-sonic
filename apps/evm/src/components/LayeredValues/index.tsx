@@ -11,7 +11,7 @@ export const LayeredValues: React.FC<LayeredValuesProps> = ({
 }) => (
   <div className={className}>
     <p>{topValue}</p>
-    <p className="text-grey">{bottomValue}</p>
+    <p className="text-blue">{bottomValue}</p>
   </div>
 );
 

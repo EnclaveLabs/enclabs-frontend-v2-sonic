@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
         {t('footer.links.documentation')}
       </Link>
 
-      <div className="bg-lightGrey hidden h-full w-[1px] sm:block" />
+      <div className="bg-lightBlack hidden h-full w-[1px] sm:block" />
 
       <div className="flex flex-none items-center">
         <IconLink
