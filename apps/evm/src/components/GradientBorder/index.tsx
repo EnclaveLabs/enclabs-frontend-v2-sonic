@@ -6,13 +6,13 @@ import { tokenTypeInfo} from 'constants/tokenType';
 import { useStyles } from './styles';
 import { css } from '@emotion/react';
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface GradientBorderProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
   tokenAddress?: string;
 }
 
 
-export const GradientBorder: React.FC<CardProps> = ({ className, asChild = false, tokenAddress = undefined, ...otherProps }) => {
+export const GradientBorder: React.FC<GradientBorderProps> = ({ className, asChild = false, tokenAddress = undefined, ...otherProps }) => {
   const Comp = asChild ? Slot : 'div';
   const style = useStyles();
 
@@ -28,7 +28,7 @@ export const GradientBorder: React.FC<CardProps> = ({ className, asChild = false
   return (
     <Comp
       css={gradientStyle}
-      className={cn('block w-full rounded-xl p-1 sm:p-[1px]', className)}
+      className={cn('block w-full rounded-xl p-1 p-[1px] pr-[1.5px]', className)}
       {...otherProps}
     />
   );

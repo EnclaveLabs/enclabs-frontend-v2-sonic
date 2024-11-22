@@ -37,7 +37,7 @@ export const CellGroup: React.FC<CellGroupProps> = ({
           'gap-2 bg-transparent p-0',
           variant === 'secondary'
             ? 'flex overflow-y-auto scrollbar-hidden'
-            : 'grid grid-cols-1 sm:grid-cols-2 xl:bg-cards xl:flex xl:p-6 xl:flex-wrap xl:rounded-xl xl:gap-x-0 xl:m-[.2px]',
+            : 'grid grid-cols-1 sm:grid-cols-2 xl:bg-cards xl:flex xl:p-6 xl:flex-wrap xl:rounded-xl xl:gap-x-0 xl:m-[.5px] xl:mr-[.5px]',
         )}
         {...containerProps}
       >

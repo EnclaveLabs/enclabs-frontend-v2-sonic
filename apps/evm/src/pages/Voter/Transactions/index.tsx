@@ -106,6 +106,7 @@ export const Transactions: React.FC<TransactionsProps> = ({
           rowKeyExtractor={row => `voter-transaction-table-row-${row.blockNumber}`}
           breakpoint="sm"
           css={styles.cardContentGrid}
+          getTokenAddress={row => ''}
         />
       ) : (
         <Spinner css={styles.spinner} />

@@ -26,6 +26,7 @@ export interface TableProps<R> {
   getRowHref?: (row: R) => string;
   title?: string;
   testId?: string;
+  getTokenAddress: (row: R) => string;
 }
 
 export interface Order<R> {

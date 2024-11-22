@@ -1,15 +1,35 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
+import { theme } from 'theme';
 
 import type { BREAKPOINTS } from 'theme/MuiThemeProvider/muiTheme';
 
+const getHoverBackgroundColor = (tokenAddress: string) : string => {
+
+  if(tokenAddress){
+
+    const tokenType = getTokenType(tokenAddress);
+    const tokenTypeInfos = tokenTypeInfo[tokenType];
+    return tokenTypeInfos.hoverColor;
+  }
+  else{
+
+    return theme.colors.lightGrey;
+  }
+}
+
 export const useStyles = () => {
   const theme = useTheme();
+
   return {
     getRoot: ({ breakpoint }: { breakpoint?: keyof (typeof BREAKPOINTS)['values'] }) => css`
       padding-left: 0;
       padding-right: 0;
-
+      margin-top: 1px;
+      margin-bottom: 1px;
+      
       ${breakpoint && theme.breakpoints.down(breakpoint)} {
         background-color: transparent;
         padding-top: 0;
@@ -80,11 +100,11 @@ export const useStyles = () => {
     delimiterMobile: css`
       margin: ${theme.spacing(4)};
     `,
-    getTableRow: ({ clickable }: { clickable: boolean }) => css`
+    getTableRow: ({ clickable, tokenAddress }: { clickable: boolean, tokenAddress: string }) => css`
       height: ${theme.spacing(14)};
 
       :hover {
-        background-color: ${theme.palette.interactive.hover} !important;
+        background-color: ${getHoverBackgroundColor(tokenAddress)} !important;
       }
 
       ${

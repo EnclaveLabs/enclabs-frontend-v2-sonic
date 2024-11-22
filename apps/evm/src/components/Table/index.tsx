@@ -33,6 +33,7 @@ export function Table<R>({
   breakpoint,
   isFetching,
   testId,
+  getTokenAddress,
 }: TableProps<R>) {
   const styles = useStyles();
   const { formatTo } = useFormatTo();
@@ -93,6 +94,7 @@ export function Table<R>({
             <MuiTableBody>
               {sortedData.map((row, rowIndex) => {
                 const rowKey = rowKeyExtractor(row);
+                const tokenAddress = getTokenAddress(row);
 
                 const additionalProps = getRowHref
                   ? {
@@ -107,7 +109,7 @@ export function Table<R>({
                     key={rowKey}
                     css={[
                       styles.link,
-                      styles.getTableRow({ clickable: !!getRowHref || !!rowOnClick }),
+                      styles.getTableRow({ clickable: !!getRowHref || !!rowOnClick, tokenAddress: tokenAddress }),
                     ]}
                     onClick={
                       rowOnClick

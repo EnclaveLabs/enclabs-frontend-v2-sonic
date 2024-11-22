@@ -111,6 +111,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
       rowKeyExtractor={row => `voter-leaderboard-table-row-${row.address}`}
       breakpoint="xl"
       css={styles.cardContentGrid}
+      getTokenAddress={row => ''}
     />
   );
 };

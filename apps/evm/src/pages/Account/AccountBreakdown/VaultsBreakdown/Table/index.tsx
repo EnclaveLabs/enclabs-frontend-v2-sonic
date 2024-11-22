@@ -75,6 +75,7 @@ export const VaultTable: React.FC<VaultTableProps> = ({ vaults }) => {
       }}
       getRowHref={() => routes.vaults.path}
       breakpoint="xs"
+      getTokenAddress={row => ''}
     />
   );
 };

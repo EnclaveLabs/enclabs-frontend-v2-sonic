@@ -5,7 +5,8 @@ import { tokenTypeInfo } from 'constants/tokenType';
 
 
 export const getTokenType = (address: string) : string => {
-    for (const [category, addresses] of Object.entries(tokenType)) {
+
+  for (const [category, addresses] of Object.entries(tokenType)) {
       if (addresses.map(a => a.toLocaleLowerCase()).includes(address.toLowerCase())) {
         return category;
       }

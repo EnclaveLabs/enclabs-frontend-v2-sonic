@@ -134,6 +134,7 @@ export const PoolTableUi: React.FC<PoolTableProps> = ({ pools, isFetchingPools }
       breakpoint="xxl"
       css={styles.cardContentGrid}
       isFetching={isFetchingPools}
+      getTokenAddress={row => ''}
     />
   );
 };

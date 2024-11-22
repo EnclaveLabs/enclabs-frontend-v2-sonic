@@ -16,7 +16,6 @@ export const PALETTE = {
     default: theme.colors.background,
     paper: theme.colors.lightCards,
     black: '#1F2028',
-    gradient: theme.colors.gradient
   },
   secondary: {
     light: theme.colors.lightGrey,
@@ -34,7 +33,7 @@ export const PALETTE = {
     dark: theme.colors.darkBlue,
   },
   interactive: {
-    primary: theme.colors.blue,
+    primary: theme.colors.red,
     success: theme.colors.green,
     success10: 'rgba(24, 223, 139, 0.1)',
     success50: 'rgba(24, 223, 139, 0.5)',
@@ -43,7 +42,8 @@ export const PALETTE = {
     tan: 'rgba(255, 231, 206, 1)',
     delimiter: 'rgba(33, 41, 58, 1)',
     warning: theme.colors.orange,
-    hover: 'rgba(32, 39, 56, 1)',
+    // hover: 'rgba(32, 39, 56, 1)',
+    hover: theme.colors.blue,
   },
 };
 

@@ -1,3 +1,5 @@
+import { theme } from 'theme';
+
 export const tokenType = {
     LRT: [
          ""
@@ -31,48 +33,55 @@ export const tokenTypeInfo: {
         color: string;
         borderColor: string;
         backgroundColor: string;
+        hoverColor: string;
         getUrl: (tokenAddress: string, chain: string) => string;
     };
 } = {
     LRT: {
-        color: '#FF9800', // Orange
-        borderColor: '#FF9800',
-        backgroundColor: 'rgba(255, 152, 0, 0.1)',
+        color: theme.colors.tagTextOrange, // Orange
+        borderColor: theme.colors.tagTextOrange,
+        backgroundColor: theme.colors.tagBgOrange,
+        hoverColor: theme.colors.hoverOrange,
         getUrl:  (tokenAddress: string, chain: string) => 
             `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     },
     PT: {
-        color: '#4CAF50', // Green
-        borderColor: '#4CAF50',
-        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+        color: theme.colors.tagTextGreen, // Green
+        borderColor: theme.colors.tagTextGreen,
+        backgroundColor: theme.colors.tagBgGreen,
+        hoverColor: theme.colors.hoverGreen,
         getUrl:  (tokenAddress: string, chain: string) => 
             `https://app.pendle.finance/trade/markets/${tokenAddress}/swap?view=pt&chain=${chain}`,
     },
     Wrapped: {
-        color: '#FFEB3B', // Yellow
-        borderColor: '#FFEB3B',
-        backgroundColor: 'rgba(255, 235, 59, 0.1)',
+        color: theme.colors.tagTextYellow, // Yellow
+        borderColor: theme.colors.tagTextYellow,
+        backgroundColor: theme.colors.tagBgYellow,
+        hoverColor: theme.colors.hoverYellow,
         getUrl: (tokenAddress: string, chain: string) =>
             `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     },
     aToken: {
-        color: '#F44336', // Red
-        borderColor: '#F44336',
-        backgroundColor: 'rgba(244, 67, 54, 0.1)',
+        color: theme.colors.tagTextRed, // Red
+        borderColor: theme.colors.tagTextRed,
+        backgroundColor: theme.colors.tagBgRed,
+        hoverColor: theme.colors.hoverRed,
         getUrl:  (tokenAddress: string, chain: string) => 
             ``,
     },
     Stable: {
-        color: '#2196F3', // Blue
-        borderColor: '#2196F3',
-        backgroundColor: 'rgba(33, 150, 243, 0.1)',
+        color: theme.colors.tagTextBlue, // Blue
+        borderColor: theme.colors.tagTextBlue,
+        backgroundColor: theme.colors.tagBgBlue,
+        hoverColor: theme.colors.hoverBlue,
         getUrl:  (tokenAddress: string, chain: string) => 
             `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     },
     Unknown: {
-        color: 'black',
-        borderColor: 'black',
-        backgroundColor: 'rgba(0, 0, 0, 0.11)',
+        color: theme.colors.tagTextGrey,
+        borderColor: theme.colors.tagTextRed,
+        backgroundColor: theme.colors.tagBgGrey,
+        hoverColor: theme.colors.hoverGrey,
         getUrl:  (tokenAddress: string, chain: string) => 
             `https://app.uniswap.org/swap?chain=${chain}&inputCurrency=${tokenAddress}`,
     }
