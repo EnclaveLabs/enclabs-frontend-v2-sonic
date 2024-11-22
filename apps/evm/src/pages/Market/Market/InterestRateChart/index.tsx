@@ -5,6 +5,10 @@ import { useTranslation } from 'libs/translations';
 import type { Asset } from 'types';
 import TEST_IDS from '../../testIds';
 import { MarketCard, type MarketCardProps } from '../MarketCard';
+import { useMemo } from 'react';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo } from 'constants/tokenType';
+import { cn } from 'utilities';
 
 export interface InterestRateChartProps {
   className?: string;
@@ -45,9 +49,17 @@ export const InterestRateChart: React.FC<InterestRateChartProps> = ({
     },
   ];
 
+  const tokenTypeInfos = useMemo(
+    () => {
+      const tokenType = getTokenType(asset.vToken.underlyingToken.address);
+      return tokenTypeInfo[tokenType];
+    },
+    [asset],
+  );
+
   return (
     <MarketCard
-      className={className}
+      className={cn(className, tokenTypeInfos.shadowClassName)}
       testId={TEST_IDS.interestRateModel}
       title={t('market.interestRateModel.title')}
       legends={legends}

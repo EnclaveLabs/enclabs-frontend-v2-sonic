@@ -14,13 +14,26 @@ import {
 import TEST_IDS from '../../testIds';
 import type { Stat } from '../../types';
 import { MarketCard } from '../MarketCard';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
+
 
 export interface MarketInfoProps {
   asset: Asset;
 }
 
+
+
 const MarketInfo: React.FC<MarketInfoProps> = ({ asset }) => {
   const { t } = useTranslation();
+
+  const tokenTypeInfos = useMemo(
+    () => {
+      const tokenType = getTokenType(asset.vToken.underlyingToken.address);
+      return tokenTypeInfo[tokenType];
+    },
+    [asset],
+  );
 
   const isMarketParticipantCountFeatureEnabled = useIsFeatureEnabled({
     name: 'marketParticipantCounts',
@@ -185,7 +198,10 @@ const MarketInfo: React.FC<MarketInfoProps> = ({ asset }) => {
   ]);
 
   return (
-    <MarketCard title={t('asset.marketInfo.title')} testId={TEST_IDS.marketInfo}>
+    <MarketCard 
+      title={t('asset.marketInfo.title')} 
+      testId={TEST_IDS.marketInfo} 
+      className={tokenTypeInfos.shadowClassName}>
       <ul className="m-0 p-0">
         {stats.map(stat => (
           <li

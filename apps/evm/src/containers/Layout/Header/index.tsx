@@ -10,6 +10,7 @@ import { useIsOnLidoMarketPage } from './useIsOnLidoMarketPage';
 import { useIsOnMarketPage } from './useIsOnMarketPage';
 import { getTokenType } from 'components/Tag';
 import { tokenTypeInfo} from 'constants/tokenType';
+import { useMemo } from 'react';
 
 export const Header: React.FC = () => {
   const isOnMarketPage = useIsOnMarketPage();
@@ -27,13 +28,13 @@ export const Header: React.FC = () => {
     imagePath: asset?.vToken.underlyingToken.asset,
   });
 
-  let tokenType;
-  let tokenTypeStyle;
-  if(asset){
-    tokenType = getTokenType(asset?.vToken.underlyingToken.address);
-    tokenTypeStyle = tokenTypeInfo[tokenType];
-    gradientAccentColor = tokenTypeStyle.color;
-  }
+  gradientAccentColor = useMemo(
+    () => {
+      const tokenType = getTokenType(asset?.vToken.underlyingToken.address!);
+      return tokenTypeInfo[tokenType].borderColor;
+    },
+    [asset],
+  );
 
   return (
     <header

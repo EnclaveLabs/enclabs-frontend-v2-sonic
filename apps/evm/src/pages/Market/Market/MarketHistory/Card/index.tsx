@@ -12,6 +12,8 @@ import { MarketCard, type MarketCardProps } from '../../MarketCard';
 import { CapThreshold } from './CapThreshold';
 import { useGetLiquidationThresholdPercentage } from './useGetLiquidationThresholdPercentage';
 import { LiquidityChart, LiquidityChartProps } from 'components/charts/LiquidityChart';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
 
 export type ChartType = 'supply' | 'borrow' | 'liquidity';
 
@@ -39,6 +41,14 @@ export const Card: React.FC<CardProps> = ({
   const { t } = useTranslation();
   const isApyChartsFeatureEnabled = useIsFeatureEnabled({ name: 'apyCharts' });
   const shouldDisplayLiquidationInfo = type === 'borrow';
+
+  const tokenTypeInfos = useMemo(
+    () => {
+      const tokenType = getTokenType(asset.vToken.underlyingToken.address);
+      return tokenTypeInfo[tokenType];
+    },
+    [asset],
+  );
 
   const periodOptions: { label: string; value: MarketHistoryPeriodType }[] = useMemo(
     () => [
@@ -169,6 +179,7 @@ export const Card: React.FC<CardProps> = ({
       title={type === 'supply' ? t('market.supplyInfo.title') : type === 'liquidity' ? t('market.liquidityInfo.title')  : t('market.borrowInfo.title')}
       stats={stats}
       legends={isApyChartsFeatureEnabled ? legends : undefined}
+      className={tokenTypeInfos.shadowClassName}
       topContent={
           type != 'liquidity' &&
             <CapThreshold
