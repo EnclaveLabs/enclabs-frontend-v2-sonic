@@ -24,6 +24,7 @@ interface TableCardProps<R>
     | 'isFetching'
   > {
   order: Order<R> | undefined;
+  getTokenAddress: (row: R) => string;
   onOrderChange: (newOrder: Order<R>) => void;
 }
 
@@ -36,6 +37,7 @@ export function TableCards<R>({
   breakpoint,
   columns,
   order,
+  getTokenAddress,
   onOrderChange,
 }: TableCardProps<R>) {
   const { t } = useTranslation();
@@ -97,6 +99,8 @@ export function TableCards<R>({
       <div>
         {data.map((row, rowIndex) => {
           const rowKey = rowKeyExtractor(row);
+          const tokenAddress = getTokenAddress(row);
+
           const content = (
             <>
               <div css={styles.rowTitleMobile}>{titleColumn.renderCell(row, rowIndex)}</div>
@@ -122,9 +126,10 @@ export function TableCards<R>({
           return (
             <Card
               key={rowKey}
-              css={styles.tableWrapperMobile({ clickable: !!(rowOnClick || getRowHref) })}
+              css={styles.tableWrapperMobile({ clickable: !!(rowOnClick || getRowHref), tokenAddress: tokenAddress })}
               onClick={rowOnClick && ((e: React.MouseEvent<HTMLDivElement>) => rowOnClick(e, row))}
               asChild
+              className='shadow-lg'
             >
               {getRowHref ? (
                 <Link css={styles.link} to={getRowHref(row)}>

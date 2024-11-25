@@ -90,7 +90,7 @@ export const Summary: React.FC<SummaryProps> = ({
 
   return (
     <Section className={className} title={t('account.summary.title')}>
-      <Card css={styles.container} data-testid={TEST_IDS.container}>
+      <Card css={styles.container} data-testid={TEST_IDS.container} className='xl:shadow-lg'>
         <CellGroup
           smallValues={displayAccountHealth}
           cells={cells}
@@ -99,7 +99,7 @@ export const Summary: React.FC<SummaryProps> = ({
         />
 
         {displayAccountHealth && (
-          <div css={styles.accountHealth} data-testid={TEST_IDS.accountHealth}>
+          <div css={styles.accountHealth} data-testid={TEST_IDS.accountHealth} className='shadow-lg xl:shadow-none'>
             <BorrowLimitUsedAccountHealth
               variant="borrowLimitUsed"
               borrowBalanceCents={totalBorrowCents.toNumber()}

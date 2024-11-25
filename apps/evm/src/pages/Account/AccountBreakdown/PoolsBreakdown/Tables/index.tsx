@@ -76,16 +76,18 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
         <MarketTable
           {...marketTableProps.supply}
           title={t('account.marketBreakdown.tables.supplyTableTitle')}
+          className='shadow-lg'
         />
 
         <MarketTable
           {...marketTableProps.borrow}
           title={t('account.marketBreakdown.tables.borrowTableTitle')}
+          className='shadow-lg'
         />
       </div>
 
       {/* Tablet/Mobile view */}
-      <Card css={[styles.tabletContainer, showXlDownCss]}>
+      <Card css={[styles.tabletContainer, showXlDownCss]} className='md:shadow-lg xl:shadow-lg'>
         <div css={styles.tabletHeader}>
           <Typography variant="h4" css={[styles.tabletHeaderTitle, hideMdDownCss]}>
             {t('account.marketBreakdown.tables.tabletTitle')}

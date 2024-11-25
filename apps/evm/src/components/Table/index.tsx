@@ -16,6 +16,7 @@ import TableCards from './TableCards';
 import { useStyles } from './styles';
 import type { Order, TableColumn, TableProps } from './types';
 import { GradientBorder } from 'components/GradientBorder';
+import { cn } from 'utilities';
 
 export * from './types';
 
@@ -64,7 +65,7 @@ export function Table<R>({
   }, [data, order]);
 
   return (
-    <Card css={styles.getRoot({ breakpoint })} data-testid={testId} className={className}>
+    <Card css={styles.getRoot({ breakpoint })} data-testid={testId} className={cn(className, 'xxl:shadow-lg')}>
       {title && (
         <h4 css={styles.getTitle({ breakpoint })} className="text-lg">
           {title}
@@ -148,6 +149,7 @@ export function Table<R>({
         columns={cardColumns || columns}
         breakpoint={breakpoint}
         order={order}
+        getTokenAddress={getTokenAddress}
         onOrderChange={setOrder}
       />
     </Card>

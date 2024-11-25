@@ -29,8 +29,7 @@ export const useStyles = () => {
       padding-right: 0;
       margin-top: 1px;
       margin-bottom: 1px;
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      
+
       ${breakpoint && usedTheme.breakpoints.down(breakpoint)} {
         background-color: transparent;
         padding-top: 0;
@@ -60,6 +59,8 @@ export const useStyles = () => {
       breakpoint?: keyof (typeof BREAKPOINTS)['values'];
     }) => css`
       display: none;
+      box-shadow: 0 0 0 0 rgb(0 0 0 / 0.1), 0 0 0 0 rgb(0 0 0 / 0.1);
+      
 
       ${breakpoint && usedTheme.breakpoints.down(breakpoint)} {
         display: block;
@@ -76,7 +77,7 @@ export const useStyles = () => {
         text-decoration: none;
       }
     `,
-    tableWrapperMobile: ({ clickable }: { clickable: boolean }) => css`
+    tableWrapperMobile: ({ clickable, tokenAddress }: { clickable: boolean, tokenAddress: string }) => css`
       &:not(:last-of-type) {
         margin-bottom: ${usedTheme.spacing(4)};
       }
@@ -89,7 +90,7 @@ export const useStyles = () => {
         cursor: pointer;
 
         :hover {
-          background-color: ${usedTheme.palette.interactive.hover};
+          background-color: ${getHoverBackgroundColor(tokenAddress)};
         }
       `
       }

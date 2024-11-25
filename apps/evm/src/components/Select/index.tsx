@@ -141,7 +141,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
 
           {!!label && (
             <div className={cn(placeLabelToLeft ? 'mr-3 shrink-0' : 'mb-1')}>
-              <p className={cn('text-grey text-sm font-semibold')}>{label}</p>
+              <p className={cn('text-lightBlack text-sm font-semibold')}>{label}</p>
             </div>
           )}
 
@@ -163,7 +163,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
                 buttonClassName,
                 'group'
               )}
-              contentClassName={cn('w-full justify-between text-sm font-semibold text-red')}
+              contentClassName={cn('w-full justify-between text-sm font-semibold text-blue')}
             >
               <span className="grow overflow-hidden text-ellipsis whitespace-nowrap text-left">
                 {selectedOption &&
