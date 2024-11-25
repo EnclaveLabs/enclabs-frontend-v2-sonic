@@ -28,23 +28,6 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
   const showXlDownCss = useShowXlDownCss();
   const hideMdDownCss = useHideMdDownCss();
 
-  const getTokenAddress = () : string | undefined => {
-    return useMemo(
-      () => {
-
-        const { vTokenAddress = '' } =
-        useParams();
-      
-        const { data: getAssetData } = useGetAsset({
-          vTokenAddress: vTokenAddress,
-        });
-
-        return getAssetData?.asset?.vToken.underlyingToken.address;
-      },
-      [],
-    );
-  };
-
   const marketTableProps: {
     supply: MarketTableProps;
     borrow: MarketTableProps;
@@ -116,7 +99,7 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
             ]}
             activeButtonIndex={activeTabIndex}
             onButtonClick={setActiveTabIndex}
-            tokenAddress={getTokenAddress()}
+            tokenAddress={''}
           />
         </div>
 

@@ -31,7 +31,7 @@ export const GradientBorder: React.FC<GradientBorderProps> = (
 
     return (
       <div
-        // css={gradientStyle}
+        css={gradientStyle}
         className={cn('block w-full rounded-xl p-1 p-[1px] pr-[1.5px]', className)}
         {...otherProps}
       >

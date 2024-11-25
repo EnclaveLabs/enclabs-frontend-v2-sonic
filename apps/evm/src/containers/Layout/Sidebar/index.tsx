@@ -13,7 +13,7 @@ export const Sidebar: React.FC = () => {
   const menuItems = useGetMenuItems();
 
   return (
-    <GradientBorder className="hidden md:flex md:flex-col md:items-center md:w-20 xl:w-56 rounded-none p-0 pr-[4px]">
+    <GradientBorder className="hidden md:flex md:flex-col md:items-center md:w-20 xl:w-56 rounded-none p-0 pr-[7px]">
       <div className="bg-cards hidden pt-7 md:flex md:flex-col md:items-center md:w-20 xl:w-56 h-full">
         <Link
           className="mb-4 flex w-full items-center justify-center py-2"
