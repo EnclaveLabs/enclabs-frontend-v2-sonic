@@ -53,7 +53,7 @@ export const useStyles = () => {
       padding: ${theme.spacing(0, 3)};
 
       :hover {
-        background-color: ${theme.palette.secondary.light};
+        background-color: ${theme.palette.grey[400]};
       }
     `,
   };

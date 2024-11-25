@@ -16,6 +16,7 @@ export const PALETTE = {
     default: theme.colors.background,
     paper: theme.colors.lightCards,
     black: '#1F2028',
+    lightGrey: theme.colors.lightGrey,
   },
   secondary: {
     light: theme.colors.lightBlack,
@@ -33,7 +34,7 @@ export const PALETTE = {
     dark: theme.colors.darkBlue,
   },
   interactive: {
-    primary: theme.colors.red,
+    primary: theme.colors.blue,
     success: theme.colors.green,
     success10: 'rgba(24, 223, 139, 0.1)',
     success50: 'rgba(24, 223, 139, 0.5)',
