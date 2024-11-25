@@ -127,13 +127,13 @@ export const MarketInfo = () => {
             </div>
 
             <AddTokenToWalletButton
-              className="shrink-0 bg-background/40 hover:bg-background/40 active:bg-background/40"
+              className="shrink-0 bg-background/90 text-lightBlack hover:bg-background/40 hover:border-lightBlack/40 active:bg-background/40"
               isUserConnected={isUserConnected}
               token={asset.vToken.underlyingToken}
             />
 
             <BuyTokenButton 
-             className="shrink-0 bg-background/40 hover:bg-background/40 active:bg-background/40"
+             className="shrink-0 bg-background/90 text-lightBlack hover:bg-background/40 hover:border-lightBlack/40 active:bg-background/40"
              token={asset.vToken.underlyingToken} 
              isUserConnected={isUserConnected}/>
           </div>
