@@ -43,7 +43,6 @@ export const PALETTE = {
     tan: 'rgba(255, 231, 206, 1)',
     delimiter: 'rgba(33, 41, 58, 1)',
     warning: theme.colors.orange,
-    // hover: 'rgba(32, 39, 56, 1)',
     hover: theme.colors.blue,
   },
 };

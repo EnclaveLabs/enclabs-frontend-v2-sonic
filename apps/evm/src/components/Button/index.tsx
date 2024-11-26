@@ -37,7 +37,7 @@ const getVariantClasses = ({ variant, active, tokenAddress = '' }: { variant: Va
         tokenTypeInfos?.buttonClassName,
         `active:border-grey active:bg-grey disabled:bg-lightGrey h-10 px-3 disabled:border-transparent`,
       );
-    // Amount % group buttons 
+    // Group buttons (Amount %, Supplied/Borrow)
     case 'quaternary':
       return cn(
         tokenTypeInfos?.buttonClassName,

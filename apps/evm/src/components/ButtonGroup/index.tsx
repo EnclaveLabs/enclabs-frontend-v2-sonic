@@ -23,20 +23,32 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
 
   return (
     <div css={styles.getContainer({ fullWidth })} className={className}>
-      {buttonLabels.map((label, index) => (
-        <TertiaryButton
-          key={`button-group-button-${label}`}
-          onClick={() => onButtonClick(index)}
-          css={styles.getButton({
-            active: index === activeButtonIndex,
-            last: index === buttonLabels.length - 1,
-            fullWidth,
-          })}
-          tokenAddress={tokenAddress}
-        >
-          {label}
-        </TertiaryButton>
-      ))}
+      {
+        buttonLabels.map((label, index) => 
+        {
+          if(tokenAddress == ''){
+            className = index === activeButtonIndex ? 
+              'bg-blue text-white':
+              '';
+          }
+
+          return (
+            <TertiaryButton
+              key={`button-group-button-${label}`}
+              onClick={() => onButtonClick(index)}
+              css={styles.getButton({
+                active: index === activeButtonIndex,
+                last: index === buttonLabels.length - 1,
+                fullWidth,
+              })}
+              tokenAddress={tokenAddress}
+              className={className}
+            >
+              {label}
+            </TertiaryButton>
+          )
+        })
+      }
     </div>
   );
 };
