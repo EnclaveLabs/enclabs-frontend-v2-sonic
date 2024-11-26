@@ -174,8 +174,8 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
                 name="arrowUp"
                 className={cn(
                   'text-lightBlack ml-2 w-5 h-5 flex-none',
-                  isMenuOpened ? 'text-white' : 'rotate-180',
-                  'group-hover:text-white'
+                  variant == 'primary' && 'group-hover:text-white',
+                  isMenuOpened ? variant == 'primary' && 'text-white' : 'rotate-180',
                 )}
               />
             </Button>
