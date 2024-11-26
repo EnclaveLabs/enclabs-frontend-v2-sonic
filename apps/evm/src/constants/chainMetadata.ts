@@ -11,7 +11,38 @@ const PROPOSAL_EXECUTION_GRACE_PERIOD_MS = 14 * 24 * 60 * 60 * 1000; // 14 days 
 
 export const CHAIN_METADATA: {
   [chainId in ChainId]: ChainMetadata;
-} = {
+} = 
+{
+  [ChainId.ARBITRUM_ONE]: {
+    name: 'Arbitrum One',
+    logoSrc: arbitrumLogo,
+    explorerUrl: 'https://arbiscan.io',
+    layerZeroScanUrl: 'https://layerzeroscan.com',
+    corePoolComptrollerContractAddress: '0xa6f4eE4a270Cb5D77984790bc2941f48952e8518',
+    lstPoolComptrollerContractAddress: '0xf27f74f5878bc0dA077FCc0933FAEe49216B5bBA',
+    lstPoolVWstEthContractAddress: '0x9df6B5132135f14719696bBAe3C54BAb272fDb16',
+    nativeToken: getToken({ chainId: ChainId.ARBITRUM_ONE, symbol: 'ETH' })!,
+    // rpcUrl: 'https://open-platform.nodereal.io/7fab7575d1c34150a9ee582167ffac6f/arbitrum-nitro',
+    rpcUrl: 'https://arb1.arbitrum.io/rpc',
+    marketsSubgraphUrl:
+       //'https://gateway-arbitrum.network.thegraph.com/api/43fa98f50f96a8e1b63423e8ead8c6dc/deployments/id/QmQByQzsGpuVqaZcfraxQduUwMX4JpnAnFd1s1JTkSUREj',
+      'https://api.studio.thegraph.com/query/91097/enclabs-arb-test/version/latest',
+  },
+  [ChainId.ETHEREUM]: {
+    name: 'Ethereum',
+    logoSrc: ethLogo,
+    explorerUrl: 'https://etherscan.io',
+    layerZeroScanUrl: 'https://layerzeroscan.com',
+    blockTimeMs: 12000,
+    blocksPerDay: 7200,
+    corePoolComptrollerContractAddress: '0x687a01ecF6d3907658f7A7c714749fAC32336D1B',
+    lstPoolComptrollerContractAddress: '0xF522cd0360EF8c2FF48B648d53EA1717Ec0F3Ac3',
+    lstPoolVWstEthContractAddress: '0x4a240F0ee138697726C8a3E43eFE6Ac3593432CB',
+    nativeToken: getToken({ chainId: ChainId.ETHEREUM, symbol: 'ETH' })!,
+    rpcUrl: 'https://eth-mainnet.nodereal.io/v1/7fab7575d1c34150a9ee582167ffac6f',
+    marketsSubgraphUrl:
+      'https://gateway-arbitrum.network.thegraph.com/api/43fa98f50f96a8e1b63423e8ead8c6dc/deployments/id/Qmazi4kSKzahgR5G6U7FVUoUGLQZQVPohRX6zbuxbC8YX1',
+  },
   [ChainId.BSC_MAINNET]: {
     name: 'BNB Chain',
     logoSrc: bscLogo,
@@ -68,21 +99,6 @@ export const CHAIN_METADATA: {
     nativeToken: getToken({ chainId: ChainId.OPBNB_TESTNET, symbol: 'BNB' })!,
     rpcUrl: 'https://opbnb-testnet.nodereal.io/v1/7fab7575d1c34150a9ee582167ffac6f',
   },
-  [ChainId.ETHEREUM]: {
-    name: 'Ethereum',
-    logoSrc: ethLogo,
-    explorerUrl: 'https://etherscan.io',
-    layerZeroScanUrl: 'https://layerzeroscan.com',
-    blockTimeMs: 12000,
-    blocksPerDay: 7200,
-    corePoolComptrollerContractAddress: '0x687a01ecF6d3907658f7A7c714749fAC32336D1B',
-    lstPoolComptrollerContractAddress: '0xF522cd0360EF8c2FF48B648d53EA1717Ec0F3Ac3',
-    lstPoolVWstEthContractAddress: '0x4a240F0ee138697726C8a3E43eFE6Ac3593432CB',
-    nativeToken: getToken({ chainId: ChainId.ETHEREUM, symbol: 'ETH' })!,
-    rpcUrl: 'https://eth-mainnet.nodereal.io/v1/7fab7575d1c34150a9ee582167ffac6f',
-    marketsSubgraphUrl:
-      'https://gateway-arbitrum.network.thegraph.com/api/43fa98f50f96a8e1b63423e8ead8c6dc/deployments/id/Qmazi4kSKzahgR5G6U7FVUoUGLQZQVPohRX6zbuxbC8YX1',
-  },
   [ChainId.SEPOLIA]: {
     name: 'Sepolia',
     logoSrc: ethLogo,
@@ -97,21 +113,6 @@ export const CHAIN_METADATA: {
     rpcUrl: 'https://eth-sepolia.nodereal.io/v1/7fab7575d1c34150a9ee582167ffac6f',
     marketsSubgraphUrl:
       'https://api.studio.thegraph.com/query/64786/venus-isolated-pools-sepolia/version/latest',
-  },
-  [ChainId.ARBITRUM_ONE]: {
-    name: 'Arbitrum One',
-    logoSrc: arbitrumLogo,
-    explorerUrl: 'https://arbiscan.io',
-    layerZeroScanUrl: 'https://layerzeroscan.com',
-    corePoolComptrollerContractAddress: '0xa6f4eE4a270Cb5D77984790bc2941f48952e8518',
-    lstPoolComptrollerContractAddress: '0xf27f74f5878bc0dA077FCc0933FAEe49216B5bBA',
-    lstPoolVWstEthContractAddress: '0x9df6B5132135f14719696bBAe3C54BAb272fDb16',
-    nativeToken: getToken({ chainId: ChainId.ARBITRUM_ONE, symbol: 'ETH' })!,
-    // rpcUrl: 'https://open-platform.nodereal.io/7fab7575d1c34150a9ee582167ffac6f/arbitrum-nitro',
-    rpcUrl: 'https://arb1.arbitrum.io/rpc',
-    marketsSubgraphUrl:
-       //'https://gateway-arbitrum.network.thegraph.com/api/43fa98f50f96a8e1b63423e8ead8c6dc/deployments/id/QmQByQzsGpuVqaZcfraxQduUwMX4JpnAnFd1s1JTkSUREj',
-      'https://api.studio.thegraph.com/query/91097/enclabs-arb-test/version/latest',
   },
   [ChainId.ARBITRUM_SEPOLIA]: {
     name: 'Arbitrum Sepolia',
@@ -129,28 +130,6 @@ export const CHAIN_METADATA: {
       'https://rpcUrl.ankr.com/arbitrum_sepolia/451c00a15d3de617618d7a880cec1da8065b10906c460b1462a8b8769d91e0da',
     marketsSubgraphUrl:
       'https://api.studio.thegraph.com/query/64786/venus-il-arbitrumsepolia/version/latest',
-  },
-  [ChainId.ZKSYNC_SEPOLIA]: {
-    name: 'zkSync Sepolia',
-    logoSrc: zkSyncLogo,
-    explorerUrl: 'https://sepolia.explorer.zksync.io',
-    layerZeroScanUrl: 'https://testnet.layerzeroscan.com',
-    corePoolComptrollerContractAddress: '0xC527DE08E43aeFD759F7c0e6aE85433923064669',
-    nativeToken: getToken({ chainId: ChainId.ZKSYNC_SEPOLIA, symbol: 'ETH' })!,
-    rpcUrl: 'https://sepolia.era.zksync.dev',
-    marketsSubgraphUrl:
-      'https://api.studio.thegraph.com/query/64786/venus-il-zksync-sepolia/version/latest',
-  },
-  [ChainId.ZKSYNC_MAINNET]: {
-    name: 'zkSync',
-    logoSrc: zkSyncLogo,
-    explorerUrl: 'https://explorer.zksync.io',
-    layerZeroScanUrl: 'https://layerzeroscan.com',
-    corePoolComptrollerContractAddress: '0xddE4D098D9995B659724ae6d5E3FB9681Ac941B1',
-    nativeToken: getToken({ chainId: ChainId.ZKSYNC_MAINNET, symbol: 'ETH' })!,
-    rpcUrl: 'https://open-platform.nodereal.io/7fab7575d1c34150a9ee582167ffac6f/zksync',
-    marketsSubgraphUrl:
-      'https://gateway.thegraph.com/api/43fa98f50f96a8e1b63423e8ead8c6dc/deployments/id/QmZRQNSYcGeq8oextwVUzKm9aoDM7xogJxtdFv5Qu34hCw',
   },
   [ChainId.OPTIMISM_MAINNET]: {
     name: 'Optimism',

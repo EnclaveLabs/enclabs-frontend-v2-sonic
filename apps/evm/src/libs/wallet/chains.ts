@@ -28,7 +28,14 @@ const getSupportedChains = (): [Chain, ...Chain[]] => {
     ];
   }
 
-  return [bscMainnet, ethereum, opBNBMainnet, arbitrumOne, zksyncMainnet, optimismMainnet];
+  return [
+    arbitrumOne, 
+    // ethereum, 
+    // bscMainnet, 
+    // opBNBMainnet, 
+    // zksyncMainnet, 
+    // optimismMainnet
+  ];
 };
 
 export const governanceChain = localConfig.network === 'testnet' ? bscTestnet : bscMainnet;
