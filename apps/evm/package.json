@@ -1,5 +1,5 @@
 {
-  "name": "@venusprotocol/evm",
+  "name": "@enclabs/evm",
   "version": "2.169.0",
   "private": true,
   "engines": {
@@ -23,7 +23,7 @@
     "generate-pancake-swap-tokens": "src/libs/tokens/scripts/generatePancakeSwapTokenRecords/index.ts && yarn biome format --vcs-use-ignore-file=false --write src/libs/tokens/generated/pancakeSwapTokens/bscMainnet.ts",
     "generate-token-accent-colors": "src/libs/tokens/scripts/generateTokenAccentColors/index.ts && yarn biome format --vcs-use-ignore-file=false --write src/libs/tokens/generated/tokenAccentColors.ts",
     "generate-version-files": "genversion --es6 --semi src/constants/version.ts && src/scripts/generatePublicVersionFile.ts && yarn biome format --vcs-use-ignore-file=false --write public/version.json",
-    "generate": "npm-run-all --parallel generate-version-files generate-contracts generate-subgraph-types && yarn generate-pancake-swap-tokens",
+    "generate": "npm-run-all --parallel generate-version-files generate-contracts",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "postinstall": "yarn run generate"
