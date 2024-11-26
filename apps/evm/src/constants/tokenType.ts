@@ -10,6 +10,7 @@ export const tokenType = {
         "0x2d16b3CC6b0E680e91b1A1788182Beb23ccc4078", // pt unibtc 26dec
         "0xb83D10c4CF7b4f14E3A745a25C52619B344B0B2B", // pt LBTC 26dec
         "0xe3248D189E8d02AF31B9516612fD855e959B54A5", // pt ebtc 26dec
+        "0xb33808ea0e883138680BA29311a220A7377cdb92", // pt weETH-26JUN2025
     ],
     Wrapped: [
         "0xd04b37878C8dEEaEE4Ef38830e78F4BA22c7482D", // Wbtc

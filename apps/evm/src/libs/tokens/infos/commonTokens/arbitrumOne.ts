@@ -7,6 +7,7 @@ import wbtcLogo from 'libs/tokens/img/wbtc.svg';
 import weEthLogo from 'libs/tokens/img/weEth.svg';
 import wethLogo from 'libs/tokens/img/weth.svg';
 import wstEthLogo from 'libs/tokens/img/wstEth.svg';
+import PTweETH26JUN2025Logo from 'libs/tokens/img/PTweETH26JUN2025Logo.svg';
 import xvsLogo from 'libs/tokens/img/xvs.svg';
 import type { Token } from 'types';
 
@@ -68,5 +69,11 @@ export const tokens: Token[] = [
     decimals: 18,
     symbol: 'wstETH',
     asset: wstEthLogo,
+  },
+  {
+    address: '0xb33808ea0e883138680ba29311a220a7377cdb92',
+    decimals: 18,
+    symbol: 'PT-weETH-26JUN2025',
+    asset: PTweETH26JUN2025Logo,
   },
 ];

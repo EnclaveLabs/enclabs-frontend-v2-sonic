@@ -550,6 +550,10 @@ export const contracts: ContractConfig[] = [
           'Comptroller_Liquid Staked ETH'
         ].toLowerCase()]:
           isolatedPoolsArbitrumOneDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
+          [isolatedPoolsArbitrumOneDeployments.addresses[
+            'Comptroller_Pendle'
+          ].toLowerCase()]:
+            isolatedPoolsArbitrumOneDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
       },
       [ChainId.ZKSYNC_SEPOLIA]: {
         [isolatedPoolsZkSyncSepoliaDeployments.addresses.Comptroller_Core.toLowerCase()]:
