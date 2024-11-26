@@ -1,9 +1,26 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
+import { theme } from 'theme';
+
+const getHoverBackgroundColor = (tokenAddress: string | undefined) : any => {
+
+  let tokenTypeInfos = {
+    color: theme.colors.blue,
+    hoverColor: theme.colors.hoverBlue,
+  };
+  if(tokenAddress){
+
+    const tokenType = getTokenType(tokenAddress!);
+    tokenTypeInfos = tokenTypeInfo[tokenType];
+  }
+  return tokenTypeInfos;
+}
 
 export const useStyles = () => {
-  const theme = useTheme();
-  const thumbSize = theme.spacing(5.5);
+  const usedTheme = useTheme();
+  const thumbSize = usedTheme.spacing(5.5);
 
   return {
     container: css`
@@ -11,12 +28,12 @@ export const useStyles = () => {
       align-items: center;
     `,
     label: css`
-      margin-right: ${theme.spacing(2)};
+      margin-right: ${usedTheme.spacing(2)};
     `,
     infoIcon: css`
-      margin-right: ${theme.spacing(2)};
+      margin-right: ${usedTheme.spacing(2)};
     `,
-    getSwitch: ({ isLight }: { isLight: boolean }) => css`
+    getSwitch: ({ isLight, tokenAddress }: { isLight: boolean, tokenAddress: string | undefined }) => css`
       flex-shrink: 0;
       width: calc(${thumbSize} * 2);
       height: ${thumbSize};
@@ -26,19 +43,19 @@ export const useStyles = () => {
         padding: 0;
         margin: 0;
         transition-duration: 300ms;
-        color: ${theme.palette.background.default};
+        color: ${usedTheme.palette.background.default};
 
         &.Mui-checked {
-          color: ${theme.palette.background.default};
+          color: ${usedTheme.palette.background.default};
           transform: translateX(${thumbSize});
 
           .MuiSwitch-thumb {
-            background-color: ${theme.palette.interactive.primary};
+            background-color: ${getHoverBackgroundColor(tokenAddress).color};
           }
 
           & + .MuiSwitch-track {
             background-color: ${
-              isLight ? theme.palette.secondary.light : theme.palette.background.default
+              isLight ? getHoverBackgroundColor(tokenAddress).hoverColor  : getHoverBackgroundColor(tokenAddress).hoverColor
             };
           }
         }
@@ -49,7 +66,7 @@ export const useStyles = () => {
       }
 
       .MuiSwitch-thumb {
-        background-color: ${isLight ? theme.palette.text.secondary : theme.palette.secondary.light};
+        background-color: ${isLight ? getHoverBackgroundColor(tokenAddress).color : getHoverBackgroundColor(tokenAddress).color};
         box-shadow: none;
         box-sizing: border-box;
         width: ${thumbSize};
@@ -63,7 +80,7 @@ export const useStyles = () => {
       .MuiSwitch-track,
       .Mui-checked + .MuiSwitch-track {
         background-color: ${
-          isLight ? theme.palette.secondary.light : theme.palette.background.default
+          isLight ? usedTheme.palette.grey[100]  : usedTheme.palette.grey[100]
         };
         opacity: 1;
       }

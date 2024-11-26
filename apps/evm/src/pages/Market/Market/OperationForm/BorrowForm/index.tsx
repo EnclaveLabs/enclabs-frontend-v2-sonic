@@ -198,6 +198,7 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
                 <Toggle
                   onChange={handleToggleReceiveNativeToken}
                   value={formValues.receiveNativeToken}
+                  tokenAddress={asset?.vToken.underlyingToken.address}
                 />
               </LabeledInlineContent>
 

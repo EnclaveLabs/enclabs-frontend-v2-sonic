@@ -14,6 +14,7 @@ export interface ToggleProps {
   isLight?: boolean;
   label?: string;
   tooltip?: string;
+  tokenAddress?: string;
 }
 
 export const switchAriaLabel = 'Switch';
@@ -27,6 +28,7 @@ export const Toggle = ({
   disabled = false,
   label,
   tooltip,
+  tokenAddress,
 }: ToggleProps) => {
   const styles = useStyles();
 
@@ -41,7 +43,7 @@ export const Toggle = ({
       )}
 
       <Switch
-        css={styles.getSwitch({ isLight })}
+        css={styles.getSwitch({ isLight, tokenAddress })}
         focusVisibleClassName=".Mui-focusVisible"
         disableRipple
         onChange={onChange}

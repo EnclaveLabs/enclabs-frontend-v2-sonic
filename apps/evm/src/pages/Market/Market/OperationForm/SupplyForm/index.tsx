@@ -248,7 +248,8 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
             onChange={handleToggleCollateral}
             value={asset.isCollateralOfUser}
             disabled={!isUserConnected}
-          />
+            tokenAddress={asset?.vToken.underlyingToken.address}
+            />
         </LabeledInlineContent>
       )}
 

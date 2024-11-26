@@ -196,6 +196,7 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
                 <Toggle
                   onChange={handleToggleReceiveNativeToken}
                   value={formValues.receiveNativeToken}
+                  tokenAddress={asset?.vToken.underlyingToken.address}
                 />
               </LabeledInlineContent>
 
