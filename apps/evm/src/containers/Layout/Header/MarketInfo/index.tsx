@@ -21,6 +21,7 @@ import { UtilizationRate } from './UtilizationRate';
 import { Tag } from 'components/Tag';
 import { BuyTokenButton } from 'components/BuyTokenButton';
 
+
 export const MarketInfo = () => {
   const { poolComptrollerAddress: poolComptrollerAddressParam = '', vTokenAddress = '' } =
     useParams();
