@@ -52,7 +52,7 @@ export const Header: React.FC = () => {
       }
     >
       <TopBar />
-
+    
       {isOnMarketPage && <MarketInfo />}
     </header>
   );

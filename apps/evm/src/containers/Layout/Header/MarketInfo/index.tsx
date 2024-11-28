@@ -102,7 +102,6 @@ export const MarketInfo = () => {
   }, [asset, t, asset, pool]);
 
 
-
   return (
     <div className="pt-4 pb-12 md:pb-10 border-b-lightGrey border-b space-y-8">
       <div className="flex items-center h-8 px-4 md:px-6 xl:px-10 max-w-[1360px] mx-auto">
@@ -137,6 +136,7 @@ export const MarketInfo = () => {
              className="shrink-0 bg-background/90 text-lightBlack hover:bg-background/40 hover:border-lightBlack/40 active:bg-background/40"
              token={asset.vToken.underlyingToken} 
              isUserConnected={isUserConnected}/>
+
           </div>
         ) : (
           <Spinner className="h-full w-auto" />
