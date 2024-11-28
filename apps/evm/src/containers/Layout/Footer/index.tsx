@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
       <div className="bg-lightBlack hidden h-full w-[1px] sm:block" />
 
       <div className="flex flex-none items-center">
-        <IconLink
+        {/* <IconLink
           href={
             xvs &&
             generateChainExplorerUrl({
@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
             })
           }
           iconName="venus"
-        />
+        /> */}
         <IconLink iconName="discord" href={VENUS_DISCORD_URL} />
         <IconLink iconName="telegram" href={VENUS_TELEGRAM_URL} />
         <IconLink iconName="twitter" href={VENUS_TWITTER_URL} />
