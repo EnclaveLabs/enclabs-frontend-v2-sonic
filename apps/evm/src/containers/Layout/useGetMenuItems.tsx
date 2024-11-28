@@ -36,6 +36,14 @@ const useGetMenuItems = () => {
         i18nKey: 'layout.menuItems.account',
         iconName: 'person',
       });
+
+      menuItems.push({
+        to: routes.swaplifi.path,
+        // Translation key: do not remove this comment
+        // t('layout.menuItems.account')
+        i18nKey: 'layout.menuItems.swap',
+        iconName: 'convert',
+      });
     }
 
     // if (lstPoolComptrollerContractAddress && lstPoolVWstEthContractAddress) {
