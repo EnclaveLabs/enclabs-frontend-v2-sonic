@@ -18,6 +18,7 @@ export interface AccountHealthProps {
   safeBorrowLimitPercentage: number;
   variant?: 'borrowBalance' | 'borrowLimitUsed';
   className?: string;
+  tokenAddress?: string;
 }
 
 export const AccountHealth: React.FC<AccountHealthProps> = ({
@@ -26,6 +27,7 @@ export const AccountHealth: React.FC<AccountHealthProps> = ({
   borrowLimitCents,
   variant = 'borrowBalance',
   safeBorrowLimitPercentage,
+  tokenAddress,
 }) => {
   const { t, Trans } = useTranslation();
 
@@ -138,6 +140,7 @@ export const AccountHealth: React.FC<AccountHealthProps> = ({
         trackTooltip={trackTooltip}
         markTooltip={markTooltip}
         progressBarColor={progressBarColor}
+        tokenAddress={tokenAddress}
       />
     </div>
   );

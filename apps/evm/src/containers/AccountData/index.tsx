@@ -50,6 +50,7 @@ export const AccountData: React.FC<AccountDataProps> = ({
           hypotheticalPoolUserBorrowLimitCents?.toNumber() ?? pool.userBorrowLimitCents?.toNumber()
         }
         safeBorrowLimitPercentage={SAFE_BORROW_LIMIT_PERCENTAGE}
+        tokenAddress={asset.vToken.underlyingToken.address}
       />
 
       <div className="space-y-2">

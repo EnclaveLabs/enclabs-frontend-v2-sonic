@@ -22,6 +22,7 @@ export interface ProgressBarProps {
   className?: string;
   tooltipPlacement?: TooltipProps['placement'];
   progressBarColor?: string;
+  tokenAddress?: string;
 }
 
 export const ProgressBar = ({
@@ -36,6 +37,7 @@ export const ProgressBar = ({
   className,
   tooltipPlacement = 'top',
   progressBarColor = PALETTE.interactive.success,
+  tokenAddress,
 }: ProgressBarProps) => {
   const safeValue = value < max ? value : max;
 
@@ -43,6 +45,7 @@ export const ProgressBar = ({
   const styles = useStyles({
     over: mark ? safeValue > mark : false,
     progressBarColor,
+    tokenAddress
   });
 
   const renderMark = useCallback(

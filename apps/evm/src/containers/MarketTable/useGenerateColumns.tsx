@@ -304,6 +304,7 @@ const useGenerateColumns = ({
                     step={1}
                     ariaLabel={t('marketTable.columnKeys.userPercentOfLimit')}
                     css={styles.percentOfLimitProgressBar}
+                    tokenAddress={poolAsset.vToken.underlyingToken.address}
                   />
                 </div>
               );

@@ -1,33 +1,52 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
+import { theme } from 'theme';
+
+const getBackgroundColor = (tokenAddress: string) : string => {
+
+  if(tokenAddress){
+
+    const tokenType = getTokenType(tokenAddress);
+    const tokenTypeInfos = tokenTypeInfo[tokenType];
+    return tokenTypeInfos.color;
+  }
+  else{
+
+    return theme.colors.lightGrey;
+  }
+}
 
 export const useStyles = ({
   over,
   progressBarColor,
+  tokenAddress,
 }: {
   over: boolean;
   progressBarColor: string;
+  tokenAddress?: string;
 }) => {
-  const theme = useTheme();
+  const usedTheme = useTheme();
   return {
     slider: css`
       z-index: 0;
       display: block;
-      color: ${over ? theme.palette.interactive.error50 : progressBarColor};
-      background-color: ${theme.palette.background.default};
-      height: ${theme.spacing(2)};
+      color: ${over ? usedTheme.palette.interactive.error50 : progressBarColor};
+      background-color: ${usedTheme.palette.background.default};
+      height: ${usedTheme.spacing(2)};
       padding: 0 !important;
       &.Mui-disabled {
-        color: ${over ? theme.palette.interactive.error50 : progressBarColor};
+        color: ${over ? usedTheme.palette.interactive.error50 : progressBarColor};
       }
       .MuiSlider-track {
-        background-color: ${over ? theme.palette.interactive.error50 : progressBarColor};
-        height: ${theme.spacing(2)};
-        border-radius: ${theme.spacing(1)};
+        background-color: ${over ? usedTheme.palette.interactive.error50 : tokenAddress ? getBackgroundColor(tokenAddress) : progressBarColor};
+        height: ${usedTheme.spacing(2)};
+        border-radius: ${usedTheme.spacing(1)};
       }
       .MuiSlider-rail {
-        height: ${theme.spacing(2)};
-        color: ${theme.palette.secondary.light};
+        height: ${usedTheme.spacing(2)};
+        color: ${theme.colors.lightGrey};
         opacity: 1;
       }
     `,
@@ -44,9 +63,9 @@ export const useStyles = ({
       background-color: currentcolor;
 
       /* theme styles */
-      width: ${theme.spacing(1)};
-      height: ${theme.spacing(2)};
-      color: ${theme.palette.interactive.error};
+      width: ${usedTheme.spacing(1)};
+      height: ${usedTheme.spacing(2)};
+      color: ${usedTheme.palette.interactive.error};
     `,
     hasTooltip: css`
       /* for tooltips working in disabled state */

@@ -10,6 +10,7 @@ export interface LabeledProgressBarProps extends ProgressBarProps {
   greyRightText?: string | React.ReactElement;
   whiteRightText?: string;
   className?: string;
+  tokenAddress?: string;
 }
 
 export const LabeledProgressBar: React.FC<LabeledProgressBarProps> = ({
@@ -18,6 +19,7 @@ export const LabeledProgressBar: React.FC<LabeledProgressBarProps> = ({
   greyLeftText,
   whiteLeftText,
   className,
+  tokenAddress,
   ...progressBarProps
 }) => {
   const styles = useStyles();
@@ -53,7 +55,7 @@ export const LabeledProgressBar: React.FC<LabeledProgressBarProps> = ({
         </div>
       </div>
 
-      <ProgressBar {...progressBarProps} />
+      <ProgressBar {...progressBarProps} tokenAddress={tokenAddress} />
     </>
   );
 };
