@@ -87,13 +87,13 @@
   "approveTokenSteps": {
     "approveTokenButton": {
       "text": "Approve {{tokenSymbol}}",
-      "tooltip": "We require spending approval for any token you wish to use with the Venus protocol."
+      "tooltip": "We require spending approval for any token you wish to use with the Enclabs protocol."
     },
     "step1": "Step 1",
     "step2": "Step 2"
   },
   "appVersionChecker": {
-    "newVersionMessage": "A new version of Venus is available. Reload the page to use it now."
+    "newVersionMessage": "A new version of Enclabs is available. Reload the page to use it now."
   },
   "apyChart": {
     "tooltipItemLabels": {
@@ -127,7 +127,7 @@
   "assetInfo": {
     "borrowApy": "Borrow APY",
     "distributionApy": "Distribution APY ({{tokenSymbol}})",
-    "distributionTooltip": "Distribution rewards are initiated and implemented by the decentralized Venus community. The Venus protocol does not guarantee them and accepts no liability.",
+    "distributionTooltip": "Distribution rewards are not necessarly initiated and implemented by Enclabs team. Enclabs protocol does not guarantee them and accepts no liability.",
     "primeApy": "Prime APY ({{tokenSymbol}})",
     "supplyApy": "Supply APY",
     "totalApy": {
@@ -353,7 +353,7 @@
       "navLink": {
         "new": "NEW"
       },
-      "venusLogoAlt": "Venus logo"
+      "venusLogoAlt": "Enclabs logo"
     },
     "menuItems": {
       "account": "Account",
@@ -370,7 +370,7 @@
     "testEnvWarning": "This is a test environment. Do not interact with it for any purpose other than testing. <Link>Go to the official Venus Protocol website</Link>"
   },
   "legacyPool": {
-    "description": "Venus’ primary pool is composed of large-cap tokens that meet minimum liquidity requirements.",
+    "description": "Enclabs’ primary pool is composed of large-cap tokens that meet minimum liquidity requirements.",
     "name": "Core Pool"
   },
   "markdownEditor": {
@@ -459,7 +459,7 @@
       }
     },
     "assetColumn": {
-      "pausedAssetTooltip": "Asset paused by Venus Governance. Borrowing and supplying have been disabled."
+      "pausedAssetTooltip": "Asset paused by Enclabs Governance. Borrowing and supplying have been disabled."
     },
     "columnKeys": {
       "asset": "Asset",
@@ -1213,7 +1213,7 @@
     "sent": "Sent",
     "transactions": "Transactions",
     "undelegated": "Undelegated",
-    "venusBalance": "Venus balance",
+    "venusBalance": "Enclabs balance",
     "viewAll": "View all",
     "votedAbstain": "Voted abstain",
     "votedAgainst": "Voted against",
