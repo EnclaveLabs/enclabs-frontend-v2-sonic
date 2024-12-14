@@ -24,6 +24,7 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
         pools={[pool]}
         stats={['supply', 'borrow', 'liquidity', 'assetCount']}
         css={styles.header}
+        className='xl:shadow-lg xl:rounded-xl'
       />
 
       <Notice

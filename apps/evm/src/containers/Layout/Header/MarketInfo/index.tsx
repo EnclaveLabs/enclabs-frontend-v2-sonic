@@ -147,6 +147,7 @@ export const MarketInfo = () => {
         variant="secondary"
         className="px-4 md:px-6 xl:px-10 max-w-[1360px] mx-auto"
         cells={cells}
+        isOnMarketPage={true}
       />
     </div>
   );
