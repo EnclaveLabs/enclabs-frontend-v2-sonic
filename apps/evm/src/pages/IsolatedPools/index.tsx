@@ -9,7 +9,7 @@ const IsolatedPools: React.FC = () => {
   return (
     <Page indexWithSearchEngines={false}>
       <PoolStats
-        className="mb-6 xl:shadow-lg"
+        className="mb-6 xl:shadow-lg xl:rounded-xl"
         pools={pools}
         stats={['supply', 'borrow', 'liquidity', 'treasury']}
       />

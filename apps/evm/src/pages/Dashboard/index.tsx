@@ -71,7 +71,7 @@ const Dashboard: React.FC = () => {
 
       <PoolStats
         pools={pools}
-        className="mb-6 xl:shadow-lg"
+        className="mb-6 xl:shadow-lg xl:rounded-xl"
         stats={
           ['supply', 
             'borrow', 
@@ -82,7 +82,7 @@ const Dashboard: React.FC = () => {
           ]}
       />
 
-      <div className="mb-6 space-y-6 lg:flex lg:items-center lg:justify-between lg:space-x-6 lg:space-y-0">
+      <div className="mb-6 space-y-6 lg:flex lg:items-center lg:justify-between lg:space-x-6 lg:space-y-0 ">
         {pools.length > 0 && (
           <TagGroup
             tags={poolTags}
