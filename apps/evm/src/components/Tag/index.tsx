@@ -20,7 +20,7 @@ export const Tag = ({ text }: TagProps) => {
     const tokenTypeStyle = tokenTypeInfo[tokenType];
 
     return (
-        <div className="flex items-center space-x-2 justify-end">
+        <div className="flex items-center space-x-2  justify-start xl:justify-end lg:justify-end">
             <p
                 style={{
                     color: tokenTypeStyle.color,
