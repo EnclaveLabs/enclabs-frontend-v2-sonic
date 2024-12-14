@@ -47,6 +47,8 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type, selec
   const baseId = useUID();
   const gradientId = `gradient-${baseId}`;
 
+  console.log(data)
+
   return (
     <div css={sharedStyles.container} className={className}>
       <ResponsiveContainer>
@@ -69,7 +71,7 @@ export const ApyChart: React.FC<ApyChartProps> = ({ className, data, type, selec
             stroke={sharedStyles.accessoryColor}
             tickMargin={sharedStyles.tickMargin}
             tickCount={data.length}
-            interval={data.length < 5 ? 5 : data.length}
+            interval={data.length < 5 ? 5 : data.length / 5}
             style={sharedStyles.axis}
           />
           <YAxis

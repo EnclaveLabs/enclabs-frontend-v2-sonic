@@ -79,7 +79,7 @@ export const LiquidityChart: React.FC<LiquidityChartProps> = ({
             stroke={sharedStyles.accessoryColor}
             tickMargin={sharedStyles.tickMargin}
             tickCount={data.length}
-            interval={data.length < 5 ? 5 : data.length}
+            interval={data.length < 5 ? 5 : data.length / 5}
             style={sharedStyles.axis}
           />
           <YAxis
