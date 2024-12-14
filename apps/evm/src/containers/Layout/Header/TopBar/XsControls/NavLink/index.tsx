@@ -23,8 +23,9 @@ export const NavLink: React.FC<NavLinkProps> = ({
     <RRNavLink
       className={({ isActive }) =>
         cn(
-          'hover:bg-blue active:bg-blue flex items-center justify-center whitespace-nowrap px-6 py-4',
-          isActive ? 'text-blue' : 'text-grey',
+          'hover:bg-mediumBlue hover:text-white active:bg-blue flex items-center justify-center whitespace-nowrap px-6 py-4',
+          isActive  ? 'bg-blue text-white xl:before:bg-blue xl:before:absolute xl:before:bottom-0 xl:before:left-0 xl:before:top-0 xl:before:w-1 xl:before:rounded-br-lg xl:before:rounded-tr-lg'
+          : 'text-lightBlack',
           className,
         )
       }
@@ -34,10 +35,10 @@ export const NavLink: React.FC<NavLinkProps> = ({
       <Icon name={iconName} className="mr-4 h-6 w-6 text-inherit" />
 
       <div className="flex grow items-center">
-        <p className="text-lightBlack overflow-hidden text-ellipsis xl:text-inherit">{t(i18nKey)}</p>
+        <p className="font-bold overflow-hidden text-ellipsis xl:text-inherit">{t(i18nKey)}</p>
 
         {isNew && (
-          <div className="border-green bg-green/10 ml-3 inline-flex rounded-[4px] border px-[4px] py-[2px]">
+            <div className="border-green bg-green/10 ml-3 inline-flex rounded-[4px] border px-[4px] py-[2px]">
             <span className="text-green mt-[1px] text-xs leading-[15px]">
               {t('layout.menu.navLink.new')}
             </span>
@@ -45,7 +46,6 @@ export const NavLink: React.FC<NavLinkProps> = ({
         )}
       </div>
 
-      <Icon name="chevronRight" className="text-lightBlack ml-4 h-6 w-6" />
     </RRNavLink>
   );
 };
