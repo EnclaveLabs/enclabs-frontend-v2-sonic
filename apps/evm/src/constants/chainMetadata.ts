@@ -1,6 +1,6 @@
 import { getToken } from 'libs/tokens/utilities/getToken';
-import arbitrumLogo from 'libs/wallet/img/chains/arbitrum.svg';
 import { ChainId, type ChainMetadata } from 'types';
+import sonicLogo from 'libs/tokens/img/sonic.svg';
 
 const PROPOSAL_EXECUTION_GRACE_PERIOD_MS = 14 * 24 * 60 * 60 * 1000; // 14 days in milliseconds
 
@@ -10,7 +10,7 @@ export const CHAIN_METADATA: {
 {
   [ChainId.SONIC_MAINNET]: {
     name: 'Sonic',
-    logoSrc: arbitrumLogo,
+    logoSrc: sonicLogo,
     explorerUrl: 'https://sonicscan.org',
     layerZeroScanUrl: 'https://layerzeroscan.com',
     corePoolComptrollerContractAddress: '0xccAdFCFaa71407707fb3dC93D7d83950171aA2c9',

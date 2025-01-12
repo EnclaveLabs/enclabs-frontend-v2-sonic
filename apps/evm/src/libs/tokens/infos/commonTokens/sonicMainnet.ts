@@ -1,5 +1,7 @@
 import { NATIVE_TOKEN_ADDRESS } from 'constants/address';
 import arbLogo from 'libs/tokens/img/arb.svg';
+import sonicLogo from 'libs/tokens/img/sonic.svg';
+import sonicTokenLogo from 'libs/tokens/img/sonic-token.svg';
 import ethLogo from 'libs/tokens/img/eth.svg';
 import usdcLogo from 'libs/tokens/img/usdc.svg';
 import usdtLogo from 'libs/tokens/img/usdt.svg';
@@ -15,7 +17,7 @@ const ethToken: Token = {
   address: NATIVE_TOKEN_ADDRESS,
   decimals: 18,
   symbol: 'S',
-  asset: ethLogo,
+  asset: sonicTokenLogo,
   isNative: true,
 };
 
@@ -25,7 +27,7 @@ export const tokens: Token[] = [
     address: '0x3bce5cb273f0f148010bbea2470e7b5df84c7812',
     decimals: 18,
     symbol: 'scETH',
-    asset: arbLogo,
+    asset: sonicLogo,
   },
   // {
   //   address: '0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38',
