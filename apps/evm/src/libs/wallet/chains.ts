@@ -16,25 +16,36 @@ import {
 
 import localConfig from 'config';
 
+export const sonicMainnet: Chain = {
+  id: 146,
+  name: 'Sonic Mainnet',
+  nativeCurrency: {
+    name: 'Sonic',
+    symbol: 'S',
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://rpc.soniclabs.com'],
+    },
+    public: {
+      http: ['https://rpc.soniclabs.com'],
+    },
+  },
+  blockExplorers: {
+    default: { name: 'SonicScan', url: 'https://sonicscan.org' },
+  },
+};
+
 const getSupportedChains = (): [Chain, ...Chain[]] => {
   if (localConfig.network === 'testnet') {
     return [
-      bscTestnet,
-      opBNBTestnet,
-      sepolia,
-      arbitrumSepolia,
-      zksyncSepoliaTestnet,
-      optimismSepolia,
+      sonicMainnet
     ];
   }
 
   return [
-    arbitrumOne, 
-    // ethereum, 
-    // bscMainnet, 
-    // opBNBMainnet, 
-    // zksyncMainnet, 
-    // optimismMainnet
+    sonicMainnet
   ];
 };
 

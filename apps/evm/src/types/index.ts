@@ -20,31 +20,11 @@ export type Network =
   | 'mainnet';
 
 export enum ChainId {
-  BSC_MAINNET = 56,
-  BSC_TESTNET = 97,
-  ETHEREUM = 1,
-  SEPOLIA = 11155111,
-  OPBNB_MAINNET = 204,
-  OPBNB_TESTNET = 5611,
-  ARBITRUM_ONE = 42161,
-  ARBITRUM_SEPOLIA = 421614,
-  OPTIMISM_MAINNET = 10,
-  OPTIMISM_SEPOLIA = 11155420,
+  SONIC_MAINNET = 146,
 }
 
 export enum ChainName {
-  BSC_MAINNET = '',
-  BSC_TESTNET = '',
-  ETHEREUM = "ethereum",
-  SEPOLIA = '',
-  OPBNB_MAINNET = '',
-  OPBNB_TESTNET = '',
-  ARBITRUM_ONE = "arbitrum",
-  ARBITRUM_SEPOLIA = '',
-  ZKSYNC_MAINNET = '',
-  ZKSYNC_SEPOLIA = '',
-  OPTIMISM_MAINNET = '',
-  OPTIMISM_SEPOLIA = '',
+  SONIC_MAINNET = 'Sonic',
 }
 
 export type TransactionType = 'chain' | 'layerZero';
