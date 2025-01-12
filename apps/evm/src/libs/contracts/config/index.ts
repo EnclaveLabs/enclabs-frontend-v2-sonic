@@ -301,6 +301,9 @@ export const contracts: ContractConfig[] = [
       [ChainId.ZKSYNC_MAINNET]: '0xFEa0f491061cdb017041D6da43c98b6383097557',
       [ChainId.OPTIMISM_MAINNET]: '0xd130B43062D875a4B7aF3f8fc036Bc6e9D3E1B3E',
       [ChainId.OPTIMISM_SEPOLIA]: '0xd130B43062D875a4B7aF3f8fc036Bc6e9D3E1B3E',
+
+
+      [ChainId.SONIC_MAINNET]: '0xd130B43062D875a4B7aF3f8fc036Bc6e9D3E1B3E',
     },
   },
   {
@@ -582,17 +585,21 @@ export const contracts: ContractConfig[] = [
 
 
 
+      // [ChainId.SONIC_MAINNET]: {
+      //   [isolatedPoolsSonicDeployments.addresses.Comptroller_Core_Sonic.toLowerCase()]:
+      //   isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_Core,
+      //   [isolatedPoolsSonicDeployments.addresses[
+      //     'Comptroller_Liquid Staked ETH'
+      //   ].toLowerCase()]:
+      //   isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
+      //     [isolatedPoolsSonicDeployments.addresses[
+      //       'Comptroller_Pendle'
+      //     ].toLowerCase()]:
+      //     isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
+      // },
       [ChainId.SONIC_MAINNET]: {
         [isolatedPoolsSonicDeployments.addresses.Comptroller_Core_Sonic.toLowerCase()]:
         isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_Core,
-        [isolatedPoolsSonicDeployments.addresses[
-          'Comptroller_Liquid Staked ETH'
-        ].toLowerCase()]:
-        isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
-          [isolatedPoolsSonicDeployments.addresses[
-            'Comptroller_Pendle'
-          ].toLowerCase()]:
-          isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
       },
     },
   },
