@@ -10,6 +10,7 @@ import { abi as RewardsDistributorAbi } from '@venusprotocol/isolated-pools/arti
 import { abi as VBep20Abi } from '@venusprotocol/isolated-pools/artifacts/contracts/VToken.sol/VToken.json';
 // import isolatedPoolsArbitrumOneDeployments from '@venusprotocol/isolated-pools/deployments/arbitrumone_addresses.json';
 import isolatedPoolsArbitrumOneDeployments from './abis/arbitrumone_addresses.json';
+import isolatedPoolsSonicDeployments from './abis/sonic_addresses.json';
 import isolatedPoolsArbitrumSepoliaDeployments from '@venusprotocol/isolated-pools/deployments/arbitrumsepolia_addresses.json';
 import isolatedPoolsBscMainnetDeployments from '@venusprotocol/isolated-pools/deployments/bscmainnet_addresses.json';
 import isolatedPoolsBscTestnetDeployments from '@venusprotocol/isolated-pools/deployments/bsctestnet_addresses.json';
@@ -144,6 +145,9 @@ export const contracts: ContractConfig[] = [
       [ChainId.ZKSYNC_MAINNET]: isolatedPoolsZkSyncMainnetDeployments.addresses.PoolLens,
       [ChainId.OPTIMISM_SEPOLIA]: isolatedPoolsOptimismSepoliaDeployments.addresses.PoolLens,
       [ChainId.OPTIMISM_MAINNET]: isolatedPoolsOptimismMainnetDeployments.addresses.PoolLens,
+
+
+      [ChainId.SONIC_MAINNET]: isolatedPoolsSonicDeployments.addresses.PoolLens,
     },
   },
   {
@@ -165,6 +169,10 @@ export const contracts: ContractConfig[] = [
         isolatedPoolsOptimismSepoliaDeployments.addresses.PoolRegistry_Proxy,
       [ChainId.OPTIMISM_MAINNET]:
         isolatedPoolsOptimismMainnetDeployments.addresses.PoolRegistry_Proxy,
+
+
+      [ChainId.SONIC_MAINNET]: isolatedPoolsSonicDeployments.addresses.PoolRegistry_Proxy,
+
     },
   },
   {
@@ -570,6 +578,21 @@ export const contracts: ContractConfig[] = [
       [ChainId.OPTIMISM_SEPOLIA]: {
         [isolatedPoolsOptimismSepoliaDeployments.addresses.Comptroller_Core.toLowerCase()]:
           isolatedPoolsOptimismSepoliaDeployments.addresses.NativeTokenGateway_vWETH_Core,
+      },
+
+
+
+      [ChainId.SONIC_MAINNET]: {
+        [isolatedPoolsSonicDeployments.addresses.Comptroller_Core_Sonic.toLowerCase()]:
+        isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_Core,
+        [isolatedPoolsSonicDeployments.addresses[
+          'Comptroller_Liquid Staked ETH'
+        ].toLowerCase()]:
+        isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
+          [isolatedPoolsSonicDeployments.addresses[
+            'Comptroller_Pendle'
+          ].toLowerCase()]:
+          isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
       },
     },
   },

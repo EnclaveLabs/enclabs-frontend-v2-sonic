@@ -52,12 +52,12 @@ export const tokens: Token[] = [
   //   symbol: 'USDT',
   //   asset: usdtLogo,
   // },
-  // {
-  //   address: '0xc1Eb7689147C81aC840d4FF0D298489fc7986d52',
-  //   decimals: 18,
-  //   symbol: 'XVS',
-  //   asset: xvsLogo,
-  // },
+  {
+    address: '0xc1Eb7689147C81aC840d4FF0D298489fc7986d52',
+    decimals: 18,
+    symbol: 'XVS',
+    asset: xvsLogo,
+  },
   // {
   //   address: '0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe',
   //   decimals: 18,
