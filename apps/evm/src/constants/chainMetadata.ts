@@ -19,8 +19,7 @@ export const CHAIN_METADATA: {
     nativeToken: getToken({ chainId: ChainId.SONIC_MAINNET, symbol: 'S' })!,
     rpcUrl: 'https://rpc.soniclabs.com',
     marketsSubgraphUrl:
-       //'https://gateway-arbitrum.network.thegraph.com/api/43fa98f50f96a8e1b63423e8ead8c6dc/deployments/id/QmQByQzsGpuVqaZcfraxQduUwMX4JpnAnFd1s1JTkSUREj',
-      'https://api.studio.thegraph.com/query/91097/enclabs-arb-test/version/latest',
+     'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/latest',
   }
 
 };
