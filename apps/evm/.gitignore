@@ -6,3 +6,48 @@ src/clients/subgraph/gql/mainnet.ts
 src/clients/subgraph/gql/testnet.ts
 
 src/constants/version.ts
+# Compiled outputs
+dist
+dist-server
+tmp
+build
+out-tsc
+out
+#generated
+
+# Local environment variables
+.env
+
+# Dependencies
+node_modules
+
+# IDEs and editors
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+bundleStats.html
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Misc
+.sass-cache
+connect.lock
+coverage
+libpeerconnection.log
+npm-debug.log
+testem.log
+typings
+.turbo
+storybook-static
+yarn-error.log
+
+# System Files
+.DS_Store
+Thumbs.db

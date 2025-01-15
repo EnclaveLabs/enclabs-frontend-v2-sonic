@@ -3,6 +3,7 @@ import type { TokenMapping } from 'libs/tokens/types';
 import { ChainId } from 'types';
 
 import { tokens as arbitrumOneTokens } from './arbitrumOne';
+import { tokens as sonicTokens } from './sonic';
 import { tokens as arbitrumSepoliaTokens } from './arbitrumSepolia';
 import { tokens as bscTestnetTokens } from './bscTestnet';
 import { tokens as ethereumTokens } from './ethereum';
@@ -23,6 +24,7 @@ export const pancakeSwapTokens: TokenMapping = {
   [ChainId.SEPOLIA]: sepoliaTokens,
   [ChainId.ARBITRUM_SEPOLIA]: arbitrumSepoliaTokens,
   [ChainId.ARBITRUM_ONE]: arbitrumOneTokens,
+  [ChainId.SONIC_MAINNET]: sonicTokens,
   [ChainId.ZKSYNC_SEPOLIA]: zkSyncSepoliaTokens,
   [ChainId.ZKSYNC_MAINNET]: zkSyncMainnetTokens,
   [ChainId.OPTIMISM_MAINNET]: optimismMainnetTokens,

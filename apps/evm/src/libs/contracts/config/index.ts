@@ -25,6 +25,7 @@ import isolatedPoolsZkSyncSepoliaDeployments from '@venusprotocol/isolated-pools
 import { abi as ResilientOracleAbi } from '@venusprotocol/oracle/artifacts/contracts/ResilientOracle.sol/ResilientOracle.json';
 // import venusOracleArbitrumOneDeployments from '@venusprotocol/oracle/deployments/arbitrumone_addresses.json';
 import venusOracleArbitrumOneDeployments from './abis/arbitrumone_addresses.json';
+import venusOracleSonicMainnetDeployments from './abis/sonic_addresses.json';
 import venusOracleArbitrumSepoliaDeployments from '@venusprotocol/oracle/deployments/arbitrumsepolia_addresses.json';
 import venusOracleBscMainnetDeployments from '@venusprotocol/oracle/deployments/bscmainnet_addresses.json';
 import venusOracleBscTestnetDeployments from '@venusprotocol/oracle/deployments/bsctestnet_addresses.json';
@@ -69,6 +70,7 @@ import { abi as VaiVaultAbi } from '@venusprotocol/venus-protocol/artifacts/cont
 import { abi as XvsStoreAbi } from '@venusprotocol/venus-protocol/artifacts/contracts/XVSVault/XVSStore.sol/XVSStore.json';
 import { abi as XvsVaultAbi } from '@venusprotocol/venus-protocol/artifacts/contracts/XVSVault/XVSVault.sol/XVSVault.json';
 import venusProtocolArbitrumOneDeployments from './abis/arbitrumone_addresses.json';
+import venusProtocolSonicDeployments from './abis/sonic_addresses.json';
 import venusProtocolArbitrumSepoliaDeployments from '@venusprotocol/venus-protocol/deployments/arbitrumsepolia_addresses.json';
 import venusProtocolBscMainnetDeployments from '@venusprotocol/venus-protocol/deployments/bscmainnet_addresses.json';
 import venusProtocolBscTestnetDeployments from '@venusprotocol/venus-protocol/deployments/bsctestnet_addresses.json';
@@ -145,8 +147,6 @@ export const contracts: ContractConfig[] = [
       [ChainId.ZKSYNC_MAINNET]: isolatedPoolsZkSyncMainnetDeployments.addresses.PoolLens,
       [ChainId.OPTIMISM_SEPOLIA]: isolatedPoolsOptimismSepoliaDeployments.addresses.PoolLens,
       [ChainId.OPTIMISM_MAINNET]: isolatedPoolsOptimismMainnetDeployments.addresses.PoolLens,
-
-
       [ChainId.SONIC_MAINNET]: isolatedPoolsSonicDeployments.addresses.PoolLens,
     },
   },
@@ -169,8 +169,6 @@ export const contracts: ContractConfig[] = [
         isolatedPoolsOptimismSepoliaDeployments.addresses.PoolRegistry_Proxy,
       [ChainId.OPTIMISM_MAINNET]:
         isolatedPoolsOptimismMainnetDeployments.addresses.PoolRegistry_Proxy,
-
-
       [ChainId.SONIC_MAINNET]: isolatedPoolsSonicDeployments.addresses.PoolRegistry_Proxy,
 
     },
@@ -322,6 +320,7 @@ export const contracts: ContractConfig[] = [
       [ChainId.ZKSYNC_MAINNET]: '0xF9cda624FBC7e059355ce98a31693d299FACd963',
       [ChainId.OPTIMISM_MAINNET]: '0xca11bde05977b3631167028862be2a173976ca11',
       [ChainId.OPTIMISM_SEPOLIA]: '0xca11bde05977b3631167028862be2a173976ca11',
+      [ChainId.SONIC_MAINNET]: '0xca11bde05977b3631167028862be2a173976ca11',
     },
   },
   {
@@ -340,6 +339,7 @@ export const contracts: ContractConfig[] = [
       [ChainId.ZKSYNC_MAINNET]: venusOracleZkSyncMainnetDeployments.addresses.ResilientOracle,
       [ChainId.OPTIMISM_SEPOLIA]: venusOracleOptimismSepoliaDeployments.addresses.ResilientOracle,
       [ChainId.OPTIMISM_MAINNET]: venusOracleOptimismMainnetDeployments.addresses.ResilientOracle,
+      [ChainId.SONIC_MAINNET]: venusOracleSonicMainnetDeployments.addresses.ResilientOracle,
     },
   },
   {
@@ -376,6 +376,7 @@ export const contracts: ContractConfig[] = [
       [ChainId.OPBNB_TESTNET]: venusProtocolOpBnbTestnetDeployments.addresses.VTreasuryV8,
       [ChainId.ARBITRUM_SEPOLIA]: venusProtocolArbitrumSepoliaDeployments.addresses.VTreasuryV8,
       [ChainId.ARBITRUM_ONE]: venusProtocolArbitrumOneDeployments.addresses.VTreasuryV8,
+      [ChainId.SONIC_MAINNET]: venusProtocolSonicDeployments.addresses.VTreasuryV8,
       [ChainId.ZKSYNC_SEPOLIA]: venusProtocolZkSyncSepoliaDeployments.addresses.VTreasuryV8,
       [ChainId.ZKSYNC_MAINNET]: venusProtocolZkSyncMainnetDeployments.addresses.VTreasuryV8,
       [ChainId.OPTIMISM_SEPOLIA]: venusProtocolOptimismSepoliaDeployments.addresses.VTreasuryV8,

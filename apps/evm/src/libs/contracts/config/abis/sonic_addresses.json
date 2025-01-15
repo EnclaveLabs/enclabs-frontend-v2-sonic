@@ -25,42 +25,14 @@
     "RewardsDistributorImpl": "0x4cB42eA31c959618Bf8Fe50E1a10f768EF1A5A36",
     "RewardsDistributor_Core_0": "",
     "RewardsDistributor_Core_0_Proxy": "",
-   
     "VTokenBeacon": "0x943358C1871AAF3Ba55BD3088cb75a4054736024",
     "VTokenImpl": "0x1053Fc8C4EAEad1edd5276a58E9BdDf1001BA143",
     "VToken_vUSDCe_Core": "0x87C69a8fB7F04b7890F48A1577a83788683A2036",
     "VToken_vUSDC_Core": "0x23b0F8AF47c1A64416247b473BBbDe925563A9ff",
     "VToken_vvwS_Core": "0xc96a4cd13C8fCB9886DE0CdF7152B9F930D67E96",
-  
     "ProtocolShareReserve_Implementation": "0xAbD27b371f4B4b8237454021032090e5c89aAfA1",
     "ProtocolShareReserve_Proxy": "0xA3F48548562A30A33257A752d396A20B4413E8E3",
     "VTreasuryV8": "0x172bC36d3f092453cE6F3F9B30F1d6Ac365C4FfD",
-    
-    "ResilientOracle": "0xd05b05590609c3610161e60eb41eC317c7562408",
-
-
-
-
-
-
-
-    "Comptroller_Liquid Staked ETH": "0xf27f74f5878bc0dA077FCc0933FAEe49216B5bBA",
-    "Comptroller_Pendle": "0xCfe0019aA5274aC1c947b9e7357C952eFc42DaFf",
-    "JumpRateModelV2_base0bps_slope1500bps_jump25000bps_kink4500bps": "0x390D1C248217615D79f74f2453D682906Bd2dD20",
-    "JumpRateModelV2_base0bps_slope350bps_jump25000bps_kink8000bps": "0x674093DaD652e6d3A8EfB23C3bD248223863e201",
-    "JumpRateModelV2_base0bps_slope350bps_jump8000bps_kink8000bps": "0x99C3B6EF256d5d028f701376ce11b2C12bAb70e8",
-    "JumpRateModelV2_base0bps_slope800bps_jump25000bps_kink8000bps": "0xa572194b6ef1491797A21FF9bEFDA1BE82683CF3",
-    "JumpRateModelV2_base0bps_slope875bps_jump25000bps_kink8000bps": "0xC7EDE29FE265aA46C1Bbc62Dc7e0f3565cce3Db6",
-    "JumpRateModelV2_base0bps_slope900bps_jump30000bps_kink4500bps": "0x4C98F72ec4c93BB4B1431effe8e3E93A3e8Ec35a",
-    "RewardsDistributor_Liquid Staked ETH_0": "0x975607ab59b3Aa0C76476A59d32525c61716341B",
-    "RewardsDistributor_Liquid Staked ETH_0_Proxy": "0x975607ab59b3Aa0C76476A59d32525c61716341B",
-    "VToken_vARB_Core": "0xAeB0FEd69354f34831fe1D16475D9A83ddaCaDA6",
-    "VToken_vUSDT_Core": "0xC59D071108c2f9970F8F316f3C5DFA459562C099",
-    "VToken_vWBTC_Core": "0xaDa57840B372D4c28623E87FC175dE8490792811",
-    "VToken_vWETH_Core": "0xA2f4fb00587Ea51D3a2e4F8517Aa06Fb6E5Bed86",
-    "VToken_vWETH_LiquidStakedETH": "0x2f02e8378DF56B3af03B0443c0Ee48052BC370f8",
-    "VToken_vweETH_LiquidStakedETH": "0x8A92Ff0572fb469e198c13b2D03a9acF73F39cEE",
-    "VToken_vwstETH_LiquidStakedETH": "0x1877223ad64a218Ee73b32f695DD08545502d235",
-    "VToken_vPT-weETH-26JUN2025_Pendle": "0x3108acDaAa776154B975c6DDBE3BD2C511E69F86"
+    "ResilientOracle": "0xd05b05590609c3610161e60eb41eC317c7562408"
   }
 }

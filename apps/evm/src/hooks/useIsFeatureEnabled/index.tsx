@@ -43,6 +43,7 @@ export const featureFlags = {
     ChainId.ZKSYNC_MAINNET,
     ChainId.OPTIMISM_MAINNET,
     ChainId.OPTIMISM_SEPOLIA,
+    ChainId.SONIC_MAINNET,
   ],
   marketParticipantCounts: [
     ChainId.BSC_MAINNET,
@@ -56,6 +57,7 @@ export const featureFlags = {
     ChainId.ZKSYNC_MAINNET,
     ChainId.OPTIMISM_SEPOLIA,
     ChainId.OPTIMISM_MAINNET,
+    ChainId.SONIC_MAINNET,
   ],
   isolatedPools: [
     ChainId.BSC_MAINNET,
@@ -64,6 +66,7 @@ export const featureFlags = {
     ChainId.SEPOLIA,
     ChainId.ARBITRUM_ONE,
     ChainId.ARBITRUM_SEPOLIA,
+    ChainId.SONIC_MAINNET,
   ],
   bridgeRoute: [
     ChainId.BSC_MAINNET,
