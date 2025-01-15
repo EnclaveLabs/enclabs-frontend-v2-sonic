@@ -19,7 +19,7 @@ export const CHAIN_METADATA: {
     nativeToken: getToken({ chainId: ChainId.SONIC_MAINNET, symbol: 'S' })!,
     rpcUrl: 'https://rpc.soniclabs.com',
     marketsSubgraphUrl:
-     'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/latest',
+     'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest',
   }
 
 };

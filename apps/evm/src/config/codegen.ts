@@ -4,7 +4,7 @@ const plugins = ['typescript', 'typed-document-node', 'typescript-operations'];
 
 export const projects = {
   isolatedPools: {
-    schema: 'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/latest',
+    schema: 'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest',
     documents: ['../clients/subgraph/queries/isolatedPools/**/*.graphql'],
     extensions: {
       codegen: {
