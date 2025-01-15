@@ -17,7 +17,7 @@ const ethToken: Token = {
   address: NATIVE_TOKEN_ADDRESS,
   decimals: 18,
   symbol: 'S',
-  asset: sonicTokenLogo,
+  asset: sonicLogo,
   isNative: true,
 };
 
@@ -27,7 +27,8 @@ export const tokens: Token[] = [
     address: '0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38',
     decimals: 18,
     symbol: 'wS',
-    asset: sonicLogo,
+    asset: sonicTokenLogo,
+    tokenWrapped: ethToken,
   },
   {
     address: '0x3bce5cb273f0f148010bbea2470e7b5df84c7812',
@@ -46,7 +47,7 @@ export const tokens: Token[] = [
     decimals: 18,
     symbol: 'WETH',
     asset: wethLogo,
-    tokenWrapped: ethToken,
+    
   },
   {
     address: '0x29219dd400f2bf60e5a23d13be72b486d4038894',
