@@ -598,10 +598,10 @@ export const contracts: ContractConfig[] = [
       //     ].toLowerCase()]:
       //     isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
       // },
-      [ChainId.SONIC_MAINNET]: {
-        [isolatedPoolsSonicDeployments.addresses.Comptroller_Core_Sonic.toLowerCase()]:
-        isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_Core,
-      },
+      // [ChainId.SONIC_MAINNET]: {
+      //   [isolatedPoolsSonicDeployments.addresses.Comptroller_Core_Sonic.toLowerCase()]:
+      //   isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_Core,
+      // },
     },
   },
 ];

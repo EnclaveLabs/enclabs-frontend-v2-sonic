@@ -24,6 +24,12 @@ const ethToken: Token = {
 export const tokens: Token[] = [
   ethToken,
   {
+    address: '0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38',
+    decimals: 18,
+    symbol: 'wS',
+    asset: sonicLogo,
+  },
+  {
     address: '0x3bce5cb273f0f148010bbea2470e7b5df84c7812',
     decimals: 18,
     symbol: 'scETH',

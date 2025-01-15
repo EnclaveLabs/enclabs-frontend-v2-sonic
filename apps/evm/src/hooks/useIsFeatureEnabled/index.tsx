@@ -95,6 +95,7 @@ export const featureFlags = {
     ChainId.ZKSYNC_MAINNET,
     ChainId.OPTIMISM_MAINNET,
     ChainId.OPTIMISM_SEPOLIA,
+    ChainId.SONIC_MAINNET,
   ],
   governanceSearch: [
     ChainId.BSC_TESTNET,
