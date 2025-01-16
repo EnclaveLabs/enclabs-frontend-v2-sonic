@@ -8,14 +8,14 @@
     "NormalTimelock": "0xb068519C3340224c42008c99eceF08d4ad479Fe4",
     "ComptrollerBeacon": "0x86f1bF5B9f5d2E3F72f78CfBBBA6463879cb2130",
     "ComptrollerImpl": "0xd5719778d4f82f13C82dC48e48011446c160eFaD",
-    "Comptroller_Core_Sonic": "0xccAdFCFaa71407707fb3dC93D7d83950171aA2c9",
+    "Comptroller_Core_Sonic": "0xccadfcfaa71407707fb3dc93d7d83950171aa2c9",
     
     "DefaultProxyAdmin": "0xD84bC1cE23883217Ea624F64b23f46C41C6acDd0",
     
     "JumpRateModelV2_base0bps_slope850bps_jump25000bps_kink6000bps": "0xe9D1af7D6B44fE94df86029Ad75659FF8B0ffaA6",
     "JumpRateModelV2_base0bps_slope1200bps_jump25000bps_kink6000bps": "0x02F9d2FE51c5be5b1E1c87c86C205a7348dC5394",
     "JumpRateModelV2_base0bps_slope1200bps_jump25000bps_kink8000bps": "0x1Fc1306Aa08f688670c1cd8f4b88842009EcbB8E",
-   
+    "NativeTokenGateway_vwS_Core": "0xb95F8CcBD23a98FB92DA2976A170498a6b8d488a",
     "NativeTokenGateway_vWETH_Core": "0xc8e51418cadc001157506b306C6d0b878f1ff755",
     "NativeTokenGateway_vWETH_LiquidStakedETH": "0xD1e89806BAB8Cd7680DFc7425D1fA6d7D5F0C3FE",
     "PoolLens": "0x3567B16050cB90236997eF47B1941502e85d65f3",
