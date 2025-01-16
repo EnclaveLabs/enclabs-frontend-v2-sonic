@@ -24,7 +24,7 @@ const Governance = safeLazyLoad(() => import('pages/Governance'));
 const IsolatedPools = safeLazyLoad(() => import('pages/IsolatedPools'));
 const Proposal = safeLazyLoad(() => import('pages/Proposal'));
 const Swap = safeLazyLoad(() => import('pages/Swap'));
-const SwapLiFi = safeLazyLoad(() => import('pages/SwapLiFi'));
+const SwapOdos = safeLazyLoad(() => import('pages/SwapOdos'));
 const Vai = safeLazyLoad(() => import('pages/Vai'));
 const Vaults = safeLazyLoad(() => import('pages/Vault'));
 const Voter = safeLazyLoad(() => import('pages/Voter'));
@@ -199,10 +199,13 @@ const AppRoutes = () => {
         />
 
         <Route
-          path={`${routes.swaplifi.path}/*`}
+          path={`${routes.swapodos.path}/*`}
           element={
             <PageSuspense>
-              <SwapLiFi />
+              <SwapOdos/>
+            
+          
+             
             </PageSuspense>
           }
         />
