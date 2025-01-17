@@ -36,6 +36,12 @@ export const tokens: Token[] = [
     symbol: 'scETH',
     asset: sonicLogo,
   },
+  {
+    address: '0xd3dce716f3ef535c5ff8d041c1a41c3bd89b97ae',
+    decimals: 6,
+    symbol: 'scUSD',
+    asset: sonicLogo,
+  },
   // {
   //   address: '0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38',
   //   decimals: 8,
