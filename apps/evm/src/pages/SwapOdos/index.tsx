@@ -26,12 +26,13 @@ const SwapOdosPage: React.FC = () => {
     backgroundColor300: "#FFFFFF", //inputs
     backgroundColor400: "#FCF9F1",
     wcThemeMode: "dark",
-    
     };
+  const referal = 2149550664;  
   return (
     <Page indexWithSearchEngines={false}>
       <OdosSwapWidget
       theme={theme}
+      referralCode={referal}
       />
     </Page>
   );
