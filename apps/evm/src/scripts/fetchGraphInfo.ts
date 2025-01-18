@@ -2,7 +2,7 @@ require('dotenv').config();
 const BigNumber = require('bignumber.js');
 const { createClient } = require('@supabase/supabase-js');
 
-const GRAPHQL_ENDPOINT = 'https://api.studio.thegraph.com/query/91097/enclabs-arb-test/version/latest';
+const GRAPHQL_ENDPOINT = 'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest';
 
 const supabase = createClient(process.env.DB_URL, process.env.DB_API_KEY)
 const COMPOUND_DECIMALS = 18;
