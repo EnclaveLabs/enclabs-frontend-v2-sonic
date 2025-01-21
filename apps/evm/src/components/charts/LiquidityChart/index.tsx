@@ -78,8 +78,6 @@ export const LiquidityChart: React.FC<LiquidityChartProps> = ({
             tickFormatter={value => formatToReadableDate(value)}
             stroke={sharedStyles.accessoryColor}
             tickMargin={sharedStyles.tickMargin}
-            tickCount={data.length}
-            interval={data.length < 5 ? 5 : data.length / 5}
             style={sharedStyles.axis}
           />
           <YAxis
