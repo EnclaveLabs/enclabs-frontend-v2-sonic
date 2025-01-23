@@ -18,11 +18,11 @@ const connectKitConfig = getDefaultConfig({
     };
   }, {}) as Record<ChainId, Transport>,
   walletConnectProjectId: WALLET_CONNECT_PROJECT_ID,
-  appName: 'Venus',
-  appUrl: 'https://app.venus.io',
+  appName: 'Enclabs',
+  appUrl: 'https://enclabs.finance',
   appDescription:
-    'Venus is a decentralized finance (DeFi) algorithmic money market protocol on EVM networks.',
-  appIcon: 'https://venus.io/180x180.png',
+    'Enclabs is a decentralized finance (DeFi) algorithmic money market protocol on Sonic.',
+  appIcon: 'https://enclabs.finance/favicon.ico',
 });
 
 const config = createConfig(connectKitConfig);
