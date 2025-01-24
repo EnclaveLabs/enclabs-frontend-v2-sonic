@@ -8,6 +8,7 @@ import usdtLogo from 'libs/tokens/img/usdt.svg';
 import wbtcLogo from 'libs/tokens/img/wbtc.svg';
 import weEthLogo from 'libs/tokens/img/weEth.svg';
 import wethLogo from 'libs/tokens/img/weth.svg';
+import wOSLogo from 'libs/tokens/img/wos.svg';
 import wstEthLogo from 'libs/tokens/img/wstEth.svg';
 import PTweETH26JUN2025Logo from 'libs/tokens/img/PTweETH26JUN2025Logo.svg';
 import xvsLogo from 'libs/tokens/img/xvs.svg';
@@ -41,6 +42,12 @@ export const tokens: Token[] = [
     decimals: 6,
     symbol: 'scUSD',
     asset: sonicLogo,
+  },
+  {
+    address: '0x9F0dF7799f6FDAd409300080cfF680f5A23df4b1',
+    decimals: 18,
+    symbol: 'wOS',
+    asset: wOSLogo,
   },
   // {
   //   address: '0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38',

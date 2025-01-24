@@ -1,8 +1,8 @@
 import { theme } from 'theme';
 
 export const tokenType = {
-    LRT: [
-         ""
+    LST: [
+         "0x9F0dF7799f6FDAd409300080cfF680f5A23df4b1", //wOS
     ],
     PT: [
     ],
@@ -28,7 +28,7 @@ export const tokenTypeInfo: {
         getUrl: (tokenAddress: string, chain: string) => string;
     };
 } = {
-    LRT: {
+    LST: {
         color: theme.colors.tagTextOrange, // Orange
         borderColor: theme.colors.tagTextOrange,
         backgroundColor: theme.colors.tagBgOrange,
