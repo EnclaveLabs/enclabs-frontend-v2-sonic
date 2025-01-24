@@ -600,8 +600,11 @@ export const contracts: ContractConfig[] = [
       // },
       [ChainId.SONIC_MAINNET]: {
         [isolatedPoolsSonicDeployments.addresses.Comptroller_Core_Sonic.toLowerCase()]:
-        isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_Core,
+        isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_Core.toLowerCase(),
+        [isolatedPoolsSonicDeployments.addresses.Comptroller_LiquidStakedS.toLowerCase()]:
+        isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_LiquidStakedS.toLowerCase(),
       },
+
     },
   },
 ];
