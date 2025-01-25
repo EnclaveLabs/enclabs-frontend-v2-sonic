@@ -35,6 +35,20 @@ export interface LiquidityChartProps {
   className?: string;
 }
 
+interface ConvertedLiquidityItem {
+  totalSupply: number;
+  totalLiquidity: number;
+  timestampMs: number;
+}
+
+function convertLiquidityItems(data: LiquidityItem[]): ConvertedLiquidityItem[] {
+  return data.map((item) => ({
+    totalSupply: item.totalSupply.toNumber(),
+    totalLiquidity: item.totalLiquidity.toNumber(),
+    timestampMs: item.timestampMs,
+  }));
+}
+
 export const LiquidityChart: React.FC<LiquidityChartProps> = ({
   className,
   selectedPeriod,
@@ -54,11 +68,14 @@ export const LiquidityChart: React.FC<LiquidityChartProps> = ({
 
   const { t } = useTranslation();
 
+  const convertedNumberData = convertLiquidityItems(data);
+
   return (
     <div css={sharedStyles.container} className={className}>
-      <ResponsiveContainer>
+  <ResponsiveContainer >
 
-      <AreaChart margin={sharedStyles.chartMargin} data={data}>
+
+      <AreaChart margin={sharedStyles.chartMargin} data={convertedNumberData}>
           {/* Gradient used as filler */}
           <defs>
             <linearGradient id={supplyGradientId} x1="0" y1="0" x2="0" y2="1">
@@ -79,6 +96,7 @@ export const LiquidityChart: React.FC<LiquidityChartProps> = ({
             stroke={sharedStyles.accessoryColor}
             tickMargin={sharedStyles.tickMargin}
             style={sharedStyles.axis}
+            tickCount={5}
           />
           <YAxis
             axisLine={false}
@@ -87,7 +105,7 @@ export const LiquidityChart: React.FC<LiquidityChartProps> = ({
             tickMargin={sharedStyles.tickMargin}
             stroke={sharedStyles.accessoryColor}
             style={sharedStyles.axis}
-            tickCount={10}
+            tickCount={6}
           />
           <Tooltip
             isAnimationActive={false}
