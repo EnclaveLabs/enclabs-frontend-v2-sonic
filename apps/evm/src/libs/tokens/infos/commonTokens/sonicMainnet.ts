@@ -9,6 +9,8 @@ import wbtcLogo from 'libs/tokens/img/wbtc.svg';
 import weEthLogo from 'libs/tokens/img/weEth.svg';
 import wethLogo from 'libs/tokens/img/weth.svg';
 import wOSLogo from 'libs/tokens/img/wos.svg';
+import scUSDLogo from 'libs/tokens/img/scusd.svg';
+import spectraPTscUSDLogo from 'libs/tokens/img/spectraPTscUSDlogo.svg';
 import wstEthLogo from 'libs/tokens/img/wstEth.svg';
 import PTweETH26JUN2025Logo from 'libs/tokens/img/PTweETH26JUN2025Logo.svg';
 import xvsLogo from 'libs/tokens/img/xvs.svg';
@@ -41,7 +43,13 @@ export const tokens: Token[] = [
     address: '0xd3dce716f3ef535c5ff8d041c1a41c3bd89b97ae',
     decimals: 6,
     symbol: 'scUSD',
-    asset: sonicLogo,
+    asset: scUSDLogo,
+  },
+  {
+    address: '0x7002383d2305b8f3b2b7786f50c13d132a22076d',
+    decimals: 6,
+    symbol: 'PT-sw-wstkscUSD-1751241607',
+    asset: spectraPTscUSDLogo,
   },
   {
     address: '0x9F0dF7799f6FDAd409300080cfF680f5A23df4b1',
