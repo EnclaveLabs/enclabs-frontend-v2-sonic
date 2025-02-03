@@ -3,8 +3,8 @@ const BN = require('bignumber.js');
 const { createClient: createClients } = require('@supabase/supabase-js');
 
 const GRAPHQL_URL = 'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest';
-// const sb = createClients(process.env.DB_URL, process.env.DB_API_KEY)
-const sb = createClients(process.env.VITE_DB_URL, process.env.VITE_DB_API_KEY)
+const sb = createClients(process.env.DB_URL, process.env.DB_API_KEY)
+// const sb = createClients(process.env.VITE_DB_URL, process.env.VITE_DB_API_KEY)
 
 type Account = {
   id: string;

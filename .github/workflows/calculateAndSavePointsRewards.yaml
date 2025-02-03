@@ -1,0 +1,33 @@
+name: Calculate and save users rewards points to remote database
+
+on:
+  schedule:
+    - cron: cron: '0 0 * * *'  # Midnight every day
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Log node version
+        run: node -v
+
+      - name: Check files in script directory
+        run: ls -la apps/evm/src/scripts
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run script
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_API_KEY: ${{ secrets.DB_API_KEY }}
+        run: npx ts-node apps/evm/src/scripts/calculatePointsRewards.ts
