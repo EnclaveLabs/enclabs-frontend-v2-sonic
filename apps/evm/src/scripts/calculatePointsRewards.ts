@@ -168,7 +168,7 @@ async function saveDataToDb() {
   }  
 }
 
-async function run() {
+async function runScript() {
   const data = await fetchGraphData();
   console.log(data);
   await getPointsRewardFromDb();
@@ -176,4 +176,4 @@ async function run() {
   await saveDataToDb();
 }
 
-run();
+runScript();
