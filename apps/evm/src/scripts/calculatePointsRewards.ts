@@ -1,6 +1,10 @@
 const dotenv = require('dotenv').config();
 const BN = require('bignumber.js');
 const { createClient: createClients } = require('@supabase/supabase-js');
+const { DEFAULT_POINT_THRESHOLD, 
+        DEFAULT_BONUS_MULTIPLICATOR,
+        MARKETS_REWARDS_CONFIGURATIONS
+       } = require('./pointsConstants');
 
 const GRAPHQL_URL = 'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest';
 const sb = createClients(process.env.DB_URL, process.env.DB_API_KEY)
@@ -16,6 +20,8 @@ type Accounts = {
 };
 
 type Market = {
+  id: string;
+  symbol: string;
   totalSupplyVTokenMantissa: string;
   underlyingName: string;
   underlyingSymbol: string;
@@ -26,9 +32,11 @@ type Market = {
 }
 
 type MarketSnapshotHistory = {
-  name: string;
+  market_id: string;
   symbol: string;
-  user_address: string
+  user_address: string;
+  points_threshold: number;
+  bonus_multiplicator: number;
   supplied_usd: string;
   points_number: number;
 }
@@ -52,6 +60,8 @@ async function fetchGraphData() {
           }
           vTokenBalanceMantissa
         }
+        id
+        symbol
         totalSupplyVTokenMantissa
         underlyingPriceCentsMantissa
         underlyingSymbol
@@ -92,18 +102,21 @@ async function getPointsRewardFromDb() {
 async function calculatePointsRewards(markets: Market[]){
 
   const COMPOUND_DECIMALS = 18;
-  const POINT_THRESHOLD = 100;
-  const BONUS_MULTIPLICATOR = 1;
 
   markets.forEach(market => {
+
+    const POINT_THRESHOLD = MARKETS_REWARDS_CONFIGURATIONS[market.id]?.POINT_THRESHOLD ?? DEFAULT_POINT_THRESHOLD;
+    const BONUS_MULTIPLICATOR = MARKETS_REWARDS_CONFIGURATIONS[market.id]?.BONUS_MULTIPLICATOR ?? DEFAULT_BONUS_MULTIPLICATOR;
 
     market.accounts.forEach(acc => {
 
       let historyMarketItem: MarketSnapshotHistory = {
-        name: market.underlyingName,
-        symbol: market.underlyingSymbol,
+        market_id: market.id,
+        symbol: market.symbol,
         user_address: "",
         supplied_usd: "",
+        points_threshold: POINT_THRESHOLD,
+        bonus_multiplicator: BONUS_MULTIPLICATOR,
         points_number: 0
       };
 
