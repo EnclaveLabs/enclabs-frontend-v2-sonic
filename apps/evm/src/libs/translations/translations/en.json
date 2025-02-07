@@ -464,6 +464,7 @@
     "columnKeys": {
       "asset": "Asset",
       "type": "Type",
+      "points": "Points",
       "borrowApy": "APY <InfoIcon />",
       "borrowBalance": "Total borrow",
       "collateral": "Collateral",
@@ -482,6 +483,7 @@
     "columnSelectOptionLabel": {
       "asset": "Asset",
       "type": "Type",
+      "points": "Points",
       "borrowApy": "Borrow APY",
       "borrowBalance": "Total borrow",
       "collateral": "Collateral",

@@ -11,6 +11,7 @@ export const useMarketTableColumns = () => {
       'type',
       'pool',
       'labeledSupplyApyLtv',
+      'points',
       'labeledBorrowApy',
     ];
 

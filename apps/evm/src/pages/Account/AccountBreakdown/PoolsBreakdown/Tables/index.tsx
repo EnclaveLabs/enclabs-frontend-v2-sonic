@@ -44,7 +44,7 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
         ],
         marketType: 'supply',
         breakpoint: 'md',
-        columns: ['asset', 'type', 'supplyApyLtv', 'userSupplyBalance', 'collateral'],
+        columns: ['asset', 'type', 'supplyApyLtv', 'points', 'userSupplyBalance', 'collateral'],
         initialOrder: {
           orderBy: 'userSupplyBalance',
           orderDirection: 'desc',

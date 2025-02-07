@@ -31,10 +31,12 @@ import { Apy } from './Apy';
 import { useStyles } from './styles';
 import type { ColumnKey, PoolAsset } from './types';
 import { getTokenType, Tag } from 'components/Tag';
+import { getTokenPoints, Points } from 'components/Points';
 
 // Translation keys: do not remove this comment
 // t('marketTable.columnKeys.asset')
 // t('marketTable.columnKeys.type')
+// t('marketTable.columnKeys.points')
 // t('marketTable.columnKeys.supplyApyLtv')
 // t('marketTable.columnKeys.labeledSupplyApyLtv')
 // t('marketTable.columnKeys.borrowApy')
@@ -52,6 +54,7 @@ import { getTokenType, Tag } from 'components/Tag';
 
 // t('marketTable.columnSelectOptionLabel.asset')
 // t('marketTable.columnSelectOptionLabel.type')
+// t('marketTable.columnKeys.points')
 // t('marketTable.columnSelectOptionLabel.supplyApyLtv')
 // t('marketTable.columnSelectOptionLabel.labeledSupplyApyLtv')
 // t('marketTable.columnSelectOptionLabel.borrowApy')
@@ -313,6 +316,11 @@ const useGenerateColumns = ({
             if(column == 'type'){
               return (
                 <Tag text={poolAsset.vToken.underlyingToken.address} />
+              );
+            }
+            if(column == 'points'){
+              return (
+                <Points text={poolAsset.vToken.underlyingToken.address} />
               );
             }
           },

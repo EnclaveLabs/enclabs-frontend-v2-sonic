@@ -41,6 +41,7 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
           'type',
           'supplyBalance',
           'labeledSupplyApyLtv',
+          'points',
           'borrowBalance',
           'labeledBorrowApy',
           'liquidity',
