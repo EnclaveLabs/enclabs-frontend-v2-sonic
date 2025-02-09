@@ -38,6 +38,14 @@ const useGetMenuItems = () => {
       });
 
       menuItems.push({
+        to: routes.rewards.path,
+        // Translation key: do not remove this comment
+        // t('layout.menuItems.account')
+        i18nKey: 'layout.menuItems.rewards',
+        iconName: 'rewards',
+      });
+
+      menuItems.push({
         to: routes.swapodos.path,
         // Translation key: do not remove this comment
         // t('layout.menuItems.account')

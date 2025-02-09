@@ -65,7 +65,7 @@ export function Table<R>({
   }, [data, order]);
 
   return (
-    <Card css={styles.getRoot({ breakpoint })} data-testid={testId} className={cn(className, 'xxl:shadow-lg')}>
+    <Card css={styles.getRoot({ breakpoint })} data-testid={testId} className={cn('xxl:shadow-lg', className)}>
       {title && (
         <h4 css={styles.getTitle({ breakpoint })} className="text-lg">
           {title}

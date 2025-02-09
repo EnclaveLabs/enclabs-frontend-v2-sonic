@@ -149,6 +149,7 @@
     "dashboard": "Dashboard",
     "governance": "Governance",
     "isolatedPools": "Isolated pools",
+    "rewards": "Rewards",
     "leaderboard": "Leaderboard",
     "lidoMarket": "Lido market",
     "markets": "Markets",
@@ -1283,5 +1284,12 @@
       "submitButton": "Withdraw"
     },
     "withdrawTabTitle": "Withdraw"
+  },
+  "rewards":{
+    "table":{
+      "rank": "Rank",
+      "address": "Address",
+      "points": "Points"
+    }
   }
 }

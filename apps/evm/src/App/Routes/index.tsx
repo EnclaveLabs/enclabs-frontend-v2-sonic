@@ -14,6 +14,7 @@ import PageSuspense from './PageSuspense';
 
 const Dashboard = safeLazyLoad(() => import('pages/Dashboard'));
 const Account = safeLazyLoad(() => import('pages/Account'));
+const Rewards = safeLazyLoad(() => import('pages/Rewards'));
 const CorePoolMarket = safeLazyLoad(() => import('pages/Market/CorePoolMarket'));
 const IsolatedPoolMarket = safeLazyLoad(() => import('pages/Market/IsolatedPoolMarket'));
 const CorePool = safeLazyLoad(() => import('pages/Pool/CorePool'));
@@ -101,6 +102,17 @@ const AppRoutes = () => {
             )}
           </Route>
         )}
+
+        {!!accountAddress && (
+          <Route
+            path={Subdirectory.REWARDS}
+
+            element={
+              <PageSuspense>
+                <Rewards />
+              </PageSuspense>
+            }
+          />)}
 
         <Route path={Subdirectory.ISOLATED_POOLS}>
           <Route
@@ -202,10 +214,10 @@ const AppRoutes = () => {
           path={`${routes.swapodos.path}/*`}
           element={
             <PageSuspense>
-              <SwapOdos/>
-            
-          
-             
+              <SwapOdos />
+
+
+
             </PageSuspense>
           }
         />

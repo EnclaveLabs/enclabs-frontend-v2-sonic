@@ -25,6 +25,7 @@ export const Breadcrumbs: React.FC = () => {
     const activeRouteKey = Object.keys(routes).find(key => {
       const routeMatch = matchPath(routes[key as keyof typeof routes].path, pathname);
 
+      
       if (routeMatch) {
         const { params: routeParams } = routeMatch;
         params = routeParams;
@@ -52,6 +53,9 @@ export const Breadcrumbs: React.FC = () => {
         case Subdirectory.ACCOUNT:
           dom = t('breadcrumbs.account');
           break;
+        case Subdirectory.REWARDS:
+            dom = t('breadcrumbs.rewards');
+            break;
         case Subdirectory.MARKETS:
           hrefFragment = Subdirectory.MARKETS.replace(
             ':poolComptrollerAddress',
