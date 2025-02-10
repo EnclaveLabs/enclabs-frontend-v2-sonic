@@ -59,14 +59,6 @@ const Rewards: React.FC = () => {
   ]);
   const [historyData, setHistoryData] = useState<HistoryData[]>();
   const sharedStyles = useSharedStyles();
-  const localStyles = useLocalStyles();
-  const supplyBaseId = useUID();
-  const supplyGradientId = `gradient-${supplyBaseId}`;
-  const supplyChartColor = localStyles.lineSupplyApyColor;
-
-  const liquidityBaseId = useUID();
-  const liquidityGradientId = `gradient-${liquidityBaseId}`;
-  const liquidityChartColor = localStyles.lineLiquidityApyColor;
 
   const supabase = createClient(config.database.dbUrl, config.database.dbApiKey);
   const { accountAddress } = useAccountAddress();
@@ -83,18 +75,25 @@ const Rewards: React.FC = () => {
         }
         if (data) {
           const pointsData = data as PointsRewardsData[];
-          if(pointsData){
-            pointsData.sort((a, b) =>  b.points_number - a.points_number);
+          if (pointsData) {
+            pointsData.sort((a, b) => b.points_number - a.points_number);
             pointsData.forEach((user, index) => {
               user.rank = index + 1;
             });
-            console.log(pointsData);
-            setPointsData(pointsData);
+
+            const slicedPointsData = pointsData.slice(0, 10);
+
+            const userPoints = pointsData.find((item: PointsRewardsData) => item.user_address.toLowerCase() === accountAddress!.toLowerCase());
+            if (userPoints) {
+
+              if (userPoints.rank > 10 && userPoints.points_number > 0)
+                slicedPointsData.push(userPoints);
+              setCurrentUserPoints(userPoints.points_number);
+            }
+
+            console.log(slicedPointsData);
+            setPointsData(slicedPointsData);
           }
-          
-          const userPoints = data.find((item: PointsRewardsData) => item.user_address.toLowerCase() === accountAddress.toLowerCase());
-          if (userPoints)
-            setCurrentUserPoints(userPoints.points_number);
         }
 
       } catch (error) {
@@ -124,7 +123,6 @@ const Rewards: React.FC = () => {
           } = {};
 
           data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-          // let cumulativePoints = 0;
           data.forEach((item) => {
             const date = item.created_at;
             const suppliedUSD = parseFloat(item.supplied_usd);
@@ -133,7 +131,6 @@ const Rewards: React.FC = () => {
               groupedByDate[date].totalPoints += item.points_number;
               groupedByDate[date].totalSuppliedUSD += suppliedUSD;
             } else {
-              // cumulativePoints = cumulativePoints + item.points_number;
               groupedByDate[date] = {
                 totalPoints: item.points_number,
                 totalSuppliedUSD: suppliedUSD,
@@ -166,24 +163,30 @@ const Rewards: React.FC = () => {
         label: t('rewards.table.rank'),
         selectOptionLabel: t('rewards.table.rank'),
         align: 'center',
-        renderCell: ({ rank }) => rank,
+        renderCell: ({ rank, user_address }) =>
+          <div className={` ${user_address === accountAddress ? 'font-bold text-blue' : ''}`}>
+            {rank}
+          </div>
       },
       {
         key: 'user_address',
         label: t('rewards.table.address'),
         selectOptionLabel: t('rewards.table.address'),
         align: 'center',
-        renderCell: ({ user_address }) => 
-        <div style={{ wordBreak: 'break-all' }}>
-          {user_address}
-        </div>,
+        renderCell: ({ user_address }) =>
+          <div className={`wordBreak: 'break-all' ${user_address === accountAddress ? 'font-bold text-blue' : ''}`}>
+            {user_address}
+          </div>,
       },
       {
         key: 'points_number',
         label: t('rewards.table.points'),
         selectOptionLabel: t('rewards.table.points'),
         align: 'center',
-        renderCell: ({ points_number }) => points_number,
+        renderCell: ({ points_number, user_address }) =>
+          <div className={` ${user_address === accountAddress ? 'font-bold text-blue' : ''}`}>
+            {points_number}
+          </div>
       },
     ],
     [t],
@@ -201,68 +204,62 @@ const Rewards: React.FC = () => {
 
         <ResponsiveContainer className="min-h-80">
           <BarChart
-          data={historyData}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis 
-          dataKey="date" 
-          axisLine={false}
-          tickLine={false}
-          tickFormatter={value => formatToReadableDate(value)}
-          stroke={sharedStyles.accessoryColor}
-          tickMargin={sharedStyles.tickMargin}
-          style={sharedStyles.axis}
-          tickCount={5}
-          />
-          <YAxis 
-          dataKey="total_points_number"
-          axisLine={false}
-          tickLine={false}
-          tickFormatter={value => value}
-          tickMargin={sharedStyles.tickMargin}
-          stroke={sharedStyles.accessoryColor}
-          style={sharedStyles.axis}
-          tickCount={6}/>
-          <Tooltip/>
-          {/* <Tooltip
-            isAnimationActive={false}
-            cursor={sharedStyles.cursor}
-            content={({ payload }) =>
-              payload?.[0] ? (
-                <TooltipContent
-                  items={[
-                    {
-                      label: t('rewards.table.date'),
-                      value: formatToReadableDate((payload[0] as HistoryData).date),
-                    },
-                    {
-                      label: t('rewards.table.points'),
-                      value: (payload[0] as HistoryData).total_points_number
-                    },
-                  ]}
-                />
-              ) : null
-            }
-          /> */}
-          <Bar dataKey="total_points_number" radius={[5, 5, 0, 0]} fill={theme.colors.blue} />
-        </BarChart>
+            data={historyData}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="date"
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={value => formatToReadableDate(value)}
+              stroke={sharedStyles.accessoryColor}
+              tickMargin={sharedStyles.tickMargin}
+              style={sharedStyles.axis}
+              tickCount={5}
+            />
+            <YAxis
+              dataKey="total_points_number"
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={value => value}
+              tickMargin={sharedStyles.tickMargin}
+              stroke={sharedStyles.accessoryColor}
+              style={sharedStyles.axis}
+              tickCount={6} />
+            <Tooltip
+              isAnimationActive={false}
+              cursor={sharedStyles.cursor}
+              content={({ payload }) => {
+                return payload?.[0] ? (
+                  <TooltipContent
+                    items={[
+                      {
+                        label: t('rewards.table.points'),
+                        value: (payload[0].payload as HistoryData).total_points_number
+                      },
+                    ]}
+                  />
+                ) : null
+              }
+              }
+            />
+            <Bar dataKey="total_points_number" radius={[5, 5, 0, 0]} fill={theme.colors.blue} />
+          </BarChart>
         </ResponsiveContainer>
 
-    <Table
-        data={pointsData}
-        getTokenAddress={() => ''}
-        rowKeyExtractor={row => `rank-points-data`}
-        getRowHref={row => ""} 
-        columns={columns}
-        className='xxl:shadow-none'
-        rowOnClick={() => {}}/>
-    </Card>
+        <Table
+          data={pointsData}
+          getTokenAddress={() => ''}
+          rowKeyExtractor={row => `rank-points-data`}
+          columns={columns}
+          className='xxl:shadow-none' />
+      </Card>
 
     </Page >
   );
