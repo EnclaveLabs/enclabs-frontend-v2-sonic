@@ -3,6 +3,7 @@ import { theme } from 'theme';
 export const tokenType = {
     LST: [
          "0x9F0dF7799f6FDAd409300080cfF680f5A23df4b1", //wOS
+         "0xE5DA20F15420aD15DE0fa650600aFc998bbE3955", //stS
     ],
     PT: [ "0x7002383d2305b8f3b2b7786f50c13d132a22076d" // PT scUSD spectra june
     ],

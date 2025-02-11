@@ -8,6 +8,7 @@ import usdtLogo from 'libs/tokens/img/usdt.svg';
 import wbtcLogo from 'libs/tokens/img/wbtc.svg';
 import weEthLogo from 'libs/tokens/img/weEth.svg';
 import wethLogo from 'libs/tokens/img/weth.svg';
+import stSLogo from 'libs/tokens/img/stS.svg';
 import wOSLogo from 'libs/tokens/img/wos.svg';
 import scUSDLogo from 'libs/tokens/img/scusd.svg';
 import spectraPTscUSDLogo from 'libs/tokens/img/spectraPTscUSDlogo.svg';
@@ -32,6 +33,12 @@ export const tokens: Token[] = [
     symbol: 'wS',
     asset: sonicTokenLogo,
     tokenWrapped: ethToken,
+  },
+  {
+    address: '0xE5DA20F15420aD15DE0fa650600aFc998bbE3955',
+    decimals: 18,
+    symbol: 'stS',
+    asset: stSLogo,
   },
   {
     address: '0x3bce5cb273f0f148010bbea2470e7b5df84c7812',
