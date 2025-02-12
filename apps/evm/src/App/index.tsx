@@ -25,10 +25,10 @@ const isMainProductionHost =
 const App = () => (
   <>
     {
-      // Only index the main production website (https://app.venus.io) with search engines
+      
       !isMainProductionHost && (
         <Helmet>
-          <meta name="robots" content="noindex" />
+          <meta name="robots" content="all" />
         </Helmet>
       )
     }
