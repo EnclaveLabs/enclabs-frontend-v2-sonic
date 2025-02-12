@@ -4,12 +4,14 @@ export const tokenType = {
     LST: [
          "0x9F0dF7799f6FDAd409300080cfF680f5A23df4b1", //wOS
          "0xE5DA20F15420aD15DE0fa650600aFc998bbE3955", //stS
+         
     ],
     PT: [ "0x7002383d2305b8f3b2b7786f50c13d132a22076d" // PT scUSD spectra june
     ],
     Wrapped: [
         "0x50c42deacd8fc9773493ed674b675be577f2634b", // wETH
         "0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38", // wS
+        "0x3bcE5CB273F0F148010BbEa2470e7b5df84C7812", //scETH
     ],
     aToken: [
     ],

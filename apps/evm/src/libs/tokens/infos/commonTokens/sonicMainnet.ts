@@ -10,6 +10,7 @@ import weEthLogo from 'libs/tokens/img/weEth.svg';
 import wethLogo from 'libs/tokens/img/weth.svg';
 import stSLogo from 'libs/tokens/img/stS.svg';
 import wOSLogo from 'libs/tokens/img/wos.svg';
+import scETHLogo from 'libs/tokens/img/sceth.svg';
 import scUSDLogo from 'libs/tokens/img/scusd.svg';
 import spectraPTscUSDLogo from 'libs/tokens/img/spectraPTscUSDlogo.svg';
 import wstEthLogo from 'libs/tokens/img/wstEth.svg';
@@ -44,7 +45,7 @@ export const tokens: Token[] = [
     address: '0x3bce5cb273f0f148010bbea2470e7b5df84c7812',
     decimals: 18,
     symbol: 'scETH',
-    asset: sonicLogo,
+    asset: scETHLogo,
   },
   {
     address: '0xd3dce716f3ef535c5ff8d041c1a41c3bd89b97ae',
