@@ -8,6 +8,8 @@ import { Icon } from '../Icon';
 import { getTokenType } from 'components/Tag';
 import { tokenTypeInfo} from 'constants/tokenType';
 import { useChainId } from 'libs/wallet/hooks/useChainId';
+import { routes } from 'constants/routing';
+import { useNavigate } from 'hooks/useNavigate';
 
 export interface BuyTokenButtonButtonProps extends Omit<ButtonProps, 'onClick' | 'variant'> {
   isUserConnected: boolean;
@@ -22,6 +24,7 @@ export const BuyTokenButton: React.FC<BuyTokenButtonButtonProps> = ({
 }) => {
   const { t } = useTranslation();
   const {chainId} = useChainId();
+  const { navigate } = useNavigate();
 
   const tokenType = getTokenType(token.address);
   const tokenTypeInfos = tokenTypeInfo[tokenType];
@@ -49,7 +52,10 @@ export const BuyTokenButton: React.FC<BuyTokenButtonButtonProps> = ({
       return;
     
     const url = tokenTypeInfos.getUrl(token.address, chainName);
-    window.open(url, '_blank');
+    if(url === "swap")
+      navigate(routes.swapodos.path);
+    else
+      window.open(url, '_blank');
   });
 
   return (

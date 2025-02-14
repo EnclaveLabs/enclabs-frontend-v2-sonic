@@ -132,10 +132,10 @@ export const MarketInfo = () => {
               token={asset.vToken.underlyingToken}
             />
 
-            {/* <BuyTokenButton 
+            <BuyTokenButton 
              className="shrink-0 bg-background/90 text-lightBlack hover:bg-background/40 hover:border-lightBlack/40 active:bg-background/40"
              token={asset.vToken.underlyingToken} 
-             isUserConnected={isUserConnected}/> */}
+             isUserConnected={isUserConnected}/>
 
           </div>
         ) : (
