@@ -28,14 +28,22 @@ import { t } from 'i18next';
 import React from 'react';
 import { theme } from 'theme';
 
+
+enum LiquidityType {
+  SUPPLY = 'SUPPLY',
+  BORROW = 'BORROW'
+}
+
+
 type MarketSnapshotHistory = {
   created_at: string;
   market_id: string;
   symbol: string;
+  type: LiquidityType;
   user_address: string;
   points_threshold: number;
   bonus_multiplicator: number;
-  supplied_usd: string;
+  suppliedOrBorrowed_usd: string;
   points_number: number;
 }
 
@@ -48,7 +56,11 @@ type PointsRewardsData = {
 type HistoryData = {
   date: string;
   total_points_number: number;
-  total_supplied_usd: number;
+  total_usd: number;
+  supply_points_number: number;
+  borrow_points_number: number;
+  supplied_usd: number;
+  borrowed_usd: number;
 }
 
 const Rewards: React.FC = () => {
@@ -117,31 +129,56 @@ const Rewards: React.FC = () => {
 
           const groupedByDate: {
             [date: string]: {
+              supplyPoints: number;
+              suppliedUSD: number;
+              borrowPoints: number;
+              borrowedUSD: number;
               totalPoints: number;
-              totalSuppliedUSD: number;
+              totalUSD: number;
             };
           } = {};
 
-          data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-          data.forEach((item) => {
+          data.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+          console.log("data");
+          console.log(data);
+          data.forEach((item:MarketSnapshotHistory) => {
             const date = item.created_at;
-            const suppliedUSD = parseFloat(item.supplied_usd);
+            const suppliedOrBorrowedUSD = parseFloat(item.suppliedOrBorrowed_usd);
 
             if (groupedByDate[date]) {
+              if(item.type == LiquidityType.SUPPLY){
+                groupedByDate[date].supplyPoints += item.points_number;
+                groupedByDate[date].suppliedUSD += suppliedOrBorrowedUSD;
+              }
+              else{
+                groupedByDate[date].borrowPoints += item.points_number;
+                groupedByDate[date].borrowedUSD += suppliedOrBorrowedUSD;
+              }
               groupedByDate[date].totalPoints += item.points_number;
-              groupedByDate[date].totalSuppliedUSD += suppliedUSD;
+              groupedByDate[date].totalUSD += suppliedOrBorrowedUSD;
             } else {
               groupedByDate[date] = {
+                supplyPoints: item.type == LiquidityType.SUPPLY ? item.points_number : 0,
+                suppliedUSD: item.type == LiquidityType.SUPPLY ? suppliedOrBorrowedUSD : 0,
+                borrowPoints: item.type == LiquidityType.BORROW ? item.points_number : 0,
+                borrowedUSD: item.type == LiquidityType.BORROW ? suppliedOrBorrowedUSD : 0,
                 totalPoints: item.points_number,
-                totalSuppliedUSD: suppliedUSD,
+                totalUSD: suppliedOrBorrowedUSD,
               };
             }
           });
 
+          console.log("groupedByDate");
+          console.log(groupedByDate);
+
           const result = Object.keys(groupedByDate).map((date) => ({
             date,
             total_points_number: groupedByDate[date].totalPoints,
-            total_supplied_usd: groupedByDate[date].totalSuppliedUSD,
+            total_usd: groupedByDate[date].totalUSD,
+            supply_points_number: groupedByDate[date].supplyPoints,
+            supplied_usd: groupedByDate[date].suppliedUSD,
+            borrow_points_number: groupedByDate[date].borrowPoints,
+            borrowed_usd: groupedByDate[date].borrowedUSD,
           } as HistoryData));
 
           setHistoryData(result);
@@ -243,13 +280,23 @@ const Rewards: React.FC = () => {
                         label: t('rewards.table.points'),
                         value: (payload[0].payload as HistoryData).total_points_number
                       },
+                      {
+                        label: 'Supply Points',
+                        value: (payload[0].payload as HistoryData).supply_points_number
+                      },
+                      {
+                        label: 'Borrow Points',
+                        value: (payload[0].payload as HistoryData).borrow_points_number
+                      },
                     ]}
                   />
                 ) : null
               }
               }
             />
-            <Bar dataKey="total_points_number" radius={[5, 5, 0, 0]} fill={theme.colors.blue} />
+            <Bar name='Supply Points' dataKey="supply_points_number" radius={[5, 5, 0, 0]} fill={theme.colors.blue} />
+            <Bar name='Borrow Points' dataKey="borrow_points_number" radius={[5, 5, 0, 0]} fill={theme.colors.orange} />
+            <Legend/>
           </BarChart>
         </ResponsiveContainer>
 

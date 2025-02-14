@@ -1,14 +1,13 @@
 const dotenv = require('dotenv').config();
 const BN = require('bignumber.js');
 const { createClient: createClients } = require('@supabase/supabase-js');
-const { DEFAULT_POINT_THRESHOLD, 
-        DEFAULT_BONUS_MULTIPLICATOR,
-        MARKETS_REWARDS_CONFIGURATIONS
-       } = require('./pointsConstants');
+const { DEFAULT_POINT_THRESHOLD,
+  DEFAULT_BONUS_MULTIPLICATOR,
+  MARKETS_REWARDS_CONFIGURATIONS
+} = require('./pointsConstants');
 
 const GRAPHQL_URL = 'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest';
 const sb = createClients(process.env.DB_URL, process.env.DB_API_KEY)
-// const sb = createClients(process.env.VITE_DB_URL, process.env.VITE_DB_API_KEY)
 
 type Account = {
   id: string;
@@ -17,6 +16,7 @@ type Account = {
 type Accounts = {
   account: Account;
   vTokenBalanceMantissa: string;
+  storedBorrowBalanceMantissa: string;
 };
 
 type Market = {
@@ -31,13 +31,19 @@ type Market = {
   accounts: Accounts[];
 }
 
+enum LiquidityType {
+  SUPPLY = 'SUPPLY',
+  BORROW = 'BORROW'
+}
+
 type MarketSnapshotHistory = {
   market_id: string;
   symbol: string;
+  type: LiquidityType;
   user_address: string;
   points_threshold: number;
   bonus_multiplicator: number;
-  supplied_usd: string;
+  suppliedOrBorrowed_usd: string;
   points_number: number;
 }
 
@@ -59,10 +65,12 @@ async function fetchGraphData() {
             id
           }
           vTokenBalanceMantissa
+          storedBorrowBalanceMantissa
         }
         id
         symbol
         totalSupplyVTokenMantissa
+        totalBorrowsMantissa
         underlyingPriceCentsMantissa
         underlyingSymbol
         vTokenDecimals
@@ -99,46 +107,36 @@ async function getPointsRewardFromDb() {
   console.log(userPoints);
 }
 
-async function calculatePointsRewards(markets: Market[]){
-
-  const COMPOUND_DECIMALS = 18;
+async function calculatePointsRewards(markets: Market[]) {
 
   markets.forEach(market => {
 
-    const POINT_THRESHOLD = MARKETS_REWARDS_CONFIGURATIONS[market.id]?.POINT_THRESHOLD ?? DEFAULT_POINT_THRESHOLD;
-    const BONUS_MULTIPLICATOR = MARKETS_REWARDS_CONFIGURATIONS[market.id]?.BONUS_MULTIPLICATOR ?? DEFAULT_BONUS_MULTIPLICATOR;
+    const SUPPLY_POINT_THRESHOLD = MARKETS_REWARDS_CONFIGURATIONS[market.id]?.SUPPLY_POINT_THRESHOLD ?? DEFAULT_POINT_THRESHOLD;
+    const SUPPLY_BONUS_MULTIPLICATOR = MARKETS_REWARDS_CONFIGURATIONS[market.id]?.SUPPLY_BONUS_MULTIPLICATOR ?? DEFAULT_BONUS_MULTIPLICATOR;
+    const BORROW_POINT_THRESHOLD = MARKETS_REWARDS_CONFIGURATIONS[market.id]?.BORROW_POINT_THRESHOLD ?? DEFAULT_POINT_THRESHOLD;
+    const BORROW_BONUS_MULTIPLICATOR = MARKETS_REWARDS_CONFIGURATIONS[market.id]?.BORROW_BONUS_MULTIPLICATOR ?? DEFAULT_BONUS_MULTIPLICATOR;
 
     market.accounts.forEach(acc => {
 
-      let historyMarketItem: MarketSnapshotHistory = {
-        market_id: market.id,
-        symbol: market.symbol,
-        user_address: "",
-        supplied_usd: "",
-        points_threshold: POINT_THRESHOLD,
-        bonus_multiplicator: BONUS_MULTIPLICATOR,
-        points_number: 0
-      };
+      const supplyPointsEarned = createMarketHistoryItem(
+        market,
+        LiquidityType.SUPPLY,
+        acc,
+        SUPPLY_POINT_THRESHOLD,
+        SUPPLY_BONUS_MULTIPLICATOR
+      );
 
-      // Price per token
-      const underlyingPriceUSD = new BN(market.underlyingPriceCentsMantissa).dividedBy(10 ** COMPOUND_DECIMALS);
-      // User supplied tokens
-      const userSupplyVToken = new BN(acc.vTokenBalanceMantissa).dividedBy(10 ** market.vTokenDecimals);
-      // Total user supplied price
-      const userSupplyInUSD = userSupplyVToken.multipliedBy(underlyingPriceUSD).decimalPlaces(market.underlyingDecimals).toString();
-
-      historyMarketItem.user_address = acc.account.id;
-      historyMarketItem.supplied_usd = userSupplyInUSD;
-
-      // Calculate points
-      const pointsEarned = Math.floor(userSupplyInUSD / POINT_THRESHOLD) * BONUS_MULTIPLICATOR;
-
-      historyMarketItem.points_number = pointsEarned;
-      historyMarket.push(historyMarketItem);
+      const borrowPointsEarned = createMarketHistoryItem(
+        market,
+        LiquidityType.BORROW,
+        acc,
+        BORROW_POINT_THRESHOLD,
+        BORROW_BONUS_MULTIPLICATOR
+      );
 
       // Add cumulated points
-      if (pointsEarned > 0) {
-        userPoints[acc.account.id] = (userPoints[acc.account.id] || 0) + pointsEarned;
+      if (supplyPointsEarned > 0 || borrowPointsEarned > 0) {
+        userPoints[acc.account.id] = (userPoints[acc.account.id] || 0) + supplyPointsEarned + borrowPointsEarned;
       }
     });
   });
@@ -147,6 +145,55 @@ async function calculatePointsRewards(markets: Market[]){
 
   console.log("User points after the snapshot");
   console.log(userPoints);
+}
+
+function createMarketHistoryItem(
+  market: Market,
+  type: LiquidityType,
+  accounts: Accounts,
+  points_threshold: number,
+  bonus_multiplicator: number) {
+
+  const COMPOUND_DECIMALS = 18;
+
+  let historyMarketItem: MarketSnapshotHistory = {
+    market_id: market.id,
+    symbol: market.symbol,
+    type: type,
+    user_address: accounts.account.id,
+    suppliedOrBorrowed_usd: "",
+    points_threshold: points_threshold,
+    bonus_multiplicator: bonus_multiplicator,
+    points_number: 0
+  };
+
+  // Price per token
+  const underlyingPriceUSD = new BN(market.underlyingPriceCentsMantissa).dividedBy(10 ** COMPOUND_DECIMALS);
+
+  let pointsEarned = 0;
+  let userSupplyOrBorrowInUsd;
+  if (type == LiquidityType.SUPPLY) {
+
+    // User supplied tokens
+    const userSupplyVToken = new BN(accounts.vTokenBalanceMantissa).dividedBy(10 ** market.vTokenDecimals);
+    // Total user supplied price
+    userSupplyOrBorrowInUsd = userSupplyVToken.multipliedBy(underlyingPriceUSD).decimalPlaces(market.underlyingDecimals).toString();
+  }
+  else {
+    // User borrowed tokens
+    const userBorrowVToken = new BN(accounts.storedBorrowBalanceMantissa).dividedBy(10 ** market.underlyingDecimals);
+    // Total user borrowed price
+    userSupplyOrBorrowInUsd = userBorrowVToken.multipliedBy(underlyingPriceUSD).decimalPlaces(market.underlyingDecimals).toString();
+  }
+
+  // Calculate supplied or borrowed points
+  pointsEarned = Math.floor(userSupplyOrBorrowInUsd / points_threshold) * bonus_multiplicator;
+
+  historyMarketItem.suppliedOrBorrowed_usd = userSupplyOrBorrowInUsd;
+  historyMarketItem.points_number = pointsEarned;
+  historyMarket.push(historyMarketItem);
+
+  return pointsEarned;
 }
 
 async function saveDataToDb() {
@@ -178,7 +225,7 @@ async function saveDataToDb() {
     return;
   } else {
     console.log('Data saved successfully: ', d);
-  }  
+  }
 }
 
 async function runScript() {
