@@ -466,7 +466,8 @@
     "columnKeys": {
       "asset": "Asset",
       "type": "Type",
-      "points": "Points",
+      "points": "Supply Points",
+      "borrowPoints": "Borrow Points",
       "borrowApy": "APY <InfoIcon />",
       "borrowBalance": "Total borrow",
       "collateral": "Collateral",
@@ -485,7 +486,8 @@
     "columnSelectOptionLabel": {
       "asset": "Asset",
       "type": "Type",
-      "points": "Points",
+      "points": "Supply Points",
+      "borrowPoints": "Borrow Points",
       "borrowApy": "Borrow APY",
       "borrowBalance": "Total borrow",
       "collateral": "Collateral",
@@ -1290,7 +1292,8 @@
     "table":{
       "rank": "Rank",
       "address": "Address",
-      "points": "Points",
+      "points": "Supply Points",
+      "borrowPoints": "Borrow Points",
       "date": "Date"
     }
   }
