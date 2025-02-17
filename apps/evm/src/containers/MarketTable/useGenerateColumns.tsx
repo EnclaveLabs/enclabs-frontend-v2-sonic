@@ -320,7 +320,7 @@ const useGenerateColumns = ({
             }
             if(column == 'points'){
               return (
-                <Points text={poolAsset.vToken.underlyingToken.address} />
+                <Points text={poolAsset.vToken.address} />
               );
             }
           },

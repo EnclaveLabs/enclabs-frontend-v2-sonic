@@ -37,6 +37,16 @@ const useGetMenuItems = () => {
         iconName: 'person',
       });
 
+      if (isolatedPoolsRouteEnabled) {
+        menuItems.push({
+          to: routes.isolatedPools.path,
+          // Translation key: do not remove this comment
+          // t('layout.menuItems.isolatedPools')
+          i18nKey: 'layout.menuItems.isolatedPools',
+          iconName: 'fourDots',
+        });
+      }
+
       menuItems.push({
         to: routes.rewards.path,
         // Translation key: do not remove this comment
@@ -71,16 +81,6 @@ const useGetMenuItems = () => {
     //   i18nKey: 'layout.menuItems.corePool',
     //   iconName: 'venus',
     // });
-
-    if (isolatedPoolsRouteEnabled) {
-      menuItems.push({
-        to: routes.isolatedPools.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.isolatedPools')
-        i18nKey: 'layout.menuItems.isolatedPools',
-        iconName: 'fourDots',
-      });
-    }
 
     // menuItems.push({
     //   to: routes.vaults.path,
