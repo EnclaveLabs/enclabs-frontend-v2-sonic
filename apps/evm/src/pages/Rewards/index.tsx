@@ -201,7 +201,7 @@ const Rewards: React.FC = () => {
         selectOptionLabel: t('rewards.table.rank'),
         align: 'center',
         renderCell: ({ rank, user_address }) =>
-          <div className={` ${user_address === accountAddress ? 'font-bold text-blue' : ''}`}>
+          <div className={` ${user_address.toLowerCase() === accountAddress?.toLowerCase() ? 'font-bold text-blue' : ''}`}>
             {rank}
           </div>
       },
@@ -211,7 +211,7 @@ const Rewards: React.FC = () => {
         selectOptionLabel: t('rewards.table.address'),
         align: 'center',
         renderCell: ({ user_address }) =>
-          <div className={`wordBreak: 'break-all' ${user_address === accountAddress ? 'font-bold text-blue' : ''}`}>
+          <div className={`wordBreak: 'break-all' ${user_address.toLowerCase() === accountAddress?.toLowerCase() ? 'font-bold text-blue' : ''}`}>
             {user_address}
           </div>,
       },
@@ -221,7 +221,7 @@ const Rewards: React.FC = () => {
         selectOptionLabel: t('rewards.table.points'),
         align: 'center',
         renderCell: ({ points_number, user_address }) =>
-          <div className={` ${user_address === accountAddress ? 'font-bold text-blue' : ''}`}>
+          <div className={` ${user_address.toLowerCase() === accountAddress?.toLowerCase() ? 'font-bold text-blue' : ''}`}>
             {points_number}
           </div>
       },
