@@ -44,6 +44,7 @@ export const PoolUi: React.FC<PoolUiProps> = ({ pool }) => {
           'points',
           'borrowBalance',
           'labeledBorrowApy',
+          'borrowPoints',
           'liquidity',
         ]}
         initialOrder={{
