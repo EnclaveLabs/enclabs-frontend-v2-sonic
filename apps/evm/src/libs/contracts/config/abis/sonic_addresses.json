@@ -52,6 +52,12 @@
     "JumpRateModelV2_base100bps_slope850bps_jump25000bps_kink7000bps": "0xeaB0755A040BE5b707f80C29DF100a6a484dE316",
     "JumpRateModelV2_base100bps_slope1000bps_jump35000bps_kink8000bps": "0x81CBDC9157316bac59dB3fC4D8Bb8127bb0102Fd",
     "VToken_vscETH_Core": "0x04568dB12221D60C93e1db9Cb7933aD6b7c4280C",
-    "VToken_vscUSD_Core": "0x6770aF27FC5233A70B85BFf631061400a09d2e1c"
+    "VToken_vscUSD_Core": "0x6770aF27FC5233A70B85BFf631061400a09d2e1c",
+    "JumpRateModelV2_base100bps_slope800bps_jump30000bps_kink8500bps": "0x1849EA7Da75D84b4A0F99fc59c42B6BA4fF11951",
+    "JumpRateModelV2_base500bps_slope1100bps_jump30000bps_kink9000bps": "0xA0934d49f7F085CA9512c65847e23E536656D46E",
+    "SpectrawstscETHJune3025Oracle": "0x93749BabD99D3c687efd3679bC04762982A014dF",
+    "Comptroller_SpectraPTscETHPool": "0x62C627E08F996D7d7563E135E527f422Fee34786",
+    "VToken_vPT-sw-wstkscETH-1751241607_SpectraPTscETHPool": "0xBFF8cf17b04A057D9A8Ce5796a85c60D1F614eaB",
+    "VToken_vscETH_SpectraPTscETHPool": "0x8bC35Aee955E2D05C13e4Ff503294676508668B5"
   }
 }

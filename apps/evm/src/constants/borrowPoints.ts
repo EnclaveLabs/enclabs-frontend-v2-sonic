@@ -15,7 +15,9 @@ export const pointType = {
        "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", //scusd core pool
         '0x87c69a8fb7f04b7890f48a1577a83788683a2036', //usdc core
          '0xb64b8585cece0e314d344c7f6437d97bf1eb0fe7', //usdc slst
-           '0xd1e8ec6eaed325006731f816f41fd5483373a8f2' //PTscusd spectrapool
+           '0xd1e8ec6eaed325006731f816f41fd5483373a8f2', //PTscusd spectrapool
+           "0xBFF8cf17b04A057D9A8Ce5796a85c60D1F614eaB", //PTsceth spectrapool
+           "0x8bC35Aee955E2D05C13e4Ff503294676508668B5", //sceth spectrapool"
         
 
     ],

@@ -9,11 +9,13 @@ export const pointType = {
         "0x7D47cBf5FE9cCF2F99D0C2E8a3c59FB3498bc21b", //scusd spectra pool
         "0x04568dB12221D60C93e1db9Cb7933aD6b7c4280C", //sceth core pool
         "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", //scusd core pool
+        "0x8bC35Aee955E2D05C13e4Ff503294676508668B5", //sceth spectrapool
         
 
     ],
     enclabsPointsX1: [
        '0xd1e8ec6eaed325006731f816f41fd5483373a8f2', //PTscusd spectrapool
+       "0xBFF8cf17b04A057D9A8Ce5796a85c60D1F614eaB", //PTsceth spectrapool
         '0x7fd79432cc704582235df11b92b783f07ed40e13', //wos Slst
         "0xe544e51bf20ab186b6b7b1a9095c8bc1e3f203f5", //sts core
 
@@ -39,6 +41,7 @@ export const pointType = {
        '0x87c69a8fb7f04b7890f48a1577a83788683a2036', //usdc core
        "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", //scusd core pool
         "0x7D47cBf5FE9cCF2F99D0C2E8a3c59FB3498bc21b", //scusd spectra pool
+        "0x8bC35Aee955E2D05C13e4Ff503294676508668B5", //sceth spectrapool
         '0x876e062420fb9a4861968ec2e0ff91be88142343', // ws slst
 
     ],
