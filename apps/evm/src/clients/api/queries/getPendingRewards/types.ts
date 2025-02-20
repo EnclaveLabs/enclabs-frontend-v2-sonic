@@ -13,15 +13,15 @@ import type { Token } from 'types';
 export interface GetPendingRewardsInput {
   tokens: Token[];
   isolatedPoolComptrollerAddresses: string[];
-  xvsVestingVaultPoolCount: number;
+  //xvsVestingVaultPoolCount: number;
   accountAddress: string;
   resilientOracleContract: ResilientOracle;
   poolLensContract: PoolLens;
-  xvsVaultContract: XvsVault;
-  vaiVaultContract?: VaiVault;
+  //xvsVaultContract: XvsVault;
+  //vaiVaultContract?: VaiVault;
   venusLensContract?: VenusLens;
-  primeContract?: Prime;
-  legacyPoolComptrollerContractAddress?: string;
+  //primeContract?: Prime;
+  //legacyPoolComptrollerContractAddress?: string;
 }
 
 export interface GetPendingRewardsOutput {
@@ -84,8 +84,8 @@ export interface PrimePendingRewardGroup {
 }
 
 export type PendingRewardGroup =
-  | LegacyPoolPendingRewardGroup
+ //| LegacyPoolPendingRewardGroup
   | IsolatedPoolPendingRewardGroup
-  | VaultPendingRewardGroup
-  | XvsVestingVaultPendingRewardGroup
-  | PrimePendingRewardGroup;
+  //| VaultPendingRewardGroup
+  //| XvsVestingVaultPendingRewardGroup
+  //| PrimePendingRewardGroup;
