@@ -154,7 +154,7 @@ const useGenerateColumns = ({
               column === 'labeledBorrowApy'
             ) {
               return (
-                <Apy className={cn(isPaused && 'text-grey')} asset={poolAsset} column={column} />
+                <Apy className={cn('text-blue font-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={poolAsset} column={column} />
               );
             }
 

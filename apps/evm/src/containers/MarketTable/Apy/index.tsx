@@ -14,9 +14,10 @@ export interface ApyProps {
   asset: Asset;
   column: ColumnKey;
   className?: string;
+  classNameBottomValue?: string;
 }
 
-export const Apy: React.FC<ApyProps> = ({ asset, column, className }) => {
+export const Apy: React.FC<ApyProps> = ({ asset, column, className, classNameBottomValue }) => {
   const type = column === 'supplyApyLtv' || column === 'labeledSupplyApyLtv' ? 'supply' : 'borrow';
 
   const xvs = useGetToken({
@@ -56,45 +57,45 @@ export const Apy: React.FC<ApyProps> = ({ asset, column, className }) => {
     value: +asset.collateralFactor * 100,
   });
 
-  // Display Prime boost
-  if (primeDistribution?.apyPercentage?.isGreaterThan(0)) {
-    const apyPercentageWithoutPrimeBoost =
-      type === 'borrow'
-        ? apyPercentage.plus(primeDistribution.apyPercentage)
-        : apyPercentage.minus(primeDistribution.apyPercentage);
+  // // Display Prime boost
+  // if (primeDistribution?.apyPercentage?.isGreaterThan(0)) {
+  //   const apyPercentageWithoutPrimeBoost =
+  //     type === 'borrow'
+  //       ? apyPercentage.plus(primeDistribution.apyPercentage)
+  //       : apyPercentage.minus(primeDistribution.apyPercentage);
 
-    return (
-      <ApyWithPrimeBoost
-        className={className}
-        type={type}
-        tokenAddress={asset.vToken.underlyingToken.address}
-        apyPercentage={apyPercentage}
-        apyPercentageWithoutPrimeBoost={apyPercentageWithoutPrimeBoost}
-        readableLtv={readableLtv}
-      />
-    );
-  }
+  //   return (
+  //     <ApyWithPrimeBoost
+  //       className={className}
+  //       type={type}
+  //       tokenAddress={asset.vToken.underlyingToken.address}
+  //       apyPercentage={apyPercentage}
+  //       apyPercentageWithoutPrimeBoost={apyPercentageWithoutPrimeBoost}
+  //       readableLtv={readableLtv}
+  //     />
+  //   );
+  // }
 
-  // Display hypothetical Prime boost
-  if (primeSimulationDistribution?.apyPercentage.isGreaterThan(0)) {
-    return (
-      <ApyWithPrimeSimulationBoost
-        className={className}
-        type={type}
-        tokenAddress={asset.vToken.underlyingToken.address}
-        apyPercentage={apyPercentage}
-        readableLtv={readableLtv}
-        primeSimulationDistribution={primeSimulationDistribution}
-        xvs={xvs!}
-      />
-    );
-  }
+  // // Display hypothetical Prime boost
+  // if (primeSimulationDistribution?.apyPercentage.isGreaterThan(0)) {
+  //   return (
+  //     <ApyWithPrimeSimulationBoost
+  //       className={className}
+  //       type={type}
+  //       tokenAddress={asset.vToken.underlyingToken.address}
+  //       apyPercentage={apyPercentage}
+  //       readableLtv={readableLtv}
+  //       primeSimulationDistribution={primeSimulationDistribution}
+  //       xvs={xvs!}
+  //     />
+  //   );
+  // }
 
   // No Prime boost or Prime boost simulation to display
 
   // Display supply APY
   if (type === 'supply') {
-    return <LayeredValues className={className} topValue={readableApy} bottomValue={readableLtv} />;
+    return <LayeredValues className={className} classNameBottomValue={classNameBottomValue} topValue={readableApy} bottomValue={readableLtv} />;
   }
 
   // Display borrow APY
