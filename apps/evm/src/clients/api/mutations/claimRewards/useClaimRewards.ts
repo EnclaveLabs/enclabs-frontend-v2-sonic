@@ -41,7 +41,7 @@ const useClaimRewards = (options?: Partial<Options>) => {
       callOrThrow(
         {
           multicallContract,
-          xvsVaultContractAddress,
+          //xvsVaultContractAddress,
         },
         params =>
           claimRewards({

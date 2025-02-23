@@ -13,6 +13,7 @@ export const useMarketTableColumns = () => {
       'labeledSupplyApyLtv',
       'points',
       'labeledBorrowApy',
+      'borrowPoints',
     ];
 
     if (accountAddress) {

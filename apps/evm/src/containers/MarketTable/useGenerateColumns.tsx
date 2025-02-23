@@ -32,11 +32,13 @@ import { useStyles } from './styles';
 import type { ColumnKey, PoolAsset } from './types';
 import { getTokenType, Tag } from 'components/Tag';
 import { getTokenPoints, Points } from 'components/Points';
+import { getTokenPoints as getTokenBorrowPoints , Points as BorrowPoints } from 'components/BorrowPoints';
 
 // Translation keys: do not remove this comment
 // t('marketTable.columnKeys.asset')
 // t('marketTable.columnKeys.type')
 // t('marketTable.columnKeys.points')
+// t('marketTable.columnKeys.borrowPoints')
 // t('marketTable.columnKeys.supplyApyLtv')
 // t('marketTable.columnKeys.labeledSupplyApyLtv')
 // t('marketTable.columnKeys.borrowApy')
@@ -54,7 +56,8 @@ import { getTokenPoints, Points } from 'components/Points';
 
 // t('marketTable.columnSelectOptionLabel.asset')
 // t('marketTable.columnSelectOptionLabel.type')
-// t('marketTable.columnKeys.points')
+// t('marketTable.columnSelectOptionLabel.points')
+// t('marketTable.columnSelectOptionLabel.borrowPoints')
 // t('marketTable.columnSelectOptionLabel.supplyApyLtv')
 // t('marketTable.columnSelectOptionLabel.labeledSupplyApyLtv')
 // t('marketTable.columnSelectOptionLabel.borrowApy')
@@ -321,6 +324,11 @@ const useGenerateColumns = ({
             if(column == 'points'){
               return (
                 <Points text={poolAsset.vToken.address} />
+              );
+            }
+            if(column == 'borrowPoints'){
+              return (
+                <BorrowPoints text={poolAsset.vToken.address} />
               );
             }
           },

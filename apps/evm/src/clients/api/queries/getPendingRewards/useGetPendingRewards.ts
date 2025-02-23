@@ -60,7 +60,7 @@ const useGetPendingRewards = (input: TrimmedGetPendingRewardsInput, options?: Pa
   const venusLensContract = useGetVenusLensContract();
   const poolLensContract = useGetPoolLensContract();
   const vaiVaultContract = useGetVaiVaultContract();
-  const xvsVaultContract = useGetXvsVaultContract();
+  const xvsVaultContract = ""; //useGetXvsVaultContract();
   const primeContract = useGetPrimeContract();
 
   const isPrimeEnabled = useIsFeatureEnabled({
