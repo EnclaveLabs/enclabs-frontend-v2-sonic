@@ -21,7 +21,7 @@ export const LabeledInlineContent = ({
   iconClassName,
   invertTextColors = false,
   children,
-  className,
+  className = 'text-blue',
   ...otherContainerProps
 }: LabeledInlineContentProps) => (
   <div
@@ -37,7 +37,7 @@ export const LabeledInlineContent = ({
         <TokenIcon token={iconSrc} className="-mt-[2px] mr-2 h-5 w-5" />
       )}
 
-      <p className={cn('text-sm md:text-base', invertTextColors ? 'text-lightBlack' : 'text-lightBlack')}>
+      <p className={cn('text-sm md:text-base', invertTextColors ? 'text-grey' : 'text-lightBlack')}>
         {label}
       </p>
 

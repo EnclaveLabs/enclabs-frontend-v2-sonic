@@ -58,3 +58,4 @@ export { default as gas } from './gas';
 export { default as gasSlashed } from './gasSlashed';
 export { default as gasSad } from './gasSad';
 export { default as rewards } from './rewards';
+export { default as distribution } from './distribution';
