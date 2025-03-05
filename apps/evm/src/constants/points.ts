@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import ringsLogo from 'libs/tokens/img/rings.svg';
-import sonicLogo from 'libs/tokens/img/sonic.svg';
+import sonicLogo from 'libs/tokens/img/sonic-token.svg';
 import enclabsPointsLogo from 'libs/tokens/img/enclabspoints.svg';
 
 
@@ -10,43 +10,62 @@ export const pointType = {
         "0x04568dB12221D60C93e1db9Cb7933aD6b7c4280C", //sceth core pool
         "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", //scusd core pool
         "0x8bC35Aee955E2D05C13e4Ff503294676508668B5", //sceth spectrapool
-        
+
 
     ],
     enclabsPointsX1: [
-       '0xd1e8ec6eaed325006731f816f41fd5483373a8f2', //PTscusd spectrapool
-       "0xBFF8cf17b04A057D9A8Ce5796a85c60D1F614eaB", //PTsceth spectrapool
+        '0xd1e8ec6eaed325006731f816f41fd5483373a8f2', //PTscusd spectrapool
+        "0xBFF8cf17b04A057D9A8Ce5796a85c60D1F614eaB", //PTsceth spectrapool
         '0x7fd79432cc704582235df11b92b783f07ed40e13', //wos Slst
         "0xe544e51bf20ab186b6b7b1a9095c8bc1e3f203f5", //sts core
 
     ],
     enclabsPointsX2: [
-       
-        
+
+
 
     ],
     enclabsPointsX4: [
-       '0xb64b8585cece0e314d344c7f6437d97bf1eb0fe7', //usdc slst
-       "0x04568dB12221D60C93e1db9Cb7933aD6b7c4280C", //sceth core pool
-       '0x52260ad4cb690c6b22629166f4d181477a9c157c', //eth core
-        
+        '0xb64b8585cece0e314d344c7f6437d97bf1eb0fe7', //usdc slst
+        "0x04568dB12221D60C93e1db9Cb7933aD6b7c4280C", //sceth core pool
+        '0x52260ad4cb690c6b22629166f4d181477a9c157c', //eth core
+
 
     ],
     enclabsPointsX6: [
-       
+
         '0xc96a4cd13c8fcb9886de0cdf7152b9f930d67e96', //wS core
 
     ],
     enclabsPointsX8: [
-       '0x87c69a8fb7f04b7890f48a1577a83788683a2036', //usdc core
-       "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", //scusd core pool
+        '0x87c69a8fb7f04b7890f48a1577a83788683a2036', //usdc core
+        "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", //scusd core pool
         "0x7D47cBf5FE9cCF2F99D0C2E8a3c59FB3498bc21b", //scusd spectra pool
         "0x8bC35Aee955E2D05C13e4Ff503294676508668B5", //sceth spectrapool
         '0x876e062420fb9a4861968ec2e0ff91be88142343', // ws slst
-
     ],
-   
-   
+
+
+
+    SonicPointsX2: [ 
+        '0x52260ad4cb690c6b22629166f4d181477a9c157c', // wETH_Core
+    ],
+    SonicPointsX4: [
+        "0x876e062420fb9a4861968ec2e0ff91be88142343", // wS_LiquidStakedS
+        "0xe544e51bf20ab186b6b7b1a9095c8bc1e3f203f5", // stS_Core
+        "0xc96a4cd13c8fcb9886de0cdf7152b9f930d67e96", // wS_Core
+        "0x04568db12221d60c93e1db9cb7933ad6b7c4280c", // scETH_Core
+        "0x8bc35aee955e2d05c13e4ff503294676508668b5", // scETH
+        "0x7fd79432cc704582235df11b92b783f07ed40e13", // wOS
+    ],
+    SonicPointsX5: [
+        "0x87c69a8fb7f04b7890f48a1577a83788683a2036", // USDCe_Core
+        "0xb64b8585cece0e314d344c7f6437d97bf1eb0fe7", // USDCe_LiquidStakedS
+    ],
+    SonicPointsX6: [
+        "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", // scUSD_Core
+        "0x7d47cbf5fe9ccf2f99d0c2e8a3c59fb3498bc21b", // scUSD_SpectraPTscUSDPool
+    ],
 };
 export const pointTypeInfo: {
     [key: string]: {
@@ -92,7 +111,31 @@ export const pointTypeInfo: {
         tooltiptext: "8 Enclabs Point / $ value / day",
         tooltipLink: "https://enclabs.gitbook.io/enclabs-documentation/enclabs-on-sonic/enclabs-points",
     },
-    
-   
+
+
+    SonicPointsX2: { 
+        logo: sonicLogo,
+        multiplier: "x4",
+        tooltiptext: "You earn 4x Sonic Points (2x * 2x = 4x)",
+        tooltipLink: "https://enclabs.gitbook.io/enclabs-documentation/enclabs-on-sonic/sonic-points",
+    },
+    SonicPointsX4: {
+        logo: sonicLogo,
+        multiplier: "x8",
+        tooltiptext: "You earn 8x Sonic Points (4x * 2x = 8x)",
+        tooltipLink: "https://enclabs.gitbook.io/enclabs-documentation/enclabs-on-sonic/sonic-points",
+    },
+    SonicPointsX5: {
+        logo: sonicLogo,
+        multiplier: "x10",
+        tooltiptext: "You earn 10x Sonic Points (5x * 2x = 10x)",
+        tooltipLink: "https://enclabs.gitbook.io/enclabs-documentation/enclabs-on-sonic/sonic-points",
+    },
+    SonicPointsX6: {
+        logo: sonicLogo,
+        multiplier: "x12",
+        tooltiptext: "You earn 12x Sonic Points (6x * 2x = 12x)",
+        tooltipLink: "https://enclabs.gitbook.io/enclabs-documentation/enclabs-on-sonic/sonic-points",
+    },
 };
 

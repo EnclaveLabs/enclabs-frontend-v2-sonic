@@ -20,7 +20,7 @@ export const Points = ({ text }: PointsProps) => {
     const tokenPoints = getTokenPoints(text);
     
     return (
-        <div> 
+        <div className="py-1"> 
           {Array.isArray(tokenPoints) ? (
             tokenPoints.map((point, index) => (
               <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">     
