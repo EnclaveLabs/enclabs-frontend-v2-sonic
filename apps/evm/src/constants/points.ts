@@ -18,6 +18,7 @@ export const pointType = {
         "0xBFF8cf17b04A057D9A8Ce5796a85c60D1F614eaB", //PTsceth spectrapool
         '0x7fd79432cc704582235df11b92b783f07ed40e13', //wos Slst
         "0xe544e51bf20ab186b6b7b1a9095c8bc1e3f203f5", //sts core
+        "0x2df4dC7cf362E56e128816BE0f1F4CEb07904Bb0", //PT pendle wstkscusd
 
     ],
     enclabsPointsX2: [
