@@ -7,7 +7,8 @@ export const tokenType = {
          
     ],
     PT: [ "0x7002383d2305b8f3b2b7786f50c13d132a22076d", // PT scUSD spectra june
-        "0x3a7ba84bbe869ed318e654dd9b6ff3cf6d531e91" // PT scETH spectra june
+        "0x3a7ba84bbe869ed318e654dd9b6ff3cf6d531e91", // PT scETH spectra june
+        "0xbe27993204ec64238f71a527b4c4d5f4949034c3" // PT pendle wstkscusd
     ],
     Wrapped: [
         "0x50c42deacd8fc9773493ed674b675be577f2634b", // wETH
