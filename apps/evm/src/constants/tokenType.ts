@@ -6,8 +6,13 @@ export const tokenType = {
          "0xE5DA20F15420aD15DE0fa650600aFc998bbE3955", //stS
          
     ],
-    PT: [ "0x7002383d2305b8f3b2b7786f50c13d132a22076d", // PT scUSD spectra june
+    PT: [ 
+    ],
+    "Spectra PT": [ "0x7002383d2305b8f3b2b7786f50c13d132a22076d", // PT scUSD spectra june
         "0x3a7ba84bbe869ed318e654dd9b6ff3cf6d531e91", // PT scETH spectra june
+        
+    ],
+    "Pendle PT": [ 
         "0xbe27993204ec64238f71a527b4c4d5f4949034c3" // PT pendle wstkscusd
     ],
     Wrapped: [
@@ -45,6 +50,26 @@ export const tokenTypeInfo: {
             `swap`,
     },
     PT: {
+        color: theme.colors.tagTextGreen, // Green
+        borderColor: theme.colors.tagTextGreen,
+        backgroundColor: theme.colors.tagBgGreen,
+        hoverColor: theme.colors.hoverGreen,
+        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        shadowClassName: 'shadow-md shadow-hoverGreen',
+        getUrl:  (tokenAddress: string, chain: string) => 
+            `swap`,
+    },
+    "Spectra PT": {
+        color: theme.colors.tagTextGreen, // Green
+        borderColor: theme.colors.tagTextGreen,
+        backgroundColor: theme.colors.tagBgGreen,
+        hoverColor: theme.colors.hoverGreen,
+        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        shadowClassName: 'shadow-md shadow-hoverGreen',
+        getUrl:  (tokenAddress: string, chain: string) => 
+            `swap`,
+    },
+    "Pendle PT": {
         color: theme.colors.tagTextGreen, // Green
         borderColor: theme.colors.tagTextGreen,
         backgroundColor: theme.colors.tagBgGreen,
