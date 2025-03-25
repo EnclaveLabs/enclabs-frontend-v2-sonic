@@ -61,9 +61,10 @@ export const pointType = {
     ],
     SonicPointsX5: [
         
-        "0xb64b8585cece0e314d344c7f6437d97bf1eb0fe7", // USDCe_LiquidStakedS
+        
     ],
     SonicPointsX6: [
+        "0xb64b8585cece0e314d344c7f6437d97bf1eb0fe7", // USDCe_LiquidStakedS
         "0x87c69a8fb7f04b7890f48a1577a83788683a2036", // USDCe_Core
         "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", // scUSD_Core
         "0x7d47cbf5fe9ccf2f99d0c2e8a3c59fb3498bc21b", // scUSD_SpectraPTscUSDPool
