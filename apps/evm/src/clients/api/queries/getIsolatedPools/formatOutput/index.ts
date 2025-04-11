@@ -156,6 +156,7 @@ const formatToPools = ({
 
       const borrowApyPercentage = calculateYearlyPercentageRate({
         dailyPercentageRate: borrowDailyPercentageRate,
+        compound: false,
       });
 
       const supplyBalanceVTokens = convertMantissaToTokens({
