@@ -83,12 +83,12 @@ export const tokenTypeInfo: {
             `swap`,
     },
     "StableJack YieldToken": {
-        color: theme.colors.tagTextStableJack, // orangeish
-        borderColor: theme.colors.tagTextStableJack,
-        backgroundColor: theme.colors.tagBgStableJack,
-        hoverColor: theme.colors.hoverStableJack,
-        buttonClassName: 'bg-tagTextOrange bg-tagTextOrange border-tagTextOrange hover:border-tagTextOrange hover:bg-hoverOrange text-lightBlack',
-        shadowClassName: 'shadow-md shadow-hoverOrange',
+        color: theme.colors.tagTextGreen, // Green
+        borderColor: theme.colors.tagTextGreen,
+        backgroundColor: theme.colors.tagBgGreen,
+        hoverColor: theme.colors.hoverGreen,
+        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        shadowClassName: 'shadow-md shadow-hoverGreen',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
