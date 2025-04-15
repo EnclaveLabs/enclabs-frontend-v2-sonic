@@ -62,6 +62,9 @@
     "RewardsDistributor_Core Sonic_0": "0xB362916fa55088149eA92e007E153976E2d9b1f1",
     "PendlePtOracle_Implementation": "0x12aF8E0E0426D6b226f9A929a2DB64C640f866E0",
     "PendlePtOracle_Proxy": "0x3E5449bFE47637C7b22EA3A36D59E540eee49A96",
-    "VToken_vPT-wstkscUSD-29MAY2025_Core": "0x2df4dC7cf362E56e128816BE0f1F4CEb07904Bb0"
+    "VToken_vPT-wstkscUSD-29MAY2025_Core": "0x2df4dC7cf362E56e128816BE0f1F4CEb07904Bb0",
+    "JumpRateModelV2_base0bps_slope850bps_jump25000bps_kink7500bps" : "0x67Bf08Bc4B9D31aC307C665e0379b3b53B99c9Aa",
+    "VToken_vscUSD-StableJack-YieldToken_Core": "0xAb1fbEE94D9ba79269B3e479cE5D78C60F148716",
+    "StableJackYTscUSDOracle_Proxy":"0xf100F6ADFBA11337062068334bfF73Dc1d8b25c5"
   }
 }

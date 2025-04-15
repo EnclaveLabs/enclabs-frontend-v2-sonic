@@ -15,6 +15,9 @@ export const tokenType = {
     "Pendle PT": [ 
         "0xbe27993204ec64238f71a527b4c4d5f4949034c3" // PT pendle wstkscusd
     ],
+    "StableJack YieldToken": [ 
+        "0xd2901D474b351bC6eE7b119f9c920863B0F781b2" // YT scusd
+    ],
     Wrapped: [
         "0x50c42deacd8fc9773493ed674b675be577f2634b", // wETH
         "0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38", // wS
@@ -76,6 +79,16 @@ export const tokenTypeInfo: {
         hoverColor: theme.colors.hoverGreen,
         buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGreen',
+        getUrl:  (tokenAddress: string, chain: string) => 
+            `swap`,
+    },
+    "StableJack YieldToken": {
+        color: theme.colors.tagTextStableJack, // orangeish
+        borderColor: theme.colors.tagTextStableJack,
+        backgroundColor: theme.colors.tagBgStableJack,
+        hoverColor: theme.colors.hoverStableJack,
+        buttonClassName: 'bg-tagTextOrange bg-tagTextOrange border-tagTextOrange hover:border-tagTextOrange hover:bg-hoverOrange text-lightBlack',
+        shadowClassName: 'shadow-md shadow-hoverOrange',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },

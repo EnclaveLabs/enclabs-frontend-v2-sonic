@@ -19,6 +19,7 @@ export const pointType = {
         '0x7fd79432cc704582235df11b92b783f07ed40e13', //wos Slst
         "0xe544e51bf20ab186b6b7b1a9095c8bc1e3f203f5", //sts core
         "0x2df4dC7cf362E56e128816BE0f1F4CEb07904Bb0", //PT pendle wstkscusd
+        "0xAb1fbEE94D9ba79269B3e479cE5D78C60F148716", //YT scusd stablejack
 
     ],
     enclabsPointsX2: [

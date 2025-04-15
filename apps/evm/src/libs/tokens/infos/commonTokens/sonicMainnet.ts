@@ -18,6 +18,7 @@ import spectraPTscETHLogo from 'libs/tokens/img/spectraPTscETH.svg';
 import wstEthLogo from 'libs/tokens/img/wstEth.svg';
 import PTweETH26JUN2025Logo from 'libs/tokens/img/PTweETH26JUN2025Logo.svg';
 import xvsLogo from 'libs/tokens/img/xvs.svg';
+import scusdstablejackytLogo from 'libs/tokens/img/jack-yt-scusd.svg';
 import type { Token } from 'types';
 
 const ethToken: Token = {
@@ -36,6 +37,12 @@ export const tokens: Token[] = [
     symbol: 'wS',
     asset: sonicTokenLogo,
     tokenWrapped: ethToken,
+  },
+  {
+    address: '0xd2901D474b351bC6eE7b119f9c920863B0F781b2',
+    decimals: 18,
+    symbol: 'StableJack scUSD YieldToken',
+    asset: scusdstablejackytLogo,
   },
   {
     address: '0xE5DA20F15420aD15DE0fa650600aFc998bbE3955',
@@ -58,19 +65,19 @@ export const tokens: Token[] = [
   {
     address: '0x7002383d2305b8f3b2b7786f50c13d132a22076d',
     decimals: 6,
-    symbol: 'PT-sw-wstkscUSD-1751241607',
+    symbol: 'Spectra PT wstkscUSD',
     asset: spectraPTscUSDLogo,
   },
   {
     address: '0x3a7ba84bbe869ed318e654dd9b6ff3cf6d531e91',
     decimals: 18,
-    symbol: 'PT-sw-wstkscETH-1751241607',
+    symbol: 'Spectra PT wstkscETH',
     asset: spectraPTscETHLogo,
   },
   {
     address: '0xbe27993204ec64238f71a527b4c4d5f4949034c3',
     decimals: 6,
-    symbol: 'PT-wstkscUSD-29MAY2025',
+    symbol: 'Pendle PT wstkscUSD (29MAY2025)',
     asset: pendlePTscUSDLogo,
   },
   {

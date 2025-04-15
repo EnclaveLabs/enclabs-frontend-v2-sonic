@@ -67,6 +67,10 @@ export const theme = {
     tagBgGrey: 'rgba(211, 211, 211, 0.1)',
     hoverGrey: 'rgba(211, 211, 211, 0.4)',
 
+    tagTextStableJack: '#ecbe86',
+    tagBgStableJack: 'rgb(227, 158, 73)',
+    hoverStableJack:'rgb(234, 197, 151)',
+
     // Rainbow color
     rainbowColors
   },
