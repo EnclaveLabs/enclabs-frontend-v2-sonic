@@ -11,6 +11,8 @@ import { ApyWithPrimeBoost } from './ApyWithPrimeBoost';
 import { ApyWithPrimeSimulationBoost } from './ApyWithPrimeSimulationBoost';
 import { Link } from 'react-router-dom';
 import { t } from 'i18next';
+import BigNumber from "bignumber.js";
+import getMerklRewardApy from "../../../utilities/getMerklRewardsApy";
 
 export interface ApyProps {
   asset: Asset;
@@ -26,6 +28,8 @@ export const Apy: React.FC<ApyProps> = ({ asset, column, className, classNameBot
   //   symbol: 'XVS',
   // });
   const combinedDistributionApys = useMemo(() => getCombinedDistributionApys({ asset }), [asset]);
+
+  const merklDistributionApy = getMerklRewardApy({tokenAddress: asset.vToken.underlyingToken.address, liquidityType: type === 'borrow' ? 'BORROW' : 'LEND'});
 
   const { primeDistribution, primeSimulationDistribution } = useMemo(() => {
     const result: {
@@ -46,10 +50,14 @@ export const Apy: React.FC<ApyProps> = ({ asset, column, className, classNameBot
     return result;
   }, [asset.borrowDistributions, asset.supplyDistributions, type]);
 
-  const apyPercentage =
+  let apyPercentage =
     type === 'borrow'
       ? asset.borrowApyPercentage.minus(combinedDistributionApys.totalBorrowApyPercentage)
       : asset.supplyApyPercentage.plus(combinedDistributionApys.totalSupplyApyPercentage);
+
+  if (!!merklDistributionApy.merklApy) {
+    apyPercentage = apyPercentage.plus(merklDistributionApy.merklApy);
+  }
 
   const readableApy = useFormatPercentageToReadableValue({
     value: apyPercentage,
@@ -112,16 +120,29 @@ export const Apy: React.FC<ApyProps> = ({ asset, column, className, classNameBot
       ? asset.supplyDistributions
       : asset.borrowDistributions
 
+  if (!!merklDistributionApy) {
+    distributions.push({
+      apyPercentage: new BigNumber(merklDistributionApy.merklApy),
+      dailyDistributedTokens: new BigNumber(merklDistributionApy.dailyRewards),
+      token: asset.vToken.underlyingToken,
+      type: "merkl"
+    })
+  }
+
   const distributionApyRows: LabeledInlineContentProps[] = distributions
     .filter(d => d.apyPercentage.toString() > "0")
     .map((distribution) =>
     ({
-      label: t('assetInfo.distributionApy', {
+      label: t(distribution.type === "merkl" ? 'assetInfo.merklApy' : 'assetInfo.distributionApy', {
         tokenSymbol: distribution.token.symbol
       }),
       iconSrc: distribution.token,
       invertTextColors: true,
       children: formatPercentageToReadableValue(distribution.apyPercentage),
+      disclaimer : distribution.type === "merkl" &&
+          <div className="text-grey text-sm">Rewards from this external program can be claimed through their <a
+              target="_blank" rel="noreferrer" href="https://app.merkl.xyz/" className="text-blue hover:underline">official
+            app</a>. The Enclabs protocol does not guarantee them and accepts no liability.</div>
     }));
 
   // Display supply APY
@@ -164,10 +185,21 @@ export const Apy: React.FC<ApyProps> = ({ asset, column, className, classNameBot
   return (
     
     distributionApyRows.length > 0 ? (
-      <div className='flex justify-start lg:justify-end gap-[5px]' >
-        <Icon name="distribution"/>
-        <span className={cn(className, 'text-[#00C38E]')}>{readableApy}</span>
-      </div>
+            <Tooltip
+                title={
+                  <div>
+                    <LabeledInlineContent {...supplyBorrowApyRow} />
+                    {distributionApyRows.map((row, index) => (
+                        <LabeledInlineContent key={index} {...row} />
+                    ))}
+                  </div>
+                }
+            >
+              <div className='flex justify-start lg:justify-end gap-[5px]' >
+                <Icon name="distribution"/>
+                <span className={cn(className, 'text-[#00C38E]')}>{readableApy}</span>
+              </div>
+            </Tooltip>
     ) : (
       <span className={className}>{readableApy}</span>
     )

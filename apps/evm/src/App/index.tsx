@@ -13,6 +13,7 @@ import { MuiThemeProvider } from 'theme/MuiThemeProvider';
 import { MAIN_PRODUCTION_HOST } from 'constants/production';
 import { safeLazyLoad } from 'utilities';
 import Routes from './Routes';
+import EnclapsMerklWrapper from "../libs/merkl";
 
 const NotificationCenter = safeLazyLoad(() => import('libs/notifications/NotificationCenter'));
 const AppVersionChecker = safeLazyLoad(() => import('containers/AppVersionChecker'));
@@ -39,25 +40,27 @@ const App = () => (
           <QueryClientProvider client={queryClient}>
             <Web3Wrapper>
               <AnalyticProvider>
-                <Routes />
+                <EnclapsMerklWrapper>
+                  <Routes />
 
-                <Suspense>
-                  <NotificationCenter />
-                </Suspense>
+                  <Suspense>
+                    <NotificationCenter />
+                  </Suspense>
 
-                <Suspense>
-                  <AppVersionChecker />
-                </Suspense>
+                  <Suspense>
+                    <AppVersionChecker />
+                  </Suspense>
 
-                <Suspense>
-                  <GaslessChecker />
-                </Suspense>
+                  <Suspense>
+                    <GaslessChecker />
+                  </Suspense>
 
-                <Suspense>
-                  <ResendPayingGasModal />
-                </Suspense>
+                  <Suspense>
+                    <ResendPayingGasModal />
+                  </Suspense>
 
-                <SentryErrorInfo />
+                  <SentryErrorInfo />
+                </EnclapsMerklWrapper>
               </AnalyticProvider>
             </Web3Wrapper>
           </QueryClientProvider>

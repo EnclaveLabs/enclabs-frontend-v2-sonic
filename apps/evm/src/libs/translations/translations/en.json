@@ -126,6 +126,7 @@
   },
   "assetInfo": {
     "borrowApy": "Borrow APY",
+    "merklApy": "Merkl campaign",
     "distributionApy": "Distribution APY ({{tokenSymbol}})",
     "distributionTooltip": "Distribution rewards are not necessarly initiated and implemented by Enclabs team. Enclabs protocol does not guarantee them and accepts no liability.",
     "primeApy": "Prime APY ({{tokenSymbol}})",
