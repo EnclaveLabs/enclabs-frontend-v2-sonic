@@ -5,6 +5,7 @@ import type { Asset, Pool, TokenAction, VToken } from 'types';
 import { areTokensEqual } from 'utilities';
 
 import DisabledActionNotice from './DisabledActionNotice';
+import getMerklDistributions from "../../utilities/getMerklRewardsApy";
 
 export interface AssetAccessorProps {
   vToken: VToken;

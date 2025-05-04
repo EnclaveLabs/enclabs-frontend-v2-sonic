@@ -1,22 +1,30 @@
-import useGetMerkl from "../../clients/api/queries/getMerkl/useGetMerkl";
-export interface GetMerklRewardApyInput {
-    tokenAddress: string;
-    liquidityType: "LEND" | "BORROW";
+import useGetMerkl, {
+  merkl,
+} from "../../clients/api/queries/getMerkl/useGetMerkl";
+import { Asset, MerklDistribution } from "../../types";
+
+export type MerklAction = "LEND" | "BORROW";
+
+export type Merkl = Awaited<ReturnType<typeof merkl.opportunities.index.get>>;
+
+export interface getMerklDistributionsInput {
+  merkl: Merkl;
+  asset: Asset;
 }
 
-export interface GetMerklRewardApyOutput {
-    merklApy: number;
-    dailyRewards: number;
+export interface getMerklDistributionsOutput {
+  supplyDistribution?: MerklDistribution;
+  borrowDistribution?: MerklDistribution;
 }
 
 export interface EnclapsMerklWrapperProps {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-const EnclapsMerklWrapper = ({children}: EnclapsMerklWrapperProps) => {
-    const _ = useGetMerkl();
+const EnclapsMerklWrapper = ({ children }: EnclapsMerklWrapperProps) => {
+  const _ = useGetMerkl();
 
-    return children;
+  return children;
 };
 
 export default EnclapsMerklWrapper;

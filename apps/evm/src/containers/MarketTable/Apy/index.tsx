@@ -1,18 +1,28 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { Icon, LabeledInlineContent, LabeledInlineContentProps, LayeredValues, Tooltip } from 'components';
-import useFormatPercentageToReadableValue from 'hooks/useFormatPercentageToReadableValue';
-import { useGetToken } from 'libs/tokens';
-import type { Asset, AssetDistribution, PrimeDistribution, PrimeSimulationDistribution } from 'types';
-import { cn, formatPercentageToReadableValue, getCombinedDistributionApys } from 'utilities';
+import {
+  Icon,
+  LabeledInlineContent,
+  LabeledInlineContentProps,
+  LayeredValues,
+  Tooltip,
+} from "components";
+import useFormatPercentageToReadableValue from "hooks/useFormatPercentageToReadableValue";
+import type {
+  Asset,
+  AssetDistribution,
+  PrimeDistribution,
+  PrimeSimulationDistribution,
+} from "types";
+import {
+  cn,
+  formatPercentageToReadableValue,
+  getCombinedDistributionApys,
+} from "utilities";
 
-import type { ColumnKey } from '../types';
-import { ApyWithPrimeBoost } from './ApyWithPrimeBoost';
-import { ApyWithPrimeSimulationBoost } from './ApyWithPrimeSimulationBoost';
-import { Link } from 'react-router-dom';
-import { t } from 'i18next';
-import BigNumber from "bignumber.js";
-import getMerklRewardApy from "../../../utilities/getMerklRewardsApy";
+import type { ColumnKey } from "../types";
+import { t } from "i18next";
+import useGetMerkl from "../../../clients/api/queries/getMerkl/useGetMerkl";
 
 export interface ApyProps {
   asset: Asset;
@@ -21,15 +31,25 @@ export interface ApyProps {
   classNameBottomValue?: string;
 }
 
-export const Apy: React.FC<ApyProps> = ({ asset, column, className, classNameBottomValue }) => {
-  const type = column === 'supplyApyLtv' || column === 'labeledSupplyApyLtv' ? 'supply' : 'borrow';
+export const Apy: React.FC<ApyProps> = ({
+  asset,
+  column,
+  className,
+  classNameBottomValue,
+}) => {
+  const type =
+    column === "supplyApyLtv" || column === "labeledSupplyApyLtv"
+      ? "supply"
+      : "borrow";
 
   // const xvs = useGetToken({
   //   symbol: 'XVS',
   // });
-  const combinedDistributionApys = useMemo(() => getCombinedDistributionApys({ asset }), [asset]);
-
-  const merklDistributionApy = getMerklRewardApy({tokenAddress: asset.vToken.underlyingToken.address, liquidityType: type === 'borrow' ? 'BORROW' : 'LEND'});
+  const { data: merkl } = useGetMerkl();
+  const combinedDistributionApys = useMemo(
+    () => getCombinedDistributionApys({ asset, merkl }),
+    [asset, merkl]
+  );
 
   const { primeDistribution, primeSimulationDistribution } = useMemo(() => {
     const result: {
@@ -37,12 +57,13 @@ export const Apy: React.FC<ApyProps> = ({ asset, column, className, classNameBot
       primeDistribution?: PrimeDistribution;
     } = {};
 
-    const distributions = type === 'borrow' ? asset.borrowDistributions : asset.supplyDistributions;
+    const distributions =
+      type === "borrow" ? asset.borrowDistributions : asset.supplyDistributions;
 
-    distributions.forEach(distribution => {
-      if (distribution.type === 'prime') {
+    distributions.forEach((distribution) => {
+      if (distribution.type === "prime") {
         result.primeDistribution = distribution;
-      } else if (distribution.type === 'primeSimulation') {
+      } else if (distribution.type === "primeSimulation") {
         result.primeSimulationDistribution = distribution;
       }
     });
@@ -50,14 +71,14 @@ export const Apy: React.FC<ApyProps> = ({ asset, column, className, classNameBot
     return result;
   }, [asset.borrowDistributions, asset.supplyDistributions, type]);
 
-  let apyPercentage =
-    type === 'borrow'
-      ? asset.borrowApyPercentage.minus(combinedDistributionApys.totalBorrowApyPercentage)
-      : asset.supplyApyPercentage.plus(combinedDistributionApys.totalSupplyApyPercentage);
-
-  if (!!merklDistributionApy.merklApy) {
-    apyPercentage = apyPercentage.plus(merklDistributionApy.merklApy);
-  }
+  const apyPercentage =
+    type === "borrow"
+      ? asset.borrowApyPercentage.minus(
+          combinedDistributionApys.totalBorrowApyPercentage
+        )
+      : asset.supplyApyPercentage.plus(
+          combinedDistributionApys.totalSupplyApyPercentage
+        );
 
   const readableApy = useFormatPercentageToReadableValue({
     value: apyPercentage,
@@ -104,104 +125,101 @@ export const Apy: React.FC<ApyProps> = ({ asset, column, className, classNameBot
   // No Prime boost or Prime boost simulation to display
 
   const supplyBorrowApyRow: LabeledInlineContentProps = {
-    label: type === 'supply'
-      ? t('assetInfo.supplyApy')
-      : t('assetInfo.borrowApy'),
+    label:
+      type === "supply" ? t("assetInfo.supplyApy") : t("assetInfo.borrowApy"),
     iconSrc: asset.vToken.underlyingToken,
     children: formatPercentageToReadableValue(
-      type === 'supply'
-        ? asset.supplyApyPercentage
-        : asset.borrowApyPercentage,
+      type === "supply" ? asset.supplyApyPercentage : asset.borrowApyPercentage
     ),
     invertTextColors: true,
   };
 
-  const distributions : AssetDistribution[] = type === 'supply'
-      ? asset.supplyDistributions
-      : asset.borrowDistributions
-
-  if (!!merklDistributionApy) {
-    distributions.push({
-      apyPercentage: new BigNumber(merklDistributionApy.merklApy),
-      dailyDistributedTokens: new BigNumber(merklDistributionApy.dailyRewards),
-      token: asset.vToken.underlyingToken,
-      type: "merkl"
-    })
-  }
+  const distributions: AssetDistribution[] =
+    type === "supply" ? asset.supplyDistributions : asset.borrowDistributions;
 
   const distributionApyRows: LabeledInlineContentProps[] = distributions
-    .filter(d => d.apyPercentage.toString() > "0")
-    .map((distribution) =>
-    ({
-      label: t(distribution.type === "merkl" ? 'assetInfo.merklApy' : 'assetInfo.distributionApy', {
-        tokenSymbol: distribution.token.symbol
-      }),
+    .filter((d) => d.apyPercentage.toString() > "0")
+    .map((distribution) => ({
+      label: t(
+        distribution.type === "merkl"
+          ? "assetInfo.merklApy"
+          : "assetInfo.distributionApy",
+        {
+          tokenSymbol: distribution.token.symbol,
+        }
+      ),
       iconSrc: distribution.token,
       invertTextColors: true,
       children: formatPercentageToReadableValue(distribution.apyPercentage),
-      disclaimer : distribution.type === "merkl" &&
-          <div className="text-grey text-sm">Rewards from this external program can be claimed through their <a
-              target="_blank" rel="noreferrer" href="https://app.merkl.xyz/" className="text-blue hover:underline">official
-            app</a>. The Enclabs protocol does not guarantee them and accepts no liability.</div>
+      disclaimer: distribution.type === "merkl" && (
+        <div className="text-grey text-sm">
+          Rewards from this external program can be claimed through their{" "}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://app.merkl.xyz/"
+            className="text-blue hover:underline"
+          >
+            official app
+          </a>
+          . The Enclabs protocol does not guarantee them and accepts no
+          liability.
+        </div>
+      ),
     }));
 
   // Display supply APY
-  if (type === 'supply') {
-    
-    return (
-      distributionApyRows.length > 0 ? (
-        <Tooltip
-          title={
-            <div>
-              <LabeledInlineContent {...supplyBorrowApyRow} />
-              {distributionApyRows.map((row, index) => (
-                <LabeledInlineContent key={index} {...row} />
-              ))}
-            </div>
-          }
-        >
-          <div className='flex justify-start lg:justify-end gap-[5px]' >
-            <Icon name="distribution"/>
-            <LayeredValues 
-              className={cn(className, 'text-[#00C38E]')}
-              classNameBottomValue={classNameBottomValue}
-              topValue={readableApy}
-              bottomValue={readableLtv}
-              />
-            </div>
-        </Tooltip>
-      ) : (
-        <LayeredValues
-          className={className}
-          classNameBottomValue={classNameBottomValue}
-          topValue={readableApy}
-          bottomValue={readableLtv}
-        />
-      )
-    )
+
+  if (type === "supply") {
+    return distributionApyRows.length > 0 ? (
+      <Tooltip
+        title={
+          <div>
+            <LabeledInlineContent {...supplyBorrowApyRow} />
+            {distributionApyRows.map((row, index) => (
+              <LabeledInlineContent key={index} {...row} />
+            ))}
+          </div>
+        }
+      >
+        <div className="flex justify-start lg:justify-end gap-[5px]">
+          <Icon name="distribution" />
+          <LayeredValues
+            className={cn(className, "text-[#00C38E]")}
+            classNameBottomValue={classNameBottomValue}
+            topValue={readableApy}
+            bottomValue={readableLtv}
+          />
+        </div>
+      </Tooltip>
+    ) : (
+      <LayeredValues
+        className={className}
+        classNameBottomValue={classNameBottomValue}
+        topValue={readableApy}
+        bottomValue={readableLtv}
+      />
+    );
   }
 
   // Display borrow APY
-  return (
-    
-    distributionApyRows.length > 0 ? (
-            <Tooltip
-                title={
-                  <div>
-                    <LabeledInlineContent {...supplyBorrowApyRow} />
-                    {distributionApyRows.map((row, index) => (
-                        <LabeledInlineContent key={index} {...row} />
-                    ))}
-                  </div>
-                }
-            >
-              <div className='flex justify-start lg:justify-end gap-[5px]' >
-                <Icon name="distribution"/>
-                <span className={cn(className, 'text-[#00C38E]')}>{readableApy}</span>
-              </div>
-            </Tooltip>
-    ) : (
-      <span className={className}>{readableApy}</span>
-    )
-  )
+  return distributionApyRows.length > 0 ? (
+    <Tooltip
+      title={
+        <div>
+          <LabeledInlineContent {...supplyBorrowApyRow} />
+          {distributionApyRows.map((row, index) => (
+            <LabeledInlineContent key={index} {...row} />
+          ))}
+        </div>
+      }
+    >
+      <div className="flex justify-start lg:justify-end gap-[5px]">
+        <Icon name="distribution" />
+        <span className={cn(className, "text-[#00C38E]")}>{readableApy}</span>
+      </div>
+    </Tooltip>
+  ) : (
+    <span className={className}>{readableApy}</span>
+  );
 };

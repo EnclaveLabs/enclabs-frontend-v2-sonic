@@ -1,4 +1,4 @@
-import BigNumber from 'bignumber.js';
+import BigNumber from "bignumber.js";
 import {
   Accordion,
   Icon,
@@ -6,16 +6,17 @@ import {
   type LabeledInlineContentProps,
   Tooltip,
   ValueUpdate,
-} from 'components';
-import { useGetHypotheticalUserPrimeApys } from 'hooks/useGetHypotheticalUserPrimeApys';
-import { useTranslation } from 'libs/translations';
-import { useMemo } from 'react';
-import type { Asset, Swap, TokenAction } from 'types';
+} from "components";
+import { useGetHypotheticalUserPrimeApys } from "hooks/useGetHypotheticalUserPrimeApys";
+import { useTranslation } from "libs/translations";
+import { useMemo } from "react";
+import type { Asset, Swap, TokenAction } from "types";
 import {
   formatPercentageToReadableValue,
   getCombinedDistributionApys,
   getSwapToTokenAmountReceivedTokens,
-} from 'utilities';
+} from "utilities";
+import useGetMerkl from "../../../../../clients/api/queries/getMerkl/useGetMerkl";
 
 export interface AssetInfoProps {
   asset: Asset;
@@ -23,7 +24,7 @@ export interface AssetInfoProps {
   amountTokens?: BigNumber;
   isUsingSwap?: boolean;
   swap?: Swap;
-  renderType?: 'block' | 'accordion';
+  renderType?: "block" | "accordion";
 }
 
 export const AssetInfo: React.FC<AssetInfoProps> = ({
@@ -32,15 +33,15 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
   swap,
   isUsingSwap = false,
   amountTokens = new BigNumber(0),
-  renderType = 'block',
+  renderType = "block",
 }) => {
   const { t } = useTranslation();
 
   const toTokenAmountTokens = useMemo(() => {
     if (isUsingSwap) {
       return (
-        getSwapToTokenAmountReceivedTokens(swap)?.swapToTokenAmountReceivedTokens ??
-        new BigNumber(0)
+        getSwapToTokenAmountReceivedTokens(swap)
+          ?.swapToTokenAmountReceivedTokens ?? new BigNumber(0)
       );
     }
 
@@ -54,33 +55,37 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
   });
 
   const { totalBorrowApyPercentage, totalSupplyApyPercentage } = useMemo(() => {
+    const { data: merkl } = useGetMerkl();
     const combinedDistributionApys = getCombinedDistributionApys({
       asset,
+      merkl,
     });
 
     let tempTotalDistributionBorrowApyPercentage =
       combinedDistributionApys.totalBorrowApyPercentage;
 
     if (hypotheticalUserPrimeApys.borrowApy) {
-      tempTotalDistributionBorrowApyPercentage = tempTotalDistributionBorrowApyPercentage
-        .minus(combinedDistributionApys.borrowApyPrimePercentage || 0)
-        .plus(hypotheticalUserPrimeApys.borrowApy);
+      tempTotalDistributionBorrowApyPercentage =
+        tempTotalDistributionBorrowApyPercentage
+          .minus(combinedDistributionApys.borrowApyPrimePercentage || 0)
+          .plus(hypotheticalUserPrimeApys.borrowApy);
     }
 
     let tempTotalDistributionSupplyApyPercentage =
       combinedDistributionApys.totalSupplyApyPercentage;
     if (hypotheticalUserPrimeApys.supplyApy) {
-      tempTotalDistributionSupplyApyPercentage = tempTotalDistributionSupplyApyPercentage
-        .minus(combinedDistributionApys.supplyApyPrimePercentage || 0)
-        .plus(hypotheticalUserPrimeApys.supplyApy);
+      tempTotalDistributionSupplyApyPercentage =
+        tempTotalDistributionSupplyApyPercentage
+          .minus(combinedDistributionApys.supplyApyPrimePercentage || 0)
+          .plus(hypotheticalUserPrimeApys.supplyApy);
     }
 
     return {
       totalBorrowApyPercentage: asset.borrowApyPercentage.minus(
-        tempTotalDistributionBorrowApyPercentage,
+        tempTotalDistributionBorrowApyPercentage
       ),
       totalSupplyApyPercentage: asset.supplyApyPercentage.plus(
-        tempTotalDistributionSupplyApyPercentage,
+        tempTotalDistributionSupplyApyPercentage
       ),
     };
   }, [asset, hypotheticalUserPrimeApys]);
@@ -89,35 +94,38 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
     const apyBreakdownRows: LabeledInlineContentProps[] = [
       {
         label:
-          action === 'borrow' || action === 'repay'
-            ? t('assetInfo.borrowApy')
-            : t('assetInfo.supplyApy'),
+          action === "borrow" || action === "repay"
+            ? t("assetInfo.borrowApy")
+            : t("assetInfo.supplyApy"),
         iconSrc: asset.vToken.underlyingToken,
         children: formatPercentageToReadableValue(
-          action === 'borrow' || action === 'repay'
+          action === "borrow" || action === "repay"
             ? asset.borrowApyPercentage
-            : asset.supplyApyPercentage,
+            : asset.supplyApyPercentage
         ),
       },
     ];
 
     const distributionRows = (
-      action === 'borrow' || action === 'repay'
+      action === "borrow" || action === "repay"
         ? asset.borrowDistributions
         : asset.supplyDistributions
     )
-      .filter(distribution => distribution.type !== 'primeSimulation')
+      .filter((distribution) => distribution.type !== "primeSimulation")
       .reduce<LabeledInlineContentProps[]>((acc, distribution) => {
-        if (distribution.type !== 'prime' && distribution.apyPercentage.isEqualTo(0)) {
+        if (
+          distribution.type !== "prime" &&
+          distribution.apyPercentage.isEqualTo(0)
+        ) {
           return acc;
         }
 
         const children =
-          distribution.type === 'prime' ? (
+          distribution.type === "prime" ? (
             <ValueUpdate
               original={distribution.apyPercentage}
               update={
-                action === 'borrow' || action === 'repay'
+                action === "borrow" || action === "repay"
                   ? hypotheticalUserPrimeApys.borrowApy
                   : hypotheticalUserPrimeApys.supplyApy
               }
@@ -129,13 +137,20 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
 
         const row: LabeledInlineContentProps = {
           label:
-            distribution.type === 'prime'
-              ? t('assetInfo.primeApy', { tokenSymbol: distribution.token.symbol })
-              : t('assetInfo.distributionApy', { tokenSymbol: distribution.token.symbol }),
+            distribution.type === "prime"
+              ? t("assetInfo.primeApy", {
+                  tokenSymbol: distribution.token.symbol,
+                })
+              : t(
+                  distribution.type === "merkl"
+                    ? "assetInfo.merklApy"
+                    : "assetInfo.distributionApy",
+                  { tokenSymbol: distribution.token.symbol }
+                ),
           iconSrc: distribution.token,
           tooltip:
-            distribution.type === 'rewardDistributor'
-              ? t('assetInfo.distributionTooltip')
+            distribution.type === "rewardDistributor"
+              ? t("assetInfo.distributionTooltip")
               : undefined,
           children,
         };
@@ -146,25 +161,25 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
     return apyBreakdownRows.concat(distributionRows);
   }, [asset, action, t, hypotheticalUserPrimeApys]);
 
-  if (renderType === 'block') {
+  if (renderType === "block") {
     return (
       <div className="space-y-2">
-        {rows.map(row => (
+        {rows.map((row) => (
           <LabeledInlineContent {...row} key={row.label} />
         ))}
 
         <LabeledInlineContent
           tooltip={
-            action === 'borrow' || action === 'repay'
-              ? t('assetInfo.totalApy.borrowApyTooltip')
-              : t('assetInfo.totalApy.supplyApyTooltip')
+            action === "borrow" || action === "repay"
+              ? t("assetInfo.totalApy.borrowApyTooltip")
+              : t("assetInfo.totalApy.supplyApyTooltip")
           }
-          label={t('assetInfo.totalApy.label')}
+          label={t("assetInfo.totalApy.label")}
         >
           {formatPercentageToReadableValue(
-            action === 'borrow' || action === 'repay'
+            action === "borrow" || action === "repay"
               ? totalBorrowApyPercentage
-              : totalSupplyApyPercentage,
+              : totalSupplyApyPercentage
           )}
         </LabeledInlineContent>
       </div>
@@ -175,14 +190,16 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
     <Accordion
       title={
         <div className="flex items-center gap-x-2">
-          <p className="text-sm md:text-base text-lightBlack">{t('assetInfo.totalApy.label')}</p>
+          <p className="text-sm md:text-base text-lightBlack">
+            {t("assetInfo.totalApy.label")}
+          </p>
 
           <Tooltip
             className="inline-flex items-center"
             title={
-              action === 'borrow' || action === 'repay'
-                ? t('assetInfo.totalApy.borrowApyTooltip')
-                : t('assetInfo.totalApy.supplyApyTooltip')
+              action === "borrow" || action === "repay"
+                ? t("assetInfo.totalApy.borrowApyTooltip")
+                : t("assetInfo.totalApy.supplyApyTooltip")
             }
           >
             <Icon className="cursor-help" name="info" />
@@ -190,13 +207,13 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
         </div>
       }
       rightLabel={formatPercentageToReadableValue(
-        action === 'borrow' || action === 'repay'
+        action === "borrow" || action === "repay"
           ? totalBorrowApyPercentage
-          : totalSupplyApyPercentage,
+          : totalSupplyApyPercentage
       )}
     >
       <div className="space-y-2">
-        {rows.map(row => (
+        {rows.map((row) => (
           <LabeledInlineContent {...row} key={row.label} />
         ))}
       </div>
