@@ -40,6 +40,7 @@
     "@hookform/resolvers": "^3.3.2",
     "@lauriys/react-palette": "^1.0.5",
     "@lifi/widget": "^3.12.2",
+    "@merkl/api": "^0.20.174",
     "@mui/material": "^5.4.2",
     "@mui/utils": "^5.4.2",
     "@pancakeswap/sdk": "^3.1.0",

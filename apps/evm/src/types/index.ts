@@ -80,6 +80,13 @@ export interface PrimeDistribution {
   apyPercentage: BigNumber;
 }
 
+export interface MerklDistribution {
+  type: 'merkl';
+  token: Token;
+  apyPercentage: BigNumber;
+  dailyDistributedTokens: BigNumber;
+}
+
 export interface PrimeSimulationDistribution {
   type: 'primeSimulation';
   token: Token;
@@ -94,6 +101,7 @@ export interface PrimeSimulationDistribution {
 export type AssetDistribution =
   | RewardDistributorDistribution
   | PrimeDistribution
+  | MerklDistribution
   | PrimeSimulationDistribution;
 
 export interface Asset {
