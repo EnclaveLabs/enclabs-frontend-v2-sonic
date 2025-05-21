@@ -23,6 +23,7 @@ import {
 import type { ColumnKey } from "../types";
 import { t } from "i18next";
 import useGetMerkl from "../../../clients/api/queries/getMerkl/useGetMerkl";
+import { Link } from 'containers/Link';
 
 export interface ApyProps {
   asset: Asset;
@@ -153,16 +154,10 @@ export const Apy: React.FC<ApyProps> = ({
       children: formatPercentageToReadableValue(distribution.apyPercentage),
       disclaimer: distribution.type === "merkl" && (
         <div className="text-grey text-sm">
-          Rewards from this external program can be claimed through their{" "}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://app.merkl.xyz/"
-            className="text-blue hover:underline"
-          >
-            official app
-          </a>
-          . The Enclabs protocol does not guarantee them and accepts no
+          Rewards from this external program can be claimed through {" "}
+          <p>Learn more about this point program: <Link target="_blank" href="https://app.merkl.xyz/" onClick={e => e.stopPropagation()} className="text-white hover:underline">Merkl official app.</Link></p>
+       
+          Enclabs protocol does not guarantee them and accepts no
           liability.
         </div>
       ),

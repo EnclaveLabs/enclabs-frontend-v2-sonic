@@ -31,7 +31,7 @@ export const Points = ({ text }: PointsProps) => {
           title={ 
           <div className="space-y-2">
             <p>{point.tooltiptext}</p>
-            <p>Learn more about this point program: <Link target="_blank" href={point.tooltipLink} onClick={e => e.stopPropagation()}>here</Link></p>
+            <p>Learn more about this point program: <Link target="_blank" href={point.tooltipLink} onClick={e => e.stopPropagation()} className="text-white hover:underline">here</Link></p>
             </div>
           }
           className="inline-flex"
