@@ -58,8 +58,8 @@ export const pointTypeInfo: {
 } = {
     sonicRingsPointsEligibleAddressesX1_5: {
         logo: ringsLogo,
-        multiplier: "x1.5",
-        tooltiptext: "36 Rings Points / $ value / day",
+        multiplier: "x1",
+        tooltiptext: "24 Rings Points / $ value / day",
         tooltipLink: "https://app.rings.money/#/points",
     },
     enclabsPointsX1: {

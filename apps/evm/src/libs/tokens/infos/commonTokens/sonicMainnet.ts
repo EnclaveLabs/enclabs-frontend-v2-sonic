@@ -17,6 +17,7 @@ import pendlePTscUSDLogo from 'libs/tokens/img/PendlePTscUSD.svg';
 import spectraPTscETHLogo from 'libs/tokens/img/spectraPTscETH.svg';
 import wstEthLogo from 'libs/tokens/img/wstEth.svg';
 import PTweETH26JUN2025Logo from 'libs/tokens/img/PTweETH26JUN2025Logo.svg';
+import xUSDLogo from 'libs/tokens/img/xusd.svg';
 import xvsLogo from 'libs/tokens/img/xvs.svg';
 import scusdstablejackytLogo from 'libs/tokens/img/jack-yt-scusd.svg';
 import type { Token } from 'types';
@@ -86,6 +87,12 @@ export const tokens: Token[] = [
     symbol: 'wOS',
     asset: wOSLogo,
   },
+  {
+    address: '0x6202B9f02E30E5e1c62Cc01E4305450E5d83b926',
+    decimals: 6,
+    symbol: 'xUSD',
+    asset: xUSDLogo,
+  },
   // {
   //   address: '0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38',
   //   decimals: 8,
@@ -102,7 +109,7 @@ export const tokens: Token[] = [
   {
     address: '0x29219dd400f2bf60e5a23d13be72b486d4038894',
     decimals: 6,
-    symbol: 'USDC.e',
+    symbol: 'USDC',
     asset: usdcLogo,
   },
   // {

@@ -20,6 +20,7 @@ export const pointType = {
         "0xe544e51bf20ab186b6b7b1a9095c8bc1e3f203f5", //sts core
         "0x2df4dC7cf362E56e128816BE0f1F4CEb07904Bb0", //PT pendle wstkscusd
         "0xAb1fbEE94D9ba79269B3e479cE5D78C60F148716", //YT scusd stablejack
+        "0x13d79435F306D155CA2b9Af77234c84f80506045", //xusd core
 
     ],
     enclabsPointsX2: [
@@ -81,8 +82,8 @@ export const pointTypeInfo: {
 } = {
     sonicRingsPointsEligibleAddressesX1_5: {
         logo: ringsLogo,
-        multiplier: "x1.5",
-        tooltiptext: "36 Rings Points / $ value / day",
+        multiplier: "x1",
+        tooltiptext: "24 Rings Points / $ value / day",
         tooltipLink: "https://app.rings.money/#/points",
     },
     enclabsPointsX1: {

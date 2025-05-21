@@ -27,8 +27,13 @@ export const tokenType = {
     ],
     Stable: [
         "0x29219dd400f2bf60e5a23d13be72b486d4038894", // USDC.e
-        "0xd3DCe716f3eF535C5Ff8d041c1A41C3bd89b97aE" //scUSD
+        "0xd3DCe716f3eF535C5Ff8d041c1A41C3bd89b97aE", //scUSD
     ],
+    "Yield bearing Stable": [
+       
+        "0x6202b9f02e30e5e1c62cc01e4305450e5d83b926" //xUSD
+      ],
+  
 };
 
 export const tokenTypeInfo: {
@@ -109,6 +114,16 @@ export const tokenTypeInfo: {
         hoverColor: theme.colors.hoverRed,
         buttonClassName: 'bg-tagTextRed bg-tagTextRed border-tagTextRed hover:border-tagTextRed hover:bg-hoverRed text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverRed',
+        getUrl:  (tokenAddress: string, chain: string) => 
+            `swap`,
+    },
+    "Yield bearing Stable": {
+        color: theme.colors.tagTextBlue, // Blue
+        borderColor: theme.colors.tagTextBlue,
+        backgroundColor: theme.colors.tagBgBlue,
+        hoverColor: theme.colors.hoverBlue,
+        buttonClassName: 'bg-tagTextBlue bg-tagTextBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
+        shadowClassName: 'shadow-md shadow-hoverBlue',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
