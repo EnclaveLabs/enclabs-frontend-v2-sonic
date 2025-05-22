@@ -15,7 +15,7 @@ const getMerklDistributions = ({
   merkl,
   asset,
 }: getMerklDistributionsInput): getMerklDistributionsOutput => {
-  const underlyingTokenAddress = asset.vToken.underlyingToken.address;
+  const tokenAddress = asset.vToken.address;
   const merklBorrowInfos = merkl?.data?.find((m) => m.action === "BORROW");
   const merklSupplyInfos = merkl?.data?.find((m) => m.action === "LEND");
   let supplyDistribution: MerklDistribution | undefined;
@@ -24,14 +24,14 @@ const getMerklDistributions = ({
   const borrowMatch = merklBorrowInfos?.tokens.find((mToken) => {
     return (
       merklBorrowInfos.status === "LIVE" && // remove this to test code
-      mToken.address.toLowerCase() === underlyingTokenAddress.toLowerCase()
+      mToken.address.toLowerCase() === tokenAddress.toLowerCase()
     );
   });
 
   const supplyMatch = merklSupplyInfos?.tokens.find((mToken) => {
     return (
       merklSupplyInfos.status === "LIVE" && // remove this to test code
-      mToken.address.toLowerCase() === underlyingTokenAddress.toLowerCase()
+      mToken.address.toLowerCase() === tokenAddress.toLowerCase()
     );
   });
 
