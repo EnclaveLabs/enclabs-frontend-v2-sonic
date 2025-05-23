@@ -18,6 +18,7 @@ export const pointType = {
            //'0xd1e8ec6eaed325006731f816f41fd5483373a8f2', //PTscusd spectrapool
            //"0xBFF8cf17b04A057D9A8Ce5796a85c60D1F614eaB", //PTsceth spectrapool
            "0x8bC35Aee955E2D05C13e4Ff503294676508668B5", //sceth spectrapool"
+           '0x6fFD0B54E2B74FdaFBceC853145372066FE98fC1', //eurc core
         
 
     ],

@@ -20,6 +20,7 @@ import PTweETH26JUN2025Logo from 'libs/tokens/img/PTweETH26JUN2025Logo.svg';
 import xUSDLogo from 'libs/tokens/img/xusd.svg';
 import xvsLogo from 'libs/tokens/img/xvs.svg';
 import scusdstablejackytLogo from 'libs/tokens/img/jack-yt-scusd.svg';
+import EURClogo from 'libs/tokens/img/EURC.svg';
 import type { Token } from 'types';
 
 const ethToken: Token = {
@@ -111,6 +112,12 @@ export const tokens: Token[] = [
     decimals: 6,
     symbol: 'USDC',
     asset: usdcLogo,
+  },
+  {
+    address: '0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57',
+    decimals: 6,
+    symbol: 'EURC',
+    asset: EURClogo,
   },
   // {
   //   address: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',

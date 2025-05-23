@@ -154,11 +154,7 @@ export const Apy: React.FC<ApyProps> = ({
       children: formatPercentageToReadableValue(distribution.apyPercentage),
       disclaimer: distribution.type === "merkl" && (
         <div className="text-grey text-sm">
-          Rewards from this external program can be claimed through {" "}
-          <p>Learn more about this point program: <Link target="_blank" href="https://app.merkl.xyz/" onClick={e => e.stopPropagation()} className="text-white hover:underline">Merkl official app.</Link></p>
-       
-          Enclabs protocol does not guarantee them and accepts no
-          liability.
+          <p>Rewards from this external program can be claimed through {" "} <Link target="_blank" href="https://app.merkl.xyz/" onClick={e => e.stopPropagation()} className="text-white hover:underline">Merkl official app.</Link></p>
         </div>
       ),
     }));

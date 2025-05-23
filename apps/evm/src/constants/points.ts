@@ -46,6 +46,7 @@ export const pointType = {
         "0x7D47cBf5FE9cCF2F99D0C2E8a3c59FB3498bc21b", //scusd spectra pool
         "0x8bC35Aee955E2D05C13e4Ff503294676508668B5", //sceth spectrapool
         '0x876e062420fb9a4861968ec2e0ff91be88142343', // ws slst
+        '0x6fFD0B54E2B74FdaFBceC853145372066FE98fC1', //eurc core
     ],
 
 
