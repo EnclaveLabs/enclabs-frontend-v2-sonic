@@ -24,7 +24,7 @@ export const calculateYearlyPercentageRate = ({
   }
 
   let apy = compound
-    ? ((formattedDailyRate + 1) ** DAYS_PER_YEAR - 1) * 108
+    ? ((formattedDailyRate + 1) ** DAYS_PER_YEAR - 1) * 104
     : formattedDailyRate * DAYS_PER_YEAR * 98;
 
   if (apy > MAX_VALUE) {

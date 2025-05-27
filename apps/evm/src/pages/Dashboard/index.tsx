@@ -76,7 +76,7 @@ const Dashboard: React.FC = () => {
           ['supply', 
             'borrow', 
             'liquidity', 
-            'treasury', 
+            //'treasury', 
             // 'dailyXvsDistribution', 
             'assetCount'
           ]}
