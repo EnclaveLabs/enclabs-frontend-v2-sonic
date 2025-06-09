@@ -6,7 +6,7 @@ const { DEFAULT_POINT_THRESHOLD,
   MARKETS_REWARDS_CONFIGURATIONS
 } = require('./pointsConstants');
 
-const GRAPHQL_URL = 'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest';
+const GRAPHQL_URL = 'https://gateway.thegraph.com/api/subgraphs/id/Ha7WNTEk2U1MvMUVMmmv8e7uZxJUYY4n8r57iJHYyYcJ';
 const sb = createClients(process.env.DB_URL, process.env.DB_API_KEY)
 
 type Account = {
@@ -81,7 +81,9 @@ async function fetchGraphData() {
 
   const response = await fetch(GRAPHQL_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.SUBGRAPH_API_KEY}`
+     },
     body: JSON.stringify({ query: graphQuery })
   });
 
