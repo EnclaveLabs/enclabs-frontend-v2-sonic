@@ -40,13 +40,13 @@ const useGetChartData = ({
         supplyChartData.push({
           apyPercentage: +marketSnapshot.supplyApy,
           timestampMs,
-          balanceCents: new BigNumber(marketSnapshot.totalSupplyCents),
+          balanceCents: new BigNumber(marketSnapshot.totalSupplyCents).times(100),
         });
 
         borrowChartData.push({
           apyPercentage: +marketSnapshot.borrowApy,
           timestampMs,
-          balanceCents: new BigNumber(marketSnapshot.totalBorrowCents),
+          balanceCents: new BigNumber(marketSnapshot.totalBorrowCents).times(100),
         });
 
         liquidityChartData.push({
