@@ -9,6 +9,7 @@ import {
   SelectTokenTextField,
   SpendingLimit,
   TokenTextField,
+  Tooltip, Icon
 } from 'components';
 import { AccountData } from 'containers/AccountData';
 import useFormatTokensToReadableValue from 'hooks/useFormatTokensToReadableValue';
@@ -313,6 +314,11 @@ export const RepayFormUi: React.FC<RepayFormUiProps> = ({
               {isUsingSwap
                 ? readableFromTokenUserWalletBalanceTokens
                 : readableRepayableFromTokenAmountTokens}
+               <Tooltip className="ml-2 inline-flex items-center" title={isUsingSwap
+                ? fromTokenUserWalletBalanceTokens.toString()
+                : repayableAmountTokens.toString() }>
+                  <Icon className="cursor-help" name="info" />
+                </Tooltip>
             </LabeledInlineContent>
 
             <SpendingLimit

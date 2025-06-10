@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useBorrow } from 'clients/api';
-import { Delimiter, LabeledInlineContent, Toggle, TokenTextField } from 'components';
+import { Delimiter, LabeledInlineContent, Toggle, TokenTextField, Tooltip, Icon, type IconName  } from 'components';
 import { SAFE_BORROW_LIMIT_PERCENTAGE } from 'constants/safeBorrowLimitPercentage';
 import { AccountData } from 'containers/AccountData';
 import useDelegateApproval from 'hooks/useDelegateApproval';
@@ -178,7 +178,10 @@ export const BorrowFormUi: React.FC<BorrowFormUiProps> = ({
           )}
 
           <LabeledInlineContent label={t('operationForm.borrowableAmount')}>
-            {readableLimit}
+            {readableLimit}  
+            <Tooltip className="ml-2 inline-flex items-center" title={limitTokens.toString()}>
+                <Icon className="cursor-help" name="info" />
+            </Tooltip>
           </LabeledInlineContent>
 
           <Delimiter />

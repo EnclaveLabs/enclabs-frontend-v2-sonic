@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useGetVTokenBalanceOf, useWithdraw } from 'clients/api';
-import { Delimiter, LabeledInlineContent, Toggle, TokenTextField } from 'components';
+import { Delimiter, LabeledInlineContent, Toggle, TokenTextField, Tooltip, Icon } from 'components';
 import { AccountData } from 'containers/AccountData';
 import useDelegateApproval from 'hooks/useDelegateApproval';
 import useFormatTokensToReadableValue from 'hooks/useFormatTokensToReadableValue';
@@ -177,6 +177,9 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
         <>
           <LabeledInlineContent label={t('operationForm.withdrawableAmount')}>
             {readableWithdrawableAmountTokens}
+             <Tooltip className="ml-2 inline-flex items-center" title={limitTokens.toString()}>
+                  <Icon className="cursor-help" name="info" />
+              </Tooltip>
           </LabeledInlineContent>
 
           <Delimiter />

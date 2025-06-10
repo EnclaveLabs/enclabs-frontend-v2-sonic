@@ -9,7 +9,7 @@ import {
   SelectTokenTextField,
   SpendingLimit,
   Toggle,
-  TokenTextField,
+  TokenTextField, Tooltip, Icon
 } from 'components';
 import { AccountData } from 'containers/AccountData';
 import { Link } from 'containers/Link';
@@ -334,6 +334,11 @@ export const SupplyFormUi: React.FC<SupplyFormUiProps> = ({
               {isUsingSwap
                 ? readableFromTokenUserWalletBalanceTokens
                 : readableSuppliableFromTokenAmountTokens}
+                 <Tooltip className="ml-2 inline-flex items-center" title={isUsingSwap
+                  ? fromTokenUserWalletBalanceTokens.toString()
+                  : suppliableFromTokenAmountTokens.toString() }>
+                    <Icon className="cursor-help" name="info" />
+                  </Tooltip>
             </LabeledInlineContent>
 
             <SpendingLimit
