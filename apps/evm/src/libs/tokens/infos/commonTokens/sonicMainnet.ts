@@ -21,6 +21,7 @@ import xUSDLogo from 'libs/tokens/img/xusd.svg';
 import xvsLogo from 'libs/tokens/img/xvs.svg';
 import scusdstablejackytLogo from 'libs/tokens/img/jack-yt-scusd.svg';
 import EURClogo from 'libs/tokens/img/EURC.svg';
+import wmetaUSDlogo from 'libs/tokens/img/wmetaUSD.svg';
 import type { Token } from 'types';
 
 const ethToken: Token = {
@@ -118,6 +119,12 @@ export const tokens: Token[] = [
     decimals: 6,
     symbol: 'EURC',
     asset: EURClogo,
+  },
+  {
+    address: '0xAaAaaAAac311D0572Bffb4772fe985A750E88805',
+    decimals: 18,
+    symbol: 'wmetaUSD (Stability)',
+    asset: wmetaUSDlogo,
   },
   // {
   //   address: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
