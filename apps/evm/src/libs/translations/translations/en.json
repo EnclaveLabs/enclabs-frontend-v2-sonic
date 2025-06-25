@@ -151,6 +151,7 @@
     "governance": "Governance",
     "isolatedPools": "Isolated pools",
     "rewards": "Rewards",
+    "veusd": "veUSD",
     "leaderboard": "Leaderboard",
     "lidoMarket": "Lido market",
     "markets": "Markets",
@@ -365,6 +366,7 @@
       "governance": "Governance",
       "isolatedPools": "Isolated pools",
       "lidoMarket": "Lido market",
+      "veusd": "veUSD",
       "swap": "Swap",
       "vai": "VAI",
       "vaults": "Vaults",
@@ -1289,8 +1291,8 @@
     },
     "withdrawTabTitle": "Withdraw"
   },
-  "rewards":{
-    "table":{
+  "rewards": {
+    "table": {
       "rank": "Rank",
       "address": "Address",
       "points": "Supply Points",

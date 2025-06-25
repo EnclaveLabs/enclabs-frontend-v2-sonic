@@ -1,20 +1,22 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { routes } from 'constants/routing';
-import { useIsFeatureEnabled } from 'hooks/useIsFeatureEnabled';
-import { useAccountAddress } from 'libs/wallet';
+import { routes } from "constants/routing";
+import { useIsFeatureEnabled } from "hooks/useIsFeatureEnabled";
+import { useAccountAddress } from "libs/wallet";
 
-import { useGetChainMetadata } from 'hooks/useGetChainMetadata';
-import type { MenuItem } from './types';
+import { useGetChainMetadata } from "hooks/useGetChainMetadata";
+import type { MenuItem } from "./types";
 
 const useGetMenuItems = () => {
   const { accountAddress } = useAccountAddress();
   const { lstPoolComptrollerContractAddress, lstPoolVWstEthContractAddress } =
     useGetChainMetadata();
-  const swapRouteEnabled = useIsFeatureEnabled({ name: 'swapRoute' });
-  const vaiRouteEnabled = useIsFeatureEnabled({ name: 'vaiRoute' });
-  const bridgeRouteEnabled = useIsFeatureEnabled({ name: 'bridgeRoute' });
-  const isolatedPoolsRouteEnabled = useIsFeatureEnabled({ name: 'isolatedPools' });
+  const swapRouteEnabled = useIsFeatureEnabled({ name: "swapRoute" });
+  const vaiRouteEnabled = useIsFeatureEnabled({ name: "vaiRoute" });
+  const bridgeRouteEnabled = useIsFeatureEnabled({ name: "bridgeRoute" });
+  const isolatedPoolsRouteEnabled = useIsFeatureEnabled({
+    name: "isolatedPools",
+  });
 
   return useMemo(() => {
     const menuItems: MenuItem[] = [
@@ -22,8 +24,8 @@ const useGetMenuItems = () => {
         to: routes.dashboard.path,
         // Translation key: do not remove this comment
         // t('layout.menuItems.dashboard')
-        i18nKey: 'layout.menuItems.dashboard',
-        iconName: 'dashboard',
+        i18nKey: "layout.menuItems.dashboard",
+        iconName: "dashboard",
       },
     ];
 
@@ -33,8 +35,8 @@ const useGetMenuItems = () => {
         to: routes.account.path,
         // Translation key: do not remove this comment
         // t('layout.menuItems.account')
-        i18nKey: 'layout.menuItems.account',
-        iconName: 'person',
+        i18nKey: "layout.menuItems.account",
+        iconName: "person",
       });
 
       if (isolatedPoolsRouteEnabled) {
@@ -42,8 +44,8 @@ const useGetMenuItems = () => {
           to: routes.isolatedPools.path,
           // Translation key: do not remove this comment
           // t('layout.menuItems.isolatedPools')
-          i18nKey: 'layout.menuItems.isolatedPools',
-          iconName: 'fourDots',
+          i18nKey: "layout.menuItems.isolatedPools",
+          iconName: "fourDots",
         });
       }
 
@@ -51,16 +53,24 @@ const useGetMenuItems = () => {
         to: routes.rewards.path,
         // Translation key: do not remove this comment
         // t('layout.menuItems.account')
-        i18nKey: 'layout.menuItems.rewards',
-        iconName: 'rewards',
+        i18nKey: "layout.menuItems.rewards",
+        iconName: "rewards",
       });
 
       menuItems.push({
         to: routes.swapodos.path,
         // Translation key: do not remove this comment
         // t('layout.menuItems.account')
-        i18nKey: 'layout.menuItems.swap',
-        iconName: 'convert',
+        i18nKey: "layout.menuItems.swap",
+        iconName: "convert",
+      });
+
+      menuItems.push({
+        to: routes.veUSD.path,
+        // Translation key: do not remove this comment
+        // t('layout.menuItems.account')
+        i18nKey: "layout.menuItems.veusd",
+        iconName: "treeve",
       });
     }
 
