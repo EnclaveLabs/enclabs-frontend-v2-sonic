@@ -22,6 +22,7 @@ import xvsLogo from 'libs/tokens/img/xvs.svg';
 import scusdstablejackytLogo from 'libs/tokens/img/jack-yt-scusd.svg';
 import EURClogo from 'libs/tokens/img/EURC.svg';
 import wmetaUSDlogo from 'libs/tokens/img/wmetaUSD.svg';
+import enclabsVeUSDLogo from 'libs/tokens/img/veEnclabs-scUSD.svg';
 import type { Token } from 'types';
 
 const ethToken: Token = {
@@ -65,6 +66,13 @@ export const tokens: Token[] = [
     symbol: 'scUSD',
     asset: scUSDLogo,
   },
+  {
+    address: '0x57203A8AeC5C03Dd48050CD599DeB24Ba669aD95',
+    decimals: 6,
+    symbol: 'Enclabs Trevee veUSD',
+    asset: enclabsVeUSDLogo,
+  },
+  
   {
     address: '0x7002383d2305b8f3b2b7786f50c13d132a22076d',
     decimals: 6,
