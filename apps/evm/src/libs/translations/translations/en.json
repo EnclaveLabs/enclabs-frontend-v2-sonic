@@ -374,9 +374,9 @@
     },
     "testEnvWarning": "This is a test environment. Do not interact with it for any purpose other than testing. <Link>Go to the official Venus Protocol website</Link>"
   },
-  "legacyPool": {
-    "description": "Enclabs’ primary pool is composed of large-cap tokens that meet minimum liquidity requirements.",
-    "name": "Core Pool"
+  "veusd": {
+    "deposit": "Deposit",
+    "withdraw": "Withdraw"
   },
   "markdownEditor": {
     "markdownTabLabel": "Write",
