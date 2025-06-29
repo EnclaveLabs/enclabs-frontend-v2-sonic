@@ -48,7 +48,9 @@ export const pointType = {
     "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", // scUSD_Core
     "0x7d47cbf5fe9ccf2f99d0c2e8a3c59fb3498bc21b", // scUSD_SpectraPTscUSDPool
   ],
-  SonicPointsX5: [],
+  SonicPointsX5: [
+    "0x1D801dC616C79c499C5d38c998Ef2D0D6Cf868e8", //wmetausd
+  ],
   SonicPointsX6: [
     "0xc96a4cd13c8fcb9886de0cdf7152b9f930d67e96", // wS_Core
     "0x876e062420fb9a4861968ec2e0ff91be88142343", // wS_LiquidStakedS
