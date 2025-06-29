@@ -82,6 +82,7 @@ import venusProtocolOptimismSepoliaDeployments from "@venusprotocol/venus-protoc
 import venusProtocolSepoliaDeployments from "@venusprotocol/venus-protocol/deployments/sepolia_addresses.json";
 import venusProtocolZkSyncMainnetDeployments from "@venusprotocol/venus-protocol/deployments/zksyncmainnet_addresses.json";
 import venusProtocolZkSyncSepoliaDeployments from "@venusprotocol/venus-protocol/deployments/zksyncsepolia_addresses.json";
+
 import type { ContractInterface } from "ethers";
 
 import { ChainId } from "types";
@@ -96,6 +97,7 @@ import EnclabsTreveeVeManagerAbi from "./abis/sonic/EnclabsTreveeVeManager.json"
 import EnclabsTreveeVeUSDAbi from "./abis/sonic/EnclabsTreveeVeUSD.json";
 import TreveeVeUSDAbi from "./abis/sonic/TreveeVeUSD.json";
 import VTokenVenclabsVeUSDCoreAbi from "./abis/sonic/VToken_venclabs_VeUSD_Core.json";
+import ERC721 from "./abis/sonic/ERC721.json";
 
 export interface UniqueContractConfig {
   name: string;
@@ -550,6 +552,10 @@ export const contracts: ContractConfig[] = [
     },
   },
   // Generic Contracts
+  {
+    name: "ERC721",
+    abi: ERC721,
+  },
   {
     name: "IsolatedPoolComptroller",
     abi: IsolatedPoolComptrollerAbi,

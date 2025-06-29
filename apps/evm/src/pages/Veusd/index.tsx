@@ -3,10 +3,14 @@ import { Card, Page, TabContent, Tabs } from "components";
 import { useStyles } from "../VoterLeaderboard/styles";
 import { cn } from "../../utilities";
 import { useTranslation } from "react-i18next";
+import { useGetTreveeVeUSDContract } from "../../libs/contracts";
 
 const VeUSD: React.FC = () => {
   const styles = useStyles();
   const { t } = useTranslation();
+  const TreveeVeUSD = useGetTreveeVeUSDContract({
+    passSigner: true,
+  });
 
   const tabsContent: TabContent[] = [
     {
