@@ -1,39 +1,43 @@
 import { type QueryObserverOptions, useQuery } from "@tanstack/react-query";
 
 import {
-  getBalanceOf,
-  type GetBalanceOfInput,
-  type GetBalanceOfOutput,
+  getNftBalanceOf,
+  type GetNftBalanceOfInput,
+  type GetNftBalanceOfOutput,
 } from "clients/api";
 import FunctionKey from "constants/functionKey";
 import { useChainId, useProvider } from "libs/wallet";
 import type { ChainId, NFT } from "types";
 import { callOrThrow } from "utilities";
 
-type TrimmedGetBalanceOfInput = Omit<GetBalanceOfInput, "signer" | "provider">;
+type TrimmedGetNftBalanceOfInput = Omit<
+  GetNftBalanceOfInput,
+  "signer" | "provider"
+>;
 
-export type UseGetBalanceOfQueryKey = [
-  FunctionKey.GET_BALANCE_OF,
-  Omit<TrimmedGetBalanceOfInput, "token"> & {
-    tokenAddress: string;
+export type UseNftGetBalanceOfQueryKey = [
+  FunctionKey.GET_NFT_BALANCE_OF,
+  {
+    accountAddress: string;
+    nftAddress: string;
     chainId: ChainId;
   }
 ];
 
 type Options = QueryObserverOptions<
-  GetBalanceOfOutput,
+  GetNftBalanceOfOutput,
   Error,
-  GetBalanceOfOutput,
-  GetBalanceOfOutput,
-  UseGetBalanceOfQueryKey
+  GetNftBalanceOfOutput,
+  GetNftBalanceOfOutput,
+  UseNftGetBalanceOfQueryKey
 >;
 
 interface UseNFTGetBalanceOfInput
-  extends Omit<TrimmedGetBalanceOfInput, "token"> {
+  extends Omit<TrimmedGetNftBalanceOfInput, "nft"> {
   nft?: NFT;
 }
 
-const useNFTGetBalanceOf = (
+const useNftGetBalanceOf = (
   { accountAddress, nft }: UseNFTGetBalanceOfInput,
   options?: Partial<Options>
 ) => {
@@ -42,17 +46,17 @@ const useNFTGetBalanceOf = (
 
   return useQuery({
     queryKey: [
-      FunctionKey.GET_BALANCE_OF,
+      FunctionKey.GET_NFT_BALANCE_OF,
       {
         chainId,
         accountAddress,
-        tokenAddress: token?.address || "",
+        nftAddress: nft?.address || "",
       },
     ],
 
     queryFn: () =>
-      callOrThrow({ token }, (params) =>
-        getBalanceOf({
+      callOrThrow({ nft }, (params) =>
+        getNftBalanceOf({
           provider,
           accountAddress,
           ...params,
@@ -63,4 +67,4 @@ const useNFTGetBalanceOf = (
   });
 };
 
-export default useNFTGetBalanceOf;
+export default useNftGetBalanceOf;

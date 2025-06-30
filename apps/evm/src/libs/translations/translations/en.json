@@ -375,8 +375,13 @@
     "testEnvWarning": "This is a test environment. Do not interact with it for any purpose other than testing. <Link>Go to the official Venus Protocol website</Link>"
   },
   "veusd": {
-    "deposit": "Deposit",
-    "withdraw": "Withdraw"
+    "wrap": "Wrap",
+    "unwrap": "Unwrap",
+    "dashboard": {
+      "scUsdBalance": "scUSD Balance",
+      "veUsdBalance": "veUSD Balance",
+      "enclabsVeUsdBalance": "Enclabs veUSD Balance"
+    }
   },
   "markdownEditor": {
     "markdownTabLabel": "Write",
