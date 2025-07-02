@@ -51,13 +51,15 @@ const VeUSD: React.FC = () => {
           veUsdBalance={veUsdBalance?.balance}
           enclabsVeUsdBalance={enclabsVeUsdBalance?.balance}
         />
-        <Card
-          className={cn(
-            "w-auto shrink-0 overflow-x-auto lg:order-2 lg:sticky lg:w-[400px] lg:top-6 lg:max-h-[calc(100vh-48px)]"
-          )}
-        >
-          <Tabs tabsContent={tabsContent} initialActiveTabIndex={0} />
-        </Card>
+        <div className={"mt-4 flex justify-center"}>
+          <Card
+            className={cn(
+              "w-auto shrink-0 overflow-x-auto lg:order-2 lg:sticky lg:w-[400px] lg:top-6 lg:max-h-[calc(100vh-48px)]"
+            )}
+          >
+            <Tabs tabsContent={tabsContent} initialActiveTabIndex={0} />
+          </Card>
+        </div>
       </div>
     </Page>
   );

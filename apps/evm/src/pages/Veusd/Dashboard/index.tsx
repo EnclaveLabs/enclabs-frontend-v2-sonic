@@ -81,5 +81,11 @@ export const VeUSDDashboard: React.FC<VeUSDDashboardProps> = ({
     []
   );
 
-  return <CellGroup cells={cells} {...otherProps} />;
+  return (
+    <CellGroup
+      className={"xl:shadow-lg xl:rounded-xl"}
+      cells={cells}
+      {...otherProps}
+    />
+  );
 };
