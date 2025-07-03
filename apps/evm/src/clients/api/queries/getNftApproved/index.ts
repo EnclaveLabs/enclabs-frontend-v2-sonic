@@ -1,10 +1,9 @@
 import type { Provider } from "libs/wallet";
 import type { NFT } from "types";
 import { getNFTContract } from "../../../../libs/contracts/utilities/getNFTContract";
-import BigNumber from "bignumber.js";
 
 export interface GetNftApprovedInput {
-  tokenId: BigNumber;
+  tokenId: string;
   nft: NFT;
   provider: Provider;
 }

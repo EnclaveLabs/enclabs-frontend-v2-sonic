@@ -1,7 +1,9 @@
 import {
+  useApproveNft,
   useGetVeUsdTokenOfOwnerByIndex,
   useGetVeUsdTokenVoted,
   useNftGetApproved,
+  useResetVeNft,
 } from "../../../clients/api";
 import { ChainId } from "types";
 import useGetVeUsdTokenLocked from "../../../clients/api/queries/getVeUsdTokenLocked/useGetVeUsdTokenLocked";
@@ -11,6 +13,7 @@ import {
   Delimiter,
   Icon,
   LabeledInlineContent,
+  Spinner,
   Tooltip,
 } from "../../../components";
 import { Card } from "@mui/material";
@@ -20,6 +23,7 @@ import useConvertMantissaToReadableTokenString from "../../../hooks/useConvertMa
 import Checked from "../../../components/Icon/icons/checked";
 import Close from "../../../components/Icon/icons/close";
 import { useGetEnclabsTreveeVeManagerContractAddress } from "../../../libs/contracts";
+import { useGetVeNFT } from "../../../libs/venfts";
 
 interface VeUsdListItemInfoProps {
   tokenId: BigNumber;
@@ -33,29 +37,58 @@ interface VeUsdListItemProps {
 }
 
 interface VeUsdListItemActionsProps {
+  tokenId: BigNumber;
   isNftApprovedForManager: boolean;
   isVoted: boolean;
 }
 
 const VeUsdListItemActions: React.FC<VeUsdListItemActionsProps> = ({
+  tokenId,
   isNftApprovedForManager,
   isVoted,
 }) => {
   const needToBeReset = isVoted;
   const actionText = isNftApprovedForManager ? "Wrap" : "Approve and wrap";
+  const veUSD = useGetVeNFT({ symbol: "veUSD" })!;
+  const { mutateAsync: resetVeNft, isPending: isResetVeNftLoading } =
+    useResetVeNft({ tokenId });
+  const { mutateAsync: approveVeUsd, isPending: isApproveVeUsdLoading } =
+    useApproveNft({ nft: veUSD });
+  const enclabsVeManagerContractAddress =
+    useGetEnclabsTreveeVeManagerContractAddress();
 
   return (
     <div className={"flex mt-4 gap-x-4"}>
       {needToBeReset ? (
-        <Button
-          variant="secondary"
-          className="h-auto flex flex-grow"
-          onClick={() => {}}
-        >
-          Reset
-        </Button>
+        <div className={"flex items-center flex-grow"}>
+          <Button
+            variant="secondary"
+            loading={isResetVeNftLoading}
+            className="h-auto flex flex-grow"
+            onClick={() => resetVeNft({ tokenId: tokenId.toString() })}
+          >
+            Reset
+          </Button>
+          <Tooltip
+            className={"ml-2 flex-shrink"}
+            title={
+              "If your VeUSD has been used to vote, you need to reset it first before wrapping it."
+            }
+          >
+            <Icon className="cursor-help" name="info" size={"24"} />
+          </Tooltip>
+        </div>
       ) : (
-        <Button className="h-auto flex flex-grow" onClick={() => {}}>
+        <Button
+          className="h-auto flex flex-grow"
+          loading={isApproveVeUsdLoading}
+          onClick={() =>
+            approveVeUsd({
+              approvedAddress: enclabsVeManagerContractAddress || "",
+              tokenId: tokenId.toString(),
+            })
+          }
+        >
           {actionText}
         </Button>
       )}
@@ -87,12 +120,12 @@ const VeUsdListItemInfos: React.FC<VeUsdListItemInfoProps> = ({
     token: scUSD,
   });
   const { data: approvedAddress } = useNftGetApproved({
-    tokenId,
+    tokenId: tokenId.toString(),
     nft: scUSD,
   });
   const enclabsVeManagerAddress = useGetEnclabsTreveeVeManagerContractAddress();
 
-  if (!VeUsdLockedData) return <></>;
+  if (!VeUsdLockedData) return <Spinner />;
 
   const isNftApprovedForManager = approvedAddress === enclabsVeManagerAddress;
 
@@ -156,7 +189,11 @@ const VeUsdListItemInfos: React.FC<VeUsdListItemInfoProps> = ({
 
       <Delimiter />
 
-      <VeUsdListItemActions />
+      <VeUsdListItemActions
+        tokenId={tokenId}
+        isNftApprovedForManager={isNftApprovedForManager}
+        isVoted={!!VeUsdIsVoted?.isVoted}
+      />
     </Card>
   ) : (
     <></>

@@ -22,11 +22,13 @@ export const VeUsdWrap: React.FC<VeUsdWrapProps> = ({ balance }) => {
   const balanceAsNb = balance.toNumber();
 
   return Array.from({ length: balanceAsNb }, (_, i) => i).map((tokenIndex) => (
-    <VeUsdListItem
-      key={tokenIndex}
-      tokenIndex={tokenIndex}
-      accountAddress={`${accountAddress}`}
-      chainId={chainId}
-    />
+    <div className={"flex flex-col gap-y-4"}>
+      <VeUsdListItem
+        key={tokenIndex}
+        tokenIndex={tokenIndex}
+        accountAddress={`${accountAddress}`}
+        chainId={chainId}
+      />
+    </div>
   ));
 };

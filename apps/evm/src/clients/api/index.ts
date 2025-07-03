@@ -21,6 +21,10 @@ export { default as approveToken } from "./mutations/approveToken";
 export * from "./mutations/approveToken";
 export { default as useApproveToken } from "./mutations/approveToken/useApproveToken";
 
+export { default as approveNft } from "./mutations/approveNft";
+export * from "./mutations/approveNft";
+export { default as useApproveNft } from "./mutations/approveNft/useApproveNft";
+
 export { default as revokeSpendingLimit } from "./mutations/revokeSpendingLimit";
 export * from "./mutations/revokeSpendingLimit";
 export { default as useRevokeSpendingLimit } from "./mutations/revokeSpendingLimit/useRevokeSpendingLimit";
@@ -123,6 +127,10 @@ export { default as useBridgeXvs } from "./mutations/bridgeXvs/useBridgeXvs";
 export { default as updatePoolDelegateStatus } from "./mutations/updatePoolDelegateStatus";
 export * from "./mutations/updatePoolDelegateStatus";
 export { default as useUpdatePoolDelegateStatus } from "./mutations/updatePoolDelegateStatus/useUpdatePoolDelegateStatus";
+
+export { default as resetVeNft } from "./mutations/resetVeNft";
+export * from "./mutations/resetVeNft";
+export { default as useResetVeNft } from "./mutations/resetVeNft/useResetVeNft";
 
 // Queries
 export { default as getVaiCalculateRepayAmount } from "./queries/getVaiCalculateRepayAmount";

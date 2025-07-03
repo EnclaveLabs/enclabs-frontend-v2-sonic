@@ -15,9 +15,9 @@ type TrimmedGetNftApprovedInput = Omit<
 >;
 
 export type UseNftGetApprovedQueryKey = [
-  FunctionKey.GET_NFT_APPROVED,
+  FunctionKey.GET_NFT_ALLOWANCE,
   {
-    accountAddress: string;
+    tokenId: string;
     nftAddress: string;
     chainId: ChainId;
   }
@@ -37,7 +37,7 @@ interface UseNFTGetApprovedInput
 }
 
 const useNftGetApproved = (
-  { accountAddress, nft }: UseNFTGetApprovedInput,
+  { tokenId, nft }: UseNFTGetApprovedInput,
   options?: Partial<Options>
 ) => {
   const { provider } = useProvider();
@@ -45,10 +45,10 @@ const useNftGetApproved = (
 
   return useQuery({
     queryKey: [
-      FunctionKey.GET_NFT_APPROVED,
+      FunctionKey.GET_NFT_ALLOWANCE,
       {
         chainId,
-        accountAddress,
+        tokenId,
         nftAddress: nft?.address || "",
       },
     ],
@@ -57,7 +57,7 @@ const useNftGetApproved = (
       callOrThrow({ nft }, (params) =>
         getNftApproved({
           provider,
-          accountAddress,
+          tokenId,
           ...params,
         })
       ),

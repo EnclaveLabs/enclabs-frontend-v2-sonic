@@ -2,7 +2,7 @@ import { Card, Page, TabContent, Tabs } from "components";
 import { useStyles } from "../VoterLeaderboard/styles";
 import { cn } from "../../utilities";
 import { useTranslation } from "react-i18next";
-import { useAccountAddress, useChainId } from "../../libs/wallet";
+import { useAccountAddress } from "../../libs/wallet";
 import { useGetBalanceOf, useNftGetBalanceOf } from "../../clients/api";
 import { useGetVeNFT } from "../../libs/venfts";
 import { useGetToken } from "../../libs/tokens";
@@ -13,11 +13,10 @@ import { VeUsdUnwrap } from "./Unwrap";
 const VeUSD: React.FC = () => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const { chainId } = useChainId();
   const { accountAddress } = useAccountAddress();
-  const scUSD = useGetToken({ chainId, symbol: "scUSD" });
-  const veUSD = useGetVeNFT({ chainId, symbol: "veUSD" });
-  const enclabsVeUsd = useGetVeNFT({ chainId, symbol: "Enclabs_veUSD" });
+  const scUSD = useGetToken({ symbol: "scUSD" });
+  const veUSD = useGetVeNFT({ symbol: "veUSD" });
+  const enclabsVeUsd = useGetVeNFT({ symbol: "Enclabs_veUSD" });
 
   const { data: scUsdBalance } = useGetBalanceOf({
     accountAddress: `${accountAddress}`,

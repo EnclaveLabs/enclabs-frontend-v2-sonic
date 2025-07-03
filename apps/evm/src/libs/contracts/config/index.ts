@@ -96,6 +96,7 @@ import ZyFiVaultAbi from "./externalAbis/ZyFiVault.json";
 import EnclabsTreveeVeManagerAbi from "./abis/sonic/EnclabsTreveeVeManager.json";
 import EnclabsTreveeVeUSDAbi from "./abis/sonic/EnclabsTreveeVeUSD.json";
 import TreveeVeUSDAbi from "./abis/sonic/TreveeVeUSD.json";
+import TreveeVeUsdAbiVoter from "./abis/sonic/TreveeVeUsdVoter.json";
 import VTokenVenclabsVeUSDCoreAbi from "./abis/sonic/VToken_venclabs_VeUSD_Core.json";
 import ERC721 from "./abis/sonic/ERC721.json";
 
@@ -542,6 +543,13 @@ export const contracts: ContractConfig[] = [
     abi: TreveeVeUSDAbi,
     address: {
       [ChainId.SONIC_MAINNET]: "0x0966cae7338518961c2d35493d3eb481a75bb86b",
+    },
+  },
+  {
+    name: "TreveeVeUSDVoter",
+    abi: TreveeVeUsdAbiVoter,
+    address: {
+      [ChainId.SONIC_MAINNET]: "0xb84194e28f624bbba3c9181f3a1120ee76469337",
     },
   },
   {
