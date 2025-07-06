@@ -1,27 +1,37 @@
-import { type MutationKey, type MutationObserverOptions, useMutation } from '@tanstack/react-query';
-import type { BaseContract, ContractReceipt } from 'ethers';
+import {
+  type MutationKey,
+  type MutationObserverOptions,
+  useMutation,
+} from "@tanstack/react-query";
+import type { BaseContract, ContractReceipt } from "ethers";
 
-import type { ContractTxData, TransactionType } from 'types';
+import type { ContractTxData, TransactionType } from "types";
 
-import { useGetPaymasterInfo } from 'clients/api';
-import { store as resendPayingGasModalStore } from 'containers/ResendPayingGasModal/store';
-import { useIsFeatureEnabled } from 'hooks/useIsFeatureEnabled';
-import { useUserChainSettings } from 'hooks/useUserChainSettings';
-import { VError } from 'libs/errors';
-import { useChainId, useProvider, useSendContractTransaction } from 'libs/wallet';
-import { CONFIRMATIONS, TIMEOUT_MS } from './constants';
-import { useTrackTransaction } from './useTrackTransaction';
+import { useGetPaymasterInfo } from "clients/api";
+import { store as resendPayingGasModalStore } from "containers/ResendPayingGasModal/store";
+import { useIsFeatureEnabled } from "hooks/useIsFeatureEnabled";
+import { useUserChainSettings } from "hooks/useUserChainSettings";
+import { VError } from "libs/errors";
+import {
+  useChainId,
+  useProvider,
+  useSendContractTransaction,
+} from "libs/wallet";
+import { CONFIRMATIONS, TIMEOUT_MS } from "./constants";
+import { useTrackTransaction } from "./useTrackTransaction";
+import { displayNotification } from "../../libs/notifications";
 
 export interface LastTransactionData<
   TMutateInput extends Record<string, unknown> | void,
   TContract extends BaseContract,
-  TMethodName extends string & keyof TContract['functions'],
+  TMethodName extends string & keyof TContract["functions"]
 > extends UseSendTransactionInput<TMutateInput, TContract, TMethodName> {
   mutationInput: TMutateInput;
 }
 
-export interface UseSendTransactionOptions<TMutateInput extends Record<string, unknown> | void>
-  extends MutationObserverOptions<unknown, Error, TMutateInput> {
+export interface UseSendTransactionOptions<
+  TMutateInput extends Record<string, unknown> | void
+> extends MutationObserverOptions<unknown, Error, TMutateInput> {
   waitForConfirmation?: boolean;
   tryGasless?: boolean;
 }
@@ -29,11 +39,13 @@ export interface UseSendTransactionOptions<TMutateInput extends Record<string, u
 export interface UseSendTransactionInput<
   TMutateInput extends Record<string, unknown> | void,
   TContract extends BaseContract,
-  TMethodName extends string & keyof TContract['functions'],
+  TMethodName extends string & keyof TContract["functions"]
 > {
   fn: (
-    input: TMutateInput,
-  ) => Promise<ContractTxData<TContract, TMethodName>> | ContractTxData<TContract, TMethodName>;
+    input: TMutateInput
+  ) =>
+    | Promise<ContractTxData<TContract, TMethodName>>
+    | ContractTxData<TContract, TMethodName>;
   fnKey: MutationKey;
   transactionType?: TransactionType;
   onConfirmed?: (input: {
@@ -51,32 +63,39 @@ export interface UseSendTransactionInput<
 export const useSendTransaction = <
   TMutateInput extends Record<string, unknown> | void,
   TContract extends BaseContract,
-  TMethodName extends string & keyof TContract['functions'],
+  TMethodName extends string & keyof TContract["functions"]
 >(
-  input: UseSendTransactionInput<TMutateInput, TContract, TMethodName>,
+  input: UseSendTransactionInput<TMutateInput, TContract, TMethodName>
 ) => {
-  const { fn, fnKey, transactionType, onConfirmed, onReverted, options } = input;
+  const { fn, fnKey, transactionType, onConfirmed, onReverted, options } =
+    input;
   const tryGasless = options?.tryGasless ?? true;
 
   const { chainId } = useChainId();
   const { provider } = useProvider();
 
   const { mutateAsync: sendContractTransaction } = useSendContractTransaction();
-  const openResendPayingGasModalStoreModal = resendPayingGasModalStore.use.openModal();
+  const openResendPayingGasModalStoreModal =
+    resendPayingGasModalStore.use.openModal();
 
-  const [{ gaslessTransactions: isGaslessTransactionsSettingEnabled }] = useUserChainSettings();
+  const [{ gaslessTransactions: isGaslessTransactionsSettingEnabled }] =
+    useUserChainSettings();
 
-  const { data: getPaymasterInfo, refetch: refetchPaymasterInfo } = useGetPaymasterInfo(
-    {
-      chainId,
-    },
-    {
-      enabled: tryGasless,
-    },
-  );
-  const paymasterCanSponsorTransactions = !!getPaymasterInfo?.canSponsorTransactions;
+  const { data: getPaymasterInfo, refetch: refetchPaymasterInfo } =
+    useGetPaymasterInfo(
+      {
+        chainId,
+      },
+      {
+        enabled: tryGasless,
+      }
+    );
+  const paymasterCanSponsorTransactions =
+    !!getPaymasterInfo?.canSponsorTransactions;
 
-  const isGaslessTransactionsFeatureEnabled = useIsFeatureEnabled({ name: 'gaslessTransactions' });
+  const isGaslessTransactionsFeatureEnabled = useIsFeatureEnabled({
+    name: "gaslessTransactions",
+  });
   // a transaction should be gas free when:
   // 1) we're on a chain that supports the feature
   // 2) the gaslessTransactions user setting is set to true
@@ -92,7 +111,7 @@ export const useSendTransaction = <
 
   return useMutation({
     mutationKey: fnKey,
-    mutationFn: async mutationInput => {
+    mutationFn: async (mutationInput) => {
       // Get transaction data from the passed input
       const txData = await fn(mutationInput);
 
@@ -105,18 +124,31 @@ export const useSendTransaction = <
       // Track transaction's progress in the background
       trackTransaction({
         transactionHash,
-        onConfirmed: onConfirmedInput =>
+        onConfirmed: (onConfirmedInput) =>
           onConfirmed?.({ ...onConfirmedInput, input: mutationInput }),
-        onReverted: onRevertedInput => onReverted?.({ ...onRevertedInput, input: mutationInput }),
+        onReverted: (onRevertedInput) =>
+          onReverted?.({ ...onRevertedInput, input: mutationInput }),
       });
 
       if (options?.waitForConfirmation) {
         // Only return when transaction has been confirmed
-        await provider.waitForTransaction(transactionHash, CONFIRMATIONS, TIMEOUT_MS);
+        await provider.waitForTransaction(
+          transactionHash,
+          CONFIRMATIONS,
+          TIMEOUT_MS
+        );
       }
     },
     onError: (error, variables, context) => {
-      if (error instanceof VError && error.code === 'gaslessTransactionNotAvailable') {
+      displayNotification({
+        description: "An error occurred while sending the transaction.",
+        autoClose: true,
+        variant: "error",
+      });
+      if (
+        error instanceof VError &&
+        error.code === "gaslessTransactionNotAvailable"
+      ) {
         // Refetch paymaster balance in case it went below threshold
         refetchPaymasterInfo();
 

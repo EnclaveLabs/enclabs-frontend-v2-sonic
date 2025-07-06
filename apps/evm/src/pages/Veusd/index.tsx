@@ -1,4 +1,4 @@
-import { Card, Page, TabContent, Tabs } from "components";
+import { Card, Page, Spinner, TabContent, Tabs } from "components";
 import { useStyles } from "../VoterLeaderboard/styles";
 import { cn } from "../../utilities";
 import { useTranslation } from "react-i18next";
@@ -16,7 +16,7 @@ const VeUSD: React.FC = () => {
   const { accountAddress } = useAccountAddress();
   const scUSD = useGetToken({ symbol: "scUSD" });
   const veUSD = useGetVeNFT({ symbol: "veUSD" });
-  const enclabsVeUsd = useGetVeNFT({ symbol: "Enclabs_veUSD" });
+  const enclabsVeUsd = useGetToken({ symbol: "Enclabs Trevee veUSD" });
 
   const { data: scUsdBalance } = useGetBalanceOf({
     accountAddress: `${accountAddress}`,
@@ -26,15 +26,19 @@ const VeUSD: React.FC = () => {
     accountAddress: `${accountAddress}`,
     nft: veUSD,
   });
-  const { data: enclabsVeUsdBalance } = useNftGetBalanceOf({
+  const { data: enclabsVeUsdBalance } = useGetBalanceOf({
     accountAddress: `${accountAddress}`,
-    nft: enclabsVeUsd,
+    token: enclabsVeUsd,
   });
 
   const tabsContent: TabContent[] = [
     {
       title: t("veusd.wrap"),
-      content: <VeUsdWrap balance={veUsdBalance?.balance} />,
+      content: (
+        <VeUsdWrap
+          veUsdBalance={veUsdBalance ? veUsdBalance.balance.toString() : "0"}
+        />
+      ),
     },
     {
       title: t("veusd.unwrap"),
@@ -42,13 +46,21 @@ const VeUSD: React.FC = () => {
     },
   ];
 
+  if (!scUsdBalance || !veUsdBalance || !enclabsVeUsdBalance) {
+    return (
+      <div className={"w-full h-full flex justify-center items-center"}>
+        <Spinner variant={"large"} />
+      </div>
+    );
+  }
+
   return (
     <Page indexWithSearchEngines={false}>
       <div css={styles.root}>
         <VeUSDDashboardCtn
           scUsdBalance={scUsdBalance?.balanceMantissa}
           veUsdBalance={veUsdBalance?.balance}
-          enclabsVeUsdBalance={enclabsVeUsdBalance?.balance}
+          enclabsVeUsdBalance={enclabsVeUsdBalance?.balanceMantissa}
         />
         <div className={"mt-4 flex justify-center"}>
           <Card

@@ -528,14 +528,14 @@ export const contracts: ContractConfig[] = [
     name: "EnclabsTreveeVeManager",
     abi: EnclabsTreveeVeManagerAbi,
     address: {
-      [ChainId.SONIC_MAINNET]: "0x2438f83294230DC72D291928023935BFC215B391",
+      [ChainId.SONIC_MAINNET]: "0x36d3e0d40dd3d4a86889d4fb0b58b987d33ff855",
     },
   },
   {
     name: "EnclabsTreveeVeUSD",
     abi: EnclabsTreveeVeUSDAbi,
     address: {
-      [ChainId.SONIC_MAINNET]: "0x5b7e8a53c809b2f15135f79145088672d68e08c1",
+      [ChainId.SONIC_MAINNET]: "0xd02962dc00a058a00fc07a8aa9f760ab6d9bd163",
     },
   },
   {

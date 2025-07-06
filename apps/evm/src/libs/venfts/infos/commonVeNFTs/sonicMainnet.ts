@@ -7,9 +7,4 @@ export const venfts: NFT[] = [
     symbol: "veUSD",
     asset: veusd,
   },
-  {
-    address: "0xd02962DC00A058a00Fc07A8AA9F760ab6D9Bd163",
-    symbol: "Enclabs_veUSD",
-    asset: veusd,
-  },
 ];

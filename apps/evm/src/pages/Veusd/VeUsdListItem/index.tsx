@@ -4,6 +4,7 @@ import {
   useGetVeUsdTokenVoted,
   useNftGetApproved,
   useResetVeNft,
+  useWrapVeNft,
 } from "../../../clients/api";
 import { ChainId } from "types";
 import useGetVeUsdTokenLocked from "../../../clients/api/queries/getVeUsdTokenLocked/useGetVeUsdTokenLocked";
@@ -22,7 +23,10 @@ import { getToken } from "../../../libs/tokens";
 import useConvertMantissaToReadableTokenString from "../../../hooks/useConvertMantissaToReadableTokenString";
 import Checked from "../../../components/Icon/icons/checked";
 import Close from "../../../components/Icon/icons/close";
-import { useGetEnclabsTreveeVeManagerContractAddress } from "../../../libs/contracts";
+import {
+  useGetEnclabsTreveeVeManagerContract,
+  useGetEnclabsTreveeVeManagerContractAddress,
+} from "../../../libs/contracts";
 import { useGetVeNFT } from "../../../libs/venfts";
 
 interface VeUsdListItemInfoProps {
@@ -52,10 +56,21 @@ const VeUsdListItemActions: React.FC<VeUsdListItemActionsProps> = ({
   const veUSD = useGetVeNFT({ symbol: "veUSD" })!;
   const { mutateAsync: resetVeNft, isPending: isResetVeNftLoading } =
     useResetVeNft({ tokenId });
+  const enclabsVeManagerContract = useGetEnclabsTreveeVeManagerContract()!;
+  const { mutateAsync: wrapVeNft, isPending: wrapVeNftLoading } = useWrapVeNft({
+    tokenId: tokenId.toString(),
+  });
   const { mutateAsync: approveVeUsd, isPending: isApproveVeUsdLoading } =
-    useApproveNft({ nft: veUSD });
-  const enclabsVeManagerContractAddress =
-    useGetEnclabsTreveeVeManagerContractAddress();
+    useApproveNft(
+      { nft: veUSD },
+      {
+        onSuccess: () =>
+          wrapVeNft({
+            enclabsTreveeVeManagerContract: enclabsVeManagerContract,
+            tokenId: tokenId.toString(),
+          }),
+      }
+    );
 
   return (
     <div className={"flex mt-4 gap-x-4"}>
@@ -83,10 +98,15 @@ const VeUsdListItemActions: React.FC<VeUsdListItemActionsProps> = ({
           className="h-auto flex flex-grow"
           loading={isApproveVeUsdLoading}
           onClick={() =>
-            approveVeUsd({
-              approvedAddress: enclabsVeManagerContractAddress || "",
-              tokenId: tokenId.toString(),
-            })
+            isNftApprovedForManager
+              ? wrapVeNft({
+                  enclabsTreveeVeManagerContract: enclabsVeManagerContract,
+                  tokenId: tokenId.toString(),
+                })
+              : approveVeUsd({
+                  approvedAddress: enclabsVeManagerContract?.address || "",
+                  tokenId: tokenId.toString(),
+                })
           }
         >
           {actionText}
@@ -111,7 +131,8 @@ const VeUsdListItemInfos: React.FC<VeUsdListItemInfoProps> = ({
 
   const readableTokenId = tokenId.toNumber();
   const scUSD = getToken({ chainId, symbol: "scUSD" });
-
+  const veUSD = useGetVeNFT({ symbol: "veUSD" })!;
+  const enclabsVeUsd = getToken({ chainId, symbol: "Enclabs Trevee veUSD" });
   const endDate = VeUsdLockedData
     ? formatToReadableDate(VeUsdLockedData.end.toNumber() * 1000, "month")
     : "-";
@@ -119,15 +140,28 @@ const VeUsdListItemInfos: React.FC<VeUsdListItemInfoProps> = ({
     value: VeUsdLockedData?.amount,
     token: scUSD,
   });
-  const { data: approvedAddress } = useNftGetApproved({
+  const amountReceived = useConvertMantissaToReadableTokenString({
+    value: VeUsdLockedData?.amount,
+    token: enclabsVeUsd,
+  });
+  const { data: veNftApproval } = useNftGetApproved({
     tokenId: tokenId.toString(),
-    nft: scUSD,
+    nft: veUSD,
   });
   const enclabsVeManagerAddress = useGetEnclabsTreveeVeManagerContractAddress();
 
-  if (!VeUsdLockedData) return <Spinner />;
+  if (!VeUsdLockedData || !veNftApproval) return <Spinner />;
 
-  const isNftApprovedForManager = approvedAddress === enclabsVeManagerAddress;
+  const isNftApprovedForManager =
+    veNftApproval.approvedAddress.toLowerCase() ===
+    enclabsVeManagerAddress.toLowerCase();
+
+  console.log(
+    ">>dd",
+    isNftApprovedForManager,
+    veNftApproval.approvedAddress,
+    enclabsVeManagerAddress
+  );
 
   return VeUsdLockedData ? (
     <Card className={"max-w-[500px] border-lightGrey border rounded-sm"}>
@@ -187,7 +221,15 @@ const VeUsdListItemInfos: React.FC<VeUsdListItemInfoProps> = ({
         </LabeledInlineContent>
       </div>
 
-      <Delimiter />
+      <Delimiter className={"mb-2"} />
+
+      <LabeledInlineContent
+        className="flex-1"
+        label={"Received"}
+        iconSrc={enclabsVeUsd}
+      >
+        <p className={"text-green"}>{amountReceived}</p>
+      </LabeledInlineContent>
 
       <VeUsdListItemActions
         tokenId={tokenId}

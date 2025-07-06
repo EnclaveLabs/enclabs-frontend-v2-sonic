@@ -1,15 +1,15 @@
-import { waitFor } from '@testing-library/react';
-import type Vi from 'vitest';
+import { waitFor } from "@testing-library/react";
+import type Vi from "vitest";
 
-import fakeAddress from '__mocks__/models/address';
-import { poolData } from '__mocks__/models/pools';
-import { renderComponent } from 'testUtils/render';
+import fakeAddress from "__mocks__/models/address";
+import { poolData } from "__mocks__/models/pools";
+import { renderComponent } from "testUtils/render";
 
-import { useGetPools } from 'clients/api';
+import { useGetPools } from "clients/api";
 
-import useGetPool, { type UseGetPoolOutput } from '.';
+import { useGetPool, type UseGetPoolOutput } from ".";
 
-describe('api/queries/useGetPool', () => {
+describe("api/queries/useGetPool", () => {
   beforeEach(() => {
     (useGetPools as Vi.Mock).mockImplementation(() => ({
       data: {
@@ -19,8 +19,8 @@ describe('api/queries/useGetPool', () => {
     }));
   });
 
-  it('returns the correct asset', async () => {
-    let data: Partial<UseGetPoolOutput['data']> = {};
+  it("returns the correct asset", async () => {
+    let data: Partial<UseGetPoolOutput["data"]> = {};
 
     const CallMarketContext = () => {
       ({ data } = useGetPool({
@@ -36,13 +36,13 @@ describe('api/queries/useGetPool', () => {
     expect(data).toMatchSnapshot();
   });
 
-  it('returns undefined when no matching pool is found', async () => {
-    let data: Partial<UseGetPoolOutput['data']> = {};
+  it("returns undefined when no matching pool is found", async () => {
+    let data: Partial<UseGetPoolOutput["data"]> = {};
 
     const CallMarketContext = () => {
       ({ data } = useGetPool({
         accountAddress: fakeAddress,
-        poolComptrollerAddress: 'fake-comptroller-address',
+        poolComptrollerAddress: "fake-comptroller-address",
       }));
       return <div />;
     };

@@ -1,5 +1,6 @@
-import useGetMerkl, {
+import {
   merkl,
+  useGetMerkl,
 } from "../../clients/api/queries/getMerkl/useGetMerkl";
 import { Asset, MerklDistribution } from "../../types";
 

@@ -16,7 +16,7 @@ import {
   getCombinedDistributionApys,
   getSwapToTokenAmountReceivedTokens,
 } from "utilities";
-import useGetMerkl from "../../../../../clients/api/queries/getMerkl/useGetMerkl";
+import { useGetMerkl } from "../../../../../clients/api/queries/getMerkl/useGetMerkl";
 
 export interface AssetInfoProps {
   asset: Asset;

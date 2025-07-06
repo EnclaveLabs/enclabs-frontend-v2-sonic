@@ -25,8 +25,6 @@ export const formatTokensToReadableValue = ({
   roundingMode,
   maxDecimalPlaces = MAX_DECIMALS,
 }: FormatTokensToReadableValueInput) => {
-  console.log(">>", token, value);
-
   if (!token || !value) {
     return PLACEHOLDER_KEY;
   }

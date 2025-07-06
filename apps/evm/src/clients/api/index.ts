@@ -25,6 +25,10 @@ export { default as approveNft } from "./mutations/approveNft";
 export * from "./mutations/approveNft";
 export { default as useApproveNft } from "./mutations/approveNft/useApproveNft";
 
+export { default as wrapVeNft } from "./mutations/wrapVeNft";
+export * from "./mutations/wrapVeNft";
+export { default as useWrapVeNft } from "./mutations/wrapVeNft/useWrapVeNft";
+
 export { default as revokeSpendingLimit } from "./mutations/revokeSpendingLimit";
 export * from "./mutations/revokeSpendingLimit";
 export { default as useRevokeSpendingLimit } from "./mutations/revokeSpendingLimit/useRevokeSpendingLimit";
@@ -44,7 +48,7 @@ export { default as useRepay } from "./mutations/repay/useRepay";
 
 export { default as borrow } from "./mutations/borrow";
 export * from "./mutations/borrow";
-export { default as useBorrow } from "./mutations/borrow/useBorrow";
+export { useBorrow } from "./mutations/borrow/useBorrow";
 
 export { default as withdrawXvs } from "./mutations/withdrawXvs";
 export * from "./mutations/withdrawXvs";
@@ -226,9 +230,9 @@ export { default as useGetAsset } from "./queries/useGetAsset";
 export * from "./queries/getLegacyPool";
 export { default as useGetLegacyPool } from "./queries/getLegacyPool/useGetLegacyPool";
 
-export { default as useGetPools } from "./queries/useGetPools";
+export { useGetPools } from "./queries/useGetPools";
 
-export { default as useGetPool } from "./queries/useGetPool";
+export { useGetPool } from "./queries/useGetPool";
 
 export { default as getIsolatedPools } from "./queries/getIsolatedPools";
 export * from "./queries/getIsolatedPools";

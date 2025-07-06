@@ -36,9 +36,14 @@ export const VeUSDDashboardCtn: React.FC<VeUSDDashboardCtnProps> = ({
 }) => {
   const { chainId } = useChainId();
   const scUsd = useGetToken({ chainId, symbol: "scUSD" });
+  const enclabsVeUsd = useGetToken({ chainId, symbol: "Enclabs Trevee veUSD" });
   const scUsdBalanceReadable = useConvertMantissaToReadableTokenString({
     value: scUsdBalance,
     token: scUsd,
+  });
+  const enclabsVeUsdBalanceReadable = useConvertMantissaToReadableTokenString({
+    value: enclabsVeUsdBalance,
+    token: enclabsVeUsd,
   });
 
   const isFetching = !scUsdBalance || !veUsdBalance || !enclabsVeUsdBalance;
@@ -49,7 +54,7 @@ export const VeUSDDashboardCtn: React.FC<VeUSDDashboardCtnProps> = ({
     <VeUSDDashboard
       scUsdBalance={scUsdBalanceReadable}
       veUsdBalance={veUsdBalance.toString()}
-      enclabsVeUsdBalance={enclabsVeUsdBalance.toString()}
+      enclabsVeUsdBalance={enclabsVeUsdBalanceReadable}
       {...otherProps}
     />
   );

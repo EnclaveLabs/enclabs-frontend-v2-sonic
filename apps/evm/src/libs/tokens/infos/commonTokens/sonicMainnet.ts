@@ -5,8 +5,10 @@ import usdcLogo from "libs/tokens/img/usdc.svg";
 import wethLogo from "libs/tokens/img/weth.svg";
 import stSLogo from "libs/tokens/img/stS.svg";
 import wOSLogo from "libs/tokens/img/wos.svg";
+import veUSDLogo from "libs/tokens/img/veusd.svg";
 import scETHLogo from "libs/tokens/img/sceth.svg";
 import scUSDLogo from "libs/tokens/img/scusd.svg";
+import stkscUSD from "libs/tokens/img/stkscUSD.svg";
 import spectraPTscUSDLogo from "libs/tokens/img/spectraPTscUSDicon.svg";
 import pendlePTscUSDLogo from "libs/tokens/img/PendlePTscUSD.svg";
 import spectraPTscETHLogo from "libs/tokens/img/spectraPTscETH.svg";
@@ -54,13 +56,25 @@ export const tokens: Token[] = [
     asset: scETHLogo,
   },
   {
+    address: "0x0966cae7338518961c2d35493d3eb481a75bb86b",
+    decimals: 0,
+    symbol: "veUSD",
+    asset: veUSDLogo,
+  },
+  {
     address: "0xd3dce716f3ef535c5ff8d041c1a41c3bd89b97ae",
     decimals: 6,
     symbol: "scUSD",
     asset: scUSDLogo,
   },
   {
-    address: "0x57203A8AeC5C03Dd48050CD599DeB24Ba669aD95",
+    address: "0x4d85ba8c3918359c78ed09581e5bc7578ba932ba",
+    decimals: 6,
+    symbol: "stkscUSD",
+    asset: stkscUSD,
+  },
+  {
+    address: "0xd02962DC00A058a00Fc07A8AA9F760ab6D9Bd163",
     decimals: 6,
     symbol: "Enclabs Trevee veUSD",
     asset: enclabsVeUSDLogo,
