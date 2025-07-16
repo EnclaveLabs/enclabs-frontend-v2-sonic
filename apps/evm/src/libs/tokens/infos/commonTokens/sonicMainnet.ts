@@ -22,6 +22,7 @@ import xvsLogo from 'libs/tokens/img/xvs.svg';
 import scusdstablejackytLogo from 'libs/tokens/img/jack-yt-scusd.svg';
 import EURClogo from 'libs/tokens/img/EURC.svg';
 import wmetaUSDlogo from 'libs/tokens/img/wmetaUSD.svg';
+import hlp0Logo from 'libs/tokens/img/logoHLP0.svg';
 import type { Token } from 'types';
 
 const ethToken: Token = {
@@ -113,6 +114,12 @@ export const tokens: Token[] = [
     decimals: 6,
     symbol: 'USDC',
     asset: usdcLogo,
+  },
+  {
+    address: '0x3D75F2BB8aBcDBd1e27443cB5CBCE8A668046C81',
+    decimals: 6,
+    symbol: 'HLP0',
+    asset: hlp0Logo,
   },
   {
     address: '0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57',

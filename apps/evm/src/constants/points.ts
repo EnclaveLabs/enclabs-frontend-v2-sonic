@@ -18,6 +18,7 @@ export const pointType = {
     "0xAb1fbEE94D9ba79269B3e479cE5D78C60F148716", //YT scusd stablejack
     "0x13d79435F306D155CA2b9Af77234c84f80506045", //xusd core
     "0x1D801dC616C79c499C5d38c998Ef2D0D6Cf868e8", //wmetausd
+    "0x05C132E75D2775Ca4257FCf824169d99d593eBF1", //hlp0
   ],
   enclabsPointsX2: [],
   enclabsPointsX4: [
