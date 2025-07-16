@@ -29,6 +29,10 @@ export { default as wrapVeNft } from "./mutations/wrapVeNft";
 export * from "./mutations/wrapVeNft";
 export { default as useWrapVeNft } from "./mutations/wrapVeNft/useWrapVeNft";
 
+export { default as unwrapVeNft } from "./mutations/unwrapVeNft";
+export * from "./mutations/unwrapVeNft";
+export { default as useUnwrapVeNft } from "./mutations/unwrapVeNft/useUnwrapVeNft";
+
 export { default as revokeSpendingLimit } from "./mutations/revokeSpendingLimit";
 export * from "./mutations/revokeSpendingLimit";
 export { default as useRevokeSpendingLimit } from "./mutations/revokeSpendingLimit/useRevokeSpendingLimit";

@@ -3,7 +3,7 @@ import type { Bep20, Vai, Vrt, Xvs } from "libs/contracts";
 import type { ContractTxData } from "types";
 
 export interface ApproveTokenInput {
-  nftContract: Vai | Bep20 | Vrt | Xvs;
+  tokenContract: Vai | Bep20 | Vrt | Xvs;
   spenderAddress: string;
   allowance?: string;
 }
@@ -15,8 +15,8 @@ export type ApproveTokenOutput = ContractTxData<
   "approve"
 >;
 
-const approveNft = ({
-  nftContract,
+const approveToken = ({
+  tokenContract,
   spenderAddress,
   allowance = MAX_UINT256.toFixed(),
 }: ApproveTokenInput): ApproveTokenOutput => ({
@@ -25,4 +25,4 @@ const approveNft = ({
   args: [spenderAddress, allowance],
 });
 
-export default approveNft;
+export default approveToken;

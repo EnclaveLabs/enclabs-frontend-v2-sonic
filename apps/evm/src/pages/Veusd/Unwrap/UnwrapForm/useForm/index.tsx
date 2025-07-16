@@ -58,11 +58,6 @@ const useForm = ({
         fromToken: formValues.fromToken,
       });
 
-      // Reset form and close modal on success only
-      setFormValues(() => ({
-        fromToken: token,
-        amountTokens: "",
-      }));
       onSubmitSuccess?.();
     } catch (error) {
       handleError({ error });

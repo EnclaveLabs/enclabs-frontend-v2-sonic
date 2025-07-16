@@ -1,4 +1,4 @@
-import { queryClient, type WrapVeNftInput } from "clients/api";
+import { queryClient } from "clients/api";
 import FunctionKey from "constants/functionKey";
 import {
   useSendTransaction,
@@ -7,17 +7,18 @@ import {
 import { useGetEnclabsTreveeVeManagerContract } from "libs/contracts";
 import { useAccountAddress, useChainId } from "libs/wallet";
 import { callOrThrow } from "utilities";
-import wrapVeNft from "./index";
+import unwrapVeNft, { UnwrapVeNftInput } from "./index";
 import { useGetToken } from "../../../../libs/tokens";
+import BigNumber from "bignumber.js";
 
-type TrimmedWrapVeNftInput = Omit<
-  WrapVeNftInput,
+type TrimmedUnwrapVeNftInput = Omit<
+  UnwrapVeNftInput,
   "enclabsTreveeVeManagerContract"
 >;
-type Options = UseSendTransactionOptions<TrimmedWrapVeNftInput>;
+type Options = UseSendTransactionOptions<TrimmedUnwrapVeNftInput>;
 
 const useWrapVeNft = (
-  { tokenId }: { tokenId: string },
+  { amountMantissa }: { amountMantissa: BigNumber },
   options?: Partial<Options>
 ) => {
   const { chainId } = useChainId();
@@ -26,10 +27,10 @@ const useWrapVeNft = (
   });
 
   return useSendTransaction({
-    fnKey: [FunctionKey.WRAP_VENFT, { tokenId }],
-    fn: (input: TrimmedWrapVeNftInput) =>
+    fnKey: [FunctionKey.UNWRAP_VENFT, { amountMantissa }],
+    fn: (input: TrimmedUnwrapVeNftInput) =>
       callOrThrow({ enclabsTreveeVeManagerContract }, (params) =>
-        wrapVeNft({
+        unwrapVeNft({
           ...input,
           ...params,
         })

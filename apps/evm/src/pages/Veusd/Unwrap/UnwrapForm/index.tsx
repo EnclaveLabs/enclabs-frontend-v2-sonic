@@ -1,18 +1,25 @@
 import BigNumber from "bignumber.js";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { useGetBalanceOf } from "clients/api";
-import { Delimiter, LabeledInlineContent, TokenTextField } from "components";
+import { useGetBalanceOf, useUnwrapVeNft } from "clients/api";
+import {
+  Delimiter,
+  LabeledInlineContent,
+  PrimaryButton,
+  Spinner,
+  TokenTextField,
+} from "components";
 import useFormatTokensToReadableValue from "hooks/useFormatTokensToReadableValue";
 import { VError } from "libs/errors";
 import { useTranslation } from "libs/translations";
 import { useAccountAddress, useChainId } from "libs/wallet";
 import type { Token } from "types";
-
-import { ConnectWallet } from "containers/ConnectWallet";
 import useForm, { type FormValues, type UseFormInput } from "./useForm";
 import { getToken } from "../../../../libs/tokens";
 import { convertMantissaToTokens } from "../../../../utilities";
+import useTokenApproval from "../../../../hooks/useTokenApproval";
+import convertTokensToMantissa from "../../../../utilities/convertTokensToMantissa";
+import { EnclabsTreveeVeManager } from "../../../../libs/contracts";
 
 export interface UnwrapFormUiProps {
   isUserConnected: boolean;
@@ -24,8 +31,6 @@ export interface UnwrapFormUiProps {
   ) => void;
   formValues: FormValues;
   isApproved: boolean | undefined;
-  isApproveLoading: boolean;
-  approveAction: () => Promise<unknown>;
   onSubmitSuccess?: () => void;
   limitTokensMantissa: BigNumber;
 }
@@ -39,8 +44,6 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
   onSubmit,
   isSubmitting,
   isApproved,
-  isApproveLoading,
-  approveAction,
   limitTokensMantissa,
 }) => {
   const { t } = useTranslation();
@@ -60,14 +63,14 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
       convertMantissaToTokens({
         value: limitTokensMantissa,
         token: tokenUsedToUnwrap,
-      }).toString(),
+      }),
     [limitTokensMantissa, tokenUsedToUnwrap]
   );
   const handleRightMaxButtonClick = useCallback(() => {
     // Update field value to correspond to user's wallet balance
     setFormValues((currentFormValues) => ({
       ...currentFormValues,
-      amountTokens: readableUnwrappableAmountLimitReadable,
+      amountTokens: readableUnwrappableAmountLimitReadable.toString(),
     }));
   }, [limitTokensMantissa, setFormValues]);
 
@@ -94,6 +97,9 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
       <TokenTextField
         label={"Enclabs veUSD amount used to unwrap"}
         name="amountTokens"
+        placeholder={`0.00 - ${readableUnwrappableAmountLimitReadable.toFixed(
+          2
+        )}`}
         token={tokenUsedToUnwrap}
         value={formValues.amountTokens}
         onChange={(amountTokens) =>
@@ -119,10 +125,8 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
           ) : undefined
         }
       />
-
-      {isUserConnected ? (
-        <>
-          {/*<LabeledInlineContent label={t("operationForm.UnwrapableAmount")}>
+      <>
+        {/*<LabeledInlineContent label={t("operationForm.UnwrapableAmount")}>
             {readableUnwrapableAmountTokens}
             <Tooltip
               className="ml-2 inline-flex items-center"
@@ -132,47 +136,19 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
             </Tooltip>
           </LabeledInlineContent>*/}
 
-          <Delimiter />
+        <Delimiter />
 
-          <div className="space-y-6">
-            <div className="space-y-4">
-              {/*<AssetInfo
-                asset={asset}
-                action="withdraw"
-                amountTokens={new BigNumber(formValues.amountTokens || 0)}
-                renderType="accordion"
-              />*/}
-
-              <Delimiter />
-
-              {/*<AccountData
-                asset={asset}
-                pool={pool}
-                amountTokens={new BigNumber(formValues.amountTokens || 0)}
-                action="withdraw"
-              />*/}
-            </div>
-
-            {/*<SubmitSection
-              isFormSubmitting={isSubmitting}
-              isFormValid={isFormValid}
-              isDelegateApproved={isDelegateApproved}
-              isDelegateApprovedLoading={isDelegateApprovedLoading}
-              approveDelegateAction={approveDelegateAction}
-              isApproveDelegateLoading={isApproveDelegateLoading}
-              tokenAddress={asset.vToken.underlyingToken.address}
-            />*/}
-          </div>
-        </>
-      ) : (
-        <div className="space-y-6">
-          {/*<AssetInfo asset={asset} action="withdraw" />*/}
-
-          <ConnectWallet buttonVariant="primary">
-            {t("operationForm.connectWalletButtonLabel")}
-          </ConnectWallet>
-        </div>
-      )}
+        <PrimaryButton
+          type="submit"
+          loading={isSubmitting}
+          className={"w-full"}
+          disabled={!isFormValid || isSubmitting}
+        >
+          {isApproved
+            ? `Unwrap ${formValues.amountTokens} veUSD`
+            : `Approve ${formValues.amountTokens} Enclabs veUSD`}
+        </PrimaryButton>
+      </>
     </form>
   );
 };
@@ -181,15 +157,16 @@ export interface UnwrapFormProps {
   tokenUsedToUnwrap: Token;
   limitTokensMantissa: BigNumber;
   onSubmitSuccess?: () => void;
+  enclabsVeManagerContract: EnclabsTreveeVeManager;
 }
 
 const UnwrapForm: React.FC<UnwrapFormProps> = ({
   tokenUsedToUnwrap,
   limitTokensMantissa,
   onSubmitSuccess,
+  enclabsVeManagerContract,
 }) => {
   const { accountAddress } = useAccountAddress();
-
   const initialFormValues: FormValues = useMemo(
     () => ({
       amountTokens: "",
@@ -199,7 +176,19 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({
   );
 
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
-
+  const {
+    approveToken: approveFromToken,
+    isApproveTokenLoading: isApproveFromTokenLoading,
+    isWalletSpendingLimitLoading: isFromTokenWalletSpendingLimitLoading,
+    walletSpendingLimitTokens: fromTokenWalletSpendingLimitTokens,
+    revokeWalletSpendingLimit: revokeFromTokenWalletSpendingLimit,
+    isRevokeWalletSpendingLimitLoading:
+      isRevokeFromTokenWalletSpendingLimitLoading,
+  } = useTokenApproval({
+    token: tokenUsedToUnwrap,
+    spenderAddress: enclabsVeManagerContract.address,
+    accountAddress,
+  });
   // Reset form when user disconnects their wallet
   useEffect(() => {
     if (!accountAddress) {
@@ -218,6 +207,22 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({
   );
   const vTokenBalanceMantissa = getTokenBalanceData?.balanceMantissa;
 
+  const formTokenAmountMantissa = useMemo(() => {
+    return convertTokensToMantissa({
+      token: tokenUsedToUnwrap,
+      value: new BigNumber(formValues.amountTokens),
+    });
+  }, [formValues.amountTokens]);
+
+  const { mutateAsync: unwrapVeNft, isPending: unwrapVeNftIsLoading } =
+    useUnwrapVeNft(
+      {
+        amountMantissa: formTokenAmountMantissa,
+      },
+      {
+        waitForConfirmation: true,
+      }
+    );
   {
     /*const { mutateAsync: withdraw, isPending: isWithdrawLoading } = useWithdraw({
     poolName: pool.name,
@@ -243,8 +248,20 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({
       });
     }
 
-    return;
-    /*return withdraw({
+    if (isApproved) {
+      return unwrapVeNft({
+        amountMantissa: new BigNumber(formValues.amountTokens),
+      }).then(() => {
+        setFormValues(() => ({
+          fromToken: tokenUsedToUnwrap,
+          amountTokens: "",
+        }));
+      });
+    } else {
+      return approveFromToken(formTokenAmountMantissa.toString());
+    }
+
+    /*{return approveToken({
       withdrawFullSupply,
       unwrap: formValues.receiveNativeToken,
       amountMantissa: withdrawFullSupply
@@ -256,7 +273,18 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({
     });*/
   };
 
-  return (
+  const pageLoading = isFromTokenWalletSpendingLimitLoading;
+
+  const isApproved = useMemo(() => {
+    if (!fromTokenWalletSpendingLimitTokens) return false;
+    return (
+      formValues.amountTokens <= fromTokenWalletSpendingLimitTokens.toString()
+    );
+  }, [formTokenAmountMantissa, fromTokenWalletSpendingLimitTokens]);
+
+  return pageLoading ? (
+    <Spinner />
+  ) : (
     <UnwrapFormUi
       isUserConnected={!!accountAddress}
       onSubmitSuccess={onSubmitSuccess}
@@ -265,10 +293,8 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({
       formValues={formValues}
       setFormValues={setFormValues}
       onSubmit={onSubmit}
-      isSubmitting={false}
-      isApproved={true}
-      isApproveLoading={false}
-      approveAction={() => Promise.resolve()}
+      isSubmitting={isApproveFromTokenLoading || unwrapVeNftIsLoading}
+      isApproved={isApproved}
     />
   );
 };

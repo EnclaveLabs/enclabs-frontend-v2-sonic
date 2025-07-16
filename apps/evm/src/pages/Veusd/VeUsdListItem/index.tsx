@@ -162,13 +162,6 @@ const VeUsdListItemInfos: React.FC<VeUsdListItemInfoProps> = ({
     veNftApproval.approvedAddress.toLowerCase() ===
     (enclabsVeManagerAddress as unknown as string).toLowerCase();
 
-  console.log(
-    ">>dd",
-    isNftApprovedForManager,
-    veNftApproval.approvedAddress,
-    enclabsVeManagerAddress
-  );
-
   return VeUsdLockedData ? (
     <Card className={"max-w-[500px] border-lightGrey border rounded-sm"}>
       <h4 className="font-semibold">#{readableTokenId}</h4>
