@@ -528,7 +528,7 @@ export const contracts: ContractConfig[] = [
     name: "EnclabsTreveeVeManager",
     abi: EnclabsTreveeVeManagerAbi,
     address: {
-      [ChainId.SONIC_MAINNET]: "0x36d3e0d40dd3d4a86889d4fb0b58b987d33ff855",
+      [ChainId.SONIC_MAINNET]: "0x9FbD3988dd9a7A2f1A9c312669f3a4EDA462555C",
     },
   },
   {

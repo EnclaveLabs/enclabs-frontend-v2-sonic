@@ -16,7 +16,7 @@ const VeUSD: React.FC = () => {
   const { accountAddress } = useAccountAddress();
   const scUSD = useGetToken({ symbol: "scUSD" });
   const veUSD = useGetVeNFT({ symbol: "veUSD" });
-  const enclabsVeUsd = useGetToken({ symbol: "Enclabs Trevee veUSD" });
+  const enclabsVeUsd = useGetToken({ symbol: "Enclabs Trevee veUSD" })!;
 
   const { data: scUsdBalance } = useGetBalanceOf({
     accountAddress: `${accountAddress}`,
@@ -42,7 +42,7 @@ const VeUSD: React.FC = () => {
     },
     {
       title: t("veusd.unwrap"),
-      content: <VeUsdUnwrap />,
+      content: <VeUsdUnwrap tokenUsedToUnwrap={enclabsVeUsd} />,
     },
   ];
 

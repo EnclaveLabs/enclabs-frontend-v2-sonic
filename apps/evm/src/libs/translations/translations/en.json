@@ -534,6 +534,7 @@
       "higherThanWalletBalance": "Insufficient {{tokenSymbol}} balance",
       "higherThanWalletSpendingLimit": "You entered an amount that exceeds your spending limit for this asset. Please revoke your spending limit then set a new one in order to proceed with this transaction.",
       "higherThanWithdrawableAmount": "Amount entered higher than withdrawable amount",
+      "higherThanUnwrappableAmount": "Amount entered higher than unwrappable amount",
       "insufficientSwapLiquidity": "Insufficient liquidity in PancakeSwap for this swap",
       "noCollateral": "You need to supply tokens and enable them as collateral before you can borrow {{tokenSymbol}} from this pool",
       "priceImpactTooHigh": "Price impact too high",

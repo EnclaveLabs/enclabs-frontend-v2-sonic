@@ -98,7 +98,7 @@ export const VeUsdWrap: React.FC<VeUsdWrapProps> = ({ veUsdBalance }) => {
               </Link>
             ) : (
               <Link href={"https://earn.trevee.xyz/vote/manage-lock/"}>
-                Lock it
+                Lock it to get VEUSD
               </Link>
             )}
           </ButtonWrapper>

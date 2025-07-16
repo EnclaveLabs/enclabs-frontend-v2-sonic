@@ -57,13 +57,17 @@ const VeUsdListItemActions: React.FC<VeUsdListItemActionsProps> = ({
   const { mutateAsync: resetVeNft, isPending: isResetVeNftLoading } =
     useResetVeNft({ tokenId });
   const enclabsVeManagerContract = useGetEnclabsTreveeVeManagerContract()!;
-  const { mutateAsync: wrapVeNft, isPending: wrapVeNftLoading } = useWrapVeNft({
-    tokenId: tokenId.toString(),
-  });
+  const { mutateAsync: wrapVeNft, isPending: wrapVeNftLoading } = useWrapVeNft(
+    {
+      tokenId: tokenId.toString(),
+    },
+    { waitForConfirmation: true }
+  );
   const { mutateAsync: approveVeUsd, isPending: isApproveVeUsdLoading } =
     useApproveNft(
       { nft: veUSD },
       {
+        waitForConfirmation: true,
         onSuccess: () =>
           wrapVeNft({
             enclabsTreveeVeManagerContract: enclabsVeManagerContract,
@@ -96,7 +100,9 @@ const VeUsdListItemActions: React.FC<VeUsdListItemActionsProps> = ({
       ) : (
         <Button
           className="h-auto flex flex-grow"
-          loading={isApproveVeUsdLoading}
+          loading={
+            isNftApprovedForManager ? wrapVeNftLoading : isApproveVeUsdLoading
+          }
           onClick={() =>
             isNftApprovedForManager
               ? wrapVeNft({
@@ -154,7 +160,7 @@ const VeUsdListItemInfos: React.FC<VeUsdListItemInfoProps> = ({
 
   const isNftApprovedForManager =
     veNftApproval.approvedAddress.toLowerCase() ===
-    enclabsVeManagerAddress.toLowerCase();
+    (enclabsVeManagerAddress as unknown as string).toLowerCase();
 
   console.log(
     ">>dd",
