@@ -249,8 +249,9 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({
     }
 
     if (isApproved) {
+      console.log(">>>", formTokenAmountMantissa.toFixed());
       return unwrapVeNft({
-        amountMantissa: new BigNumber(formValues.amountTokens),
+        amountMantissa: formTokenAmountMantissa,
       }).then(() => {
         setFormValues(() => ({
           fromToken: tokenUsedToUnwrap,
