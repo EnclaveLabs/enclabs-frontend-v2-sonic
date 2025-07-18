@@ -4,12 +4,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useGetBalanceOf, useUnwrapVeNft } from "clients/api";
 import {
   Delimiter,
+  Icon,
   LabeledInlineContent,
   PrimaryButton,
   Spinner,
   TokenTextField,
+  Tooltip,
 } from "components";
-import useFormatTokensToReadableValue from "hooks/useFormatTokensToReadableValue";
 import { VError } from "libs/errors";
 import { useTranslation } from "libs/translations";
 import { useAccountAddress, useChainId } from "libs/wallet";
@@ -74,10 +75,7 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
     }));
   }, [limitTokensMantissa, setFormValues]);
 
-  const readableUnwrappableAmountTokens = useFormatTokensToReadableValue({
-    value: limitTokensMantissa,
-    token: formValues.fromToken,
-  });
+  const isWednesday = new Date().getUTCDay() === 3; // 3 = mercredi
 
   if (!tokenUsedToUnwrap) {
     return <></>;
@@ -138,16 +136,28 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
 
         <Delimiter />
 
-        <PrimaryButton
-          type="submit"
-          loading={isSubmitting}
-          className={"w-full"}
-          disabled={!isFormValid || isSubmitting}
-        >
-          {isApproved
-            ? `Unwrap ${formValues.amountTokens} veUSD`
-            : `Approve ${formValues.amountTokens} Enclabs veUSD`}
-        </PrimaryButton>
+        <div className={"flex justify-center items-center"}>
+          <PrimaryButton
+            type="submit"
+            loading={isSubmitting}
+            className={"flex flex-grow"}
+            disabled={
+              !isFormValid || isSubmitting || (isApproved && isWednesday)
+            }
+          >
+            {isApproved
+              ? `Unwrap ${formValues.amountTokens} veUSD`
+              : `Approve ${formValues.amountTokens} Enclabs veUSD`}
+          </PrimaryButton>
+          {isApproved && isWednesday && (
+            <Tooltip
+              className={"ml-2 flex-shrink"}
+              title={"You cannot unwrap your nft on Wednesday"}
+            >
+              <Icon className="cursor-help" name="info" size={"24"} />
+            </Tooltip>
+          )}
+        </div>
       </>
     </form>
   );
@@ -260,17 +270,6 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({
     } else {
       return approveFromToken(formTokenAmountMantissa.toString());
     }
-
-    /*{return approveToken({
-      withdrawFullSupply,
-      unwrap: formValues.receiveNativeToken,
-      amountMantissa: withdrawFullSupply
-        ? vTokenBalanceMantissa!
-        : convertTokensToMantissa({
-            value: new BigNumber(fromTokenAmountTokens),
-            token: fromToken,
-          }),
-    });*/
   };
 
   const pageLoading = isFromTokenWalletSpendingLimitLoading;

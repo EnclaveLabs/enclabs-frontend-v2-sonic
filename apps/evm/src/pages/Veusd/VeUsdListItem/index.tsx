@@ -63,6 +63,7 @@ const VeUsdListItemActions: React.FC<VeUsdListItemActionsProps> = ({
     },
     { waitForConfirmation: true }
   );
+
   const { mutateAsync: approveVeUsd, isPending: isApproveVeUsdLoading } =
     useApproveNft(
       { nft: veUSD },
@@ -70,7 +71,6 @@ const VeUsdListItemActions: React.FC<VeUsdListItemActionsProps> = ({
         waitForConfirmation: true,
         onSuccess: () =>
           wrapVeNft({
-            enclabsTreveeVeManagerContract: enclabsVeManagerContract,
             tokenId: tokenId.toString(),
           }),
       }
@@ -106,7 +106,6 @@ const VeUsdListItemActions: React.FC<VeUsdListItemActionsProps> = ({
           onClick={() =>
             isNftApprovedForManager
               ? wrapVeNft({
-                  enclabsTreveeVeManagerContract: enclabsVeManagerContract,
                   tokenId: tokenId.toString(),
                 })
               : approveVeUsd({
