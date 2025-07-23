@@ -17,7 +17,6 @@ export const VeUsdUnwrap: React.FC<VeUsdUnwrapInput> = ({
     token: tokenUsedToUnwrap,
   });
   const enclabsVeManagerContract = useGetEnclabsTreveeVeManagerContract();
-
   return (
     !!tokenUsedToUnwrapBalance &&
     !!enclabsVeManagerContract?.address && (

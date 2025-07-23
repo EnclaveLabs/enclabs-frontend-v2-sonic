@@ -19,7 +19,6 @@ import {
 } from "libs/wallet";
 import { CONFIRMATIONS, TIMEOUT_MS } from "./constants";
 import { useTrackTransaction } from "./useTrackTransaction";
-import { displayNotification } from "../../libs/notifications";
 
 export interface LastTransactionData<
   TMutateInput extends Record<string, unknown> | void,
@@ -140,11 +139,6 @@ export const useSendTransaction = <
       }
     },
     onError: (error, variables, context) => {
-      displayNotification({
-        description: "An error occurred while sending the transaction.",
-        autoClose: true,
-        variant: "error",
-      });
       if (
         error instanceof VError &&
         error.code === "gaslessTransactionNotAvailable"

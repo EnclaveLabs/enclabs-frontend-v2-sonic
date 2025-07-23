@@ -19,7 +19,7 @@ import {
 } from "../../../components";
 import { Card } from "@mui/material";
 import formatToReadableDate from "../../../components/charts/ApyChart/formatToReadableDate";
-import { getToken } from "../../../libs/tokens";
+import { useGetToken } from "../../../libs/tokens";
 import useConvertMantissaToReadableTokenString from "../../../hooks/useConvertMantissaToReadableTokenString";
 import Checked from "../../../components/Icon/icons/checked";
 import Close from "../../../components/Icon/icons/close";
@@ -135,9 +135,9 @@ const VeUsdListItemInfos: React.FC<VeUsdListItemInfoProps> = ({
     });
 
   const readableTokenId = tokenId.toNumber();
-  const scUSD = getToken({ chainId, symbol: "scUSD" });
+  const scUSD = useGetToken({ symbol: "scUSD" });
   const veUSD = useGetVeNFT({ symbol: "veUSD" })!;
-  const enclabsVeUsd = getToken({ chainId, symbol: "Enclabs Trevee veUSD" });
+  const enclabsVeUsd = useGetToken({ symbol: "Enclabs Trevee veUSD" });
   const endDate = VeUsdLockedData
     ? formatToReadableDate(VeUsdLockedData.end.toNumber() * 1000, "month")
     : "-";

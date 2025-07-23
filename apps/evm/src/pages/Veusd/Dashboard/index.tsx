@@ -1,89 +1,61 @@
-import { type Cell, CellGroup, type CellGroupProps } from "components";
+import { type Cell, CellGroup } from "components";
 import { useTranslation } from "libs/translations";
 import { useMemo } from "react";
-import BigNumber from "bignumber.js";
 import useConvertMantissaToReadableTokenString from "../../../hooks/useConvertMantissaToReadableTokenString";
 import { useGetToken } from "../../../libs/tokens";
-import { useChainId } from "libs/wallet";
+import { useGetVeNFT } from "../../../libs/venfts";
+import { useGetBalanceOf, useNftGetBalanceOf } from "../../../clients/api";
+import { useAccountAddress } from "../../../libs/wallet";
 
-export interface VeUSDDashboardCtnProps extends Omit<CellGroupProps, "cells"> {
-  scUsdBalance: BigNumber | undefined;
-  veUsdBalance: BigNumber | undefined;
-  enclabsVeUsdBalance: BigNumber | undefined;
-}
+export const VeUSDDashboard: React.FC = ({ ...otherProps }) => {
+  const { accountAddress } = useAccountAddress();
+  const { t } = useTranslation();
+  const scUSD = useGetToken({ symbol: "scUSD" });
+  const veUSD = useGetVeNFT({ symbol: "veUSD" });
+  const enclabsVeUsd = useGetToken({ symbol: "Enclabs Trevee veUSD" })!;
 
-export interface VeUSDDashboardProps extends Omit<CellGroupProps, "cells"> {
-  scUsdBalance: string;
-  veUsdBalance: string;
-  enclabsVeUsdBalance: string;
-}
-
-export const LoadingVeUSDDashboard: React.FC = () => {
-  return (
-    <VeUSDDashboard
-      scUsdBalance={"-"}
-      veUsdBalance={"-"}
-      enclabsVeUsdBalance={"-"}
-    />
-  );
-};
-
-export const VeUSDDashboardCtn: React.FC<VeUSDDashboardCtnProps> = ({
-  scUsdBalance,
-  veUsdBalance,
-  enclabsVeUsdBalance,
-  ...otherProps
-}) => {
-  const { chainId } = useChainId();
-  const scUsd = useGetToken({ chainId, symbol: "scUSD" });
-  const enclabsVeUsd = useGetToken({ chainId, symbol: "Enclabs Trevee veUSD" });
-  const scUsdBalanceReadable = useConvertMantissaToReadableTokenString({
-    value: scUsdBalance,
-    token: scUsd,
+  const { data: scUsdBalance } = useGetBalanceOf({
+    accountAddress: `${accountAddress}`,
+    token: scUSD,
   });
-  const enclabsVeUsdBalanceReadable = useConvertMantissaToReadableTokenString({
-    value: enclabsVeUsdBalance,
+  const { data: veUsdBalance } = useNftGetBalanceOf({
+    accountAddress: `${accountAddress}`,
+    nft: veUSD,
+  });
+  const { data: enclabsVeUsdBalance } = useGetBalanceOf({
+    accountAddress: `${accountAddress}`,
     token: enclabsVeUsd,
   });
 
   const isFetching = !scUsdBalance || !veUsdBalance || !enclabsVeUsdBalance;
 
-  return isFetching ? (
-    <LoadingVeUSDDashboard />
-  ) : (
-    <VeUSDDashboard
-      scUsdBalance={scUsdBalanceReadable}
-      veUsdBalance={veUsdBalance.toString()}
-      enclabsVeUsdBalance={enclabsVeUsdBalanceReadable}
-      {...otherProps}
-    />
-  );
-};
+  if (isFetching) return <></>;
 
-export const VeUSDDashboard: React.FC<VeUSDDashboardProps> = ({
-  scUsdBalance,
-  veUsdBalance,
-  enclabsVeUsdBalance,
-  ...otherProps
-}) => {
-  const { t } = useTranslation();
+  const scUsdBalanceReadable = useConvertMantissaToReadableTokenString({
+    value: scUsdBalance.balanceMantissa,
+    token: scUSD,
+  });
+  const enclabsVeUsdBalanceReadable = useConvertMantissaToReadableTokenString({
+    value: enclabsVeUsdBalance.balanceMantissa,
+    token: enclabsVeUsd,
+  });
 
   const cells: Cell[] = useMemo(
     () => [
       {
         label: t("veusd.dashboard.scUsdBalance"),
-        value: scUsdBalance,
+        value: scUsdBalanceReadable,
       },
       {
         label: t("veusd.dashboard.veUsdBalance"),
-        value: veUsdBalance,
+        value: `${veUsdBalance.balance} veNFT(s)`,
       },
       {
         label: t("veusd.dashboard.enclabsVeUsdBalance"),
-        value: enclabsVeUsdBalance,
+        value: enclabsVeUsdBalanceReadable,
       },
     ],
-    []
+    [scUsdBalanceReadable, veUsdBalance.balance, enclabsVeUsdBalanceReadable]
   );
 
   return (

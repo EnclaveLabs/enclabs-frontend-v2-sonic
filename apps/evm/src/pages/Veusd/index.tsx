@@ -6,9 +6,9 @@ import { useAccountAddress } from "../../libs/wallet";
 import { useGetBalanceOf, useNftGetBalanceOf } from "../../clients/api";
 import { useGetVeNFT } from "../../libs/venfts";
 import { useGetToken } from "../../libs/tokens";
-import { VeUSDDashboardCtn } from "./Dashboard";
 import { VeUsdWrap } from "./Wrap";
 import { VeUsdUnwrap } from "./Unwrap";
+import { VeUSDDashboard } from "./Dashboard";
 
 const VeUSD: React.FC = () => {
   const styles = useStyles();
@@ -57,11 +57,7 @@ const VeUSD: React.FC = () => {
   return (
     <Page indexWithSearchEngines={false}>
       <div css={styles.root}>
-        <VeUSDDashboardCtn
-          scUsdBalance={scUsdBalance?.balanceMantissa}
-          veUsdBalance={veUsdBalance?.balance}
-          enclabsVeUsdBalance={enclabsVeUsdBalance?.balanceMantissa}
-        />
+        <VeUSDDashboard />
         <div className={"mt-4 flex justify-center"}>
           <Card
             className={cn(

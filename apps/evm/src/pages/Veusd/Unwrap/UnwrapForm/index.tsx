@@ -13,10 +13,10 @@ import {
 } from "components";
 import { VError } from "libs/errors";
 import { useTranslation } from "libs/translations";
-import { useAccountAddress, useChainId } from "libs/wallet";
+import { useAccountAddress } from "libs/wallet";
 import type { Token } from "types";
 import useForm, { type FormValues, type UseFormInput } from "./useForm";
-import { getToken } from "../../../../libs/tokens";
+import { useGetToken } from "../../../../libs/tokens";
 import { convertMantissaToTokens } from "../../../../utilities";
 import useTokenApproval from "../../../../hooks/useTokenApproval";
 import convertTokensToMantissa from "../../../../utilities/convertTokensToMantissa";
@@ -56,8 +56,7 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
     formValues,
     setFormValues,
   });
-  const { chainId } = useChainId();
-  const veUSD = getToken({ chainId, symbol: "veUSD" });
+  const veUSD = useGetToken({ symbol: "veUSD" });
   const readableUnwrappableAmountLimitReadable = useMemo(
     () =>
       limitTokensMantissa &&
@@ -260,7 +259,7 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({
 
     if (isApproved) {
       return unwrapVeNft({
-        amountMantissa: new BigNumber(formValues.amountTokens),
+        amountMantissa: formTokenAmountMantissa,
       }).then(() => {
         setFormValues(() => ({
           fromToken: tokenUsedToUnwrap,

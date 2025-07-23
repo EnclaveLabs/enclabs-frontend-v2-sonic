@@ -7,7 +7,7 @@ import {
 import { useAccountAddress, useChainId } from "../../../libs/wallet";
 import { VeUsdListItem } from "../VeUsdListItem";
 import { Link } from "../../../containers/Link";
-import { getToken, useGetToken } from "../../../libs/tokens";
+import { useGetToken } from "../../../libs/tokens";
 import useConvertMantissaToReadableTokenString from "../../../hooks/useConvertMantissaToReadableTokenString";
 import { useGetBalanceOf } from "../../../clients/api";
 
@@ -18,9 +18,9 @@ export interface VeUsdWrapProps {
 export const VeUsdWrap: React.FC<VeUsdWrapProps> = ({ veUsdBalance }) => {
   const { accountAddress } = useAccountAddress();
   const { chainId } = useChainId();
-  const scUSD = getToken({ chainId, symbol: "scUSD" });
-  const veUSD = getToken({ chainId, symbol: "veUSD" });
-  const enclabsVeUSD = getToken({ chainId, symbol: "Enclabs Trevee veUSD" });
+  const scUSD = useGetToken({ symbol: "scUSD" });
+  const veUSD = useGetToken({ symbol: "veUSD" });
+  const enclabsVeUSD = useGetToken({ symbol: "Enclabs Trevee veUSD" });
   const stkscUSD = useGetToken({ symbol: "stkscUSD" });
   const { data: scUsdBalance } = useGetBalanceOf({
     accountAddress: `${accountAddress}`,
@@ -115,14 +115,16 @@ export const VeUsdWrap: React.FC<VeUsdWrapProps> = ({ veUsdBalance }) => {
     );
   }
 
-  return Array.from({ length: balanceAsNb }, (_, i) => i).map((tokenIndex) => (
+  return (
     <div className={"flex flex-col gap-y-4"}>
-      <VeUsdListItem
-        key={tokenIndex}
-        tokenIndex={tokenIndex}
-        accountAddress={`${accountAddress}`}
-        chainId={chainId}
-      />
+      {Array.from({ length: balanceAsNb }, (_, i) => i).map((tokenIndex) => (
+        <VeUsdListItem
+          key={tokenIndex}
+          tokenIndex={tokenIndex}
+          accountAddress={`${accountAddress}`}
+          chainId={chainId}
+        />
+      ))}
     </div>
-  ));
+  );
 };

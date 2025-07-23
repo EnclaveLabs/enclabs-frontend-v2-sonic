@@ -1,11 +1,11 @@
-import BigNumber from 'bignumber.js';
-import { useMemo } from 'react';
+import BigNumber from "bignumber.js";
+import { useMemo } from "react";
 
-import { MAXIMUM_PRICE_IMPACT_THRESHOLD_PERCENTAGE } from 'constants/swap';
-import type { Swap } from 'types';
-import { convertTokensToMantissa } from 'utilities';
+import { MAXIMUM_PRICE_IMPACT_THRESHOLD_PERCENTAGE } from "constants/swap";
+import type { Swap } from "types";
+import { convertTokensToMantissa } from "utilities";
 
-import type { FormError, FormValues } from './types';
+import type { FormError, FormValues } from "./types";
 
 interface UseFormValidationInput {
   formValues: FormValues;
@@ -35,35 +35,39 @@ const useFormValidation = ({
         token: formValues.fromToken,
       });
 
-    const isInvalid = !fromTokenAmountMantissa || fromTokenAmountMantissa.isLessThanOrEqualTo(0);
+    const isInvalid =
+      !fromTokenAmountMantissa ||
+      fromTokenAmountMantissa.isLessThanOrEqualTo(0);
 
-    const isHigherThanMax = fromTokenUserBalanceMantissa?.isLessThan(fromTokenAmountMantissa);
+    const isHigherThanMax = fromTokenUserBalanceMantissa?.isLessThan(
+      fromTokenAmountMantissa
+    );
 
     const errorsTmp: FormError[] = [];
 
     if (isInvalid) {
-      errorsTmp.push('INVALID_FROM_TOKEN_AMOUNT');
+      errorsTmp.push("INVALID_FROM_TOKEN_AMOUNT");
     }
 
     if (isHigherThanMax) {
-      errorsTmp.push('FROM_TOKEN_AMOUNT_HIGHER_THAN_USER_BALANCE');
+      errorsTmp.push("FROM_TOKEN_AMOUNT_HIGHER_THAN_USER_BALANCE");
     }
 
     if (
       isFromTokenApproved &&
       fromTokenWalletSpendingLimitTokens &&
       new BigNumber(formValues.fromTokenAmountTokens).isGreaterThan(
-        fromTokenWalletSpendingLimitTokens,
+        fromTokenWalletSpendingLimitTokens
       )
     ) {
-      errorsTmp.push('FROM_TOKEN_AMOUNT_HIGHER_THAN_WALLET_SPENDING_LIMIT');
+      errorsTmp.push("FROM_TOKEN_AMOUNT_HIGHER_THAN_WALLET_SPENDING_LIMIT");
     }
 
     if (
       !!swap?.priceImpactPercentage &&
       swap?.priceImpactPercentage >= MAXIMUM_PRICE_IMPACT_THRESHOLD_PERCENTAGE
     ) {
-      errorsTmp.push('PRICE_IMPACT_TOO_HIGH');
+      errorsTmp.push("PRICE_IMPACT_TOO_HIGH");
     }
 
     return errorsTmp;
@@ -79,12 +83,12 @@ const useFormValidation = ({
   const wrapUnwrapErrors = useMemo(() => {
     const errorsTmp: FormError[] = [];
 
-    if (formValues.fromToken.isNative && formValues.toToken.symbol === 'WBNB') {
-      errorsTmp.push('WRAPPING_UNSUPPORTED');
+    if (formValues.fromToken.isNative && formValues.toToken.symbol === "WBNB") {
+      errorsTmp.push("WRAPPING_UNSUPPORTED");
     }
 
-    if (formValues.toToken.isNative && formValues.fromToken.symbol === 'WBNB') {
-      errorsTmp.push('UNWRAPPING_UNSUPPORTED');
+    if (formValues.toToken.isNative && formValues.fromToken.symbol === "WBNB") {
+      errorsTmp.push("UNWRAPPING_UNSUPPORTED");
     }
 
     return errorsTmp;

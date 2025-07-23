@@ -10,8 +10,8 @@ import BigNumber from "bignumber.js";
 export type UseGetVeUsdTokenLockedQueryKey = [
   FunctionKey.GET_VEUSD_TOKEN_LOCKED,
   {
-    tokenId: BigNumber;
     chainId: ChainId;
+    tokenId: BigNumber;
   }
 ];
 
@@ -39,7 +39,7 @@ const useGetVeUsdTokenLocked = (
       FunctionKey.GET_VEUSD_TOKEN_LOCKED,
       {
         chainId,
-        tokenId: tokenId,
+        tokenId,
       },
     ],
 
