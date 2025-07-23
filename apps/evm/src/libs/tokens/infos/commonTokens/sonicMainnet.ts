@@ -18,12 +18,13 @@ import scusdstablejackytLogo from "libs/tokens/img/jack-yt-scusd.svg";
 import EURClogo from "libs/tokens/img/EURC.svg";
 import wmetaUSDlogo from "libs/tokens/img/wmetaUSD.svg";
 import enclabsVeUSDLogo from "libs/tokens/img/veEnclabs-scUSD.svg";
+import hlp0Logo from 'libs/tokens/img/logoHLP0.svg';
 import type { Token } from "types";
 
 const ethToken: Token = {
   address: NATIVE_TOKEN_ADDRESS,
   decimals: 18,
-  symbol: "S",
+  symbol: 'S',
   asset: sonicLogo,
   isNative: true,
 };
@@ -31,28 +32,28 @@ const ethToken: Token = {
 export const tokens: Token[] = [
   ethToken,
   {
-    address: "0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+    address: '0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38',
     decimals: 18,
-    symbol: "wS",
+    symbol: 'wS',
     asset: sonicTokenLogo,
     tokenWrapped: ethToken,
   },
   {
-    address: "0xd2901D474b351bC6eE7b119f9c920863B0F781b2",
+    address: '0xd2901D474b351bC6eE7b119f9c920863B0F781b2',
     decimals: 18,
-    symbol: "StableJack scUSD YieldToken",
+    symbol: 'StableJack scUSD YieldToken',
     asset: scusdstablejackytLogo,
   },
   {
-    address: "0xE5DA20F15420aD15DE0fa650600aFc998bbE3955",
+    address: '0xE5DA20F15420aD15DE0fa650600aFc998bbE3955',
     decimals: 18,
-    symbol: "stS",
+    symbol: 'stS',
     asset: stSLogo,
   },
   {
-    address: "0x3bce5cb273f0f148010bbea2470e7b5df84c7812",
+    address: '0x3bce5cb273f0f148010bbea2470e7b5df84c7812',
     decimals: 18,
-    symbol: "scETH",
+    symbol: 'scETH',
     asset: scETHLogo,
   },
   {
@@ -64,7 +65,7 @@ export const tokens: Token[] = [
   {
     address: "0xd3dce716f3ef535c5ff8d041c1a41c3bd89b97ae",
     decimals: 6,
-    symbol: "scUSD",
+    symbol: 'scUSD',
     asset: scUSDLogo,
   },
   {
@@ -86,27 +87,27 @@ export const tokens: Token[] = [
     asset: spectraPTscUSDLogo,
   },
   {
-    address: "0x3a7ba84bbe869ed318e654dd9b6ff3cf6d531e91",
+    address: '0x3a7ba84bbe869ed318e654dd9b6ff3cf6d531e91',
     decimals: 18,
-    symbol: "Spectra PT wstkscETH",
+    symbol: 'Spectra PT wstkscETH',
     asset: spectraPTscETHLogo,
   },
   {
-    address: "0xbe27993204ec64238f71a527b4c4d5f4949034c3",
+    address: '0xbe27993204ec64238f71a527b4c4d5f4949034c3',
     decimals: 6,
-    symbol: "Pendle PT wstkscUSD (29MAY2025)",
+    symbol: 'Pendle PT wstkscUSD (29MAY2025)',
     asset: pendlePTscUSDLogo,
   },
   {
-    address: "0x9F0dF7799f6FDAd409300080cfF680f5A23df4b1",
+    address: '0x9F0dF7799f6FDAd409300080cfF680f5A23df4b1',
     decimals: 18,
-    symbol: "wOS",
+    symbol: 'wOS',
     asset: wOSLogo,
   },
   {
-    address: "0x6202B9f02E30E5e1c62Cc01E4305450E5d83b926",
+    address: '0x6202B9f02E30E5e1c62Cc01E4305450E5d83b926',
     decimals: 6,
-    symbol: "xUSD",
+    symbol: 'xUSD',
     asset: xUSDLogo,
   },
   // {
@@ -116,27 +117,34 @@ export const tokens: Token[] = [
   //   asset: wbtcLogo,
   // },
   {
-    address: "0x50c42deacd8fc9773493ed674b675be577f2634b",
+    address: '0x50c42deacd8fc9773493ed674b675be577f2634b',
     decimals: 18,
-    symbol: "WETH",
+    symbol: 'WETH',
     asset: wethLogo,
+    
   },
   {
-    address: "0x29219dd400f2bf60e5a23d13be72b486d4038894",
+    address: '0x29219dd400f2bf60e5a23d13be72b486d4038894',
     decimals: 6,
-    symbol: "USDC",
+    symbol: 'USDC',
     asset: usdcLogo,
   },
   {
-    address: "0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57",
+    address: '0x3D75F2BB8aBcDBd1e27443cB5CBCE8A668046C81',
     decimals: 6,
-    symbol: "EURC",
+    symbol: 'HLP0',
+    asset: hlp0Logo,
+  },
+  {
+    address: '0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57',
+    decimals: 6,
+    symbol: 'EURC',
     asset: EURClogo,
   },
   {
-    address: "0xAaAaaAAac311D0572Bffb4772fe985A750E88805",
+    address: '0xAaAaaAAac311D0572Bffb4772fe985A750E88805',
     decimals: 18,
-    symbol: "wmetaUSD (Stability)",
+    symbol: 'wmetaUSD (Stability)',
     asset: wmetaUSDlogo,
   },
   // {
@@ -146,9 +154,9 @@ export const tokens: Token[] = [
   //   asset: usdtLogo,
   // },
   {
-    address: "0xc1Eb7689147C81aC840d4FF0D298489fc7986d52",
+    address: '0xc1Eb7689147C81aC840d4FF0D298489fc7986d52',
     decimals: 18,
-    symbol: "XVS",
+    symbol: 'XVS',
     asset: xvsLogo,
   },
   // {

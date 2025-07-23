@@ -14,11 +14,12 @@ export const useMarketTableColumns = () => {
       'points',
       'labeledBorrowApy',
       'borrowPoints',
+      'supplyBalance'
     ];
 
-    if (accountAddress) {
-      columns.push('userWalletBalance');
-    }
+    // if (accountAddress) {
+    //   columns.push('userWalletBalance');
+    // }
 
     columns.push('liquidity');
 
