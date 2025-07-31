@@ -2,6 +2,14 @@ import type { Token as PSToken } from "@pancakeswap/sdk";
 import type BigNumber from "bignumber.js";
 import type { BaseContract, ContractReceipt } from "ethers";
 import type { TransactionReceipt } from "viem";
+import {
+  EnclabsVeETHTreveeVeManager,
+  EnclabsVeUSDTreveeVeManager,
+  TreveeVeETH,
+  TreveeVeETHVoter,
+  TreveeVeUSD,
+  TreveeVeUSDVoter,
+} from "../libs/contracts";
 
 export type NonNullableFields<T> = Required<{
   [P in keyof T]: NonNullable<T[P]>;
@@ -501,4 +509,25 @@ export interface ContractTransaction {
   wait: (
     confirmations?: number
   ) => Promise<ContractReceipt | TransactionReceipt>;
+}
+
+export type EnclabsTreveeVeManager =
+  | EnclabsVeUSDTreveeVeManager
+  | EnclabsVeETHTreveeVeManager;
+export type TreveeVoter = TreveeVeUSDVoter | TreveeVeETHVoter;
+export type TreveeTokenSymbol = "scUSD" | "scETH";
+export type TreveeVeNftSymbol = "veUSD" | "veETH";
+export type TreveeVeNFT = TreveeVeUSD | TreveeVeETH;
+export type TreveeStakedTokenSymbol = "stkscUSD" | "stkscETH";
+export type EnclabsStakedTokenSymbol =
+  | "Enclabs Trevee veUSD"
+  | "Enclabs Trevee veETH";
+
+export interface TreveeWraping {
+  manager: EnclabsTreveeVeManager;
+  voter: TreveeVoter;
+  treeveTokenSymbol: TreveeTokenSymbol;
+  treveeVeNftSymbol: TreveeVeNftSymbol;
+  treveeStakedTokenSymbol: TreveeStakedTokenSymbol;
+  enclabsStakedTokenSymbol: EnclabsStakedTokenSymbol;
 }

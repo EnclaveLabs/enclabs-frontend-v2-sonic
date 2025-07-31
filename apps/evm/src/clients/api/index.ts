@@ -192,17 +192,17 @@ export { default as getNftApproved } from "./queries/getNftApproved";
 export * from "./queries/getNftApproved";
 export { default as useNftGetApproved } from "./queries/getNftApproved/useNftGetApproved";
 
-export { default as getVeUsdTokenOfOwnerByIndex } from "./queries/getVeUsdTokenOfOwnerByIndex";
-export * from "./queries/getVeUsdTokenOfOwnerByIndex";
-export { default as useGetVeUsdTokenOfOwnerByIndex } from "./queries/getVeUsdTokenOfOwnerByIndex/useGetVeUsdTokenOfOwnerByIndex";
+export { default as getVeNftTokenOfOwnerByIndex } from "./queries/getVeNftTokenOfOwnerByIndex";
+export * from "./queries/getVeNftTokenOfOwnerByIndex";
+export { default as useGetVeNftTokenOfOwnerByIndex } from "./queries/getVeNftTokenOfOwnerByIndex/useGetVeNftTokenOfOwnerByIndex";
 
-export { default as getVeUsdTokenLocked } from "./queries/getVeUsdTokenLocked";
-export * from "./queries/getVeUsdTokenLocked";
-export { default as useGetVeUsdTokenLocked } from "./queries/getVeUsdTokenLocked/useGetVeUsdTokenLocked";
+export { default as getVeNftTokenLocked } from "./queries/getVeNftTokenLocked";
+export * from "./queries/getVeNftTokenLocked";
+export { default as useGetVeNftTokenLocked } from "./queries/getVeNftTokenLocked/useGetVeNftTokenLocked";
 
-export { default as getVeUsdTokenVoted } from "./queries/getVeUsdTokenVoted";
-export * from "./queries/getVeUsdTokenVoted";
-export { default as useGetVeUsdTokenVoted } from "./queries/getVeUsdTokenVoted/useGetVeUsdTokenVoted";
+export { default as getVeNftTokenVoted } from "./queries/getVeNftTokenVoted";
+export * from "./queries/getVeNftTokenVoted";
+export { default as useGetVeNftTokenVoted } from "./queries/getVeNftTokenVoted/useGetVeNftTokenVoted";
 
 export { default as getTokenBalances } from "./queries/getTokenBalances";
 export * from "./queries/getTokenBalances";

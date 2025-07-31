@@ -1,9 +1,8 @@
-import { EnclabsTreveeVeManager } from "libs/contracts";
-import type { ContractTxData } from "types";
+import type { ContractTxData, EnclabsTreveeVeManager } from "types";
 import BigNumber from "bignumber.js";
 
 export interface UnwrapVeNftInput {
-  enclabsTreveeVeManagerContract: EnclabsTreveeVeManager;
+  enclabsTreveeVeManager: EnclabsTreveeVeManager;
   amountMantissa: BigNumber;
 }
 
@@ -13,10 +12,10 @@ export type UnwrapVeNftOutput = ContractTxData<
 >;
 
 const unwrapVeNft = ({
-  enclabsTreveeVeManagerContract,
+  enclabsTreveeVeManager,
   amountMantissa,
 }: UnwrapVeNftInput): UnwrapVeNftOutput => ({
-  contract: enclabsTreveeVeManagerContract,
+  contract: enclabsTreveeVeManager,
   methodName: "withdraw",
   args: [amountMantissa.toFixed()],
 });

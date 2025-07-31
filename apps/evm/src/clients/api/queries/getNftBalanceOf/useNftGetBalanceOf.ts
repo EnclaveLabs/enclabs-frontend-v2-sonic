@@ -33,7 +33,7 @@ type Options = QueryObserverOptions<
 
 interface UseNFTGetBalanceOfInput
   extends Omit<TrimmedGetNftBalanceOfInput, "nft"> {
-  nft?: NFT;
+  nft: NFT;
 }
 
 const useNftGetBalanceOf = (
@@ -49,7 +49,7 @@ const useNftGetBalanceOf = (
       {
         chainId,
         accountAddress,
-        nftAddress: nft?.address || "",
+        nftAddress: nft.address,
       },
     ],
 

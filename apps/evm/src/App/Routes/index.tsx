@@ -36,7 +36,7 @@ const Voter = safeLazyLoad(() => import("pages/Voter"));
 const VoterLeaderboard = safeLazyLoad(() => import("pages/VoterLeaderboard"));
 const PrimeCalculator = safeLazyLoad(() => import("pages/PrimeCalculator"));
 const Bridge = safeLazyLoad(() => import("pages/Bridge"));
-const VeUSD = safeLazyLoad(() => import("pages/Veusd"));
+const VeTrevee = safeLazyLoad(() => import("pages/VeTrevee"));
 
 const AppRoutes = () => {
   const { accountAddress } = useAccountAddress();
@@ -123,10 +123,10 @@ const AppRoutes = () => {
 
         {!!accountAddress && (
           <Route
-            path={Subdirectory.VE_USD}
+            path={Subdirectory.VE_TREVEE}
             element={
               <PageSuspense>
-                <VeUSD />
+                <VeTrevee />
               </PageSuspense>
             }
           />

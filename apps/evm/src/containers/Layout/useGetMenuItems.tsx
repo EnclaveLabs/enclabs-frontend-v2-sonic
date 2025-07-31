@@ -66,10 +66,10 @@ const useGetMenuItems = () => {
       });
 
       menuItems.push({
-        to: routes.veUSD.path,
+        to: routes.veTrevee.path,
         // Translation key: do not remove this comment
         // t('layout.menuItems.account')
-        i18nKey: "layout.menuItems.veusd",
+        i18nKey: "veTrevee",
         iconName: "treeve",
       });
     }

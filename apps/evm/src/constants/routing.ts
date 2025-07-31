@@ -26,7 +26,7 @@ export enum Subdirectory {
   VAI = "vai",
   PRIME_CALCULATOR = "prime-calculator",
   BRIDGE = "bridge",
-  VE_USD = "veusd",
+  VE_TREVEE = "ve-trevee",
 }
 
 const routeSubdirectories = {
@@ -37,7 +37,7 @@ const routeSubdirectories = {
   ],
   account: [Subdirectory.ACCOUNT],
   rewards: [Subdirectory.REWARDS],
-  veUSD: [Subdirectory.VE_USD],
+  veTrevee: [Subdirectory.VE_TREVEE],
   accountPrimeCalculator: [Subdirectory.ACCOUNT, Subdirectory.PRIME_CALCULATOR],
   xvs: [Subdirectory.XVS],
   isolatedPools: [Subdirectory.ISOLATED_POOLS],

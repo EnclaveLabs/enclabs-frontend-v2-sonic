@@ -94,9 +94,11 @@ import VBnbAbi from "./externalAbis/VBnb.json";
 import XsequenceMulticallAbi from "./externalAbis/XsequenceMulticall.json";
 import ZyFiVaultAbi from "./externalAbis/ZyFiVault.json";
 import EnclabsTreveeVeManagerAbi from "./abis/sonic/EnclabsTreveeVeManager.json";
-import EnclabsTreveeVeUSDAbi from "./abis/sonic/EnclabsTreveeVeUSD.json";
+import EnclabsTreveeAbi from "./abis/sonic/EnclabsTrevee.json";
 import TreveeVeUSDAbi from "./abis/sonic/TreveeVeUSD.json";
-import TreveeVeUsdAbiVoter from "./abis/sonic/TreveeVeUsdVoter.json";
+import TreveeVeETHAbi from "./abis/sonic/TreveeVeUSD.json";
+import TreveeVeUSDAbiVoter from "./abis/sonic/TreveeVeUsdVoter.json";
+import TreveeVeETHAbiVoter from "./abis/sonic/TreveeVeUsdVoter.json";
 import VTokenVenclabsVeUSDCoreAbi from "./abis/sonic/VToken_venclabs_VeUSD_Core.json";
 import ERC721 from "./abis/sonic/ERC721.json";
 
@@ -525,17 +527,31 @@ export const contracts: ContractConfig[] = [
     },
   },
   {
-    name: "EnclabsTreveeVeManager",
+    name: "EnclabsVeUSDTreveeVeManager",
     abi: EnclabsTreveeVeManagerAbi,
     address: {
       [ChainId.SONIC_MAINNET]: "0x9FbD3988dd9a7A2f1A9c312669f3a4EDA462555C",
     },
   },
   {
+    name: "EnclabsVeETHTreveeVeManager",
+    abi: EnclabsTreveeVeManagerAbi,
+    address: {
+      [ChainId.SONIC_MAINNET]: "0xfa24b79af1e6a287a3aad7229216f8930d4daccb",
+    },
+  },
+  {
     name: "EnclabsTreveeVeUSD",
-    abi: EnclabsTreveeVeUSDAbi,
+    abi: EnclabsTreveeAbi,
     address: {
       [ChainId.SONIC_MAINNET]: "0xd02962dc00a058a00fc07a8aa9f760ab6d9bd163",
+    },
+  },
+  {
+    name: "EnclabsTreveeVeETH",
+    abi: EnclabsTreveeAbi,
+    address: {
+      [ChainId.SONIC_MAINNET]: "0xb9ea44d1aa76d5cfd475c2800e186d3dea2141a4",
     },
   },
   {
@@ -546,10 +562,24 @@ export const contracts: ContractConfig[] = [
     },
   },
   {
+    name: "TreveeVeETH",
+    abi: TreveeVeETHAbi,
+    address: {
+      [ChainId.SONIC_MAINNET]: "0x1ec2b9a77a7226acd457954820197f89b3e3a578",
+    },
+  },
+  {
     name: "TreveeVeUSDVoter",
-    abi: TreveeVeUsdAbiVoter,
+    abi: TreveeVeUSDAbiVoter,
     address: {
       [ChainId.SONIC_MAINNET]: "0xb84194e28f624bbba3c9181f3a1120ee76469337",
+    },
+  },
+  {
+    name: "TreveeVeETHVoter",
+    abi: TreveeVeETHAbiVoter,
+    address: {
+      [ChainId.SONIC_MAINNET]: "0x43739B96B19aE7C2E0d80BE7832325846f55Fa05",
     },
   },
   {

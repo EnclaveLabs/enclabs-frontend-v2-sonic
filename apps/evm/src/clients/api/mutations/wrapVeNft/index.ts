@@ -1,18 +1,17 @@
-import { EnclabsTreveeVeManager } from "libs/contracts";
-import type { ContractTxData } from "types";
+import type { ContractTxData, EnclabsTreveeVeManager } from "types";
 
 export interface WrapVeNftInput {
-  enclabsTreveeVeManagerContract: EnclabsTreveeVeManager;
+  enclabsTreveeVeManager: EnclabsTreveeVeManager;
   tokenId: string;
 }
 
 export type WrapVeNftOutput = ContractTxData<EnclabsTreveeVeManager, "deposit">;
 
 const wrapVeNft = ({
-  enclabsTreveeVeManagerContract,
+  enclabsTreveeVeManager,
   tokenId,
 }: WrapVeNftInput): WrapVeNftOutput => ({
-  contract: enclabsTreveeVeManagerContract,
+  contract: enclabsTreveeVeManager,
   methodName: "deposit",
   args: [tokenId],
 });
