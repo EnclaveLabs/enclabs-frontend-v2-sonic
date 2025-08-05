@@ -140,6 +140,10 @@ export { default as resetVeNft } from "./mutations/resetVeNft";
 export * from "./mutations/resetVeNft";
 export { default as useResetVeNft } from "./mutations/resetVeNft/useResetVeNft";
 
+export { default as detachVeNft } from "./mutations/detachVeNft";
+export * from "./mutations/detachVeNft";
+export { default as useDetachVeNft } from "./mutations/detachVeNft/useDetachVeNft";
+
 // Queries
 export { default as getVaiCalculateRepayAmount } from "./queries/getVaiCalculateRepayAmount";
 export * from "./queries/getVaiCalculateRepayAmount";
@@ -203,6 +207,10 @@ export { default as useGetVeNftTokenLocked } from "./queries/getVeNftTokenLocked
 export { default as getVeNftTokenVoted } from "./queries/getVeNftTokenVoted";
 export * from "./queries/getVeNftTokenVoted";
 export { default as useGetVeNftTokenVoted } from "./queries/getVeNftTokenVoted/useGetVeNftTokenVoted";
+
+export { default as getVeNftTokenAttached } from "./queries/getVeNftTokenAttached";
+export * from "./queries/getVeNftTokenAttached";
+export { default as useGetVeNftTokenAttached } from "./queries/getVeNftTokenAttached/useGetVeNftTokenAttached";
 
 export { default as getTokenBalances } from "./queries/getTokenBalances";
 export * from "./queries/getTokenBalances";

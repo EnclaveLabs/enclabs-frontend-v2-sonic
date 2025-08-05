@@ -1,5 +1,8 @@
 import {
   useApproveNft,
+  useDetachVeNft,
+  useGetVeNftTokenAttached,
+  useGetVeNftTokenLocked,
   useGetVeNftTokenOfOwnerByIndex,
   useGetVeNftTokenVoted,
   useNftGetApproved,
@@ -7,7 +10,6 @@ import {
   useWrapVeNft,
 } from "../../../clients/api";
 import { ChainId, TreveeVeNFT, TreveeWraping } from "types";
-import useGetVeNftTokenLocked from "../../../clients/api/queries/getVeNftTokenLocked/useGetVeNftTokenLocked";
 import BigNumber from "bignumber.js";
 import {
   Button,
@@ -28,6 +30,7 @@ import {
   useGetTreveeVeETHContract,
   useGetTreveeVeUSDContract,
 } from "../../../libs/contracts";
+import { useMemo } from "react";
 
 interface VeTreveeListItemInfoProps {
   veNftContract: TreveeVeNFT;
@@ -46,20 +49,28 @@ interface VeTreveeListItemActionsProps {
   tokenId: BigNumber;
   isNftApprovedForManager: boolean;
   isVoted: boolean;
+  isAttached: boolean;
   treveeWraping: TreveeWraping;
+  veNftContract: TreveeVeNFT;
 }
 
 const VeTreveeListItemActions: React.FC<VeTreveeListItemActionsProps> = ({
   tokenId,
   isNftApprovedForManager,
   isVoted,
+  isAttached,
+  veNftContract,
   treveeWraping,
 }) => {
   const needToBeReset = isVoted;
-  const actionText = isNftApprovedForManager ? "Wrap" : "Approve and wrap";
   const treveeVeNft = useGetVeNFT({ symbol: treveeWraping.treveeVeNftSymbol })!;
   const { mutateAsync: resetVeNft, isPending: isResetVeNftLoading } =
-    useResetVeNft({ tokenId });
+    useResetVeNft(
+      { tokenId, veNftVoterContract: treveeWraping.voter },
+      { waitForConfirmation: true }
+    );
+  const { mutateAsync: detachVeNft, isPending: isDetachVeNftLoading } =
+    useDetachVeNft({ tokenId, veNftContract }, { waitForConfirmation: true });
   const { mutateAsync: wrapVeNft, isPending: wrapVeNftLoading } = useWrapVeNft(
     {
       tokenId: tokenId.toString(),
@@ -68,34 +79,70 @@ const VeTreveeListItemActions: React.FC<VeTreveeListItemActionsProps> = ({
     { waitForConfirmation: true }
   );
 
-  const { mutateAsync: approveTreveeVeNft, isPending: isApproveTreveeVeNft } =
-    useApproveNft(
-      { nft: treveeVeNft },
-      {
-        waitForConfirmation: true,
-        onSuccess: () =>
+  const {
+    mutateAsync: approveTreveeVeNft,
+    isPending: isApproveTreveeVeNftLoading,
+  } = useApproveNft(
+    { nft: treveeVeNft },
+    {
+      waitForConfirmation: true,
+      /*onSuccess: () =>
           wrapVeNft({
             tokenId: tokenId.toString(),
             enclabsTreveeVeManager: treveeWraping.manager,
-          }),
-      }
-    );
+          }),*/
+    }
+  );
+
+  const actionText = useMemo(() => {
+    if (needToBeReset) {
+      return "Reset";
+    } else if (isAttached) {
+      return "Detach";
+    } else if (!isNftApprovedForManager) {
+      return "Approve";
+    } else {
+      return "Wrap";
+    }
+  }, [needToBeReset, isAttached, isNftApprovedForManager]);
+
+  const action = () => {
+    if (needToBeReset) {
+      return resetVeNft({ tokenId: tokenId.toString() });
+    } else if (isAttached) {
+      return detachVeNft({ tokenId: tokenId.toString() });
+    } else if (!isNftApprovedForManager) {
+      return approveTreveeVeNft({
+        approvedAddress: treveeWraping.manager.address || "",
+        tokenId: tokenId.toString(),
+      });
+    } else {
+      return wrapVeNft({
+        tokenId: tokenId.toString(),
+        enclabsTreveeVeManager: treveeWraping.manager,
+      });
+    }
+  };
+
+  const needAction = needToBeReset || isAttached || !isNftApprovedForManager;
+  const isLoading =
+    isResetVeNftLoading || isDetachVeNftLoading || isApproveTreveeVeNftLoading;
 
   return (
     <div className={"flex mt-4 gap-x-4"}>
-      {needToBeReset ? (
+      {needAction ? (
         <div className={"flex items-center flex-grow"}>
           <Button
             variant="secondary"
-            loading={isResetVeNftLoading}
+            loading={isLoading}
             className="h-auto flex flex-grow"
-            onClick={() => resetVeNft({ tokenId: tokenId.toString() })}
+            onClick={() => action()}
           >
-            Reset
+            {actionText}
           </Button>
           <Tooltip
             className={"ml-2 flex-shrink"}
-            title={`If your ${treveeWraping.treveeVeNftSymbol} has been used to vote, you need to reset it first before wrapping it.`}
+            title={`If your ${treveeWraping.treveeVeNftSymbol} has been used to vote, you need to reset/detach it first before wrapping it.`}
           >
             <Icon className="cursor-help" name="info" size={"24"} />
           </Tooltip>
@@ -103,22 +150,15 @@ const VeTreveeListItemActions: React.FC<VeTreveeListItemActionsProps> = ({
       ) : (
         <Button
           className="h-auto flex flex-grow"
-          loading={
-            isNftApprovedForManager ? wrapVeNftLoading : isApproveTreveeVeNft
-          }
+          loading={wrapVeNftLoading}
           onClick={() =>
-            isNftApprovedForManager
-              ? wrapVeNft({
-                  tokenId: tokenId.toString(),
-                  enclabsTreveeVeManager: treveeWraping.manager,
-                })
-              : approveTreveeVeNft({
-                  approvedAddress: treveeWraping.manager.address || "",
-                  tokenId: tokenId.toString(),
-                })
+            wrapVeNft({
+              tokenId: tokenId.toString(),
+              enclabsTreveeVeManager: treveeWraping.manager,
+            })
           }
         >
-          {actionText}
+          Wrap
         </Button>
       )}
     </div>
@@ -135,6 +175,10 @@ const VeTreveeListItemInfos: React.FC<VeTreveeListItemInfoProps> = ({
     tokenId,
   });
   const { data: VeNftIsVoted } = useGetVeNftTokenVoted({
+    veNftContract,
+    tokenId,
+  });
+  const { data: VeNftIsAttached } = useGetVeNftTokenAttached({
     veNftContract,
     tokenId,
   });
@@ -161,7 +205,7 @@ const VeTreveeListItemInfos: React.FC<VeTreveeListItemInfoProps> = ({
     nft: treveeVeNft,
   });
 
-  if (!VeNftLockedData || !veNftApproval) return <Spinner />;
+  if (!VeNftLockedData || !veNftApproval || !tokenId) return <Spinner />;
 
   const isNftApprovedForManager =
     veNftApproval.approvedAddress.toLowerCase() ===
@@ -204,6 +248,23 @@ const VeTreveeListItemInfos: React.FC<VeTreveeListItemInfoProps> = ({
         </LabeledInlineContent>
         <LabeledInlineContent
           className="flex-1"
+          label={"Attached"}
+          iconSrc={"copy"}
+        >
+          {!!VeNftIsAttached?.isAttached ? (
+            <Checked height={16} width={16} />
+          ) : (
+            <Close height={16} width={16} />
+          )}
+          <Tooltip
+            className={"ml-1"}
+            title={`If your ${treveeVeNft.symbol} is attached, you need to detach it before wrapping it.`}
+          >
+            <Icon className="cursor-help" name="info" />
+          </Tooltip>
+        </LabeledInlineContent>
+        <LabeledInlineContent
+          className="flex-1"
           label={"Enclabs approval"}
           iconSrc={"vote"}
         >
@@ -233,9 +294,11 @@ const VeTreveeListItemInfos: React.FC<VeTreveeListItemInfoProps> = ({
 
       <VeTreveeListItemActions
         treveeWraping={treveeWraping}
+        veNftContract={veNftContract}
         tokenId={tokenId}
         isNftApprovedForManager={isNftApprovedForManager}
         isVoted={!!VeNftIsVoted?.isVoted}
+        isAttached={!!VeNftIsAttached?.isAttached}
       />
     </Card>
   ) : (
@@ -251,7 +314,7 @@ export const VeTreveeListItem: React.FC<VeTreveeListItemProps> = ({
 }) => {
   const treveeVeETH = useGetTreveeVeETHContract()!;
   const treveeVeUSD = useGetTreveeVeUSDContract()!;
-  const veNftContract =
+  const veNftContract: TreveeVeNFT =
     treveeWraping.treveeVeNftSymbol === "veUSD" ? treveeVeUSD : treveeVeETH;
   const { data: VeNftData, isLoading: VeUsdDataLoading } =
     useGetVeNftTokenOfOwnerByIndex({

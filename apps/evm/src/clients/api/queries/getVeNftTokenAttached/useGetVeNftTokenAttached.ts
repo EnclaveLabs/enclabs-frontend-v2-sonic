@@ -4,33 +4,33 @@ import FunctionKey from "constants/functionKey";
 import { useChainId, useProvider } from "libs/wallet";
 import type { ChainId, TreveeVeNFT } from "types";
 import { callOrThrow } from "utilities";
-import getVeNftTokenLocked, { GetVeNftTokenLockedOutput } from "./index";
+import getVeNftTokenAttached, { GetVeNftTokenAttachedOutput } from "./index";
 import BigNumber from "bignumber.js";
 
-export type UseGetVeNftTokenLockedQueryKey = [
-  FunctionKey.GET_VENFT_TOKEN_LOCKED,
+export type UseGetVeNftTokenAttachedQueryKey = [
+  FunctionKey.GET_VENFT_TOKEN_ATTACHED,
   {
     veNftContractAddress: string;
-    chainId: ChainId;
     tokenId: BigNumber;
+    chainId: ChainId;
   }
 ];
 
 type Options = QueryObserverOptions<
-  GetVeNftTokenLockedOutput,
+  GetVeNftTokenAttachedOutput,
   Error,
-  GetVeNftTokenLockedOutput,
-  GetVeNftTokenLockedOutput,
-  UseGetVeNftTokenLockedQueryKey
+  GetVeNftTokenAttachedOutput,
+  GetVeNftTokenAttachedOutput,
+  UseGetVeNftTokenAttachedQueryKey
 >;
 
-interface UseGetVeNftTokenLockedInput {
-  tokenId: BigNumber;
+interface UseGetVeNftTokenAttachedInput {
   veNftContract: TreveeVeNFT;
+  tokenId: BigNumber;
 }
 
-const useGetVeNftTokenLocked = (
-  { tokenId, veNftContract }: UseGetVeNftTokenLockedInput,
+const useGetVeNftTokenAttached = (
+  { veNftContract, tokenId }: UseGetVeNftTokenAttachedInput,
   options?: Partial<Options>
 ) => {
   const { provider } = useProvider();
@@ -38,17 +38,17 @@ const useGetVeNftTokenLocked = (
 
   return useQuery({
     queryKey: [
-      FunctionKey.GET_VENFT_TOKEN_LOCKED,
+      FunctionKey.GET_VENFT_TOKEN_ATTACHED,
       {
         veNftContractAddress: veNftContract.address,
         chainId,
-        tokenId,
+        tokenId: tokenId,
       },
     ],
 
     queryFn: () =>
       callOrThrow({ tokenId }, (params) =>
-        getVeNftTokenLocked({
+        getVeNftTokenAttached({
           veNftContract,
           provider,
           chainId,
@@ -60,4 +60,4 @@ const useGetVeNftTokenLocked = (
   });
 };
 
-export default useGetVeNftTokenLocked;
+export default useGetVeNftTokenAttached;

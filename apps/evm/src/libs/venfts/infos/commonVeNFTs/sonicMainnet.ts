@@ -1,6 +1,6 @@
 import type { NFT } from "types";
 import veUSD from "libs/tokens/img/veUSD.svg";
-import veETH from "libs/tokens/img/veUSD.svg";
+import veETH from "libs/tokens/img/veETH.svg";
 
 export const venfts: NFT[] = [
   {

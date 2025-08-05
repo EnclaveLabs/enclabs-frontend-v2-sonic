@@ -95,7 +95,6 @@ export const VeTreveeWrap: React.FC<VeTreveeWrapProps> = ({
         <LabeledInlineContent
           className="flex-1"
           label={`You don't have any ${treveeWraping.treveeVeNftSymbol}.`}
-          iconSrc={treveeVeNft}
         >
           <></>
         </LabeledInlineContent>
@@ -144,7 +143,6 @@ export const VeTreveeWrap: React.FC<VeTreveeWrapProps> = ({
     );
   }
 
-  console.log(">>indexArray", indexArray);
   return (
     <div className={"flex flex-col gap-y-4"}>
       {indexArray.map((tokenIndex) => (

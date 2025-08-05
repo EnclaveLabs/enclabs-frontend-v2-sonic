@@ -4,22 +4,22 @@ import {
   useSendTransaction,
   type UseSendTransactionOptions,
 } from "hooks/useSendTransaction";
-import { useGetTreveeVeUSDVoterContract } from "libs/contracts";
 import { useChainId } from "libs/wallet";
 import { callOrThrow } from "utilities";
 import BigNumber from "bignumber.js";
+import { TreveeVoter } from "../../../../types";
 
 type TrimmedResetVeNftInput = Omit<ResetVeNftInput, "veNftVoterContract">;
 type Options = UseSendTransactionOptions<TrimmedResetVeNftInput>;
 
 const useResetVeNft = (
-  { tokenId }: { tokenId: BigNumber },
+  {
+    veNftVoterContract,
+    tokenId,
+  }: { veNftVoterContract: TreveeVoter; tokenId: BigNumber },
   options?: Partial<Options>
 ) => {
   const { chainId } = useChainId();
-  const veNftVoterContract = useGetTreveeVeUSDVoterContract({
-    passSigner: true,
-  });
 
   return useSendTransaction({
     fnKey: [FunctionKey.RESET_VENFT, { tokenId }],
@@ -33,7 +33,16 @@ const useResetVeNft = (
     onConfirmed: async ({ input }) => {
       queryClient.invalidateQueries({
         queryKey: [
-          FunctionKey.GET_VEUSD_TOKEN_VOTED,
+          FunctionKey.GET_VENFT_TOKEN_VOTED,
+          {
+            chainId,
+            tokenId,
+          },
+        ],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [
+          FunctionKey.GET_VENFT_TOKEN_ATTACHED,
           {
             chainId,
             tokenId,
