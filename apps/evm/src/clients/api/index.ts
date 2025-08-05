@@ -212,6 +212,10 @@ export { default as getVeNftTokenAttached } from "./queries/getVeNftTokenAttache
 export * from "./queries/getVeNftTokenAttached";
 export { default as useGetVeNftTokenAttached } from "./queries/getVeNftTokenAttached/useGetVeNftTokenAttached";
 
+export { default as getVeNftTokenIdsOfUser } from "./queries/getVeNftTokenIdsOfUser";
+export * from "./queries/getVeNftTokenIdsOfUser";
+export { default as useGetVeNftTokenIdsOfUser } from "./queries/getVeNftTokenIdsOfUser/useGetVeNftTokenIdsOfUser";
+
 export { default as getTokenBalances } from "./queries/getTokenBalances";
 export * from "./queries/getTokenBalances";
 export { default as useGetTokenBalances } from "./queries/getTokenBalances/useGetTokenBalances";

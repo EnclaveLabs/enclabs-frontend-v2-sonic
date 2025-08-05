@@ -5,14 +5,21 @@ import {
   Spinner,
 } from "../../../components";
 import { useAccountAddress, useChainId } from "../../../libs/wallet";
-import { VeTreveeListItem } from "../VeTreveeListItem";
+import { VeTreveeListItemInfos } from "../VeTreveeListItem";
 import { Link } from "../../../containers/Link";
 import { useGetToken } from "../../../libs/tokens";
 import useConvertMantissaToReadableTokenString from "../../../hooks/useConvertMantissaToReadableTokenString";
-import { useGetBalanceOf, useNftGetBalanceOf } from "../../../clients/api";
-import { TreveeWraping } from "../../../types";
-import { useMemo } from "react";
+import {
+  useGetBalanceOf,
+  useGetVeNftTokenIdsOfUser,
+} from "../../../clients/api";
+import { TreveeVeNFT, TreveeWraping } from "../../../types";
 import { useGetVeNFT } from "../../../libs/venfts";
+import {
+  useGetTreveeVeETHContract,
+  useGetTreveeVeUSDContract,
+} from "../../../libs/contracts";
+import BigNumber from "bignumber.js";
 
 export interface VeTreveeWrapProps {
   treveeWraping: TreveeWraping;
@@ -39,16 +46,14 @@ export const VeTreveeWrap: React.FC<VeTreveeWrapProps> = ({
     accountAddress: `${accountAddress}`,
     token: treeveToken,
   })!;
-  const { data: treveeVeNftBalance } = useNftGetBalanceOf({
+  const treveeVeETH = useGetTreveeVeETHContract()!;
+  const treveeVeUSD = useGetTreveeVeUSDContract()!;
+  const veNftContract: TreveeVeNFT =
+    treveeWraping.treveeVeNftSymbol === "veUSD" ? treveeVeUSD : treveeVeETH;
+  const { data: treveeTokenIds } = useGetVeNftTokenIdsOfUser({
     accountAddress: `${accountAddress}`,
-    nft: treveeVeNft,
+    veNftContract: veNftContract,
   })!;
-  const indexArray = useMemo(() => {
-    return Array.from(
-      { length: treveeVeNftBalance?.balance.toNumber() || 0 },
-      (_, i) => i
-    );
-  }, [treveeVeNftBalance?.balance]);
   const { data: treveeStakedTokenBalance } = useGetBalanceOf({
     accountAddress: `${accountAddress}`,
     token: treveeStakedToken,
@@ -74,7 +79,7 @@ export const VeTreveeWrap: React.FC<VeTreveeWrapProps> = ({
 
   if (
     !treeveTokenBalance ||
-    !treveeVeNftBalance ||
+    !treveeTokenIds ||
     !treveeStakedTokenBalance ||
     !enclabsStakedTokenBalance
   ) {
@@ -89,7 +94,7 @@ export const VeTreveeWrap: React.FC<VeTreveeWrapProps> = ({
   const emptyTreveeStakedTokenBalance =
     treveeStakedTokenBalance.balanceMantissa.isZero();
 
-  if (indexArray.length === 0) {
+  if (treveeTokenIds.tokenIds.length === 0) {
     return (
       <>
         <LabeledInlineContent
@@ -145,13 +150,12 @@ export const VeTreveeWrap: React.FC<VeTreveeWrapProps> = ({
 
   return (
     <div className={"flex flex-col gap-y-4"}>
-      {indexArray.map((tokenIndex) => (
-        <VeTreveeListItem
+      {treveeTokenIds.tokenIds.map((tokenId) => (
+        <VeTreveeListItemInfos
+          key={tokenId.toString()}
+          veNftContract={veNftContract}
           treveeWraping={treveeWraping}
-          key={tokenIndex}
-          tokenIndex={tokenIndex}
-          accountAddress={`${accountAddress}`}
-          chainId={chainId}
+          tokenId={new BigNumber(tokenId.toString())}
         />
       ))}
     </div>

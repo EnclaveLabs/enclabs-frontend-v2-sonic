@@ -57,6 +57,16 @@ const useWrapVeNft = (
       });
       queryClient.invalidateQueries({
         queryKey: [
+          FunctionKey.GET_VENFT_TOKEN_IDS,
+          {
+            veNftContractAddress: treveeVeNft.address,
+            accountAddress,
+          },
+        ],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: [
           FunctionKey.GET_VENFT_TOKEN_LOCKED,
           {
             chainId,

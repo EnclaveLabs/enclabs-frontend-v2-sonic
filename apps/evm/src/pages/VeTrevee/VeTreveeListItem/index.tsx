@@ -3,13 +3,12 @@ import {
   useDetachVeNft,
   useGetVeNftTokenAttached,
   useGetVeNftTokenLocked,
-  useGetVeNftTokenOfOwnerByIndex,
   useGetVeNftTokenVoted,
   useNftGetApproved,
   useResetVeNft,
   useWrapVeNft,
 } from "../../../clients/api";
-import { ChainId, TreveeVeNFT, TreveeWraping } from "types";
+import { TreveeVeNFT, TreveeWraping } from "types";
 import BigNumber from "bignumber.js";
 import {
   Button,
@@ -26,10 +25,6 @@ import useConvertMantissaToReadableTokenString from "../../../hooks/useConvertMa
 import Checked from "../../../components/Icon/icons/checked";
 import Close from "../../../components/Icon/icons/close";
 import { useGetVeNFT } from "../../../libs/venfts";
-import {
-  useGetTreveeVeETHContract,
-  useGetTreveeVeUSDContract,
-} from "../../../libs/contracts";
 import { useMemo } from "react";
 
 interface VeTreveeListItemInfoProps {
@@ -39,9 +34,8 @@ interface VeTreveeListItemInfoProps {
 }
 
 interface VeTreveeListItemProps {
-  tokenIndex: number;
-  accountAddress: string;
-  chainId: ChainId;
+  veNftContract: TreveeVeNFT;
+  tokenId: BigNumber;
   treveeWraping: TreveeWraping;
 }
 
@@ -165,7 +159,7 @@ const VeTreveeListItemActions: React.FC<VeTreveeListItemActionsProps> = ({
   );
 };
 
-const VeTreveeListItemInfos: React.FC<VeTreveeListItemInfoProps> = ({
+export const VeTreveeListItemInfos: React.FC<VeTreveeListItemInfoProps> = ({
   veNftContract,
   tokenId,
   treveeWraping,
@@ -301,35 +295,6 @@ const VeTreveeListItemInfos: React.FC<VeTreveeListItemInfoProps> = ({
         isAttached={!!VeNftIsAttached?.isAttached}
       />
     </Card>
-  ) : (
-    <></>
-  );
-};
-
-export const VeTreveeListItem: React.FC<VeTreveeListItemProps> = ({
-  accountAddress,
-  tokenIndex,
-  chainId,
-  treveeWraping,
-}) => {
-  const treveeVeETH = useGetTreveeVeETHContract()!;
-  const treveeVeUSD = useGetTreveeVeUSDContract()!;
-  const veNftContract: TreveeVeNFT =
-    treveeWraping.treveeVeNftSymbol === "veUSD" ? treveeVeUSD : treveeVeETH;
-  const { data: VeNftData, isLoading: VeUsdDataLoading } =
-    useGetVeNftTokenOfOwnerByIndex({
-      veNftContract,
-      accountAddress,
-      tokenIndex,
-      chainId,
-    });
-
-  return VeNftData ? (
-    <VeTreveeListItemInfos
-      veNftContract={veNftContract}
-      treveeWraping={treveeWraping}
-      tokenId={VeNftData.tokenId}
-    />
   ) : (
     <></>
   );

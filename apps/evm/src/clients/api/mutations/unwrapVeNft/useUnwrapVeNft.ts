@@ -63,6 +63,17 @@ const useUnwrapVeNft = (
         ],
       });
       queryClient.invalidateQueries({
+        queryKey: [
+          FunctionKey.GET_TOKEN_ALLOWANCE,
+          {
+            chainId,
+            accountAddress,
+            tokenAddress: enclabsStakedToken.address,
+            spenderAddress: enclabsTreveeVeManager.address,
+          },
+        ],
+      });
+      queryClient.invalidateQueries({
         queryKey: [FunctionKey.GET_VENFT_TOKEN_LOCKED],
       });
     },
