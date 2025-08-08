@@ -1,10 +1,14 @@
-import type BigNumber from 'bignumber.js';
-import { useMemo } from 'react';
+import type BigNumber from "bignumber.js";
+import { useMemo } from "react";
 
-import { useApproveToken, useGetAllowance, useRevokeSpendingLimit } from 'clients/api';
-import { VError } from 'libs/errors';
-import type { Token } from 'types';
-import { convertMantissaToTokens } from 'utilities';
+import {
+  useApproveToken,
+  useGetAllowance,
+  useRevokeSpendingLimit,
+} from "clients/api";
+import { VError } from "libs/errors";
+import type { Token } from "types";
+import { convertMantissaToTokens } from "utilities";
 
 export interface UseTokenApprovalInput {
   token: Token;
@@ -14,7 +18,7 @@ export interface UseTokenApprovalInput {
 
 export interface UseTokenApprovalOutput {
   isTokenApproved: boolean | undefined;
-  approveToken: () => Promise<void>;
+  approveToken: (allowance?: string) => Promise<void>;
   revokeWalletSpendingLimit: () => Promise<unknown>;
   isApproveTokenLoading: boolean;
   isRevokeWalletSpendingLimitLoading: boolean;
@@ -29,26 +33,31 @@ const useTokenApproval = ({
   spenderAddress,
   accountAddress,
 }: UseTokenApprovalInput): UseTokenApprovalOutput => {
-  const { data: getTokenAllowanceData, isLoading: isWalletSpendingLimitLoading } = useGetAllowance(
+  const {
+    data: getTokenAllowanceData,
+    isLoading: isWalletSpendingLimitLoading,
+  } = useGetAllowance(
     {
-      accountAddress: accountAddress || '',
-      spenderAddress: spenderAddress || '',
+      accountAddress: accountAddress || "",
+      spenderAddress: spenderAddress || "",
       token,
     },
     {
       enabled: !!spenderAddress && !!accountAddress && !token.isNative,
-    },
+    }
   );
 
-  const { mutateAsync: revokeAsync, isPending: isRevokeWalletSpendingLimitLoading } =
-    useRevokeSpendingLimit(
-      {
-        token,
-      },
-      {
-        waitForConfirmation: true,
-      },
-    );
+  const {
+    mutateAsync: revokeAsync,
+    isPending: isRevokeWalletSpendingLimitLoading,
+  } = useRevokeSpendingLimit(
+    {
+      token,
+    },
+    {
+      waitForConfirmation: true,
+    }
+  );
 
   const revokeWalletSpendingLimit = async () => {
     if (spenderAddress) {
@@ -59,8 +68,11 @@ const useTokenApproval = ({
   const walletSpendingLimitTokens = useMemo(
     () =>
       getTokenAllowanceData?.allowanceMantissa &&
-      convertMantissaToTokens({ value: getTokenAllowanceData.allowanceMantissa, token }),
-    [getTokenAllowanceData?.allowanceMantissa, token],
+      convertMantissaToTokens({
+        value: getTokenAllowanceData.allowanceMantissa,
+        token,
+      }),
+    [getTokenAllowanceData?.allowanceMantissa, token]
   );
 
   const isTokenApproved = useMemo(() => {
@@ -75,22 +87,26 @@ const useTokenApproval = ({
     return walletSpendingLimitTokens.isGreaterThan(0);
   }, [token.isNative, walletSpendingLimitTokens]);
 
-  const { mutateAsync: approveTokenMutation, isPending: isApproveTokenLoading } = useApproveToken(
+  const {
+    mutateAsync: approveTokenMutation,
+    isPending: isApproveTokenLoading,
+  } = useApproveToken(
     {
       token,
     },
     {
       waitForConfirmation: true,
-    },
+    }
   );
 
-  const approveToken = async () => {
+  const approveToken = async (allowance?: string) => {
     if (!spenderAddress) {
-      throw new VError({ type: 'unexpected', code: 'somethingWentWrong' });
+      throw new VError({ type: "unexpected", code: "somethingWentWrong" });
     }
 
     await approveTokenMutation({
       spenderAddress,
+      allowance,
     });
   };
 

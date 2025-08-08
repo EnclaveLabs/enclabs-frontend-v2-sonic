@@ -1,48 +1,55 @@
-import { useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 
-import { PAGE_CONTAINER_ID } from 'constants/layout';
-import { Subdirectory, routes } from 'constants/routing';
-import { Layout } from 'containers/Layout';
-import { useIsFeatureEnabled } from 'hooks/useIsFeatureEnabled';
-import { useAccountAddress } from 'libs/wallet';
+import { PAGE_CONTAINER_ID } from "constants/layout";
+import { routes, Subdirectory } from "constants/routing";
+import { Layout } from "containers/Layout";
+import { useIsFeatureEnabled } from "hooks/useIsFeatureEnabled";
+import { useAccountAddress } from "libs/wallet";
 
-import { Redirect } from 'components';
-import { useGetChainMetadata } from 'hooks/useGetChainMetadata';
-import { safeLazyLoad } from 'utilities';
-import PageSuspense from './PageSuspense';
+import { Redirect } from "components";
+import { useGetChainMetadata } from "hooks/useGetChainMetadata";
+import { safeLazyLoad } from "utilities";
+import PageSuspense from "./PageSuspense";
 
-const Dashboard = safeLazyLoad(() => import('pages/Dashboard'));
-const Account = safeLazyLoad(() => import('pages/Account'));
-const Rewards = safeLazyLoad(() => import('pages/Rewards'));
-const CorePoolMarket = safeLazyLoad(() => import('pages/Market/CorePoolMarket'));
-const IsolatedPoolMarket = safeLazyLoad(() => import('pages/Market/IsolatedPoolMarket'));
-const CorePool = safeLazyLoad(() => import('pages/Pool/CorePool'));
-const IsolatedPool = safeLazyLoad(() => import('pages/Pool/IsolatedPool'));
-const LidoMarket = safeLazyLoad(() => import('pages/Market/LidoMarket'));
-const ConvertVrt = safeLazyLoad(() => import('pages/ConvertVrt'));
-const Governance = safeLazyLoad(() => import('pages/Governance'));
-const IsolatedPools = safeLazyLoad(() => import('pages/IsolatedPools'));
-const Proposal = safeLazyLoad(() => import('pages/Proposal'));
-const Swap = safeLazyLoad(() => import('pages/Swap'));
-const SwapOdos = safeLazyLoad(() => import('pages/SwapOdos'));
-const Vai = safeLazyLoad(() => import('pages/Vai'));
-const Vaults = safeLazyLoad(() => import('pages/Vault'));
-const Voter = safeLazyLoad(() => import('pages/Voter'));
-const VoterLeaderboard = safeLazyLoad(() => import('pages/VoterLeaderboard'));
-const PrimeCalculator = safeLazyLoad(() => import('pages/PrimeCalculator'));
-const Bridge = safeLazyLoad(() => import('pages/Bridge'));
+const Dashboard = safeLazyLoad(() => import("pages/Dashboard"));
+const Account = safeLazyLoad(() => import("pages/Account"));
+const Rewards = safeLazyLoad(() => import("pages/Rewards"));
+const CorePoolMarket = safeLazyLoad(
+  () => import("pages/Market/CorePoolMarket")
+);
+const IsolatedPoolMarket = safeLazyLoad(
+  () => import("pages/Market/IsolatedPoolMarket")
+);
+const CorePool = safeLazyLoad(() => import("pages/Pool/CorePool"));
+const IsolatedPool = safeLazyLoad(() => import("pages/Pool/IsolatedPool"));
+const LidoMarket = safeLazyLoad(() => import("pages/Market/LidoMarket"));
+const ConvertVrt = safeLazyLoad(() => import("pages/ConvertVrt"));
+const Governance = safeLazyLoad(() => import("pages/Governance"));
+const IsolatedPools = safeLazyLoad(() => import("pages/IsolatedPools"));
+const Proposal = safeLazyLoad(() => import("pages/Proposal"));
+const Swap = safeLazyLoad(() => import("pages/Swap"));
+const SwapOdos = safeLazyLoad(() => import("pages/SwapOdos"));
+const Vai = safeLazyLoad(() => import("pages/Vai"));
+const Vaults = safeLazyLoad(() => import("pages/Vault"));
+const Voter = safeLazyLoad(() => import("pages/Voter"));
+const VoterLeaderboard = safeLazyLoad(() => import("pages/VoterLeaderboard"));
+const PrimeCalculator = safeLazyLoad(() => import("pages/PrimeCalculator"));
+const Bridge = safeLazyLoad(() => import("pages/Bridge"));
+const VeTrevee = safeLazyLoad(() => import("pages/VeTrevee"));
 
 const AppRoutes = () => {
   const { accountAddress } = useAccountAddress();
   const { lstPoolComptrollerContractAddress, lstPoolVWstEthContractAddress } =
     useGetChainMetadata();
-  const swapRouteEnabled = useIsFeatureEnabled({ name: 'swapRoute' });
-  const convertVrtRouteEnabled = useIsFeatureEnabled({ name: 'convertVrtRoute' });
-  const vaiRouteEnabled = useIsFeatureEnabled({ name: 'vaiRoute' });
-  const bridgeEnabled = useIsFeatureEnabled({ name: 'bridgeRoute' });
+  const swapRouteEnabled = useIsFeatureEnabled({ name: "swapRoute" });
+  const convertVrtRouteEnabled = useIsFeatureEnabled({
+    name: "convertVrtRoute",
+  });
+  const vaiRouteEnabled = useIsFeatureEnabled({ name: "vaiRoute" });
+  const bridgeEnabled = useIsFeatureEnabled({ name: "bridgeRoute" });
   const primeCalculatorEnabled = useIsFeatureEnabled({
-    name: 'primeCalculator',
+    name: "primeCalculator",
   });
   const location = useLocation();
 
@@ -106,13 +113,24 @@ const AppRoutes = () => {
         {!!accountAddress && (
           <Route
             path={Subdirectory.REWARDS}
-
             element={
               <PageSuspense>
                 <Rewards />
               </PageSuspense>
             }
-          />)}
+          />
+        )}
+
+        {!!accountAddress && (
+          <Route
+            path={Subdirectory.VE_TREVEE}
+            element={
+              <PageSuspense>
+                <VeTrevee />
+              </PageSuspense>
+            }
+          />
+        )}
 
         <Route path={Subdirectory.ISOLATED_POOLS}>
           <Route
@@ -165,18 +183,19 @@ const AppRoutes = () => {
           />
         </Route>
 
-        {!!lstPoolComptrollerContractAddress && !!lstPoolVWstEthContractAddress && (
-          <Route path={Subdirectory.LIDO_MARKET}>
-            <Route
-              index
-              element={
-                <PageSuspense>
-                  <LidoMarket />
-                </PageSuspense>
-              }
-            />
-          </Route>
-        )}
+        {!!lstPoolComptrollerContractAddress &&
+          !!lstPoolVWstEthContractAddress && (
+            <Route path={Subdirectory.LIDO_MARKET}>
+              <Route
+                index
+                element={
+                  <PageSuspense>
+                    <LidoMarket />
+                  </PageSuspense>
+                }
+              />
+            </Route>
+          )}
 
         <Route path={Subdirectory.VAULTS}>
           <Route
@@ -215,9 +234,6 @@ const AppRoutes = () => {
           element={
             <PageSuspense>
               <SwapOdos />
-
-
-
             </PageSuspense>
           }
         />

@@ -1,30 +1,30 @@
-import { css } from "@emotion/react";
-import { useTheme } from "@mui/material";
-import { getTokenType } from "components/Tag";
-import { tokenTypeInfo } from "constants/tokenType";
-import { theme } from "theme";
+import { css } from '@emotion/react';
+import { useTheme } from '@mui/material';
+import { getTokenType } from 'components/Tag';
+import { tokenTypeInfo} from 'constants/tokenType';
+import { theme } from 'theme';
 
-import type { BREAKPOINTS } from "theme/MuiThemeProvider/muiTheme";
+import type { BREAKPOINTS } from 'theme/MuiThemeProvider/muiTheme';
 
-const getHoverBackgroundColor = (tokenAddress: string): string => {
-  if (tokenAddress) {
+const getHoverBackgroundColor = (tokenAddress: string) : string => {
+
+  if(tokenAddress){
+
     const tokenType = getTokenType(tokenAddress);
     const tokenTypeInfos = tokenTypeInfo[tokenType];
     return tokenTypeInfos.hoverColor;
-  } else {
+  }
+  else{
+
     return theme.colors.lightGrey;
   }
-};
+}
 
 export const useStyles = () => {
   const usedTheme = useTheme();
 
   return {
-    getRoot: ({
-      breakpoint,
-    }: {
-      breakpoint?: keyof (typeof BREAKPOINTS)["values"];
-    }) => css`
+    getRoot: ({ breakpoint }: { breakpoint?: keyof (typeof BREAKPOINTS)['values'] }) => css`
       padding-left: 0;
       padding-right: 0;
       margin-top: 1px;
@@ -36,11 +36,7 @@ export const useStyles = () => {
         padding-bottom: 0;
       }
     `,
-    getTitle: ({
-      breakpoint,
-    }: {
-      breakpoint?: keyof (typeof BREAKPOINTS)["values"];
-    }) => css`
+    getTitle: ({ breakpoint }: { breakpoint?: keyof (typeof BREAKPOINTS)['values'] }) => css`
       margin-bottom: ${usedTheme.spacing(4)};
       padding: ${usedTheme.spacing(0, 6)};
 
@@ -51,7 +47,7 @@ export const useStyles = () => {
     getTableContainer: ({
       breakpoint,
     }: {
-      breakpoint?: keyof (typeof BREAKPOINTS)["values"];
+      breakpoint?: keyof (typeof BREAKPOINTS)['values'];
     }) => css`
       ${breakpoint && usedTheme.breakpoints.down(breakpoint)} {
         display: none;
@@ -60,7 +56,7 @@ export const useStyles = () => {
     getCardsContainer: ({
       breakpoint,
     }: {
-      breakpoint?: keyof (typeof BREAKPOINTS)["values"];
+      breakpoint?: keyof (typeof BREAKPOINTS)['values'];
     }) => css`
       display: none;
       box-shadow: 0 0 0 0 rgb(0 0 0 / 0.1), 0 0 0 0 rgb(0 0 0 / 0.1);
@@ -80,27 +76,23 @@ export const useStyles = () => {
         text-decoration: none;
       }
     `,
-    tableWrapperMobile: ({
-      clickable,
-      tokenAddress,
-    }: {
-      clickable: boolean;
-      tokenAddress: string;
-    }) => css`
+    tableWrapperMobile: ({ clickable, tokenAddress }: { clickable: boolean, tokenAddress: string }) => css`
       &:not(:last-of-type) {
         margin-bottom: ${usedTheme.spacing(4)};
       }
 
       padding: ${usedTheme.spacing(4, 0)};
 
-      ${clickable &&
-      css`
+      ${
+        clickable &&
+        css`
         cursor: pointer;
 
         :hover {
           background-color: ${getHoverBackgroundColor(tokenAddress)};
         }
-      `}
+      `
+      }
     `,
     rowTitleMobile: css`
       padding-left: ${usedTheme.spacing(4)};
@@ -109,23 +101,19 @@ export const useStyles = () => {
     delimiterMobile: css`
       margin: ${usedTheme.spacing(4)};
     `,
-    getTableRow: ({
-      clickable,
-      tokenAddress,
-    }: {
-      clickable: boolean;
-      tokenAddress: string;
-    }) => css`
+    getTableRow: ({ clickable, tokenAddress }: { clickable: boolean, tokenAddress: string }) => css`
       height: ${usedTheme.spacing(14)};
 
       :hover {
         background-color: ${getHoverBackgroundColor(tokenAddress)} !important;
       }
 
-      ${clickable &&
-      css`
+      ${
+        clickable &&
+        css`
         cursor: pointer;
-      `}
+      `
+      }
     `,
     rowWrapperMobile: css`
       display: grid;
@@ -155,7 +143,7 @@ export const useStyles = () => {
 
       .MuiTableRow-root:first-child,
       .MuiTableRow-root:not(:last-child) {
-        border-bottom: 1px solid lightgray;
+        border-bottom: 2px solid #faf8f0;
       }
 
       .MuiTableCell-root {
@@ -175,7 +163,7 @@ export const useStyles = () => {
       }
     `,
     tableSortLabel: ({ orderable }: { orderable: boolean }) => css`
-      cursor: ${orderable ? "pointer" : "auto"};
+      cursor: ${orderable ? 'pointer' : 'auto'};
 
       &.MuiTableSortLabel-root {
         span {
@@ -216,14 +204,9 @@ export const useStyles = () => {
       &.MuiTableSortLabel-icon {
         fill: ${usedTheme.palette.text.primary};
       }
-
       .Mui-active &.MuiTableSortLabel-icon {
-        fill: ${active
-          ? usedTheme.palette.interactive.success
-          : usedTheme.palette.text.primary};
-        color: ${active
-          ? usedTheme.palette.interactive.success
-          : usedTheme.palette.text.primary};
+        fill: ${active ? usedTheme.palette.interactive.success : usedTheme.palette.text.primary};
+        color: ${active ? usedTheme.palette.interactive.success : usedTheme.palette.text.primary};
       }
     `,
     cellWrapper: css`

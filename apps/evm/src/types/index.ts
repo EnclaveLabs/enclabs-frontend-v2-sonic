@@ -1,33 +1,41 @@
-import type { Token as PSToken } from '@pancakeswap/sdk';
-import type BigNumber from 'bignumber.js';
-import type { BaseContract, ContractReceipt } from 'ethers';
-import type { TransactionReceipt } from 'viem';
+import type { Token as PSToken } from "@pancakeswap/sdk";
+import type BigNumber from "bignumber.js";
+import type { BaseContract, ContractReceipt } from "ethers";
+import type { TransactionReceipt } from "viem";
+import {
+  EnclabsVeETHTreveeVeManager,
+  EnclabsVeUSDTreveeVeManager,
+  TreveeVeETH,
+  TreveeVeETHVoter,
+  TreveeVeUSD,
+  TreveeVeUSDVoter,
+} from "../libs/contracts";
 
 export type NonNullableFields<T> = Required<{
   [P in keyof T]: NonNullable<T[P]>;
 }>;
 
 export type Environment =
-  | 'storybook'
-  | 'ci'
-  | 'local'
-  | 'preview' // Automatically generated environments when opening PRs and fixed preview environments
-  | 'production';
+  | "storybook"
+  | "ci"
+  | "local"
+  | "preview" // Automatically generated environments when opening PRs and fixed preview environments
+  | "production";
 
 export type Network =
-  | 'testnet'
-  | 'mainnet-preview' // mainnet too, but will hit the preview API
-  | 'mainnet';
+  | "testnet"
+  | "mainnet-preview" // mainnet too, but will hit the preview API
+  | "mainnet";
 
 export enum ChainId {
   SONIC_MAINNET = 146,
 }
 
 export enum ChainName {
-  SONIC_MAINNET = 'Sonic',
+  SONIC_MAINNET = "Sonic",
 }
 
-export type TransactionType = 'chain' | 'layerZero';
+export type TransactionType = "chain" | "layerZero";
 
 export interface ChainMetadata {
   name: string;
@@ -55,12 +63,30 @@ export interface Token {
   tokenWrapped?: Token;
 }
 
-export interface VToken extends Omit<Token, 'isNative' | 'asset' | 'tokenWrapped'> {
+export interface NFT {
+  tokenId?: string; // identifiant unique (en string ou BigNumber.toString)
+  symbol: string;
+  name?: string; // nom du NFT (ex: "CryptoPunk #1234")
+  asset?: string; // URL image ou IPFS
+  description?: string; // texte descriptif
+  address: string; // adresse du contrat ERC-721
+  collectionName?: string; // nom de la collection (ex: "CryptoPunks")
+  owner?: string; // adresse du propriétaire
+  attributes?: Record<string, any>[]; // metadata (ex: traits OpenSea)
+}
+
+export interface VToken
+  extends Omit<Token, "isNative" | "asset" | "tokenWrapped"> {
   decimals: 8; // VBep tokens all have 8 decimals
   underlyingToken: Token;
 }
 
-export type TokenAction = 'swapAndSupply' | 'supply' | 'withdraw' | 'borrow' | 'repay';
+export type TokenAction =
+  | "swapAndSupply"
+  | "supply"
+  | "withdraw"
+  | "borrow"
+  | "repay";
 
 export interface TokenBalance {
   token: Token;
@@ -68,27 +94,27 @@ export interface TokenBalance {
 }
 
 export interface RewardDistributorDistribution {
-  type: 'rewardDistributor';
+  type: "rewardDistributor";
   token: Token;
   apyPercentage: BigNumber;
   dailyDistributedTokens: BigNumber;
 }
 
 export interface PrimeDistribution {
-  type: 'prime';
+  type: "prime";
   token: Token;
   apyPercentage: BigNumber;
 }
 
 export interface MerklDistribution {
-  type: 'merkl';
+  type: "merkl";
   token: Token;
   apyPercentage: BigNumber;
   dailyDistributedTokens: BigNumber;
 }
 
 export interface PrimeSimulationDistribution {
-  type: 'primeSimulation';
+  type: "primeSimulation";
   token: Token;
   apyPercentage: BigNumber;
   referenceValues: {
@@ -201,7 +227,7 @@ export interface ProposalAction {
 }
 
 export interface DescriptionV2 {
-  version: 'v2';
+  version: "v2";
   title: string;
   description: string;
   forDescription: string;
@@ -210,7 +236,7 @@ export interface DescriptionV2 {
 }
 
 export interface DescriptionV1 {
-  version: 'v1';
+  version: "v1";
   title: string;
   description: string;
   forDescription?: undefined;
@@ -240,15 +266,15 @@ export type ProposalVoter = {
   blockTimestamp: Date;
 };
 
-export type ForVoter = Omit<ProposalVoter, 'support'> & {
+export type ForVoter = Omit<ProposalVoter, "support"> & {
   support: VoteSupport.For;
 };
 
-export type AgainstVoter = Omit<ProposalVoter, 'support'> & {
+export type AgainstVoter = Omit<ProposalVoter, "support"> & {
   support: VoteSupport.Against;
 };
 
-export type AbstainVoter = Omit<ProposalVoter, 'support'> & {
+export type AbstainVoter = Omit<ProposalVoter, "support"> & {
   support: VoteSupport.Abstain;
 };
 
@@ -330,29 +356,29 @@ export interface MarketSnapshot {
 }
 
 export type TransactionEvent =
-  | 'Mint'
-  | 'Transfer'
-  | 'Borrow'
-  | 'RepayBorrow'
-  | 'Redeem'
-  | 'Approval'
-  | 'LiquidateBorrow'
-  | 'ReservesAdded'
-  | 'ReservesReduced'
-  | 'MintVAI'
-  | 'Withdraw'
-  | 'RepayVAI'
-  | 'Deposit'
-  | 'VoteCast'
-  | 'ProposalCreated'
-  | 'ProposalQueued'
-  | 'ProposalExecuted'
-  | 'ProposalCanceled';
+  | "Mint"
+  | "Transfer"
+  | "Borrow"
+  | "RepayBorrow"
+  | "Redeem"
+  | "Approval"
+  | "LiquidateBorrow"
+  | "ReservesAdded"
+  | "ReservesReduced"
+  | "MintVAI"
+  | "Withdraw"
+  | "RepayVAI"
+  | "Deposit"
+  | "VoteCast"
+  | "ProposalCreated"
+  | "ProposalQueued"
+  | "ProposalExecuted"
+  | "ProposalCanceled";
 
 export enum TransactionCategory {
-  vtoken = 'vtoken',
-  vai = 'vai',
-  vote = 'vote',
+  vtoken = "vtoken",
+  vai = "vai",
+  vote = "vote",
 }
 
 export interface Transaction {
@@ -429,7 +455,7 @@ export type VoterHistory = Proposal & {
   reason: string | undefined;
 };
 
-export type SwapDirection = 'exactAmountIn' | 'exactAmountOut';
+export type SwapDirection = "exactAmountIn" | "exactAmountOut";
 
 interface SwapBase {
   fromToken: Token;
@@ -444,22 +470,22 @@ export interface ExactAmountInSwap extends SwapBase {
   fromTokenAmountSoldMantissa: BigNumber;
   expectedToTokenAmountReceivedMantissa: BigNumber;
   minimumToTokenAmountReceivedMantissa: BigNumber;
-  direction: 'exactAmountIn';
+  direction: "exactAmountIn";
 }
 
 export interface ExactAmountOutSwap extends SwapBase {
   expectedFromTokenAmountSoldMantissa: BigNumber;
   maximumFromTokenAmountSoldMantissa: BigNumber;
   toTokenAmountReceivedMantissa: BigNumber;
-  direction: 'exactAmountOut';
+  direction: "exactAmountOut";
 }
 
 export type Swap = ExactAmountInSwap | ExactAmountOutSwap;
 
 export type SwapError =
-  | 'INSUFFICIENT_LIQUIDITY'
-  | 'WRAPPING_UNSUPPORTED'
-  | 'UNWRAPPING_UNSUPPORTED';
+  | "INSUFFICIENT_LIQUIDITY"
+  | "WRAPPING_UNSUPPORTED"
+  | "UNWRAPPING_UNSUPPORTED";
 
 export type PSTokenCombination = [PSToken, PSToken];
 
@@ -470,15 +496,38 @@ export interface PrimeApy {
 
 export type ContractTxData<
   TContract extends BaseContract,
-  TMethodName extends keyof TContract['functions'],
+  TMethodName extends keyof TContract["functions"]
 > = {
   contract: TContract;
   methodName: TMethodName;
-  args: Omit<Parameters<TContract['functions'][TMethodName]>, 'overrides'>;
+  args: Omit<Parameters<TContract["functions"][TMethodName]>, "overrides">;
   overrides?: { value: string } | Record<never, never>;
 };
 
 export interface ContractTransaction {
   hash: string;
-  wait: (confirmations?: number) => Promise<ContractReceipt | TransactionReceipt>;
+  wait: (
+    confirmations?: number
+  ) => Promise<ContractReceipt | TransactionReceipt>;
+}
+
+export type EnclabsTreveeVeManager =
+  | EnclabsVeUSDTreveeVeManager
+  | EnclabsVeETHTreveeVeManager;
+export type TreveeVoter = TreveeVeUSDVoter | TreveeVeETHVoter;
+export type TreveeTokenSymbol = "scUSD" | "scETH";
+export type TreveeVeNftSymbol = "veUSD" | "veETH";
+export type TreveeVeNFT = TreveeVeUSD | TreveeVeETH;
+export type TreveeStakedTokenSymbol = "stkscUSD" | "stkscETH";
+export type EnclabsStakedTokenSymbol =
+  | "Enclabs Trevee veUSD"
+  | "Enclabs Trevee veETH";
+
+export interface TreveeWraping {
+  manager: EnclabsTreveeVeManager;
+  voter: TreveeVoter;
+  treeveTokenSymbol: TreveeTokenSymbol;
+  treveeVeNftSymbol: TreveeVeNftSymbol;
+  treveeStakedTokenSymbol: TreveeStakedTokenSymbol;
+  enclabsStakedTokenSymbol: EnclabsStakedTokenSymbol;
 }

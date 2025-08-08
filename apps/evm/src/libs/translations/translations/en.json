@@ -151,6 +151,7 @@
     "governance": "Governance",
     "isolatedPools": "Isolated pools",
     "rewards": "Rewards",
+    "veusd": "veUSD",
     "leaderboard": "Leaderboard",
     "lidoMarket": "Lido market",
     "markets": "Markets",
@@ -365,6 +366,7 @@
       "governance": "Governance",
       "isolatedPools": "Isolated pools",
       "lidoMarket": "Lido market",
+      "veusd": "veUSD",
       "swap": "Swap",
       "vai": "VAI",
       "vaults": "Vaults",
@@ -372,9 +374,14 @@
     },
     "testEnvWarning": "This is a test environment. Do not interact with it for any purpose other than testing. <Link>Go to the official Venus Protocol website</Link>"
   },
-  "legacyPool": {
-    "description": "Enclabs’ primary pool is composed of large-cap tokens that meet minimum liquidity requirements.",
-    "name": "Core Pool"
+  "veusd": {
+    "wrap": "Wrap",
+    "unwrap": "Unwrap",
+    "dashboard": {
+      "scUsdBalance": "scUSD Balance",
+      "veUsdBalance": "veUSD Balance",
+      "enclabsVeUsdBalance": "Enclabs veUSD Balance"
+    }
   },
   "markdownEditor": {
     "markdownTabLabel": "Write",
@@ -527,6 +534,7 @@
       "higherThanWalletBalance": "Insufficient {{tokenSymbol}} balance",
       "higherThanWalletSpendingLimit": "You entered an amount that exceeds your spending limit for this asset. Please revoke your spending limit then set a new one in order to proceed with this transaction.",
       "higherThanWithdrawableAmount": "Amount entered higher than withdrawable amount",
+      "higherThanUnwrappableAmount": "Amount entered higher than unwrappable amount",
       "insufficientSwapLiquidity": "Insufficient liquidity in PancakeSwap for this swap",
       "noCollateral": "You need to supply tokens and enable them as collateral before you can borrow {{tokenSymbol}} from this pool",
       "priceImpactTooHigh": "Price impact too high",
@@ -1289,8 +1297,8 @@
     },
     "withdrawTabTitle": "Withdraw"
   },
-  "rewards":{
-    "table":{
+  "rewards": {
+    "table": {
       "rank": "Rank",
       "address": "Address",
       "points": "Supply Points",

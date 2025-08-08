@@ -29,6 +29,8 @@ export const tokenType = {
         "0x29219dd400f2bf60e5a23d13be72b486d4038894", // USDC.e
         "0xd3DCe716f3eF535C5Ff8d041c1A41C3bd89b97aE", //scUSD
         "0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57", //EURC
+        "0xB9EA44D1aa76D5Cfd475C2800E186d3Dea2141a4", //veETHEnclabs
+        "0xd02962DC00A058a00Fc07A8AA9F760ab6D9Bd163", //veUSDEnclabs
     ],
     "Yield bearing Stable": [
        

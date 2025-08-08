@@ -1,22 +1,31 @@
-import { type BorrowInput, borrow, queryClient } from 'clients/api';
-import FunctionKey from 'constants/functionKey';
-import { type UseSendTransactionOptions, useSendTransaction } from 'hooks/useSendTransaction';
-import { useAnalytics } from 'libs/analytics';
-import { useGetNativeTokenGatewayContract, useGetVTokenContract } from 'libs/contracts';
-import { useChainId } from 'libs/wallet';
-import type { VToken } from 'types';
-import { callOrThrow, convertMantissaToTokens } from 'utilities';
+import { borrow, type BorrowInput, queryClient } from "clients/api";
+import FunctionKey from "constants/functionKey";
+import {
+  useSendTransaction,
+  type UseSendTransactionOptions,
+} from "hooks/useSendTransaction";
+import { useAnalytics } from "libs/analytics";
+import {
+  useGetNativeTokenGatewayContract,
+  useGetVTokenContract,
+} from "libs/contracts";
+import { useChainId } from "libs/wallet";
+import type { VToken } from "types";
+import { callOrThrow, convertMantissaToTokens } from "utilities";
 
-type TrimmedBorrowInput = Omit<BorrowInput, 'vTokenContract' | 'nativeTokenGatewayContract'>;
+type TrimmedBorrowInput = Omit<
+  BorrowInput,
+  "vTokenContract" | "nativeTokenGatewayContract"
+>;
 type Options = UseSendTransactionOptions<TrimmedBorrowInput>;
 
-const useBorrow = (
+export const useBorrow = (
   {
     vToken,
     poolName,
     poolComptrollerAddress,
   }: { vToken: VToken; poolName: string; poolComptrollerAddress: string },
-  options?: Partial<Options>,
+  options?: Partial<Options>
 ) => {
   const vTokenContract = useGetVTokenContract({ vToken, passSigner: true });
   const nativeTokenGatewayContract = useGetNativeTokenGatewayContract({
@@ -30,15 +39,15 @@ const useBorrow = (
     fnKey: [FunctionKey.BORROW, { vToken }],
     // @ts-expect-error this should accept both the NativeTokenGateway and VToken contracts
     fn: (input: TrimmedBorrowInput) =>
-      callOrThrow({ vTokenContract }, params =>
+      callOrThrow({ vTokenContract }, (params) =>
         borrow({
           ...params,
           ...input,
           nativeTokenGatewayContract,
-        }),
+        })
       ),
     onConfirmed: async ({ input }) => {
-      captureAnalyticEvent('Tokens borrowed', {
+      captureAnalyticEvent("Tokens borrowed", {
         poolName,
         tokenSymbol: vToken.underlyingToken.symbol,
         tokenAmountTokens: convertMantissaToTokens({
@@ -96,5 +105,3 @@ const useBorrow = (
     options,
   });
 };
-
-export default useBorrow;

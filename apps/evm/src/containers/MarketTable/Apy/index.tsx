@@ -22,8 +22,8 @@ import {
 
 import type { ColumnKey } from "../types";
 import { t } from "i18next";
-import useGetMerkl from "../../../clients/api/queries/getMerkl/useGetMerkl";
-import { Link } from 'containers/Link';
+import { useGetMerkl } from "../../../clients/api/queries/getMerkl/useGetMerkl";
+import { Link } from "containers/Link";
 
 export interface ApyProps {
   asset: Asset;
@@ -154,7 +154,17 @@ export const Apy: React.FC<ApyProps> = ({
       children: formatPercentageToReadableValue(distribution.apyPercentage),
       disclaimer: distribution.type === "merkl" && (
         <div className="text-grey text-sm">
-          <p>Rewards from this external program can be claimed through {" "} <Link target="_blank" href="https://app.merkl.xyz/" onClick={e => e.stopPropagation()} className="text-white hover:underline">Merkl official app.</Link></p>
+          <p>
+            Rewards from this external program can be claimed through{" "}
+            <Link
+              target="_blank"
+              href="https://app.merkl.xyz/"
+              onClick={(e) => e.stopPropagation()}
+              className="text-white hover:underline"
+            >
+              Merkl official app.
+            </Link>
+          </p>
         </div>
       ),
     }));

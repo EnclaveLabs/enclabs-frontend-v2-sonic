@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { useGetPools } from 'clients/api';
-import type { Pool } from 'types';
-import { areAddressesEqual } from 'utilities';
+import { useGetPools } from "clients/api";
+import type { Pool } from "types";
+import { areAddressesEqual } from "utilities";
 
 export interface UseGetPoolInput {
   poolComptrollerAddress: string;
@@ -16,7 +16,7 @@ export interface UseGetPoolOutput {
   };
 }
 
-const useGetPool = ({
+export const useGetPool = ({
   poolComptrollerAddress,
   accountAddress,
 }: UseGetPoolInput): UseGetPoolOutput => {
@@ -26,10 +26,10 @@ const useGetPool = ({
 
   const pool = useMemo(
     () =>
-      getPoolsData?.pools?.find(currPool =>
-        areAddressesEqual(currPool.comptrollerAddress, poolComptrollerAddress),
+      getPoolsData?.pools?.find((currPool) =>
+        areAddressesEqual(currPool.comptrollerAddress, poolComptrollerAddress)
       ),
-    [poolComptrollerAddress, getPoolsData?.pools],
+    [poolComptrollerAddress, getPoolsData?.pools]
   );
 
   return {
@@ -39,5 +39,3 @@ const useGetPool = ({
     },
   };
 };
-
-export default useGetPool;

@@ -1,15 +1,15 @@
-import { waitFor } from '@testing-library/react';
-import type Vi from 'vitest';
+import { waitFor } from "@testing-library/react";
+import type Vi from "vitest";
 
-import fakeAddress from '__mocks__/models/address';
-import { poolData } from '__mocks__/models/pools';
-import { renderComponent } from 'testUtils/render';
+import fakeAddress from "__mocks__/models/address";
+import { poolData } from "__mocks__/models/pools";
+import { renderComponent } from "testUtils/render";
 
-import { useGetLegacyPool } from 'clients/api';
+import { useGetLegacyPool } from "clients/api";
 
-import useGetPools, { type UseGetPoolsOutput } from '.';
+import { useGetPools, type UseGetPoolsOutput } from ".";
 
-describe('api/queries/useGetPools', () => {
+describe("api/queries/useGetPools", () => {
   beforeEach(() => {
     (useGetLegacyPool as Vi.Mock).mockImplementation(() => ({
       data: {
@@ -19,8 +19,8 @@ describe('api/queries/useGetPools', () => {
     }));
   });
 
-  it('returns data in the correct format', async () => {
-    let data: Partial<UseGetPoolsOutput['data']> = {};
+  it("returns data in the correct format", async () => {
+    let data: Partial<UseGetPoolsOutput["data"]> = {};
 
     const CallMarketContext = () => {
       ({ data } = useGetPools({ accountAddress: fakeAddress }));

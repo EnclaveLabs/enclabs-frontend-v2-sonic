@@ -1,8 +1,10 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
 
 export const useStyles = () => ({
   root: css`
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   `,
 });
