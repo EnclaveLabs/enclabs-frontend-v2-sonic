@@ -88,7 +88,7 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
         <></>
       </LabeledInlineContent>
       <TokenTextField
-        label={`${treveeWraping.enclabsStakedTokenSymbol} amount used to unwrap`}
+        label={`${treveeWraping.enclabsStakedTokenSymbol} to be deposed`}
         name="amountTokens"
         placeholder={`0 - ${readableUnwrappableAmountLimitReadable
           .toFixed(enclabsStakedToken.decimals)

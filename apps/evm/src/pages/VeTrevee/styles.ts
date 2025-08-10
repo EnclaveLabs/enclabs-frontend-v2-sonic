@@ -1,8 +1,32 @@
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
+import { useTheme } from "@mui/material";
 
-export const useStyles = () => ({
-  root: css`
-    display: flex;
-    flex-direction: column;
-  `,
-});
+export const useStyles = () => {
+  const theme = useTheme();
+
+  return {
+    root: css`
+      margin: 0 auto;
+      max-width: 480px;
+    `,
+    container: css`
+      margin-top: ${theme.spacing(8)};
+    `,
+    multicolorBorder: css`
+      width: fit-content;
+      --radius: 16px;
+      --border: 1px;
+      padding: 16px;
+      border-radius: var(--radius);
+      border: var(--border) solid transparent;
+      background: /* fond intérieur (SOLIDE via gradient) */ linear-gradient(
+            #fff,
+            #fff
+          )
+          padding-box,
+        /* bordure dégradée */
+          linear-gradient(90deg, #6e13d2, #380ae2, #64da49, #fdf652, #f3ad3d)
+          border-box;
+    `,
+  };
+};
