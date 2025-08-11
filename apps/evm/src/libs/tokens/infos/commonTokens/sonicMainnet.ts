@@ -152,7 +152,7 @@ export const tokens: Token[] = [
   {
     address: "0x3D75F2BB8aBcDBd1e27443cB5CBCE8A668046C81",
     decimals: 6,
-    symbol: "HLP0",
+    symbol: "HLP0+",
     asset: hlp0Logo,
   },
   {
