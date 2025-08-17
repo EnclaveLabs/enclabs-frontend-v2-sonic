@@ -61,6 +61,7 @@ export interface Token {
   address: string;
   isNative?: boolean;
   tokenWrapped?: Token;
+  intrinsicSupplyApy?: number;
 }
 
 export interface NFT {
@@ -86,7 +87,7 @@ export type TokenAction =
   | "supply"
   | "withdraw"
   | "borrow"
-  | "repay";
+  | "repay"
 
 export interface TokenBalance {
   token: Token;
@@ -124,11 +125,18 @@ export interface PrimeSimulationDistribution {
   };
 }
 
+export interface IntrinsicDistribution {
+  type: "intrinsic";
+  token: Token;
+  apyPercentage: BigNumber;
+}
+
 export type AssetDistribution =
   | RewardDistributorDistribution
   | PrimeDistribution
   | MerklDistribution
-  | PrimeSimulationDistribution;
+  | PrimeSimulationDistribution
+  | IntrinsicDistribution;
 
 export interface Asset {
   vToken: VToken;

@@ -279,14 +279,14 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({ treveeWraping }) => {
     );
   }, [formTokenAmountMantissa, fromTokenWalletSpendingLimitTokens]);
 
-  return pageLoading ? (
+  return pageLoading || !enclabsStakedTokenBalance ? (
     <Spinner />
   ) : (
     <UnwrapFormUi
       isUserConnected={!!accountAddress}
       treveeWraping={treveeWraping}
       enclabsStakedToken={enclabsStakedToken}
-      enclabsStakedTokenBalance={enclabsStakedTokenBalance!.balanceMantissa}
+      enclabsStakedTokenBalance={enclabsStakedTokenBalance.balanceMantissa}
       formValues={formValues}
       setFormValues={setFormValues}
       onSubmit={onSubmit}

@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 
-import type { Asset, AssetDistribution } from "types";
+import type { Asset, AssetDistribution, IntrinsicDistribution } from "types";
 import getMerklDistributions from "../getMerklRewardsApy";
 import { Merkl } from "../../libs/merkl";
 
@@ -14,6 +14,7 @@ const aggregatePercentages = ({ distributions }: AggregatePercentagesInput) =>
     apyPrimePercentage?: BigNumber;
     apyPrimeSimulationPercentage?: BigNumber;
     apyMerklPercentage?: BigNumber;
+    apyIntrinsicPercentage?: BigNumber;
   }>(
     (acc, distribution) => {
       if (distribution.type === "rewardDistributor") {
@@ -39,6 +40,15 @@ const aggregatePercentages = ({ distributions }: AggregatePercentagesInput) =>
           ...acc,
           apyPrimeSimulationPercentage: (
             acc.apyPrimeSimulationPercentage || new BigNumber(0)
+          ).plus(distribution.apyPercentage),
+        };
+      }
+
+      if (distribution.type === "intrinsic") {
+        return {
+          ...acc,
+          apyIntrinsicPercentage: (
+            acc.apyIntrinsicPercentage || new BigNumber(0)
           ).plus(distribution.apyPercentage),
         };
       }
@@ -89,6 +99,17 @@ const getCombinedDistributionApys = ({
     }
   }
 
+  if (!!asset.vToken.underlyingToken?.intrinsicSupplyApy &&
+    !asset.supplyDistributions.find((d) => d.type === "intrinsic")
+  ) {
+    const intrinsicSupplyApyDistribution: IntrinsicDistribution = {
+      type: "intrinsic",
+      token: asset.vToken.underlyingToken,
+      apyPercentage: new BigNumber(asset.vToken.underlyingToken.intrinsicSupplyApy.toString())
+    }
+    asset.supplyDistributions.push(intrinsicSupplyApyDistribution);
+  }
+
   const supply = aggregatePercentages({
     distributions: asset.supplyDistributions,
   });
@@ -105,12 +126,15 @@ const getCombinedDistributionApys = ({
     borrowApyPrimeSimulationPercentage: borrow.apyPrimeSimulationPercentage,
     supplyMerklApyRewardsPercentage: supply.apyMerklPercentage,
     borrowMerklApyRewardsPercentage: borrow.apyMerklPercentage,
+    supplyEnclabsApyRewardsPercentage: supply.apyIntrinsicPercentage,
     totalSupplyApyPercentage: supply.apyRewardsPercentage
       .plus(supply.apyPrimePercentage || 0)
-      .plus(supply.apyMerklPercentage || 0),
+      .plus(supply.apyMerklPercentage || 0)
+      .plus(supply.apyIntrinsicPercentage || 0),
     totalBorrowApyPercentage: borrow.apyRewardsPercentage
       .plus(borrow.apyPrimePercentage || 0)
-      .plus(borrow.apyMerklPercentage || 0),
+      .plus(borrow.apyMerklPercentage || 0)
+      .plus(borrow.apyIntrinsicPercentage || 0),
   };
 };
 

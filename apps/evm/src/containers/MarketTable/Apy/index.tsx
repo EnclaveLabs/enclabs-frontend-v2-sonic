@@ -140,38 +140,54 @@ export const Apy: React.FC<ApyProps> = ({
 
   const distributionApyRows: LabeledInlineContentProps[] = distributions
     .filter((d) => d.apyPercentage.toString() > "0")
-    .map((distribution) => ({
-      label: t(
-        distribution.type === "merkl"
-          ? "assetInfo.merklApy"
-          : "assetInfo.distributionApy",
-        {
-          tokenSymbol: distribution.token.symbol,
+    .map((distribution) => {
+        let translatedLabel = ".";
+        switch (distribution.type) {
+          case "prime":
+            translatedLabel = t("assetInfo.primeApy", {
+              tokenSymbol: distribution.token.symbol,
+            });
+            break;
+          case "merkl":
+            translatedLabel = t("assetInfo.merklApy", {
+              tokenSymbol: distribution.token.symbol
+            });
+            break;
+          case "intrinsic":
+            translatedLabel = "Intrinsic APY";
+            break;
+          default:
+            translatedLabel = t("assetInfo.distributionApy", {
+              tokenSymbol: distribution.token.symbol
+            });
+            break;
         }
-      ),
-      iconSrc: distribution.token,
-      invertTextColors: true,
-      children: formatPercentageToReadableValue(distribution.apyPercentage),
-      disclaimer: distribution.type === "merkl" && (
-        <div className="text-grey text-sm">
-          <p>
-            Rewards from this external program can be claimed through{" "}
-            <Link
-              target="_blank"
-              href="https://app.merkl.xyz/"
-              onClick={(e) => e.stopPropagation()}
-              className="text-white hover:underline"
-            >
-              Merkl official app.
-            </Link>
-          </p>
-        </div>
-      ),
-    }));
+        return {
+          label: translatedLabel,
+          iconSrc: distribution.token,
+          invertTextColors: true,
+          children: formatPercentageToReadableValue(distribution.apyPercentage),
+          disclaimer: distribution.type === "merkl" && (
+            <div className="text-grey text-sm">
+              <p>
+                Rewards from this external program can be claimed through{" "}
+                <Link
+                  target="_blank"
+                  href="https://app.merkl.xyz/"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-white hover:underline"
+                >
+                  Merkl official app.
+                </Link>
+              </p>
+            </div>)
+      }
+    });
 
   // Display supply APY
 
   if (type === "supply") {
+    const isCampain = distributions.some(d => d.type === 'merkl');
     return distributionApyRows.length > 0 ? (
       <Tooltip
         title={
@@ -183,7 +199,8 @@ export const Apy: React.FC<ApyProps> = ({
           </div>
         }
       >
-        <div className="flex justify-start lg:justify-end gap-[5px]">
+
+        {isCampain ? <div className="flex justify-start lg:justify-end gap-[5px]">
           <Icon name="distribution" />
           <LayeredValues
             className={cn(className, "text-[#00C38E]")}
@@ -191,7 +208,12 @@ export const Apy: React.FC<ApyProps> = ({
             topValue={readableApy}
             bottomValue={readableLtv}
           />
-        </div>
+        </div> : <LayeredValues
+        className={className}
+        classNameBottomValue={classNameBottomValue}
+        topValue={readableApy}
+        bottomValue={readableLtv}
+      />}
       </Tooltip>
     ) : (
       <LayeredValues

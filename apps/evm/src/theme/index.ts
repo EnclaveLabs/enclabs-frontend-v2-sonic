@@ -44,32 +44,28 @@ export const theme = {
 
     // Use for tag and dynamical hover 
     tagTextOrange: '#FF9800',
-    tagBgOrange: 'rgba(255, 152, 0, 0.1)',
+    tagBgOrange: 'rgba(255, 243, 229, 1)',
     hoverOrange: 'rgba(255, 152, 0, 0.4)',
 
     tagTextGreen: '#4CAF50',
-    tagBgGreen: 'rgba(76, 175, 80, 0.1)',
+    tagBgGreen: 'rgb(236, 246, 236)',
     hoverGreen: 'rgba(76, 175, 80, 0.4)',
 
     tagTextYellow: '#FFC107',
-    tagBgYellow: 'rgba(255, 193, 7, 0.1)',
+    tagBgYellow: 'rgba(255, 251, 241, 1)',
     hoverYellow: 'rgba(255, 193, 7, 0.4)',
 
     tagTextRed: '#F44336',
-    tagBgRed: 'rgba(244, 67, 54, 0.1)',
+    tagBgRed: 'rgba(254, 235, 234, 1)',
     hoverRed: 'rgba(244, 67, 54, 0.4)',
 
     tagTextBlue: '#2196F3',
-    tagBgBlue: 'rgba(33, 150, 243, 0.1)',
+    tagBgBlue: 'rgba(232, 243, 254, 1)',
     hoverBlue: 'rgba(33, 150, 243, 0.4)',  
 
     tagTextGrey: '#D3D3D3',
-    tagBgGrey: 'rgba(211, 211, 211, 0.1)',
+    tagBgGrey: 'rgba(250, 250, 250, 1)',
     hoverGrey: 'rgba(211, 211, 211, 0.4)',
-
-    tagTextStableJack: '#ecbe86',
-    tagBgStableJack: 'rgb(227, 158, 73)',
-    hoverStableJack:'rgb(234, 197, 151)',
 
     // Rainbow color
     rainbowColors

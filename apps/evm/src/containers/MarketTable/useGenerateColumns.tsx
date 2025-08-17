@@ -33,6 +33,8 @@ import type { ColumnKey, PoolAsset } from './types';
 import { getTokenType, Tag } from 'components/Tag';
 import { getTokenPoints, Points } from 'components/Points';
 import { getTokenPoints as getTokenBorrowPoints , Points as BorrowPoints } from 'components/BorrowPoints';
+import EllipsisText from 'components/EllipsisText';
+import EllipsisLink from 'components/EllipsisLink';
 
 // Translation keys: do not remove this comment
 // t('marketTable.columnKeys.asset')
@@ -136,8 +138,8 @@ const useGenerateColumns = ({
 
             if (column === 'asset') {
               return (
-                <div className="flex items-center space-x-2">
-                  <TokenIconWithSymbol token={poolAsset.vToken.underlyingToken} />
+                <div className="flex items-center space-x-2 min-w-0">
+                  <TokenIconWithSymbol token={poolAsset.vToken.underlyingToken} className='min-w-0'/>
 
                   {isPaused && (
                     <InfoIcon
@@ -208,15 +210,14 @@ const useGenerateColumns = ({
 
               return (
                 <div>
-                  <Link
-                    to={to}
-                    className={cn(
-                      'hover:text-blue text-sm underline',
-                      isPaused ? 'text-grey' : 'text-lightBlack',
-                    )}
-                  >
-                    {poolAsset.pool.name}
-                  </Link>
+                  <EllipsisLink
+                  to={to}
+                  className={cn(
+                    'hover:text-blue text-sm underline',
+                    isPaused ? 'text-grey' : 'text-lightBlack',
+                  )}>
+                  {poolAsset.pool.name}
+                  </EllipsisLink>
                 </div>
               );
             }
