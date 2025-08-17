@@ -126,7 +126,7 @@ const getCombinedDistributionApys = ({
     borrowApyPrimeSimulationPercentage: borrow.apyPrimeSimulationPercentage,
     supplyMerklApyRewardsPercentage: supply.apyMerklPercentage,
     borrowMerklApyRewardsPercentage: borrow.apyMerklPercentage,
-    supplyEnclabsApyRewardsPercentage: supply.apyIntrinsicPercentage,
+    supplyApyIntrinsicPercentage: supply.apyIntrinsicPercentage,
     totalSupplyApyPercentage: supply.apyRewardsPercentage
       .plus(supply.apyPrimePercentage || 0)
       .plus(supply.apyMerklPercentage || 0)
@@ -134,7 +134,6 @@ const getCombinedDistributionApys = ({
     totalBorrowApyPercentage: borrow.apyRewardsPercentage
       .plus(borrow.apyPrimePercentage || 0)
       .plus(borrow.apyMerklPercentage || 0)
-      .plus(borrow.apyIntrinsicPercentage || 0),
   };
 };
 
