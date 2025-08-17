@@ -148,7 +148,7 @@ export const tokens: Token[] = [
     decimals: 6,
     symbol: "USDC",
     asset: usdcLogo,
-    // intrinsicSupplyApy: 1.25 // sera ajouté au supply APY Total
+    // intrinsicSupplyApy: 1.5
   },
   {
     address: "0x3D75F2BB8aBcDBd1e27443cB5CBCE8A668046C81",
