@@ -27,6 +27,13 @@ const useGetMenuItems = () => {
         i18nKey: "layout.menuItems.dashboard",
         iconName: "dashboard",
       },
+      {
+        to: routes.earn.path,
+        // Translation key: do not remove this comment
+        // t('layout.menuItems.earn')
+        i18nKey: "layout.menuItems.earn",
+        iconName: "market",
+      },
     ];
 
     // Insert account page if wallet is connected

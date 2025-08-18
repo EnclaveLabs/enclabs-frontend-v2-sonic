@@ -3,6 +3,7 @@ export enum Subdirectory {
   ACCOUNT = "account",
   REWARDS = "rewards",
   XVS = "xvs",
+  EARN = "earn",
   CORE_POOL = "core-pool",
   ISOLATED_POOL = "pool/:poolComptrollerAddress",
   ISOLATED_POOLS = "isolated-pools",
@@ -31,6 +32,7 @@ export enum Subdirectory {
 
 const routeSubdirectories = {
   dashboard: [Subdirectory.DASHBOARD],
+  earn: [Subdirectory.EARN],
   dashboardPrimeCalculator: [
     Subdirectory.DASHBOARD,
     Subdirectory.PRIME_CALCULATOR,
@@ -94,14 +96,14 @@ export const routes = Object.keys(routeSubdirectories).reduce<Routes>(
   (obj, key) =>
     Object.prototype.hasOwnProperty.call(routeSubdirectories, key)
       ? {
-          ...obj,
-          [key]: {
-            path: `/${routeSubdirectories[key as RouteName]
-              .filter((sub) => !!sub)
-              .join("/")}`,
-            subdirectories: routeSubdirectories[key as RouteName],
-          },
-        }
+        ...obj,
+        [key]: {
+          path: `/${routeSubdirectories[key as RouteName]
+            .filter((sub) => !!sub)
+            .join("/")}`,
+          subdirectories: routeSubdirectories[key as RouteName],
+        },
+      }
       : obj,
   {} as Routes
 );

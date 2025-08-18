@@ -37,6 +37,7 @@ const VoterLeaderboard = safeLazyLoad(() => import("pages/VoterLeaderboard"));
 const PrimeCalculator = safeLazyLoad(() => import("pages/PrimeCalculator"));
 const Bridge = safeLazyLoad(() => import("pages/Bridge"));
 const VeTrevee = safeLazyLoad(() => import("pages/VeTrevee"));
+const Earn = safeLazyLoad(() => import("pages/Earn"));
 
 const AppRoutes = () => {
   const { accountAddress } = useAccountAddress();
@@ -120,6 +121,15 @@ const AppRoutes = () => {
             }
           />
         )}
+
+        <Route
+          path={Subdirectory.EARN}
+          element={
+            <PageSuspense>
+              <Earn />
+            </PageSuspense>
+          }
+        />
 
         {!!accountAddress && (
           <Route

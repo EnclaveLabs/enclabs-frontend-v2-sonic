@@ -144,6 +144,7 @@
   },
   "breadcrumbs": {
     "account": "Account",
+    "earn": "Earn",
     "bridge": "Bridge",
     "convertVrt": "Convert VRT",
     "corePool": "Core pool",
@@ -363,6 +364,7 @@
       "bridge": "Bridge",
       "corePool": "Core pool",
       "dashboard": "Dashboard",
+      "earn": "Earn",
       "governance": "Governance",
       "isolatedPools": "Isolated pools",
       "lidoMarket": "Lido market",

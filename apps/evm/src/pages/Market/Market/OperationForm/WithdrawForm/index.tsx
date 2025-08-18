@@ -1,33 +1,42 @@
-import BigNumber from 'bignumber.js';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import BigNumber from "bignumber.js";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { useGetVTokenBalanceOf, useWithdraw } from 'clients/api';
-import { Delimiter, LabeledInlineContent, Toggle, TokenTextField, Tooltip, Icon } from 'components';
-import { AccountData } from 'containers/AccountData';
-import useDelegateApproval from 'hooks/useDelegateApproval';
-import useFormatTokensToReadableValue from 'hooks/useFormatTokensToReadableValue';
-import { useGetChainMetadata } from 'hooks/useGetChainMetadata';
-import { useIsFeatureEnabled } from 'hooks/useIsFeatureEnabled';
-import { useGetNativeTokenGatewayContractAddress } from 'libs/contracts';
-import { VError } from 'libs/errors';
-import { useTranslation } from 'libs/translations';
-import { useAccountAddress } from 'libs/wallet';
-import type { Asset, Pool } from 'types';
-import { convertTokensToMantissa } from 'utilities';
+import { useGetVTokenBalanceOf, useWithdraw } from "clients/api";
+import {
+  Delimiter,
+  LabeledInlineContent,
+  Toggle,
+  TokenTextField,
+  Tooltip,
+  Icon,
+} from "components";
+import { AccountData } from "containers/AccountData";
+import useDelegateApproval from "hooks/useDelegateApproval";
+import useFormatTokensToReadableValue from "hooks/useFormatTokensToReadableValue";
+import { useGetChainMetadata } from "hooks/useGetChainMetadata";
+import { useIsFeatureEnabled } from "hooks/useIsFeatureEnabled";
+import { useGetNativeTokenGatewayContractAddress } from "libs/contracts";
+import { VError } from "libs/errors";
+import { useTranslation } from "libs/translations";
+import { useAccountAddress } from "libs/wallet";
+import type { Asset, Pool } from "types";
+import { convertTokensToMantissa } from "utilities";
 
-import { ConnectWallet } from 'containers/ConnectWallet';
-import { AssetInfo } from '../AssetInfo';
-import SubmitSection from './SubmitSection';
-import TEST_IDS from './testIds';
-import useForm, { type FormValues, type UseFormInput } from './useForm';
+import { ConnectWallet } from "containers/ConnectWallet";
+import { AssetInfo } from "../AssetInfo";
+import SubmitSection from "./SubmitSection";
+import TEST_IDS from "./testIds";
+import useForm, { type FormValues, type UseFormInput } from "./useForm";
 
 export interface WithdrawFormUiProps {
   isUserConnected: boolean;
   asset: Asset;
   pool: Pool;
-  onSubmit: UseFormInput['onSubmit'];
+  onSubmit: UseFormInput["onSubmit"];
   isSubmitting: boolean;
-  setFormValues: (setter: (currentFormValues: FormValues) => FormValues) => void;
+  setFormValues: (
+    setter: (currentFormValues: FormValues) => FormValues
+  ) => void;
   formValues: FormValues;
   isWrapUnwrapNativeTokenEnabled: boolean;
   isDelegateApproved: boolean | undefined;
@@ -35,6 +44,7 @@ export interface WithdrawFormUiProps {
   isApproveDelegateLoading: boolean;
   approveDelegateAction: () => Promise<unknown>;
   onSubmitSuccess?: () => void;
+  hideAccountData?: boolean;
 }
 
 export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
@@ -51,17 +61,20 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
   isDelegateApprovedLoading,
   isApproveDelegateLoading,
   approveDelegateAction,
+  hideAccountData,
 }) => {
   const { t } = useTranslation();
   const { nativeToken } = useGetChainMetadata();
 
   const canUnwrapToNativeToken = useMemo(
-    () => isWrapUnwrapNativeTokenEnabled && !!asset.vToken.underlyingToken.tokenWrapped,
-    [isWrapUnwrapNativeTokenEnabled, asset.vToken.underlyingToken.tokenWrapped],
+    () =>
+      isWrapUnwrapNativeTokenEnabled &&
+      !!asset.vToken.underlyingToken.tokenWrapped,
+    [isWrapUnwrapNativeTokenEnabled, asset.vToken.underlyingToken.tokenWrapped]
   );
 
   const handleToggleReceiveNativeToken = () => {
-    setFormValues(currentFormValues => ({
+    setFormValues((currentFormValues) => ({
       ...currentFormValues,
       receiveNativeToken: !currentFormValues.receiveNativeToken,
     }));
@@ -69,13 +82,13 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
 
   const limitTokens = useMemo(() => {
     const assetLiquidityTokens = new BigNumber(asset.liquidityCents).dividedBy(
-      asset.tokenPriceCents,
+      asset.tokenPriceCents
     );
     // If asset isn't used as collateral user can withdraw the entire supply balance without
     // affecting their borrow limit, if there's enough liquidity
     let maxTokensBeforeLiquidation = BigNumber.minimum(
       asset.userSupplyBalanceTokens,
-      assetLiquidityTokens,
+      assetLiquidityTokens
     );
 
     if (
@@ -92,14 +105,20 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
     // liquidated (if their borrow balance goes above their borrow limit)
 
     // Return 0 if borrow limit has already been reached
-    if (pool.userBorrowBalanceCents.isGreaterThanOrEqualTo(pool.userBorrowLimitCents)) {
+    if (
+      pool.userBorrowBalanceCents.isGreaterThanOrEqualTo(
+        pool.userBorrowLimitCents
+      )
+    ) {
       return new BigNumber(0);
     }
 
-    const marginWithBorrowLimitCents = pool.userBorrowLimitCents.minus(pool.userBorrowBalanceCents);
+    const marginWithBorrowLimitCents = pool.userBorrowLimitCents.minus(
+      pool.userBorrowBalanceCents
+    );
 
     const collateralAmountPerTokenCents = asset.tokenPriceCents.multipliedBy(
-      asset.collateralFactor,
+      asset.collateralFactor
     );
 
     maxTokensBeforeLiquidation = new BigNumber(marginWithBorrowLimitCents)
@@ -109,10 +128,12 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
     maxTokensBeforeLiquidation = BigNumber.minimum(
       maxTokensBeforeLiquidation,
       asset.userSupplyBalanceTokens,
-      assetLiquidityTokens,
+      assetLiquidityTokens
     );
 
-    maxTokensBeforeLiquidation = maxTokensBeforeLiquidation.isLessThanOrEqualTo(0)
+    maxTokensBeforeLiquidation = maxTokensBeforeLiquidation.isLessThanOrEqualTo(
+      0
+    )
       ? new BigNumber(0)
       : maxTokensBeforeLiquidation;
 
@@ -130,7 +151,7 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
 
   const handleRightMaxButtonClick = useCallback(() => {
     // Update field value to correspond to user's wallet balance
-    setFormValues(currentFormValues => ({
+    setFormValues((currentFormValues) => ({
       ...currentFormValues,
       amountTokens: limitTokens.toString(),
     }));
@@ -152,19 +173,22 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
         name="amountTokens"
         token={asset.vToken.underlyingToken}
         value={formValues.amountTokens}
-        onChange={amountTokens =>
-          setFormValues(currentFormValues => ({
+        onChange={(amountTokens) =>
+          setFormValues((currentFormValues) => ({
             ...currentFormValues,
             amountTokens,
           }))
         }
         disabled={!isUserConnected || isSubmitting}
         rightMaxButton={{
-          label: t('operationForm.rightMaxButtonLabel'),
+          label: t("operationForm.rightMaxButtonLabel"),
           onClick: handleRightMaxButtonClick,
         }}
         hasError={
-          isUserConnected && !isSubmitting && !!formError && Number(formValues.amountTokens) > 0
+          isUserConnected &&
+          !isSubmitting &&
+          !!formError &&
+          Number(formValues.amountTokens) > 0
         }
         description={
           isUserConnected && !isSubmitting && !!formError?.message ? (
@@ -175,11 +199,14 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
 
       {isUserConnected ? (
         <>
-          <LabeledInlineContent label={t('operationForm.withdrawableAmount')}>
+          <LabeledInlineContent label={t("operationForm.withdrawableAmount")}>
             {readableWithdrawableAmountTokens}
-             <Tooltip className="ml-2 inline-flex items-center" title={limitTokens.toString()}>
-                  <Icon className="cursor-help" name="info" />
-              </Tooltip>
+            <Tooltip
+              className="ml-2 inline-flex items-center"
+              title={limitTokens.toString()}
+            >
+              <Icon className="cursor-help" name="info" />
+            </Tooltip>
           </LabeledInlineContent>
 
           <Delimiter />
@@ -188,10 +215,10 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
             <>
               <LabeledInlineContent
                 data-testid={TEST_IDS.receiveNativeToken}
-                label={t('operationForm.receiveNativeToken.label', {
+                label={t("operationForm.receiveNativeToken.label", {
                   tokenSymbol: nativeToken.symbol,
                 })}
-                tooltip={t('operationForm.receiveNativeToken.tooltip', {
+                tooltip={t("operationForm.receiveNativeToken.tooltip", {
                   wrappedNativeTokenSymbol: asset.vToken.underlyingToken.symbol,
                   nativeTokenSymbol: nativeToken.symbol,
                 })}
@@ -218,12 +245,14 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
 
               <Delimiter />
 
-              <AccountData
-                asset={asset}
-                pool={pool}
-                amountTokens={new BigNumber(formValues.amountTokens || 0)}
-                action="withdraw"
-              />
+              {!hideAccountData && (
+                <AccountData
+                  asset={asset}
+                  pool={pool}
+                  amountTokens={new BigNumber(formValues.amountTokens || 0)}
+                  action="withdraw"
+                />
+              )}
             </div>
 
             <SubmitSection
@@ -242,7 +271,7 @@ export const WithdrawFormUi: React.FC<WithdrawFormUiProps> = ({
           <AssetInfo asset={asset} action="withdraw" />
 
           <ConnectWallet buttonVariant="primary">
-            {t('operationForm.connectWalletButtonLabel')}
+            {t("operationForm.connectWalletButtonLabel")}
           </ConnectWallet>
         </div>
       )}
@@ -254,19 +283,27 @@ export interface WithdrawFormProps {
   asset: Asset;
   pool: Pool;
   onSubmitSuccess?: () => void;
+  hideAccountData?: boolean;
 }
 
-const WithdrawForm: React.FC<WithdrawFormProps> = ({ asset, pool, onSubmitSuccess }) => {
-  const isWrapUnwrapNativeTokenEnabled = useIsFeatureEnabled({ name: 'wrapUnwrapNativeToken' });
+const WithdrawForm: React.FC<WithdrawFormProps> = ({
+  asset,
+  pool,
+  onSubmitSuccess,
+  hideAccountData,
+}) => {
+  const isWrapUnwrapNativeTokenEnabled = useIsFeatureEnabled({
+    name: "wrapUnwrapNativeToken",
+  });
   const { accountAddress } = useAccountAddress();
 
   const initialFormValues: FormValues = useMemo(
     () => ({
-      amountTokens: '',
+      amountTokens: "",
       fromToken: asset.vToken.underlyingToken,
       receiveNativeToken: !!asset.vToken.underlyingToken.tokenWrapped,
     }),
-    [asset],
+    [asset]
   );
 
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
@@ -280,12 +317,12 @@ const WithdrawForm: React.FC<WithdrawFormProps> = ({ asset, pool, onSubmitSucces
 
   const { data: getVTokenBalanceData } = useGetVTokenBalanceOf(
     {
-      accountAddress: accountAddress || '',
+      accountAddress: accountAddress || "",
       vToken: asset.vToken,
     },
     {
       enabled: !!accountAddress,
-    },
+    }
   );
   const vTokenBalanceMantissa = getVTokenBalanceData?.balanceMantissa;
 
@@ -295,9 +332,10 @@ const WithdrawForm: React.FC<WithdrawFormProps> = ({ asset, pool, onSubmitSucces
     vToken: asset.vToken,
   });
 
-  const nativeTokenGatewayContractAddress = useGetNativeTokenGatewayContractAddress({
-    comptrollerContractAddress: pool.comptrollerAddress,
-  });
+  const nativeTokenGatewayContractAddress =
+    useGetNativeTokenGatewayContractAddress({
+      comptrollerContractAddress: pool.comptrollerAddress,
+    });
 
   const {
     isDelegateApproved,
@@ -305,20 +343,25 @@ const WithdrawForm: React.FC<WithdrawFormProps> = ({ asset, pool, onSubmitSucces
     isUseUpdatePoolDelegateStatusLoading,
     updatePoolDelegateStatus,
   } = useDelegateApproval({
-    delegateeAddress: nativeTokenGatewayContractAddress || '',
+    delegateeAddress: nativeTokenGatewayContractAddress || "",
     poolComptrollerAddress: pool.comptrollerAddress,
     enabled: formValues.receiveNativeToken && isWrapUnwrapNativeTokenEnabled,
   });
 
-  const onSubmit: UseFormInput['onSubmit'] = async ({ fromToken, fromTokenAmountTokens }) => {
-    const withdrawFullSupply = asset.userSupplyBalanceTokens.isEqualTo(fromTokenAmountTokens);
+  const onSubmit: UseFormInput["onSubmit"] = async ({
+    fromToken,
+    fromTokenAmountTokens,
+  }) => {
+    const withdrawFullSupply = asset.userSupplyBalanceTokens.isEqualTo(
+      fromTokenAmountTokens
+    );
 
     // This case should never be reached, but just in case we throw a generic
     // internal error
     if (!asset || (withdrawFullSupply && !vTokenBalanceMantissa)) {
       throw new VError({
-        type: 'unexpected',
-        code: 'somethingWentWrong',
+        type: "unexpected",
+        code: "somethingWentWrong",
       });
     }
 
@@ -348,7 +391,10 @@ const WithdrawForm: React.FC<WithdrawFormProps> = ({ asset, pool, onSubmitSucces
       isDelegateApproved={isDelegateApproved}
       isDelegateApprovedLoading={isDelegateApprovedLoading}
       isApproveDelegateLoading={isUseUpdatePoolDelegateStatusLoading}
-      approveDelegateAction={() => updatePoolDelegateStatus({ approvedStatus: true })}
+      approveDelegateAction={() =>
+        updatePoolDelegateStatus({ approvedStatus: true })
+      }
+      hideAccountData={hideAccountData}
     />
   );
 };
