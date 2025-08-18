@@ -150,14 +150,14 @@ export const VeTreveeWrap: React.FC<VeTreveeWrapProps> = ({
 
   return (
     <div className={"flex flex-col gap-y-4"}>
-      {treveeTokenIds.tokenIds.map((tokenId) => (
+      {!!treveeWraping.voter && !!treveeWraping.manager ? treveeTokenIds.tokenIds.map((tokenId) => (
         <VeTreveeListItemInfos
           key={tokenId.toString()}
           veNftContract={veNftContract}
           treveeWraping={treveeWraping}
           tokenId={new BigNumber(tokenId.toString())}
         />
-      ))}
+      )) : <Spinner/>}
     </div>
   );
 };

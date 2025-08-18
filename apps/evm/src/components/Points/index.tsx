@@ -18,26 +18,8 @@ export const getTokenPoints = (address: string) => {
 
 export const Points = ({ text }: PointsProps) => {
     const tokenPoints = getTokenPoints(text);
-    const onlyOnePointType = Array.isArray(tokenPoints) && tokenPoints.length === 1;
 
-    if (onlyOnePointType) {
-      return <Tooltip
-        placement="right"
-          title={ 
-          <div className="space-y-2">
-            <p>{tokenPoints[0].tooltiptext}</p>
-            <p>Learn more about this point program: <Link target="_blank" href={tokenPoints[0].tooltipLink} onClick={e => e.stopPropagation()} className="text-white underline">here</Link></p>
-            </div>
-          }
-          className="inline-flex"
-        >
-          <div className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">
-          <p>{tokenPoints[0].multiplier}</p>
-          <img src={tokenPoints[0].logo} className="w-5 max-w-none flex-none" />
-          </div>
-        </Tooltip>
-    } else {
- return <Tooltip placement="right" title={<div className="flex flex-col gap-1"> 
+    return <Tooltip placement="right" title={<div className="flex flex-col gap-1"> 
           {Array.isArray(tokenPoints) ? (
             tokenPoints.map((point, index) => (
               <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">     
@@ -67,11 +49,9 @@ export const Points = ({ text }: PointsProps) => {
         Array.isArray(tokenPoints) ? tokenPoints.map((point, index) => {
           return <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">
           <img src={point.logo} className="w-5 max-w-none flex-none" />
-          {onlyOnePointType && <p>{point.multiplier}</p>}
           </div>
         }) : <p>{tokenPoints}</p>
       }
       </div>
     </Tooltip>
-    }
 };

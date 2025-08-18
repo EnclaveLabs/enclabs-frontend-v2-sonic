@@ -61,7 +61,7 @@ const VeTreveeListItemActions: React.FC<VeTreveeListItemActionsProps> = ({
   const treveeVeNft = useGetVeNFT({ symbol: treveeWraping.treveeVeNftSymbol })!;
   const { mutateAsync: resetVeNft, isPending: isResetVeNftLoading } =
     useResetVeNft(
-      { tokenId, veNftVoterContract: treveeWraping.voter },
+      { tokenId, veNftVoterContract: treveeWraping.voter! },
       { waitForConfirmation: true }
     );
   const { mutateAsync: detachVeNft, isPending: isDetachVeNftLoading } =
@@ -108,13 +108,13 @@ const VeTreveeListItemActions: React.FC<VeTreveeListItemActionsProps> = ({
       return detachVeNft({ tokenId: tokenId.toString() });
     } else if (!isNftApprovedForManager) {
       return approveTreveeVeNft({
-        approvedAddress: treveeWraping.manager.address || "",
+        approvedAddress: treveeWraping.manager?.address || "",
         tokenId: tokenId.toString(),
       });
     } else {
       return wrapVeNft({
         tokenId: tokenId.toString(),
-        enclabsTreveeVeManager: treveeWraping.manager,
+        enclabsTreveeVeManager: treveeWraping.manager!,
       });
     }
   };
@@ -149,7 +149,7 @@ const VeTreveeListItemActions: React.FC<VeTreveeListItemActionsProps> = ({
           onClick={() =>
             wrapVeNft({
               tokenId: tokenId.toString(),
-              enclabsTreveeVeManager: treveeWraping.manager,
+              enclabsTreveeVeManager: treveeWraping.manager!,
             })
           }
         >
@@ -204,7 +204,7 @@ export const VeTreveeListItemInfos: React.FC<VeTreveeListItemInfoProps> = ({
 
   const isNftApprovedForManager =
     veNftApproval.approvedAddress.toLowerCase() ===
-    treveeWraping.manager.address.toLowerCase();
+    (treveeWraping.manager?.address.toLowerCase() || '');
 
   return VeNftLockedData ? (
     <Card className={"max-w-[500px] border-lightGrey border rounded-sm"}>
