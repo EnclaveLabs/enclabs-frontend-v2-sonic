@@ -143,12 +143,12 @@
     "supplyDescription": "Supplying {{tokenSymbol}} to the {{poolName}} pool will enable you to borrow tokens from this pool exclusively. <Button>Show all tokens</Button>"
   },
   "breadcrumbs": {
-    "account": "Account",
+    "account": "Dashboard",
     "earn": "Earn",
     "bridge": "Bridge",
     "convertVrt": "Convert VRT",
     "corePool": "Core pool",
-    "dashboard": "Dashboard",
+    "dashboard": "Markets",
     "governance": "Governance",
     "isolatedPools": "Isolated pools",
     "rewards": "Rewards",
@@ -360,10 +360,10 @@
       "venusLogoAlt": "Enclabs logo"
     },
     "menuItems": {
-      "account": "Account",
+      "account": "Dashboard",
       "bridge": "Bridge",
       "corePool": "Core pool",
-      "dashboard": "Dashboard",
+      "dashboard": "Markets",
       "earn": "Earn",
       "governance": "Governance",
       "isolatedPools": "Isolated pools",

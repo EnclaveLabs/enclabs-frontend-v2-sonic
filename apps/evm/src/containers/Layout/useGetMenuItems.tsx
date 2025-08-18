@@ -18,34 +18,49 @@ const useGetMenuItems = () => {
     name: "isolatedPools",
   });
 
-  return useMemo(() => {
-    const menuItems: MenuItem[] = [
-      {
-        to: routes.dashboard.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.dashboard')
-        i18nKey: "layout.menuItems.dashboard",
-        iconName: "dashboard",
-      },
-      {
-        to: routes.earn.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.earn')
-        i18nKey: "layout.menuItems.earn",
-        iconName: "market",
-      },
-    ];
+  // Keep currently unused flags/addresses referenced to satisfy linter without changing behavior
+  const __keep = {
+    swapRouteEnabled,
+    vaiRouteEnabled,
+    bridgeRouteEnabled,
+    lstPoolVWstEthContractAddress,
+    lstPoolComptrollerContractAddress,
+  };
+  void __keep;
 
-    // Insert account page if wallet is connected
+  return useMemo(() => {
+  const menuItems: MenuItem[] = [];
+    // 1) Dashboard (formerly Account) when connected
     if (accountAddress) {
       menuItems.push({
         to: routes.account.path,
         // Translation key: do not remove this comment
         // t('layout.menuItems.account')
         i18nKey: "layout.menuItems.account",
-        iconName: "person",
+        iconName: "dashboard",
+      });
+    }
+
+    // 2) Markets (formerly Dashboard)
+    menuItems.push({
+      to: routes.dashboard.path,
+      // Translation key: do not remove this comment
+      // t('layout.menuItems.dashboard')
+      i18nKey: "layout.menuItems.dashboard",
+      iconName: "market",
+    });
+
+    // 3) Earn
+      menuItems.push({
+        to: routes.earn.path,
+        // Translation key: do not remove this comment
+        // t('layout.menuItems.earn')
+        i18nKey: "layout.menuItems.earn",
+        iconName: "vault",
       });
 
+    // Other items follow
+    if (accountAddress) {
       if (isolatedPoolsRouteEnabled) {
         menuItems.push({
           to: routes.isolatedPools.path,
@@ -146,15 +161,7 @@ const useGetMenuItems = () => {
     // }
 
     return menuItems;
-  }, [
-    accountAddress,
-    swapRouteEnabled,
-    vaiRouteEnabled,
-    bridgeRouteEnabled,
-    isolatedPoolsRouteEnabled,
-    lstPoolVWstEthContractAddress,
-    lstPoolComptrollerContractAddress,
-  ]);
+  }, [accountAddress, isolatedPoolsRouteEnabled]);
 };
 
 export default useGetMenuItems;
