@@ -26,5 +26,10 @@ export const useStyles = () => {
       fontSize: theme.typography.small1.fontSize,
       fontWeight: theme.typography.small1.fontWeight,
     } as React.ComponentProps<typeof ReferenceLine>['label'],
+    bubble: {
+      backgroundFill: theme.palette.background.paper,
+      borderStroke: theme.palette.divider,
+      textFill: theme.palette.text.primary,
+    },
   };
 };
