@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
-import { alpha } from '@mui/material/styles';
 import type { ReferenceLine } from 'recharts';
 
 import { SPACING } from 'theme/MuiThemeProvider/muiTheme';
@@ -27,7 +26,7 @@ export const useStyles = () => {
       fontWeight: theme.typography.small1.fontWeight,
     } as React.ComponentProps<typeof ReferenceLine>['label'],
     bubble: {
-      backgroundFill: alpha(theme.palette.interactive.primary, 0.12),
+      backgroundFill: theme.palette.background.paper,
       borderStroke: theme.palette.interactive.primary,
       textFill: theme.palette.text.primary,
     },
