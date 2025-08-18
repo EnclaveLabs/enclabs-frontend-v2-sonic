@@ -1,4 +1,4 @@
-import { type UseQueryOptions, type UseQueryResult, useQueries } from '@tanstack/react-query';
+import { type UseQueryResult, useQuery } from '@tanstack/react-query';
 
 import {
   type GetXvsVaultPendingWithdrawalsBalanceOutput,
@@ -21,12 +21,16 @@ export interface UseGetXvsVaultPoolsInput {
   accountAddress?: string;
 }
 
-export type UseGetXvsVaultPoolsOutput = UseQueryResult<
-  | GetXvsVaultPoolInfoOutput
-  | GetXvsVaultUserInfoOutput
-  | GetXvsVaultUserPendingWithdrawalsFromBeforeUpgradeOutput
-  | GetXvsVaultPendingWithdrawalsBalanceOutput
->[];
+export interface BatchedXvsVaultPoolsData {
+  poolInfos: GetXvsVaultPoolInfoOutput[];
+  pendingWithdrawals: GetXvsVaultPendingWithdrawalsBalanceOutput[];
+  userInfos: Array<GetXvsVaultUserInfoOutput | undefined>;
+  userPendingBeforeUpgrade: Array<
+    GetXvsVaultUserPendingWithdrawalsFromBeforeUpgradeOutput | undefined
+  >;
+}
+
+export type UseGetXvsVaultPoolsOutput = UseQueryResult<BatchedXvsVaultPoolsData>;
 
 const useGetXvsVaultPools = ({
   accountAddress,
@@ -42,84 +46,105 @@ const useGetXvsVaultPools = ({
 
   const isReady = !!xvsVaultContract && !!xvs;
 
-  const queries: UseQueryOptions<
-    | GetXvsVaultPoolInfoOutput
-    | GetXvsVaultUserInfoOutput
-    | GetXvsVaultUserPendingWithdrawalsFromBeforeUpgradeOutput
-    | GetXvsVaultPendingWithdrawalsBalanceOutput
-  >[] = [];
+  const FIVE_MINUTES_MS = 5 * 60 * 1000;
 
-  // Fetch pool infos
-  // TODO: use multicall
-  for (let poolIndex = 0; poolIndex < poolsCount; poolIndex++) {
-    queries.push({
-      queryFn: () =>
-        callOrThrow({ xvsVaultContract, xvs }, params =>
-          getXvsVaultPoolInfo({
-            ...params,
-            rewardTokenAddress: params.xvs.address,
-            poolIndex,
-          }),
-        ),
-      queryKey: [
-        FunctionKey.GET_XVS_VAULT_POOL_INFOS,
-        { chainId, rewardTokenAddress: xvs?.address, poolIndex },
-      ],
-      enabled: isReady,
-    });
+  return useQuery<BatchedXvsVaultPoolsData>({
+    queryKey: [
+      FunctionKey.GET_XVS_VAULT_POOL_INFOS,
+      { chainId, rewardTokenAddress: xvs?.address, poolsCount, accountAddress },
+    ],
+    enabled: isReady,
+    staleTime: FIVE_MINUTES_MS,
+    gcTime: FIVE_MINUTES_MS,
+    refetchOnWindowFocus: false,
+    retry: 2,
+    retryDelay: attempt => Math.min(1000 * 2 ** attempt, 5000),
+    queryFn: async () => {
 
-    queries.push({
-      queryFn: () =>
-        callOrThrow({ xvsVaultContract, xvs }, params =>
-          getXvsVaultPendingWithdrawalsBalance({
-            ...params,
-            rewardTokenAddress: params.xvs.address,
-            poolIndex,
-          }),
-        ),
-      queryKey: [
-        FunctionKey.GET_XVS_VAULT_PENDING_WITHDRAWALS_BALANCE,
-        { chainId, accountAddress, rewardTokenAddress: xvs?.address, poolIndex },
-      ],
-      enabled: isReady,
-    });
+      const infoPromises: Promise<GetXvsVaultPoolInfoOutput>[] = [];
+      const pendingPromises: Promise<GetXvsVaultPendingWithdrawalsBalanceOutput>[] = [];
+      const userInfoPromises: Array<Promise<GetXvsVaultUserInfoOutput> | undefined> = [];
+      const userPendingBeforePromises: Array<
+        Promise<GetXvsVaultUserPendingWithdrawalsFromBeforeUpgradeOutput> | undefined
+      > = [];
 
-    queries.push({
-      queryFn: () =>
-        callOrThrow({ xvsVaultContract, xvs }, params =>
-          getXvsVaultUserInfo({
-            ...params,
-            rewardTokenAddress: params.xvs.address,
-            poolIndex,
-            accountAddress: accountAddress || '',
-          }),
-        ),
-      queryKey: [
-        FunctionKey.GET_XVS_VAULT_USER_INFO,
-        { chainId, accountAddress, rewardTokenAddress: xvs?.address, poolIndex },
-      ],
-      enabled: !!accountAddress && isReady,
-    });
+      for (let poolIndex = 0; poolIndex < poolsCount; poolIndex++) {
+        infoPromises.push(
+          callOrThrow({ xvsVaultContract, xvs }, params =>
+            getXvsVaultPoolInfo({
+              ...params,
+              rewardTokenAddress: params.xvs.address,
+              poolIndex,
+            }),
+          ),
+        );
 
-    queries.push({
-      queryFn: () =>
-        callOrThrow({ xvsVaultContract, xvs }, params =>
-          getXvsVaultUserPendingWithdrawalsFromBeforeUpgrade({
-            ...params,
-            rewardTokenAddress: params.xvs.address,
-            poolIndex,
-            accountAddress: accountAddress || '',
-          }),
-        ),
-      queryKey: [
-        FunctionKey.GET_XVS_VAULT_PENDING_WITHDRAWALS_FROM_BEFORE_UPGRADE,
-        { chainId, accountAddress, rewardTokenAddress: xvs?.address, poolIndex },
-      ],
-      enabled: !!accountAddress && isReady,
-    });
-  }
+        pendingPromises.push(
+          callOrThrow({ xvsVaultContract, xvs }, params =>
+            getXvsVaultPendingWithdrawalsBalance({
+              ...params,
+              rewardTokenAddress: params.xvs.address,
+              poolIndex,
+            }),
+          ),
+        );
 
-  return useQueries({ queries });
+        if (accountAddress) {
+          userInfoPromises.push(
+            callOrThrow({ xvsVaultContract, xvs }, params =>
+              getXvsVaultUserInfo({
+                ...params,
+                rewardTokenAddress: params.xvs.address,
+                poolIndex,
+                accountAddress,
+              }),
+            ),
+          );
+
+          userPendingBeforePromises.push(
+            callOrThrow({ xvsVaultContract, xvs }, params =>
+              getXvsVaultUserPendingWithdrawalsFromBeforeUpgrade({
+                ...params,
+                rewardTokenAddress: params.xvs.address,
+                poolIndex,
+                accountAddress,
+              }),
+            ),
+          );
+        } else {
+          userInfoPromises.push(undefined);
+          userPendingBeforePromises.push(undefined);
+        }
+      }
+
+      let poolInfos: GetXvsVaultPoolInfoOutput[] = [];
+      let pendingWithdrawals: GetXvsVaultPendingWithdrawalsBalanceOutput[] = [];
+
+      poolInfos = await Promise.all(infoPromises);
+
+      pendingWithdrawals = await Promise.all(pendingPromises);
+
+      const userInfos: Array<GetXvsVaultUserInfoOutput | undefined> = await Promise.all(
+        userInfoPromises.map(p => (p ? p : Promise.resolve(undefined))),
+      );
+
+      const userPendingBeforeUpgrade: Array<
+        GetXvsVaultUserPendingWithdrawalsFromBeforeUpgradeOutput | undefined
+      > = await Promise.all(
+        userPendingBeforePromises.map(p => (p ? p : Promise.resolve(undefined))),
+      );
+
+      const result = {
+        poolInfos,
+        pendingWithdrawals,
+        userInfos,
+        userPendingBeforeUpgrade,
+      };
+
+
+      return result;
+    },
+  });
 };
 
 export default useGetXvsVaultPools;

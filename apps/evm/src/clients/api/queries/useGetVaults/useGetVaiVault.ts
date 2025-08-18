@@ -36,7 +36,10 @@ const useGetVaiVault = ({ accountAddress }: { accountAddress?: string }): UseGet
         token: vai,
       },
       {
-        enabled: !!vaiVaultContractAddress,
+        enabled: !!vaiVaultContractAddress && !!accountAddress,
+        staleTime: 5 * 60 * 1000,
+        gcTime: 5 * 60 * 1000,
+        refetchOnWindowFocus: false,
       },
     );
 
@@ -47,23 +50,31 @@ const useGetVaiVault = ({ accountAddress }: { accountAddress?: string }): UseGet
       },
       {
         enabled: !!accountAddress,
+        staleTime: 15 * 1000,
+        gcTime: 5 * 60 * 1000,
+        refetchOnWindowFocus: false,
       },
     );
 
   const { data: vaiVaultDailyRateData, isLoading: isGetVaiVaultDailyRateMantissaLoading } =
-    useGetVenusVaiVaultDailyRate();
+    useGetVenusVaiVaultDailyRate({ enabled: !!accountAddress, staleTime: 5 * 60 * 1000, gcTime: 5 * 60 * 1000, refetchOnWindowFocus: false });
 
   const { data: getVaiVaultPausedData, isLoading: isGetVaiVaultPausedLoading } =
-    useGetVaiVaultPaused();
+    useGetVaiVaultPaused({ enabled: !!accountAddress, staleTime: 5 * 60 * 1000, gcTime: 5 * 60 * 1000, refetchOnWindowFocus: false });
 
   const { data: xvsPriceData, isLoading: isGetXvsPriceLoading } = useGetTokenUsdPrice(
     {
       token: xvs,
     },
     {
-      enabled: !!xvs,
+      enabled: !!xvs && !!accountAddress,
+      staleTime: 60 * 1000,
+      gcTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
     },
   );
+
+  // no-op
 
   const data: Vault | undefined = useMemo(() => {
     if (

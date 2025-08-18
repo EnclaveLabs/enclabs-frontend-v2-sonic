@@ -1,16 +1,7 @@
-import type { UseQueryResult } from '@tanstack/react-query';
+// import type { UseQueryResult } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
-import {
-  type GetXvsVaultPendingWithdrawalsBalanceOutput,
-  type GetXvsVaultPoolInfoOutput,
-  type GetXvsVaultUserInfoOutput,
-  type GetXvsVaultUserPendingWithdrawalsFromBeforeUpgradeOutput,
-  useGetXvsVaultPaused,
-  useGetXvsVaultPoolCount,
-  useGetXvsVaultTotalAllocationPoints,
-  useGetXvsVaultsTotalDailyDistributedXvs,
-} from 'clients/api';
+import { useGetXvsVaultPaused, useGetXvsVaultPoolCount, useGetXvsVaultTotalAllocationPoints, useGetXvsVaultsTotalDailyDistributedXvs } from 'clients/api';
 import { DAYS_PER_YEAR } from 'constants/time';
 import { useGetToken, useGetTokens } from 'libs/tokens';
 import type { Vault } from 'types';
@@ -19,7 +10,7 @@ import findTokenByAddress from 'utilities/findTokenByAddress';
 
 import BigNumber from 'bignumber.js';
 import useGetXvsVaultPoolBalances from './useGetXvsVaultPoolBalances';
-import useGetXvsVaultPools from './useGetXvsVaultPools';
+import useGetXvsVaultPools, { type BatchedXvsVaultPoolsData } from './useGetXvsVaultPools';
 
 export interface UseGetVestingVaultsOutput {
   isLoading: boolean;
@@ -39,7 +30,7 @@ const useGetVestingVaults = ({
   const {
     data: xvsVaultPoolCountData = { poolCount: 0 },
     isLoading: isGetXvsVaultPoolCountLoading,
-  } = useGetXvsVaultPoolCount();
+  } = useGetXvsVaultPoolCount({ enabled: !!accountAddress });
 
   // Fetch data generic to all XVS pools
   const {
@@ -47,10 +38,13 @@ const useGetVestingVaults = ({
     isLoading: isGetXvsVaultsTotalDailyDistributedXvsLoading,
   } = useGetXvsVaultsTotalDailyDistributedXvs(
     {
-      stakedToken: xvs!, // We ensure XVS exists through the enabled option
+      stakedToken: xvs as NonNullable<typeof xvs>,
     },
     {
-      enabled: !!xvs,
+      enabled: !!xvs && !!accountAddress,
+      staleTime: 5 * 60 * 1000,
+      gcTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
     },
   );
 
@@ -59,81 +53,62 @@ const useGetVestingVaults = ({
     isLoading: isGetXvsVaultTotalAllocationPointsLoading,
   } = useGetXvsVaultTotalAllocationPoints(
     {
-      tokenAddress: xvs!.address, // We ensure XVS exists through the enabled option
+      tokenAddress: (xvs as NonNullable<typeof xvs>).address,
     },
     {
-      enabled: !!xvs,
+      enabled: !!xvs && !!accountAddress,
+      staleTime: 5 * 60 * 1000,
+      gcTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
     },
   );
 
   const { data: getXvsVaultPausedData, isLoading: isGetXvsVaultPausedLoading } =
-    useGetXvsVaultPaused();
+    useGetXvsVaultPaused({ enabled: !!accountAddress, staleTime: 5 * 60 * 1000, gcTime: 5 * 60 * 1000, refetchOnWindowFocus: false });
 
   // Fetch pools
-  const poolQueryResults = useGetXvsVaultPools({
+  const poolsDataQuery = useGetXvsVaultPools({
     accountAddress,
     poolsCount: xvsVaultPoolCountData.poolCount,
   });
-  const arePoolQueriesLoading = poolQueryResults.some(queryResult => queryResult.isLoading);
+  const arePoolQueriesLoading = poolsDataQuery.isLoading;
+
 
   // Index results by pool ID
   const [poolData, stakedTokenAddresses] = useMemo(() => {
     const data: {
       [poolIndex: string]: {
-        poolInfos: GetXvsVaultPoolInfoOutput;
+        poolInfos: BatchedXvsVaultPoolsData['poolInfos'][number];
         pendingWithdrawalsBalanceMantissa: BigNumber;
         userHasPendingWithdrawalsFromBeforeUpgrade: boolean;
-        userInfos?: GetXvsVaultUserInfoOutput;
+        userInfos?: BatchedXvsVaultPoolsData['userInfos'][number];
       };
     } = {};
 
     const tokenAddresses: string[] = [];
 
-    const queriesPerPoolCount =
-      xvsVaultPoolCountData.poolCount > 0
-        ? poolQueryResults.length / xvsVaultPoolCountData.poolCount
-        : 0;
-
     for (let poolIndex = 0; poolIndex < xvsVaultPoolCountData.poolCount; poolIndex++) {
-      const poolQueryResultStartIndex = poolIndex * queriesPerPoolCount;
+      const poolInfos = poolsDataQuery.data?.poolInfos?.[poolIndex];
+      const pending = poolsDataQuery.data?.pendingWithdrawals?.[poolIndex];
+      const userInfo = poolsDataQuery.data?.userInfos?.[poolIndex];
+      const userPending = poolsDataQuery.data?.userPendingBeforeUpgrade?.[poolIndex];
 
-      const poolInfosQueryResult = poolQueryResults[
-        poolQueryResultStartIndex
-      ] as UseQueryResult<GetXvsVaultPoolInfoOutput>;
-
-      const poolPendingWithdrawalsBalanceQueryResult = poolQueryResults[
-        poolQueryResultStartIndex + 1
-      ] as UseQueryResult<GetXvsVaultPendingWithdrawalsBalanceOutput>;
-
-      const userInfoQueryResult = poolQueryResults[
-        poolQueryResultStartIndex + 2
-      ] as UseQueryResult<GetXvsVaultUserInfoOutput>;
-
-      const userPendingWithdrawalsFromBeforeUpgradeQueryResult = poolQueryResults[
-        poolQueryResultStartIndex + 3
-      ] as UseQueryResult<GetXvsVaultUserPendingWithdrawalsFromBeforeUpgradeOutput>;
-
-      if (
-        poolInfosQueryResult?.data &&
-        poolPendingWithdrawalsBalanceQueryResult?.data?.balanceMantissa
-      ) {
-        tokenAddresses.push(poolInfosQueryResult.data.stakedTokenAddress);
+      if (poolInfos && pending?.balanceMantissa) {
+        tokenAddresses.push(poolInfos.stakedTokenAddress);
 
         data[poolIndex] = {
-          poolInfos: poolInfosQueryResult.data,
-          userInfos: userInfoQueryResult.data,
-          pendingWithdrawalsBalanceMantissa:
-            poolPendingWithdrawalsBalanceQueryResult.data.balanceMantissa,
+          poolInfos,
+          userInfos: userInfo,
+          pendingWithdrawalsBalanceMantissa: pending.balanceMantissa,
           userHasPendingWithdrawalsFromBeforeUpgrade:
-            userPendingWithdrawalsFromBeforeUpgradeQueryResult.data?.userPendingWithdrawalsFromBeforeUpgradeMantissa.isGreaterThan(
-              0,
-            ) || false,
+            userPending?.userPendingWithdrawalsFromBeforeUpgradeMantissa?.isGreaterThan(0) ||
+            false,
         };
       }
     }
 
     return [data, tokenAddresses];
-  }, [poolQueryResults, xvsVaultPoolCountData.poolCount]);
+  }, [poolsDataQuery.data, xvsVaultPoolCountData.poolCount]);
 
   // Fetch pool balances
   const poolBalanceQueryResults = useGetXvsVaultPoolBalances({
@@ -190,18 +165,18 @@ const useGetVestingVaults = ({
 
           const dailyDistributedXvs =
             xvsVaultDailyDistributedXvsData?.dailyDistributedXvs !== undefined &&
-            xvsVaultTotalAllocationPointsData?.totalAllocationPoints !== undefined &&
-            poolData[poolIndex]?.poolInfos.allocationPoint
+              xvsVaultTotalAllocationPointsData?.totalAllocationPoints !== undefined &&
+              poolData[poolIndex]?.poolInfos.allocationPoint
               ? xvsVaultDailyDistributedXvsData?.dailyDistributedXvs
-                  .multipliedBy(poolData[poolIndex]?.poolInfos.allocationPoint)
-                  .div(xvsVaultTotalAllocationPointsData.totalAllocationPoints)
+                .multipliedBy(poolData[poolIndex]?.poolInfos.allocationPoint)
+                .div(xvsVaultTotalAllocationPointsData.totalAllocationPoints)
               : undefined;
 
           const dailyDistributedXvsMantissa =
             dailyDistributedXvs &&
             convertTokensToMantissa({
               value: dailyDistributedXvs,
-              token: xvs!,
+              token: xvs as NonNullable<typeof xvs>,
             });
 
           const stakingAprPercentage = dailyDistributedXvsMantissa

@@ -1,74 +1,83 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { useGetPools, useGetTokenUsdPrice, useGetVaults } from 'clients/api';
-import { Spinner } from 'components';
-import { useGetToken } from 'libs/tokens';
-import { useAccountAddress } from 'libs/wallet';
+import { useGetPools, useGetTokenUsdPrice, useGetVaults } from "clients/api";
+import { Spinner } from "components";
+import { useGetToken } from "libs/tokens";
+import { useAccountAddress } from "libs/wallet";
 
-import BigNumber from 'bignumber.js';
-import { useConvertDollarsToCents } from 'hooks/useConvertDollarsToCents';
-import AccountPlaceholder from './AccountPlaceholder';
-import PoolsBreakdown from './PoolsBreakdown';
-import Summary from './Summary';
-import VaultsBreakdown from './VaultsBreakdown';
+import BigNumber from "bignumber.js";
+import { useConvertDollarsToCents } from "hooks/useConvertDollarsToCents";
+import AccountPlaceholder from "./AccountPlaceholder";
+import PoolsBreakdown from "./PoolsBreakdown";
+import Summary from "./Summary";
+import VaultsBreakdown from "./VaultsBreakdown";
 
 const Account: React.FC = () => {
   const { accountAddress } = useAccountAddress();
-  const { data: getPoolsData, isLoading: isGetPoolsLoading } = useGetPools({
-    accountAddress,
-  });
+  const { data: getPoolsData } = useGetPools({ accountAddress });
   const pools = getPoolsData?.pools || [];
 
-  const { data: getVaultsData, isLoading: isGetVaultsLoading } = useGetVaults({
-    accountAddress,
-  });
+  const { data: getVaultsData } = useGetVaults({ accountAddress });
   const vaults = getVaultsData || [];
 
   const xvs = useGetToken({
-    symbol: 'XVS',
+    symbol: "XVS",
   });
-  const { data: getXvsUsdPriceData, isLoading: isGetXvsUsdPriceLoading } = useGetTokenUsdPrice({
-    token: xvs,
-  });
+  const { data: getXvsUsdPriceData } = useGetTokenUsdPrice(
+    {
+      token: xvs,
+    },
+    {
+      staleTime: 5 * 60 * 1000,
+      gcTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
+    }
+  );
   const xvsPriceCents = useConvertDollarsToCents({
     value: getXvsUsdPriceData?.tokenPriceUsd || new BigNumber(0),
   });
 
   const vai = useGetToken({
-    symbol: 'VAI',
+    symbol: "VAI",
   });
-  const { data: getVaiUsdPriceData, isLoading: isGetVaiUsdPriceLoading } = useGetTokenUsdPrice({
-    token: vai,
-  });
+  const { data: getVaiUsdPriceData } = useGetTokenUsdPrice(
+    {
+      token: vai,
+    },
+    {
+      staleTime: 5 * 60 * 1000,
+      gcTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
+    }
+  );
   const vaiPriceCents = useConvertDollarsToCents({
     value: getVaiUsdPriceData?.tokenPriceUsd || new BigNumber(0),
   });
 
-  const isFetching =
-    isGetPoolsLoading || isGetVaultsLoading || isGetXvsUsdPriceLoading || isGetVaiUsdPriceLoading;
+  const isCriticalFetching = false;
 
   // Filter out vaults user has not staked in
   const filteredVaults = useMemo(
-    () => vaults.filter(vault => vault.userStakedMantissa?.isGreaterThan(0)),
-    [vaults],
+    () => vaults.filter((vault) => vault.userStakedMantissa?.isGreaterThan(0)),
+    [vaults]
   );
 
   // Filter out pools user has not supplied in or borrowed from, unless they have assets enabled as
   // collateral in that pool
   const filteredPools = useMemo(
     () =>
-      pools.filter(pool =>
+      pools.filter((pool) =>
         pool.assets.some(
-          asset =>
+          (asset) =>
             asset.userSupplyBalanceTokens.isGreaterThan(0) ||
             asset.userBorrowBalanceTokens.isGreaterThan(0) ||
-            asset.isCollateralOfUser,
-        ),
+            asset.isCollateralOfUser
+        )
       ),
-    [pools],
+    [pools]
   );
 
-  if (isFetching) {
+  if (isCriticalFetching) {
     return <Spinner />;
   }
 

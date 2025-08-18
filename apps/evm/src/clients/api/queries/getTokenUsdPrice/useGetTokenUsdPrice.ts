@@ -5,6 +5,7 @@ import {
   type GetTokenUsdPriceOutput,
   getTokenUsdPrice,
 } from 'clients/api';
+import { queryClient } from 'clients/api';
 import FunctionKey from 'constants/functionKey';
 import { useGetResilientOracleContract } from 'libs/contracts';
 import { useChainId } from 'libs/wallet';
@@ -39,17 +40,26 @@ const useGetTokenUsdPrice = ({ token }: UseGetTokenUsdPriceInput, options?: Part
     chainId,
   });
 
+  const queryKey: UseGetTokenBalancesQueryKey = [
+    FunctionKey.GET_TOKEN_USD_PRICE,
+    {
+      tokenAddress: token ? token.address : '',
+      chainId,
+    },
+  ];
+
   return useQuery({
-    queryKey: [
-      FunctionKey.GET_TOKEN_USD_PRICE,
-      {
-        tokenAddress: token ? token.address : '',
-        chainId,
-      },
-    ],
+    queryKey,
 
     queryFn: () =>
       callOrThrow({ token, resilientOracleContract }, params => getTokenUsdPrice({ ...params })),
+
+    placeholderData: options?.placeholderData ?? (() => queryClient.getQueryData(queryKey)),
+    staleTime: options?.staleTime ?? 5 * 60 * 1000,
+    gcTime: options?.gcTime ?? 5 * 60 * 1000,
+    refetchOnWindowFocus: options?.refetchOnWindowFocus ?? false,
+    retry: options?.retry ?? 1,
+    retryDelay: options?.retryDelay ?? ((attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 3000)),
 
     ...options,
     enabled: (options?.enabled === undefined || options?.enabled) && !!token,
