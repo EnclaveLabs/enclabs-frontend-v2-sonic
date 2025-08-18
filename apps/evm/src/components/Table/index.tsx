@@ -5,18 +5,17 @@ import MuiTableCell from '@mui/material/TableCell';
 import MuiTableContainer from '@mui/material/TableContainer';
 import MuiTableRow from '@mui/material/TableRow';
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useFormatTo } from 'hooks/useFormatTo';
 
+import { cn } from 'utilities';
 import { Card } from '../Card';
 import { Spinner } from '../Spinner';
 import Head from './Head';
 import TableCards from './TableCards';
 import { useStyles } from './styles';
 import type { Order, TableColumn, TableProps } from './types';
-import { GradientBorder } from 'components/GradientBorder';
-import { cn } from 'utilities';
 
 export * from './types';
 
@@ -38,6 +37,7 @@ export function Table<R>({
 }: TableProps<R>) {
   const styles = useStyles();
   const { formatTo } = useFormatTo();
+  const navigate = useNavigate();
 
   const [order, setOrder] = useState<Order<R> | undefined>(initialOrder);
 
@@ -96,13 +96,6 @@ export function Table<R>({
               const rowKey = rowKeyExtractor(row);
               const tokenAddress = getTokenAddress(row);
 
-              const additionalProps = getRowHref
-                ? {
-                    component: Link,
-                    to: formatTo({ to: getRowHref(row) }),
-                  }
-                : {};
-
               return (
                 <MuiTableRow
                   hover
@@ -114,9 +107,10 @@ export function Table<R>({
                   onClick={
                     rowOnClick
                       ? (e: React.MouseEvent<HTMLDivElement>) => rowOnClick(e, row)
+                      : getRowHref
+                      ? () => navigate(formatTo({ to: getRowHref(row) }))
                       : undefined
                   }
-                  {...additionalProps}
                 >
                   {columns.map(column => {
                     const cellContent = column.renderCell(row, rowIndex);

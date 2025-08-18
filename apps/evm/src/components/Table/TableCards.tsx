@@ -3,8 +3,9 @@ import { Typography } from '@mui/material';
 import { useMemo } from 'react';
 
 import { Spinner } from 'components/Spinner';
-import { Link } from 'containers/Link';
+import { useFormatTo } from 'hooks/useFormatTo';
 import { useTranslation } from 'libs/translations';
+import { useNavigate } from 'react-router-dom';
 
 import { Card } from 'components';
 import { Delimiter } from '../Delimiter';
@@ -42,6 +43,8 @@ export function TableCards<R>({
 }: TableCardProps<R>) {
   const { t } = useTranslation();
   const styles = useStyles();
+  const navigate = useNavigate();
+  const { formatTo } = useFormatTo();
 
   const [titleColumn, ...otherColumns] = columns;
 
@@ -123,21 +126,29 @@ export function TableCards<R>({
             </>
           );
 
+          const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+            if (rowOnClick) {
+              rowOnClick(e, row);
+              return;
+            }
+            if (!getRowHref) {
+              return;
+            }
+            const target = e.target as HTMLElement | null;
+            if (target?.closest('a')) {
+              return;
+            }
+            navigate(formatTo({ to: getRowHref(row) }));
+          };
+
           return (
             <Card
               key={rowKey}
               css={styles.tableWrapperMobile({ clickable: !!(rowOnClick || getRowHref), tokenAddress: tokenAddress })}
-              onClick={rowOnClick && ((e: React.MouseEvent<HTMLDivElement>) => rowOnClick(e, row))}
-              asChild
+              onClick={handleClick}
               className='shadow-lg'
             >
-              {getRowHref ? (
-                <Link css={styles.link} to={getRowHref(row)}>
-                  {content}
-                </Link>
-              ) : (
-                <div>{content}</div>
-              )}
+              <div css={styles.link}>{content}</div>
             </Card>
           );
         })}
