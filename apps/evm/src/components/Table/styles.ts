@@ -99,7 +99,7 @@ export const useStyles = () => {
       margin: ${usedTheme.spacing(4)};
     `,
     getTableRow: ({ clickable, tokenAddress }: { clickable: boolean, tokenAddress: string }) => css`
-      height: ${usedTheme.spacing(14)};
+      height: ${usedTheme.spacing(16)};
 
       :hover {
         background-color: ${getHoverBackgroundColor(tokenAddress)} !important;

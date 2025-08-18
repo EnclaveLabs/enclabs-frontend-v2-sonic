@@ -1,25 +1,26 @@
 /** @jsxImportSource @emotion/react */
-import { Typography } from '@mui/material';
-import { Card } from 'components';
-import { useMemo, useState } from 'react';
+import { Typography } from "@mui/material";
+import { Card } from "components";
+import { useMemo, useState } from "react";
 
-import { ButtonGroup } from 'components';
-import { MarketTable, type MarketTableProps } from 'containers/MarketTable';
-import { useHideMdDownCss, useHideXlDownCss, useShowXlDownCss } from 'hooks/responsive';
-import { useTranslation } from 'libs/translations';
-import type { Pool } from 'types';
+import { ButtonGroup } from "components";
+import { MarketTable, type MarketTableProps } from "containers/MarketTable";
+import {
+  useHideMdDownCss,
+  useHideXlDownCss,
+  useShowXlDownCss,
+} from "hooks/responsive";
+import { useTranslation } from "libs/translations";
+import type { Pool } from "types";
 
-import TEST_IDS from '../testIds';
-import { useStyles } from './styles';
-import { useGetChainMetadata } from 'hooks/useGetChainMetadata';
-import { useParams } from 'react-router';
-import { useGetAsset } from 'clients/api';
+import TEST_IDS from "../testIds";
+import { useStyles } from "./styles";
 
 export interface TablesProps {
-  pool: Pool;
+  pools: Pool[];
 }
 
-export const Tables: React.FC<TablesProps> = ({ pool }) => {
+export const Tables: React.FC<TablesProps> = ({ pools }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -31,43 +32,60 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
   const marketTableProps: {
     supply: MarketTableProps;
     borrow: MarketTableProps;
-  } = useMemo(
-    () => ({
+  } = useMemo(() => {
+    const supplyPools: Pool[] = pools.map((pool) => ({
+      ...pool,
+      assets: pool.assets.filter(
+        (asset) =>
+          asset.userSupplyBalanceTokens.isGreaterThan(0) ||
+          asset.isCollateralOfUser
+      ),
+    }));
+
+    const borrowPools: Pool[] = pools.map((pool) => ({
+      ...pool,
+      assets: pool.assets.filter((asset) =>
+        asset.userBorrowBalanceTokens.isGreaterThan(0)
+      ),
+    }));
+
+    return {
       supply: {
-        pools: [
-          {
-            ...pool,
-            assets: pool.assets.filter(
-              asset => asset.userSupplyBalanceTokens.isGreaterThan(0) || asset.isCollateralOfUser,
-            ),
-          },
+        pools: supplyPools,
+        marketType: "supply",
+        breakpoint: "md",
+        columns: [
+          "asset",
+          "type",
+          "supplyApyLtv",
+          "points",
+          "userSupplyBalance",
+          "collateral",
         ],
-        marketType: 'supply',
-        breakpoint: 'md',
-        columns: ['asset', 'type', 'supplyApyLtv', 'points', 'userSupplyBalance', 'collateral'],
         initialOrder: {
-          orderBy: 'userSupplyBalance',
-          orderDirection: 'desc',
+          orderBy: "userSupplyBalance",
+          orderDirection: "desc",
         },
       },
       borrow: {
-        pools: [
-          {
-            ...pool,
-            assets: pool.assets.filter(asset => asset.userBorrowBalanceTokens.isGreaterThan(0)),
-          },
+        pools: borrowPools,
+        marketType: "borrow",
+        breakpoint: "md",
+        columns: [
+          "asset",
+          "type",
+          "borrowApy",
+          "borrowPoints",
+          "userBorrowBalance",
+          "userPercentOfLimit",
         ],
-        marketType: 'borrow',
-        breakpoint: 'md',
-        columns: ['asset', 'type', 'borrowApy', 'borrowPoints', 'userBorrowBalance', 'userPercentOfLimit'],
         initialOrder: {
-          orderBy: 'userBorrowBalance',
-          orderDirection: 'desc',
+          orderBy: "userBorrowBalance",
+          orderDirection: "desc",
         },
       },
-    }),
-    [pool],
-  );
+    };
+  }, [pools]);
 
   return (
     <div data-testid={TEST_IDS.tables}>
@@ -75,33 +93,39 @@ export const Tables: React.FC<TablesProps> = ({ pool }) => {
       <div css={[styles.desktopContainer, hideXlDownCss]}>
         <MarketTable
           {...marketTableProps.supply}
-          title={t('account.marketBreakdown.tables.supplyTableTitle')}
-          className='shadow-lg'
+          title={t("account.marketBreakdown.tables.supplyTableTitle")}
+          className="shadow-lg"
         />
 
         <MarketTable
           {...marketTableProps.borrow}
-          title={t('account.marketBreakdown.tables.borrowTableTitle')}
-          className='shadow-lg'
+          title={t("account.marketBreakdown.tables.borrowTableTitle")}
+          className="shadow-lg"
         />
       </div>
 
       {/* Tablet/Mobile view */}
-      <Card css={[styles.tabletContainer, showXlDownCss]} className='md:shadow-lg xl:shadow-lg'>
+      <Card
+        css={[styles.tabletContainer, showXlDownCss]}
+        className="md:shadow-lg xl:shadow-lg"
+      >
         <div css={styles.tabletHeader}>
-          <Typography variant="h4" css={[styles.tabletHeaderTitle, hideMdDownCss]}>
-            {t('account.marketBreakdown.tables.tabletTitle')}
+          <Typography
+            variant="h4"
+            css={[styles.tabletHeaderTitle, hideMdDownCss]}
+          >
+            {t("account.marketBreakdown.tables.tabletTitle")}
           </Typography>
 
           <ButtonGroup
             css={styles.tabletHeaderButtonGroup}
             buttonLabels={[
-              t('account.marketBreakdown.tables.tabletSupplyTabTitle'),
-              t('account.marketBreakdown.tables.tabletBorrowTabTitle'),
+              t("account.marketBreakdown.tables.tabletSupplyTabTitle"),
+              t("account.marketBreakdown.tables.tabletBorrowTabTitle"),
             ]}
             activeButtonIndex={activeTabIndex}
             onButtonClick={setActiveTabIndex}
-            tokenAddress={''}
+            tokenAddress={""}
           />
         </div>
 

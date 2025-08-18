@@ -1,15 +1,11 @@
 import { useMemo } from "react";
 
-import { useGetPools, useGetTokenUsdPrice, useGetVaults } from "clients/api";
+import { useGetPools, useGetVaults } from "clients/api";
 import { Spinner } from "components";
-import { useGetToken } from "libs/tokens";
 import { useAccountAddress } from "libs/wallet";
 
-import BigNumber from "bignumber.js";
-import { useConvertDollarsToCents } from "hooks/useConvertDollarsToCents";
 import AccountPlaceholder from "./AccountPlaceholder";
 import PoolsBreakdown from "./PoolsBreakdown";
-import Summary from "./Summary";
 import VaultsBreakdown from "./VaultsBreakdown";
 
 const Account: React.FC = () => {
@@ -19,40 +15,6 @@ const Account: React.FC = () => {
 
   const { data: getVaultsData } = useGetVaults({ accountAddress });
   const vaults = getVaultsData || [];
-
-  const xvs = useGetToken({
-    symbol: "XVS",
-  });
-  const { data: getXvsUsdPriceData } = useGetTokenUsdPrice(
-    {
-      token: xvs,
-    },
-    {
-      staleTime: 5 * 60 * 1000,
-      gcTime: 5 * 60 * 1000,
-      refetchOnWindowFocus: false,
-    }
-  );
-  const xvsPriceCents = useConvertDollarsToCents({
-    value: getXvsUsdPriceData?.tokenPriceUsd || new BigNumber(0),
-  });
-
-  const vai = useGetToken({
-    symbol: "VAI",
-  });
-  const { data: getVaiUsdPriceData } = useGetTokenUsdPrice(
-    {
-      token: vai,
-    },
-    {
-      staleTime: 5 * 60 * 1000,
-      gcTime: 5 * 60 * 1000,
-      refetchOnWindowFocus: false,
-    }
-  );
-  const vaiPriceCents = useConvertDollarsToCents({
-    value: getVaiUsdPriceData?.tokenPriceUsd || new BigNumber(0),
-  });
 
   const isCriticalFetching = false;
 
@@ -88,15 +50,7 @@ const Account: React.FC = () => {
   }
 
   return (
-    <div className="flex-auto space-y-10 lg:space-y-14">
-      <Summary
-        pools={filteredPools}
-        vaults={filteredVaults}
-        xvsPriceCents={xvsPriceCents}
-        vaiPriceCents={vaiPriceCents}
-        displayTotalVaultStake
-      />
-
+    <div className="flex-auto space-y-6 lg:space-y-10">
       {filteredVaults.length > 0 && <VaultsBreakdown vaults={filteredVaults} />}
 
       {filteredPools.length > 0 && <PoolsBreakdown pools={filteredPools} />}
