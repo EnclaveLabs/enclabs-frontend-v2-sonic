@@ -20,14 +20,14 @@ const SvgLido = (props: SVGProps<SVGSVGElement>) => (
       <path
         d="M19.1472 15.6758C19.1472 19.8603 15.755 23.2526 11.5704 23.2526C7.38581 23.2526 3.99355 19.8603 3.99355 15.6758C3.99355 11.4912 7.38581 8.09892 11.5704 8.09892C15.755 8.09892 19.1472 11.4912 19.1472 15.6758Z"
         stroke="currentColor"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </g>
 
     <path
       d="M11.5 11.8423L6.89864 9.15817L11.5 1.87268L16.1014 9.15817L11.5 11.8423Z"
       stroke="currentColor"
-      stroke-width="2"
+      strokeWidth="2"
     />
   </svg>
 );
