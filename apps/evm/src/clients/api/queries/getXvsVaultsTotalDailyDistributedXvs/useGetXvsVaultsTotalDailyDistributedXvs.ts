@@ -40,6 +40,8 @@ export const useGetXvsVaultsTotalDailyDistributedXvs = (
   const { blocksPerDay } = useGetChainMetadata();
   const xvsVaultContract = useGetXvsVaultContract();
 
+  const enabled = !!xvsVaultContract && (options?.enabled ?? true);
+
   return useQuery({
     queryKey: [FunctionKey.GET_XVS_VAULT_DAILY_REWARD_TOKENS, { ...input, chainId }],
 
@@ -49,5 +51,6 @@ export const useGetXvsVaultsTotalDailyDistributedXvs = (
       ),
 
     ...options,
+    enabled,
   });
 };

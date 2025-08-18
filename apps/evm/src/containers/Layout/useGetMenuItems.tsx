@@ -2,13 +2,13 @@ import { useMemo } from "react";
 
 import { routes } from "constants/routing";
 import { useIsFeatureEnabled } from "hooks/useIsFeatureEnabled";
-import { useAccountAddress } from "libs/wallet";
+// import { useAccountAddress } from "libs/wallet";
 
 import { useGetChainMetadata } from "hooks/useGetChainMetadata";
 import type { MenuItem } from "./types";
 
 const useGetMenuItems = () => {
-  const { accountAddress } = useAccountAddress();
+  // const { accountAddress } = useAccountAddress();
   const { lstPoolComptrollerContractAddress, lstPoolVWstEthContractAddress } =
     useGetChainMetadata();
   const swapRouteEnabled = useIsFeatureEnabled({ name: "swapRoute" });
@@ -30,16 +30,14 @@ const useGetMenuItems = () => {
 
   return useMemo(() => {
   const menuItems: MenuItem[] = [];
-    // 1) Dashboard (formerly Account) when connected
-    if (accountAddress) {
-      menuItems.push({
-        to: routes.account.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.account')
-        i18nKey: "layout.menuItems.account",
-        iconName: "dashboard",
-      });
-    }
+    // 1) Account (always visible)
+    menuItems.push({
+      to: routes.account.path,
+      // Translation key: do not remove this comment
+      // t('layout.menuItems.account')
+      i18nKey: "layout.menuItems.account",
+      iconName: "dashboard",
+    });
 
     // 2) Markets (formerly Dashboard)
     menuItems.push({
@@ -60,41 +58,39 @@ const useGetMenuItems = () => {
       });
 
     // Other items follow
-    if (accountAddress) {
-      if (isolatedPoolsRouteEnabled) {
-        menuItems.push({
-          to: routes.isolatedPools.path,
-          // Translation key: do not remove this comment
-          // t('layout.menuItems.isolatedPools')
-          i18nKey: "layout.menuItems.isolatedPools",
-          iconName: "fourDots",
-        });
-      }
-
+    if (isolatedPoolsRouteEnabled) {
       menuItems.push({
-        to: routes.rewards.path,
+        to: routes.isolatedPools.path,
         // Translation key: do not remove this comment
-        // t('layout.menuItems.account')
-        i18nKey: "layout.menuItems.rewards",
-        iconName: "rewards",
-      });
-
-      menuItems.push({
-        to: routes.swapodos.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.account')
-        i18nKey: "layout.menuItems.swap",
-        iconName: "convert",
-      });
-
-      menuItems.push({
-        to: routes.veTrevee.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.account')
-        i18nKey: "veTrevee",
-        iconName: "treeve",
+        // t('layout.menuItems.isolatedPools')
+        i18nKey: "layout.menuItems.isolatedPools",
+        iconName: "fourDots",
       });
     }
+
+    menuItems.push({
+      to: routes.rewards.path,
+      // Translation key: do not remove this comment
+      // t('layout.menuItems.account')
+      i18nKey: "layout.menuItems.rewards",
+      iconName: "rewards",
+    });
+
+    menuItems.push({
+      to: routes.swapodos.path,
+      // Translation key: do not remove this comment
+      // t('layout.menuItems.account')
+      i18nKey: "layout.menuItems.swap",
+      iconName: "convert",
+    });
+
+    menuItems.push({
+      to: routes.veTrevee.path,
+      // Translation key: do not remove this comment
+      // t('layout.menuItems.account')
+      i18nKey: "veTrevee",
+      iconName: "treeve",
+    });
 
     // if (lstPoolComptrollerContractAddress && lstPoolVWstEthContractAddress) {
     //   menuItems.push({
@@ -161,7 +157,7 @@ const useGetMenuItems = () => {
     // }
 
     return menuItems;
-  }, [accountAddress, isolatedPoolsRouteEnabled]);
+  }, [isolatedPoolsRouteEnabled]);
 };
 
 export default useGetMenuItems;

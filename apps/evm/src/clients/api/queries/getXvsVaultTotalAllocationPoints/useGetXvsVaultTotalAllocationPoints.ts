@@ -37,6 +37,8 @@ const useGetXvsVaultTotalAllocationPoints = (
   const { chainId } = useChainId();
   const xvsVaultContract = useGetXvsVaultContract();
 
+  const enabled = !!xvsVaultContract && (options?.enabled ?? true);
+
   return useQuery({
     queryKey: [FunctionKey.GET_XVS_VAULT_TOTAL_ALLOCATION_POINTS, { ...input, chainId }],
 
@@ -46,6 +48,7 @@ const useGetXvsVaultTotalAllocationPoints = (
       ),
 
     ...options,
+    enabled,
   });
 };
 

@@ -34,11 +34,14 @@ const useGetXvsVaultPoolInfo = (
   const { chainId } = useChainId();
   const xvsVaultContract = useGetXvsVaultContract();
 
+  const enabled = !!xvsVaultContract && (options?.enabled ?? true);
+
   return useQuery({
     queryKey: [FunctionKey.GET_XVS_VAULT_POOL_INFOS, { ...input, chainId }],
     queryFn: () =>
       callOrThrow({ xvsVaultContract }, params => getXvsVaultPoolInfo({ ...params, ...input })),
     ...options,
+    enabled,
   });
 };
 

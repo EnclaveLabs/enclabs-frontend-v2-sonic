@@ -2,10 +2,9 @@ import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import { PAGE_CONTAINER_ID } from "constants/layout";
-import { routes, Subdirectory } from "constants/routing";
+import { Subdirectory, routes } from "constants/routing";
 import { Layout } from "containers/Layout";
 import { useIsFeatureEnabled } from "hooks/useIsFeatureEnabled";
-import { useAccountAddress } from "libs/wallet";
 
 import { Redirect } from "components";
 import { useGetChainMetadata } from "hooks/useGetChainMetadata";
@@ -40,7 +39,6 @@ const VeTrevee = safeLazyLoad(() => import("pages/VeTrevee"));
 const Earn = safeLazyLoad(() => import("pages/Earn"));
 
 const AppRoutes = () => {
-  const { accountAddress } = useAccountAddress();
   const { lstPoolComptrollerContractAddress, lstPoolVWstEthContractAddress } =
     useGetChainMetadata();
   const swapRouteEnabled = useIsFeatureEnabled({ name: "swapRoute" });
@@ -87,40 +85,36 @@ const AppRoutes = () => {
           <Route path="*" element={<Redirect to={routes.dashboard.path} />} />
         </Route>
 
-        {!!accountAddress && (
-          <Route path={Subdirectory.ACCOUNT}>
-            <Route
-              index
-              element={
-                <PageSuspense>
-                  <Account />
-                </PageSuspense>
-              }
-            />
-
-            {primeCalculatorEnabled && (
-              <Route
-                path={Subdirectory.PRIME_CALCULATOR}
-                element={
-                  <PageSuspense>
-                    <PrimeCalculator />
-                  </PageSuspense>
-                }
-              />
-            )}
-          </Route>
-        )}
-
-        {!!accountAddress && (
+        <Route path={Subdirectory.ACCOUNT}>
           <Route
-            path={Subdirectory.REWARDS}
+            index
             element={
               <PageSuspense>
-                <Rewards />
+                <Account />
               </PageSuspense>
             }
           />
-        )}
+
+          {primeCalculatorEnabled && (
+            <Route
+              path={Subdirectory.PRIME_CALCULATOR}
+              element={
+                <PageSuspense>
+                  <PrimeCalculator />
+                </PageSuspense>
+              }
+            />
+          )}
+        </Route>
+
+        <Route
+          path={Subdirectory.REWARDS}
+          element={
+            <PageSuspense>
+              <Rewards />
+            </PageSuspense>
+          }
+        />
 
         <Route
           path={Subdirectory.EARN}
@@ -131,16 +125,14 @@ const AppRoutes = () => {
           }
         />
 
-        {!!accountAddress && (
-          <Route
-            path={Subdirectory.VE_TREVEE}
-            element={
-              <PageSuspense>
-                <VeTrevee />
-              </PageSuspense>
-            }
-          />
-        )}
+        <Route
+          path={Subdirectory.VE_TREVEE}
+          element={
+            <PageSuspense>
+              <VeTrevee />
+            </PageSuspense>
+          }
+        />
 
         <Route path={Subdirectory.ISOLATED_POOLS}>
           <Route

@@ -37,6 +37,8 @@ const useGetXvsVaultLockedDeposits = (
   const { chainId } = useChainId();
   const xvsVaultContract = useGetXvsVaultContract();
 
+  const enabled = !!xvsVaultContract && (options?.enabled ?? true);
+
   return useQuery({
     queryKey: [FunctionKey.GET_XVS_VAULT_WITHDRAWAL_REQUESTS, { ...input, chainId }],
 
@@ -46,6 +48,7 @@ const useGetXvsVaultLockedDeposits = (
       ),
 
     ...options,
+    enabled,
   });
 };
 

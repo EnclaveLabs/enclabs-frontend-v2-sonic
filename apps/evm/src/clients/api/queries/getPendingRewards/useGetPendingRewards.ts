@@ -2,22 +2,13 @@ import { type QueryObserverOptions, useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 
 import FunctionKey from "constants/functionKey";
-import { useIsFeatureEnabled } from "hooks/useIsFeatureEnabled";
-import {
-  useGetLegacyPoolComptrollerContractAddress,
-  useGetPoolLensContract,
-  useGetPrimeContract,
-  useGetResilientOracleContract,
-  useGetVaiVaultContract,
-  useGetVenusLensContract,
-} from "libs/contracts";
+import { useGetPoolLensContract, useGetResilientOracleContract, useGetVenusLensContract } from "libs/contracts";
 import { useGetTokens } from "libs/tokens";
 import { useChainId } from "libs/wallet";
 import type { ChainId } from "types";
 import { callOrThrow, generatePseudoRandomRefetchInterval } from "utilities";
 
 import getPendingRewards from ".";
-import useGetXvsVaultPoolCount from "../getXvsVaultPoolCount/useGetXvsVaultPoolCount";
 import { useGetPools } from "../useGetPools";
 import type { GetPendingRewardsInput, GetPendingRewardsOutput } from "./types";
 
@@ -57,18 +48,9 @@ const useGetPendingRewards = (
   options?: Partial<Options>
 ) => {
   const { chainId } = useChainId();
-  const legacyPoolComptrollerContractAddress =
-    useGetLegacyPoolComptrollerContractAddress();
   const resilientOracleContract = useGetResilientOracleContract();
   const venusLensContract = useGetVenusLensContract();
   const poolLensContract = useGetPoolLensContract();
-  const vaiVaultContract = useGetVaiVaultContract();
-  const xvsVaultContract = ""; //useGetXvsVaultContract();
-  const primeContract = useGetPrimeContract();
-
-  const isPrimeEnabled = useIsFeatureEnabled({
-    name: "prime",
-  });
 
   const tokens = useGetTokens();
 
@@ -87,14 +69,7 @@ const useGetPendingRewards = (
     [getPoolsData?.pools]
   );
 
-  // Get XVS vesting vault pool count
-  const {
-    data: getXvsVaultPoolCountData,
-    isLoading: isGetXvsVaultPoolCountLoading,
-  } = useGetXvsVaultPoolCount({
-    enabled: !!options?.enabled,
-  });
-  const xvsVestingVaultPoolCount = getXvsVaultPoolCountData?.poolCount || 0;
+  // XVS vesting vault data not used in this implementation
 
   // Sort addresses to output the same data when providing them in a different
   // order. This prevents unnecessary queries
@@ -109,18 +84,13 @@ const useGetPendingRewards = (
         {
           resilientOracleContract,
           poolLensContract,
-          xvsVaultContract,
         },
         (params) =>
           getPendingRewards({
-            legacyPoolComptrollerContractAddress,
             venusLensContract,
             isolatedPoolComptrollerAddresses:
               sortedIsolatedPoolComptrollerAddresses,
-            xvsVestingVaultPoolCount,
-            vaiVaultContract,
             tokens,
-            primeContract: isPrimeEnabled ? primeContract : undefined,
             ...input,
             ...params,
           })
@@ -129,8 +99,7 @@ const useGetPendingRewards = (
     ...options,
     enabled:
       (!options || options.enabled) &&
-      !isGetPoolsLoading &&
-      !isGetXvsVaultPoolCountLoading,
+      !isGetPoolsLoading,
   });
 };
 

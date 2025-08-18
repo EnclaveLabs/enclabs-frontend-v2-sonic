@@ -37,6 +37,8 @@ const useGetXvsVaultUserPendingWithdrawalsFromBeforeUpgrade = (
   const { chainId } = useChainId();
   const xvsVaultContract = useGetXvsVaultContract();
 
+  const enabled = !!xvsVaultContract && (options?.enabled ?? true);
+
   return useQuery({
     queryKey: [
       FunctionKey.GET_XVS_VAULT_PENDING_WITHDRAWALS_FROM_BEFORE_UPGRADE,
@@ -47,8 +49,8 @@ const useGetXvsVaultUserPendingWithdrawalsFromBeforeUpgrade = (
       callOrThrow({ xvsVaultContract }, params =>
         getXvsVaultUserPendingWithdrawalsFromBeforeUpgrade({ ...params, ...input }),
       ),
-
     ...options,
+    enabled,
   });
 };
 

@@ -40,6 +40,8 @@ const useGetXvsVaultPools = ({
     symbol: 'XVS',
   });
 
+  const isReady = !!xvsVaultContract && !!xvs;
+
   const queries: UseQueryOptions<
     | GetXvsVaultPoolInfoOutput
     | GetXvsVaultUserInfoOutput
@@ -63,6 +65,7 @@ const useGetXvsVaultPools = ({
         FunctionKey.GET_XVS_VAULT_POOL_INFOS,
         { chainId, rewardTokenAddress: xvs?.address, poolIndex },
       ],
+      enabled: isReady,
     });
 
     queries.push({
@@ -78,6 +81,7 @@ const useGetXvsVaultPools = ({
         FunctionKey.GET_XVS_VAULT_PENDING_WITHDRAWALS_BALANCE,
         { chainId, accountAddress, rewardTokenAddress: xvs?.address, poolIndex },
       ],
+      enabled: isReady,
     });
 
     queries.push({
@@ -94,7 +98,7 @@ const useGetXvsVaultPools = ({
         FunctionKey.GET_XVS_VAULT_USER_INFO,
         { chainId, accountAddress, rewardTokenAddress: xvs?.address, poolIndex },
       ],
-      enabled: !!accountAddress,
+      enabled: !!accountAddress && isReady,
     });
 
     queries.push({
@@ -111,7 +115,7 @@ const useGetXvsVaultPools = ({
         FunctionKey.GET_XVS_VAULT_PENDING_WITHDRAWALS_FROM_BEFORE_UPGRADE,
         { chainId, accountAddress, rewardTokenAddress: xvs?.address, poolIndex },
       ],
-      enabled: !!accountAddress,
+      enabled: !!accountAddress && isReady,
     });
   }
 
