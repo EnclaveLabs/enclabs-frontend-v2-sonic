@@ -1,23 +1,21 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
 import { getTokenType } from 'components/Tag';
-import { tokenTypeInfo} from 'constants/tokenType';
+import { tokenTypeInfo } from 'constants/tokenType';
 import { theme } from 'theme';
 
 import type { BREAKPOINTS } from 'theme/MuiThemeProvider/muiTheme';
 
-const getHoverBackgroundColor = (tokenAddress: string) : string => {
+const getHoverBackgroundColor = (tokenAddress: string): string => {
 
-  if(tokenAddress){
+  if (tokenAddress) {
 
     const tokenType = getTokenType(tokenAddress);
     const tokenTypeInfos = tokenTypeInfo[tokenType];
     return tokenTypeInfos.hoverColor;
   }
-  else{
 
-    return theme.colors.lightGrey;
-  }
+  return theme.colors.lightGrey;
 }
 
 export const useStyles = () => {
@@ -83,9 +81,8 @@ export const useStyles = () => {
 
       padding: ${usedTheme.spacing(4, 0)};
 
-      ${
-        clickable &&
-        css`
+      ${clickable &&
+      css`
         cursor: pointer;
 
         :hover {
@@ -108,9 +105,8 @@ export const useStyles = () => {
         background-color: ${getHoverBackgroundColor(tokenAddress)} !important;
       }
 
-      ${
-        clickable &&
-        css`
+      ${clickable &&
+      css`
         cursor: pointer;
       `
       }
@@ -141,7 +137,7 @@ export const useStyles = () => {
       min-width: ${minWidth};
       table-layout: fixed;
 
-      .MuiTableRow-root:first-child,
+      .MuiTableRow-root:first-of-type,
       .MuiTableRow-root:not(:last-child) {
         border-bottom: 2px solid #faf8f0;
       }
