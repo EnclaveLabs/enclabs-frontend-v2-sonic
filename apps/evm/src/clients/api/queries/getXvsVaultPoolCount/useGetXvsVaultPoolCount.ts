@@ -36,6 +36,10 @@ const useGetXvsVaultPoolCount = (options?: Partial<Options>) => {
     queryFn: () =>
       callOrThrow({ xvsVaultContract, xvsTokenAddress: xvs?.address }, getXvsVaultPoolCount),
     ...options,
+    enabled:
+      !!xvsVaultContract &&
+      !!xvs?.address &&
+      (options?.enabled === undefined || options?.enabled),
   });
 };
 
