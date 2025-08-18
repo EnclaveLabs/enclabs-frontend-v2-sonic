@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { type ReactElement, useState } from 'react';
+import { type ReactElement, useState } from "react";
 
-import { ButtonGroup } from '../ButtonGroup';
-import { useStyles } from './styles';
+import { ButtonGroup } from "../ButtonGroup";
+import { useStyles } from "./styles";
 
 export type TabContent = {
   title: string;
@@ -15,14 +15,16 @@ export interface TabsProps {
   tokenAddress?: string;
   onTabChange?: (newIndex: number) => void;
   className?: string;
+  children?: React.ReactNode;
 }
 
 export const Tabs = ({
   tabsContent,
   initialActiveTabIndex = 0,
-  tokenAddress = '',
+  tokenAddress = "",
   onTabChange,
   className,
+  children,
 }: TabsProps) => {
   const styles = useStyles();
   const [activeTabIndex, setActiveTabIndex] = useState(initialActiveTabIndex);
@@ -45,6 +47,8 @@ export const Tabs = ({
         onButtonClick={handleChange}
         fullWidth
       />
+
+      {children}
 
       {tabsContent[activeTabIndex].content}
     </div>

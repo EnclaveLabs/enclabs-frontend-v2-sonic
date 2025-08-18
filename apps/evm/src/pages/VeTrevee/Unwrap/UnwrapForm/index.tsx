@@ -88,7 +88,7 @@ export const UnwrapFormUi: React.FC<UnwrapFormUiProps> = ({
         <></>
       </LabeledInlineContent>
       <TokenTextField
-        label={`${treveeWraping.enclabsStakedTokenSymbol} amount used to unwrap`}
+        label={`${treveeWraping.enclabsStakedTokenSymbol} to be deposited`}
         name="amountTokens"
         placeholder={`0 - ${readableUnwrappableAmountLimitReadable
           .toFixed(enclabsStakedToken.decimals)
@@ -279,14 +279,14 @@ const UnwrapForm: React.FC<UnwrapFormProps> = ({ treveeWraping }) => {
     );
   }, [formTokenAmountMantissa, fromTokenWalletSpendingLimitTokens]);
 
-  return pageLoading ? (
+  return pageLoading || !enclabsStakedTokenBalance ? (
     <Spinner />
   ) : (
     <UnwrapFormUi
       isUserConnected={!!accountAddress}
       treveeWraping={treveeWraping}
       enclabsStakedToken={enclabsStakedToken}
-      enclabsStakedTokenBalance={enclabsStakedTokenBalance!.balanceMantissa}
+      enclabsStakedTokenBalance={enclabsStakedTokenBalance.balanceMantissa}
       formValues={formValues}
       setFormValues={setFormValues}
       onSubmit={onSubmit}

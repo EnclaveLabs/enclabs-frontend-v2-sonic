@@ -16,6 +16,7 @@ import {
   Icon,
   LabeledInlineContent,
   Spinner,
+  TokenIcon,
   Tooltip,
 } from "../../../components";
 import { Card } from "@mui/material";
@@ -278,12 +279,12 @@ export const VeTreveeListItemInfos: React.FC<VeTreveeListItemInfoProps> = ({
 
       <Delimiter className={"mb-2"} />
 
-      <LabeledInlineContent
-        className="flex-1"
-        label={"Received"}
-        iconSrc={enclabsStakedToken}
-      >
-        <p className={"text-green"}>{amountReceived}</p>
+      <LabeledInlineContent className="flex-1" label={"You will receive"}>
+        <p className={"font-bold"}>{amountReceived}</p>
+        <TokenIcon
+          token={enclabsStakedToken!}
+          className="-mt-[2px] ml-2 h-6 w-6"
+        />
       </LabeledInlineContent>
 
       <VeTreveeListItemActions

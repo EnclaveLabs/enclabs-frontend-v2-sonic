@@ -113,6 +113,27 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
     )
       .filter((distribution) => distribution.type !== "primeSimulation")
       .reduce<LabeledInlineContentProps[]>((acc, distribution) => {
+        let translatedLabel = ".";
+        switch (distribution.type) {
+          case "prime":
+            translatedLabel = t("assetInfo.primeApy", {
+              tokenSymbol: distribution.token.symbol,
+            });
+            break;
+          case "merkl":
+            translatedLabel = t("assetInfo.merklApy", {
+              tokenSymbol: distribution.token.symbol
+            });
+            break;
+          case "intrinsic":
+            translatedLabel = "Intrinsic APY";
+            break;
+          default:
+            translatedLabel = t("assetInfo.distributionApy", {
+              tokenSymbol: distribution.token.symbol
+            });
+            break;
+        }
         if (
           distribution.type !== "prime" &&
           distribution.apyPercentage.isEqualTo(0)
@@ -136,17 +157,7 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
           );
 
         const row: LabeledInlineContentProps = {
-          label:
-            distribution.type === "prime"
-              ? t("assetInfo.primeApy", {
-                  tokenSymbol: distribution.token.symbol,
-                })
-              : t(
-                  distribution.type === "merkl"
-                    ? "assetInfo.merklApy"
-                    : "assetInfo.distributionApy",
-                  { tokenSymbol: distribution.token.symbol }
-                ),
+          label: translatedLabel,
           iconSrc: distribution.token,
           tooltip:
             distribution.type === "rewardDistributor"

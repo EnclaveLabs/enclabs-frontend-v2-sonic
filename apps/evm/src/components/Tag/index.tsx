@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import EllipsisText from "components/EllipsisText";
 import { tokenType } from "../../constants/tokenType";
 import { TagProps } from './types';
 import { tokenTypeInfo } from 'constants/tokenType';
@@ -21,7 +22,7 @@ export const Tag = ({ text }: TagProps) => {
 
     return (
         <div className="flex items-center space-x-2  justify-start xl:justify-end lg:justify-end">
-            <p
+            <EllipsisText
                 style={{
                     color: tokenTypeStyle.color,
                     borderColor: tokenTypeStyle.borderColor,
@@ -30,7 +31,7 @@ export const Tag = ({ text }: TagProps) => {
                     borderRadius: '8px',
                     padding: '4px 8px',
                 }}
-            >{getTokenType(text)}</p>
+            >{getTokenType(text)}</EllipsisText>
         </div>
     );
 };
