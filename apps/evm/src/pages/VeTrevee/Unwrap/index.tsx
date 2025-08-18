@@ -1,3 +1,4 @@
+import { Spinner } from "components";
 import { TreveeWraping } from "../../../types";
 import UnwrapForm from "./UnwrapForm";
 
@@ -9,8 +10,8 @@ export const VeTreveUnwrap: React.FC<VeTreveeUnwrapInput> = ({
   treveeWraping,
 }) => {
   return (
-    !!treveeWraping.manager?.address && (
+    !!treveeWraping.voter && !!treveeWraping.manager ? (
       <UnwrapForm treveeWraping={treveeWraping} />
-    )
+    ) : <Spinner/>
   );
 };

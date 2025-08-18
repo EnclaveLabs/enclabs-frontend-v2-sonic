@@ -532,8 +532,8 @@ export type EnclabsStakedTokenSymbol =
   | "Enclabs Trevee veETH";
 
 export interface TreveeWraping {
-  manager: EnclabsTreveeVeManager;
-  voter: TreveeVoter;
+  manager?: EnclabsTreveeVeManager;
+  voter?: TreveeVoter;
   treeveTokenSymbol: TreveeTokenSymbol;
   treveeVeNftSymbol: TreveeVeNftSymbol;
   treveeStakedTokenSymbol: TreveeStakedTokenSymbol;

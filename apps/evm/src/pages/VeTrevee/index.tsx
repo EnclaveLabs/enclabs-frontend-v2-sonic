@@ -11,22 +11,24 @@ import {
   useGetTreveeVeETHVoterContract,
   useGetTreveeVeUSDVoterContract,
 } from "../../libs/contracts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VeNftSelect } from "./VeNftSelect";
+import { useAccountAddress, useSigner } from "libs/wallet";
+import { ConnectButton } from "containers/Layout/ConnectButton";
 
 const VeTrevee: React.FC = () => {
   const styles = useStyles();
-  const { t } = useTranslation();
+  const { signer } = useSigner();
   const enclabsVeEthTreeveeVeManager =
-    useGetEnclabsVeETHTreveeVeManagerContract({ passSigner: true })!;
+    useGetEnclabsVeETHTreveeVeManagerContract({ passSigner: true });
   const enclabsVeUsdTreeveeVeManager =
-    useGetEnclabsVeUSDTreveeVeManagerContract({ passSigner: true })!;
+    useGetEnclabsVeUSDTreveeVeManagerContract({ passSigner: true });
   const treveeVeETHVoter = useGetTreveeVeETHVoterContract({
     passSigner: true,
-  })!;
+  });
   const treveeVeUSDVoter = useGetTreveeVeUSDVoterContract({
     passSigner: true,
-  })!;
+  });
 
   const TreeveNftChoices: Record<TreveeVeNftSymbol, TreveeWraping> = {
     veUSD: {
@@ -46,18 +48,22 @@ const VeTrevee: React.FC = () => {
       enclabsStakedTokenSymbol: "Enclabs Trevee veETH",
     },
   };
-  const [treveeWraping, setTreveeWraping] = useState<TreveeWraping>(
-    TreeveNftChoices["veUSD"]
-  );
+  const [treveeWraping, setTreveeWraping] = useState<TreveeWraping | undefined>(undefined);
+
+  useEffect(() => {
+    if (!!enclabsVeUsdTreeveeVeManager && !!treveeVeUSDVoter && !!enclabsVeEthTreeveeVeManager && !!treveeVeETHVoter && !treveeWraping) {
+      setTreveeWraping(TreeveNftChoices["veUSD"]);
+    }
+  }, [enclabsVeUsdTreeveeVeManager, treveeVeUSDVoter, enclabsVeEthTreeveeVeManager, treveeVeETHVoter, treveeWraping, setTreveeWraping])
 
   const tabsContent: TabContent[] = [
     {
       title: "Wrap",
-      content: <VeTreveeWrap treveeWraping={treveeWraping} />,
+      content: treveeWraping ? <VeTreveeWrap treveeWraping={treveeWraping} /> : <></>,
     },
     {
       title: "Unwrap",
-      content: <VeTreveUnwrap treveeWraping={treveeWraping} />,
+      content: treveeWraping ? <VeTreveUnwrap treveeWraping={treveeWraping} /> : <></>,
     },
   ];
 
@@ -74,20 +80,20 @@ const VeTrevee: React.FC = () => {
             "w-auto shrink-0 overflow-x-auto lg:order-2 lg:sticky lg:top-6 lg:max-h-[calc(100vh-48px)] mt-4"
           )}
         >
-          <Tabs tabsContent={tabsContent} initialActiveTabIndex={0}>
+          {!!signer ? <Tabs tabsContent={tabsContent} initialActiveTabIndex={0}>
             <VeNftSelect
               variant={"secondary"}
               buttonClassName={cn(
                 "bg-background/40 hover:bg-background/40 active:bg-background/40"
               )}
               className={"mb-4 w-[50%]"}
-              value={treveeWraping.treveeVeNftSymbol}
+              value={treveeWraping?.treveeVeNftSymbol || "veUSD"}
               onChange={(value) =>
                 setTreveeWraping(TreeveNftChoices[value as TreveeVeNftSymbol])
               }
               label="Select VeNFT"
             />
-          </Tabs>
+          </Tabs> : <div className="flex justify-center"><ConnectButton variant={'primary'} /></div>}
         </Card>
       </div>
     </Page>
