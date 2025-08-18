@@ -1304,6 +1304,7 @@
       "rank": "Rank",
       "address": "Address",
       "points": "Supply Points",
+      "totalPoints": "Total Points",
       "borrowPoints": "Borrow Points",
       "date": "Date"
     }
