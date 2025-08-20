@@ -2,7 +2,7 @@ require('dotenv').config();
 const BigNumber = require('bignumber.js');
 const { createClient } = require('@supabase/supabase-js');
 
-const GRAPHQL_ENDPOINT = 'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest';
+const GRAPHQL_ENDPOINT = 'https://gateway.thegraph.com/api/subgraphs/id/Ha7WNTEk2U1MvMUVMmmv8e7uZxJUYY4n8r57iJHYyYcJ';
 
 const supabase = createClient(process.env.DB_URL, process.env.DB_API_KEY)
 const COMPOUND_DECIMALS = 18;
@@ -72,11 +72,13 @@ async function fetchGraphQLData() {
         }
     }`;
 
-    const response = await fetch(GRAPHQL_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: graphQuery })
-    });
+     const response = await fetch(GRAPHQL_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.SUBGRAPH_API_KEY}`
+     },
+    body: JSON.stringify({ query: graphQuery })
+  });
 
     const data = await response.json();
     return data.data;
