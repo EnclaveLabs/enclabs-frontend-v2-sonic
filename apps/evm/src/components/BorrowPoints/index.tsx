@@ -44,7 +44,7 @@ export const Points = ({ text }: PointsProps) => {
             <p>{tokenPoints}</p>
           )}
     </div>}>
-      <div className={"flex gap-1 justify-end"}>
+      <div className={"flex gap-1 justify-start lg:justify-end"}>
       {
         Array.isArray(tokenPoints) ? tokenPoints.map((point, index) => {
           return <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">
