@@ -2,7 +2,7 @@ import EllipsisText from "components/EllipsisText";
 
 export interface LayeredValuesProps {
   topValue: string | number;
-  bottomValue: string | number;
+  bottomValue?: string | number;
   className?: string;
   classNameBottomValue?: string;
 }
@@ -15,7 +15,7 @@ export const LayeredValues: React.FC<LayeredValuesProps> = ({
 }) => (
   <div >
     <EllipsisText className={className}>{topValue}</EllipsisText>
-    <p className={classNameBottomValue}>{bottomValue}</p>
+    {bottomValue && <p className={classNameBottomValue}>{bottomValue}</p>}
   </div>
 );
 

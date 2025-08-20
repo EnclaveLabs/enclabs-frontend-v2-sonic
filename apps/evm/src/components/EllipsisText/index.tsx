@@ -47,7 +47,7 @@ export default function EllipsisText({
     }, [open]);
 
   const base =
-    " block whitespace-nowrap overflow-hidden text-ellipsis";
+    "block md:whitespace-nowrap overflow-hidden text-ellipsis";
   const _className = `${className} ${base}`;
   const _portalClassname = "fixed z-[9999] pointer-events-none bg-white px-1 rounded-md" + className;
 

@@ -27,7 +27,7 @@ import {
   isAssetPaused,
 } from 'utilities';
 
-import { Apy } from './Apy';
+import { Apy, ApyPercent } from './Apy';
 import { useStyles } from './styles';
 import type { ColumnKey, PoolAsset } from './types';
 import { getTokenType, Tag } from 'components/Tag';
@@ -41,8 +41,8 @@ import EllipsisLink from 'components/EllipsisLink';
 // t('marketTable.columnKeys.type')
 // t('marketTable.columnKeys.points')
 // t('marketTable.columnKeys.borrowPoints')
-// t('marketTable.columnKeys.supplyApyLtv')
-// t('marketTable.columnKeys.labeledSupplyApyLtv')
+// t('marketTable.columnKeys.supplyApy')
+// t('marketTable.columnKeys.labeledSupplyApy')
 // t('marketTable.columnKeys.borrowApy')
 // t('marketTable.columnKeys.labeledBorrowApy')
 // t('marketTable.columnKeys.pool')
@@ -60,8 +60,8 @@ import EllipsisLink from 'components/EllipsisLink';
 // t('marketTable.columnSelectOptionLabel.type')
 // t('marketTable.columnSelectOptionLabel.points')
 // t('marketTable.columnSelectOptionLabel.borrowPoints')
-// t('marketTable.columnSelectOptionLabel.supplyApyLtv')
-// t('marketTable.columnSelectOptionLabel.labeledSupplyApyLtv')
+// t('marketTable.columnSelectOptionLabel.supplyApy')
+// t('marketTable.columnSelectOptionLabel.labeledSupplyApy')
 // t('marketTable.columnSelectOptionLabel.borrowApy')
 // t('marketTable.columnSelectOptionLabel.labeledBorrowApy')
 // t('marketTable.columnSelectOptionLabel.pool')
@@ -85,7 +85,6 @@ const useGenerateColumns = ({
   const { corePoolComptrollerContractAddress } = useGetChainMetadata();
   const { t, Trans } = useTranslation();
   const styles = useStyles();
-
   const columns: TableColumn<PoolAsset>[] = useMemo(
     () =>
       columnKeys.map((column, index) => {
@@ -107,7 +106,7 @@ const useGenerateColumns = ({
               }}
             />
           );
-        } else if (column === 'supplyApyLtv' || column === 'labeledSupplyApyLtv') {
+        } else if (column === 'supplyApy' || column === 'labeledSupplyApy') {
           columnLabel = (
             <Trans
               i18nKey={`marketTable.columnKeys.${column}`}
@@ -153,13 +152,17 @@ const useGenerateColumns = ({
             }
 
             if (
-              column === 'supplyApyLtv' ||
+              column === 'supplyApy' ||
               column === 'borrowApy' ||
-              column === 'labeledSupplyApyLtv' ||
+              column === 'labeledSupplyApy' ||
               column === 'labeledBorrowApy'
             ) {
               return (
-                <Apy className={cn('text-blue font-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={poolAsset} column={column} />
+                <>
+                 <Apy className={cn('text-blue font-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={poolAsset} column={column} />
+                 {['supplyApy', 'labeledSupplyApy'].includes(column) && <Points text={poolAsset.vToken.address} />}
+                 {['borrowApy', 'labeledBorrowApy'].includes(column) && <BorrowPoints text={poolAsset.vToken.address} />}
+                </>
               );
             }
 
@@ -213,7 +216,7 @@ const useGenerateColumns = ({
                   <EllipsisLink
                   to={to}
                   className={cn(
-                    'hover:text-blue text-sm underline',
+                    'hover:text-blue text-sm',
                     isPaused ? 'text-grey' : 'text-lightBlack',
                   )}>
                   {poolAsset.pool.name}
@@ -316,13 +319,20 @@ const useGenerateColumns = ({
                 </div>
               );
             }
+
+            if(column == 'ltv'){
+              
+              return (
+                <ApyPercent asset={poolAsset} />
+              );
+            }
             
             if(column == 'type'){
               return (
                 <Tag text={poolAsset.vToken.underlyingToken.address} />
               );
             }
-            if(column == 'points'){
+            /*if(column == 'points'){
               return (
                 <Points text={poolAsset.vToken.address} />
               );
@@ -331,7 +341,7 @@ const useGenerateColumns = ({
               return (
                 <BorrowPoints text={poolAsset.vToken.address} />
               );
-            }
+            }*/
           },
           sortRows:
             column === 'asset'
@@ -348,7 +358,7 @@ const useGenerateColumns = ({
                     return compareBigNumbers(roaABorrowApy, roaBBorrowApy, direction);
                   }
 
-                  if (column === 'supplyApyLtv' || column === 'labeledSupplyApyLtv') {
+                  if (column === 'supplyApy' || column === 'labeledSupplyApy' || column === 'ltv') {
                     const roaASupplyApy = rowA.supplyApyPercentage.plus(
                       getCombinedDistributionApys({ asset: rowA }).totalSupplyApyPercentage,
                     );

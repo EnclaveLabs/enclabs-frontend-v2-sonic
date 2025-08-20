@@ -32,6 +32,20 @@ export interface ApyProps {
   classNameBottomValue?: string;
 }
 
+export interface ApyPercentProps {
+  asset: Asset;
+}
+
+export const ApyPercent: React.FC<ApyPercentProps> = ({
+  asset,
+}) => {
+   const readableLtv = useFormatPercentageToReadableValue({
+    value: +asset.collateralFactor * 100,
+  });
+
+  return <p>{readableLtv}</p>
+}
+
 export const Apy: React.FC<ApyProps> = ({
   asset,
   column,
@@ -39,7 +53,7 @@ export const Apy: React.FC<ApyProps> = ({
   classNameBottomValue,
 }) => {
   const type =
-    column === "supplyApyLtv" || column === "labeledSupplyApyLtv"
+    column === "supplyApy" || column === "labeledSupplyApy"
       ? "supply"
       : "borrow";
 
@@ -220,7 +234,6 @@ export const Apy: React.FC<ApyProps> = ({
         className={className}
         classNameBottomValue={classNameBottomValue}
         topValue={readableApy}
-        bottomValue={readableLtv}
       />
     );
   }
