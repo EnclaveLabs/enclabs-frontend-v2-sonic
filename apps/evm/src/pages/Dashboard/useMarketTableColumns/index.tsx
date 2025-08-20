@@ -10,10 +10,9 @@ export const useMarketTableColumns = () => {
       'asset',
       'type',
       'pool',
-      'labeledSupplyApyLtv',
-      'points',
+      'labeledSupplyApy',
+      'ltv',
       'labeledBorrowApy',
-      'borrowPoints',
       'supplyBalance'
     ];
 

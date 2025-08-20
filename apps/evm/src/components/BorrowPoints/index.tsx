@@ -19,15 +19,15 @@ export const getTokenPoints = (address: string) => {
 export const Points = ({ text }: PointsProps) => {
     const tokenPoints = getTokenPoints(text);
     
-    return (
-        <div> 
+    return <Tooltip placement="right" title={<div className="flex flex-col gap-1"> 
           {Array.isArray(tokenPoints) ? (
             tokenPoints.map((point, index) => (
               <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">     
-          <p>{point.multiplier} </p>
+          <p>{point.multiplier}</p>
           <img src={point.logo} className="w-5 max-w-none flex-none" />
         
         <Tooltip
+        placement="right"
           title={ 
           <div className="space-y-2">
             <p>{point.tooltiptext}</p>
@@ -36,13 +36,22 @@ export const Points = ({ text }: PointsProps) => {
           }
           className="inline-flex"
         >
-          <Icon name="info" className="text-blue" />
+          <Icon name="info" className="text-white" />
         </Tooltip>
       </div>
             ))
           ) : ( 
             <p>{tokenPoints}</p>
           )}
-    </div>
-  );
+    </div>}>
+      <div className={"flex gap-1 justify-end"}>
+      {
+        Array.isArray(tokenPoints) ? tokenPoints.map((point, index) => {
+          return <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">
+          <img src={point.logo} className="w-4 max-w-none flex-none" />
+          </div>
+        }) : <p>{tokenPoints}</p>
+      }
+      </div>
+    </Tooltip>
 };

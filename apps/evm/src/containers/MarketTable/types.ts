@@ -2,8 +2,9 @@ import type { Asset, Pool } from 'types';
 
 export type ColumnKey =
   | 'asset'
-  | 'supplyApyLtv'
-  | 'labeledSupplyApyLtv'
+  | 'supplyApy'
+  | 'labeledSupplyApy'
+  | 'ltv'
   | 'borrowApy'
   | 'labeledBorrowApy'
   | 'pool'
