@@ -801,6 +801,9 @@ export const contracts: ContractConfig[] = [
           isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_Core.toLowerCase(),
         [isolatedPoolsSonicDeployments.addresses.Comptroller_LiquidStakedS.toLowerCase()]:
           isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_LiquidStakedS.toLowerCase(),
+        [isolatedPoolsSonicDeployments.addresses.Comptroller_LiquidStakedS.toLowerCase()]:
+          isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_SonicEcosystemPool.toLowerCase(),
+          
       },
     },
   },

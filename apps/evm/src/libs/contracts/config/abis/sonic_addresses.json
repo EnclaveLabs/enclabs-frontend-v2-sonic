@@ -71,7 +71,8 @@
     "VToken_vwmetaUSD_Core": "0x1D801dC616C79c499C5d38c998Ef2D0D6Cf868e8",
     "EnclabsVeUSDOracle_Implementation": "0xd4b24311bcdCf50641f5D8A2965e82ba0a1ed7f1",
     "EnclabsVeUSDOracle_Proxy":"0x62870A572e9bEB11D71ccBB296BEF5bD79df3050",
-    "VToken_venclabsVeUSD_Core": "0x3f0c9dcCa72058950327b5D4a5783fB0CbA520Ce"
+    "VToken_venclabsVeUSD_Core": "0x3f0c9dcCa72058950327b5D4a5783fB0CbA520Ce",
+    "NativeTokenGateway_vwS_SonicEcosystemPool": "0x4FE8960c5Bf853d8b019FC84656Ab665391016bc"
 
 
   }
