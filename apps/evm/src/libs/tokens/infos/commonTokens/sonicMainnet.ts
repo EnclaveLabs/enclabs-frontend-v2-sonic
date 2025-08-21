@@ -46,12 +46,14 @@ export const tokens: Token[] = [
     decimals: 18,
     symbol: "StableJack scUSD YieldToken",
     asset: scusdstablejackytLogo,
+    intrinsicSupplyApy: 4
   },
   {
     address: "0xE5DA20F15420aD15DE0fa650600aFc998bbE3955",
     decimals: 18,
     symbol: "stS",
     asset: stSLogo,
+    intrinsicSupplyApy: 4
   },
   {
     address: "0x0966cae7338518961c2d35493d3eb481a75bb86b",
@@ -124,12 +126,14 @@ export const tokens: Token[] = [
     decimals: 18,
     symbol: "wOS",
     asset: wOSLogo,
+    intrinsicSupplyApy: 3.5
   },
   {
     address: "0x6202B9f02E30E5e1c62Cc01E4305450E5d83b926",
     decimals: 6,
     symbol: "xUSD",
     asset: xUSDLogo,
+    intrinsicSupplyApy: 14
   },
   // {
   //   address: '0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38',
@@ -155,6 +159,7 @@ export const tokens: Token[] = [
     decimals: 6,
     symbol: "HLP0+",
     asset: hlp0Logo,
+    intrinsicSupplyApy: 11
   },
   {
     address: "0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57",
