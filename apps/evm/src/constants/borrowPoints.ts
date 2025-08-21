@@ -23,8 +23,10 @@ export const pointType = {
 
     ],
     enclabsPointsX2: [
-         '0x7fd79432cc704582235df11b92b783f07ed40e13', //wos Slst
+        '0x7fd79432cc704582235df11b92b783f07ed40e13', //wos Slst
         '0x876e062420fb9a4861968ec2e0ff91be88142343', // ws slst
+        "0x76463494e39e259470301aA1c2B48E2Ca4Ac9b13", //usdc ecostystem
+        "0x730935e4F45610Ca07DBA1B5f3649Fa34464d5eD", //ws ecosystem
 
 
     ],
@@ -34,6 +36,8 @@ export const pointType = {
         '0x52260ad4cb690c6b22629166f4d181477a9c157c', //eth core
         "0xe544e51bf20ab186b6b7b1a9095c8bc1e3f203f5", //sts core
         '0xc96a4cd13c8fcb9886de0cdf7152b9f930d67e96', //wS core
+        "0xf50466320de462627f929f7F631206653c10C0b7", //goglz ecosystem
+        "0xdDe5262d257BB26DCd6Ea482f489078eD020CD7C", //snake ecosystem
 
     ],
     enclabsPointsX6: [

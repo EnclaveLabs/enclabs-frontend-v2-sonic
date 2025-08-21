@@ -22,6 +22,8 @@ import wmetaUSDlogo from "libs/tokens/img/wmetaUSD.svg";
 import enclabsVeUSDLogo from "libs/tokens/img/veEnclabs-scUSD.svg";
 import enclabsVeETHLogo from "libs/tokens/img/veEnclabs-scETH.svg";
 import hlp0Logo from "libs/tokens/img/logoHLP0.svg";
+import snakeLogo from "libs/tokens/img/snake.svg";
+import goglzLogo from "libs/tokens/img/goglz.svg";
 import type { Token } from "types";
 
 const ethToken: Token = {
@@ -135,6 +137,7 @@ export const tokens: Token[] = [
     asset: xUSDLogo,
     intrinsicSupplyApy: 14
   },
+
   // {
   //   address: '0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38',
   //   decimals: 8,
@@ -172,6 +175,18 @@ export const tokens: Token[] = [
     decimals: 18,
     symbol: "wmetaUSD (Stability)",
     asset: wmetaUSDlogo,
+  },
+  {
+    address: "0x3a516e01f82c1e18916ED69a81Dd498eF64bB157",
+    decimals: 18,
+    symbol: "SNAKE",
+    asset: snakeLogo,
+  },
+  {
+    address: "0x9fDbC3f8Abc05Fa8f3Ad3C17D2F806c1230c4564",
+    decimals: 18,
+    symbol: "GOGLZ",
+    asset: goglzLogo,
   },
   // {
   //   address: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',

@@ -37,7 +37,13 @@ export const tokenType = {
         "0x6202b9f02e30e5e1c62cc01e4305450e5d83b926", //xUSD
         "0xaaaaaaaac311d0572bffb4772fe985a750e88805", //wMetaUSD
         "0x3D75F2BB8aBcDBd1e27443cB5CBCE8A668046C81", //hlp0
-      ],
+    ],
+    "Ecosystem tokens": [
+       
+        "0x3a516e01f82c1e18916ED69a81Dd498eF64bB157", // snake
+        "0x9fDbC3f8Abc05Fa8f3Ad3C17D2F806c1230c4564", //goglz
+        
+    ],
   
 };
 
@@ -103,6 +109,16 @@ export const tokenTypeInfo: {
             `swap`,
     },
     Wrapped: {
+        color: theme.colors.tagTextYellow, // Yellow
+        borderColor: theme.colors.tagTextYellow,
+        backgroundColor: theme.colors.tagBgYellow,
+        hoverColor: theme.colors.hoverYellow,
+        buttonClassName: 'bg-tagTextYellow bg-tagTextYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
+        shadowClassName: 'shadow-md shadow-hoverYellow',
+        getUrl: (tokenAddress: string, chain: string) =>
+            `swap`,
+    },
+     "Ecosystem tokens": {
         color: theme.colors.tagTextYellow, // Yellow
         borderColor: theme.colors.tagTextYellow,
         backgroundColor: theme.colors.tagBgYellow,
