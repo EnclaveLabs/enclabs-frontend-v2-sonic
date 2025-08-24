@@ -52,6 +52,7 @@ export const pointType = {
     "0xb64b8585cece0e314d344c7f6437d97bf1eb0fe7", // USDCe_LiquidStakedS
     "0x6770aF27FC5233A70B85BFf631061400a09d2e1c", // scUSD_Core
     "0x7d47cbf5fe9ccf2f99d0c2e8a3c59fb3498bc21b", // scUSD_SpectraPTscUSDPool
+   "0x76463494e39e259470301aA1c2B48E2Ca4Ac9b13", //usdc ecostystem
   ],
   SonicPointsX5: [
     "0x1D801dC616C79c499C5d38c998Ef2D0D6Cf868e8", //wmetausd
@@ -61,6 +62,7 @@ export const pointType = {
     "0x876e062420fb9a4861968ec2e0ff91be88142343", // wS_LiquidStakedS
     "0x7fd79432cc704582235df11b92b783f07ed40e13", // wOS
     "0xe544e51bf20ab186b6b7b1a9095c8bc1e3f203f5", // stS_Core
+    "0x730935e4F45610Ca07DBA1B5f3649Fa34464d5eD", // ws ecosystem
   ],
 };
 export const pointTypeInfo: {

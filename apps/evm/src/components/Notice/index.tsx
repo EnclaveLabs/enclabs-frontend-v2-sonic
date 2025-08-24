@@ -27,10 +27,11 @@ export const Notice = ({
   <div
     className={cn(
       'before:bg-background relative flex overflow-hidden rounded-xl border px-4 py-3 transition-colors ease-linear before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:z-[-1] before:transition-colors',
-      (variant === 'info' || variant === 'loading') && 'border-lightGrey',
+      (variant === 'loading') && 'border-lightGrey',
       variant === 'error' && 'border-red bg-red/5',
       variant === 'success' && 'border-green bg-green/5',
       variant === 'warning' && 'border-orange bg-orange/5',
+      variant === 'info' && 'border-blue bg-blue/5',
       className,
     )}
     {...otherProps}

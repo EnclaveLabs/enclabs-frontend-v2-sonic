@@ -99,10 +99,6 @@ export const Apy: React.FC<ApyProps> = ({
     value: apyPercentage,
   });
 
-  const readableLtv = useFormatPercentageToReadableValue({
-    value: +asset.collateralFactor * 100,
-  });
-
   // // Display Prime boost
   // if (primeDistribution?.apyPercentage?.isGreaterThan(0)) {
   //   const apyPercentageWithoutPrimeBoost =
@@ -220,13 +216,11 @@ export const Apy: React.FC<ApyProps> = ({
             className={cn(className, "text-[#00C38E]")}
             classNameBottomValue={classNameBottomValue}
             topValue={readableApy}
-            bottomValue={readableLtv}
           />
         </div> : <LayeredValues
         className={className}
         classNameBottomValue={classNameBottomValue}
         topValue={readableApy}
-        bottomValue={readableLtv}
       />}
       </Tooltip>
     ) : (
