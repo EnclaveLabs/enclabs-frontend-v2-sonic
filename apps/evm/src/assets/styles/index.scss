@@ -2,6 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-background: 252 249 241; /* #FCF9F1 */
+  --color-cards: 255 255 255;      /* #FFFFFF */
+  --color-lightCards: 255 255 255; /* #FFFFFF */
+
+  --color-text: 17 24 39;          /* #111827 */
+  --color-text-muted: 107 114 128; /* #6B7280 */
+  --color-border: 229 231 235;     /* #E5E7EB */
+
+  --color-primary: 0 74 173;       /* #004aad */
+  --color-danger: 233 61 102;      /* #E93D66 */
+  --color-warning: 245 120 66;     /* #F57842 */
+  --color-success: 0 195 142;      /* #00C38E */
+
+  /* Tags (light) */
+  --tag-orange-text: 255 152 0;
+  --tag-orange-bg: 255 243 229;
+  --tag-orange-hover: 255 152 0;
+
+  --tag-green-text: 76 175 80;
+  --tag-green-bg: 236 246 236;
+  --tag-green-hover: 76 175 80;
+
+  --tag-yellow-text: 255 193 7;
+  --tag-yellow-bg: 255 251 241;
+  --tag-yellow-hover: 255 193 7;
+
+  --tag-red-text: 244 67 54;
+  --tag-red-bg: 254 235 234;
+  --tag-red-hover: 244 67 54;
+
+  --tag-blue-text: 33 150 243;
+  --tag-blue-bg: 232 243 254;
+  --tag-blue-hover: 33 150 243;
+
+  --tag-grey-text: 211 211 211;
+  --tag-grey-bg: 250 250 250;
+  --tag-grey-hover: 211 211 211;
+
+  --color-white: 255 255 255;   /* #FFFFFF */
+  --color-black: 0 0 0;         /* #000000 */
+
+  --color-grey: 170 179 202;    /* #AAB3CA */
+  --color-lightGrey: 211 211 211; /* #D3D3D3 */
+  --color-lightBlack: 28 28 28; /* #1C1C1C */
+}
+
+html.dark {
+  --color-background: 11 15 25;    /* #0B0F19 */
+  --color-cards: 18 24 38;         /* #121826 */
+  --color-lightCards: 18 24 38;    /* #121826 */
+
+  --color-text: 229 231 235;       /* #E5E7EB */
+  --color-text-muted: 156 163 175; /* #9CA3AF */
+  --color-border: 31 41 55;        /* #1F2937 */
+
+  --color-primary: 0 74 173;    /* #7FB3FF */
+  --color-danger: 255 107 143;     /* #FF6B8F */
+  --color-warning: 255 178 107;    /* #FFB26B */
+  --color-success: 52 211 153;     /* #34D399 */
+
+  /* Tags (dark) : lisibilité sur fond sombre */
+  --tag-orange-text: 255 189 107;
+  --tag-orange-bg: 25 20 0;
+  --tag-orange-hover: 255 152 0;
+
+  --tag-green-text: 122 225 166;
+  --tag-green-bg: 0 20 0;
+  --tag-green-hover: 76 175 80;
+
+  --tag-yellow-text: 255 224 130;
+  --tag-yellow-bg: 20 20 0;
+  --tag-yellow-hover: 255 193 7;
+
+  --tag-red-text: 255 138 128;
+  --tag-red-bg: 25 0 0;
+  --tag-red-hover: 244 67 54;
+
+  --tag-blue-text: 156 203 255;
+  --tag-blue-bg: 0 10 25;
+  --tag-blue-hover: 33 150 243;
+
+  --tag-grey-text: 209 213 219;
+  --tag-grey-bg: 10 10 10;
+  --tag-grey-hover: 209 213 219;
+
+  --color-white: 0 0 0;           /* white -> black */
+  --color-black: 255 255 255;     /* black -> white */
+
+  /* gris inversés (version "sombre" cohérente UI) */
+  --color-grey: 75 85 99;         /* ~ #4B5563 (slate-600) */
+  --color-lightGrey: 60 60 60;    /* gris plus foncé */
+  --color-lightBlack: 229 231 235;/* lightBlack -> clair (~#E5E7EB) */
+}
+
+
 @layer utilities {
   .scrollbar-hidden {
     -ms-overflow-style: none;
@@ -81,59 +177,45 @@
 
 body {
   font-family: 'ProximaNova', sans-serif;
-  background-color: theme('colors.background');
-  color: theme('colors.lightBlack');
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-text));
 }
 
 input {
   color: inherit;
+}
+input::-webkit-input-placeholder { padding-right: 22px; }
+input::-moz-placeholder { padding-right: 22px; }
+input:-moz-placeholder { padding-right: 22px; }
 
-  &::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    padding-right: 22px;
-  }
-  &::-moz-placeholder {
-    /* Firefox 19+ */
-    padding-right: 22px;
-  }
-  &:-moz-placeholder {
-    /* Firefox 18- */
-    padding-right: 22px;
-  }
+/* Hide arrows from input number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
 
-  /* Hide arrows from input number */
-  /* Chrome, Safari, Edge, Opera */
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  /* Firefox */
-  &[type='number'] {
-    -moz-appearance: textfield;
-  }
+*::-webkit-scrollbar {
+  width: 4px;
+}
+/* Track */
+*::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: rgb(var(--color-background));
+}
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-grey));
+  border-radius: 4px;
+}
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--color-lightBlack));
 }
 
 * {
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    border-radius: 4px;
-    background-color: theme('colors.background');
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background-color: theme('colors.grey');
-    border-radius: 4px;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: theme('colors.lightBlack');
-  }
+  color: rgb(var(--color-black));
 }

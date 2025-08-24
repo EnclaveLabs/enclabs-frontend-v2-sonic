@@ -1,3 +1,4 @@
+// src/theme/index.ts
 const rainbowColors = {
   red: '#FF0000',
   orange: '#FF7F00',
@@ -6,44 +7,63 @@ const rainbowColors = {
   blue: '#0000FF',
   indigo: '#4B0082',
   violet: '#8B00FF',
+} as const;
+
+const fontFamily = {
+  sans: ['ProximaNova', 'Arial', 'sans-serif'],
 };
 
-export const theme = {
-  fontFamily: {
-    sans: ['ProximaNova', 'Arial', 'sans-serif'],
-  },
-  screens: {
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1280px',
-    xxl: '1440px',
-  },
-  colors: {
-    inherit: 'inherit',
-    transparent: 'transparent',
-    // The next colors are taken from the UI kit in Figma
-    background: '#FCF9F1',
-    // cards: '#1E2431', // before
-    cards: '#FFFFFF',
-    lightCards: '#FFFFFF',
-    grey: '#AAB3CA',
-    black: '#0000000',
-    white: '#FFFFFF',
-    // lightGrey: '#2D3549', // before not light grey it's blue
-    lightGrey: '#D3D3D3', 
-    green: '#00C38E',
-    red: '#E93D66',
-    lightBlack: '#1C1C1C',
-    orange: '#F57842',
-    yellow: '#F5B242',
-    blue: '#004aad',
-    // The next colors are not in the UI kit, but are used throughout the designs
-    mediumBlue: '#0074FF',
-    darkBlue: '#1B4398',
+const screens = { sm: '576px', md: '768px', lg: '992px', xl: '1280px', xxl: '1440px' };
 
-    // Use for tag and dynamical hover 
-    tagTextOrange: '#FF9800',
+const fontSize = {
+  xs: ['0.75rem', { lineHeight: '1.5' }],
+  sm: ['0.875rem', { lineHeight: '1.5' }],
+  base: ['1rem', { lineHeight: '1.5' }],
+  lg: ['1.25rem', { lineHeight: '1.5', fontWeight: '600' }],
+  xl: ['1.5rem', { lineHeight: '1.5', fontWeight: '700' }],
+  '2xl': ['2rem', { lineHeight: '1.5', fontWeight: '600' }],
+  '3xl': ['2.5rem', { lineHeight: '1.2', fontWeight: '600' }],
+};
+
+const spacing = new Array(200).fill(null).map((_, i) => `${i * 0.25}rem`);
+
+export const theme = {
+  fontFamily,
+  screens,
+  spacing,
+  fontSize,
+  extend: {
+    colors: {
+      inherit: 'inherit',
+      transparent: 'transparent',
+
+      cards: 'rgb(var(--color-cards))',
+      lightCards: 'rgb(var(--color-lightCards))',
+
+      background: 'rgb(var(--color-background) / <alpha-value>)',
+      surface: 'rgb(var(--color-surface) / <alpha-value>)',
+      surfaceMuted: 'rgb(var(--color-surface-muted) / <alpha-value>)',
+      text: 'rgb(var(--color-text) / <alpha-value>)',
+      textMuted: 'rgb(var(--color-text-muted) / <alpha-value>)',
+      border: 'rgb(var(--color-border) / <alpha-value>)',
+      primary: 'rgb(var(--color-primary) / <alpha-value>)',
+      danger: 'rgb(var(--color-danger) / <alpha-value>)',
+      warning: 'rgb(var(--color-warning) / <alpha-value>)',
+      success: 'rgb(var(--color-success) / <alpha-value>)',
+
+     white: 'rgb(var(--color-white) / <alpha-value>)',
+     black: 'rgb(var(--color-black) / <alpha-value>)',
+     grey: 'rgb(var(--color-grey) / <alpha-value>)',
+     lightGrey: 'rgb(var(--color-lightGrey))',
+     lightBlack: 'rgb(var(--color-lightBlack))',
+      blue: '#004aad',
+      mediumBlue: '#0074FF',
+      darkBlue: '#1B4398',
+      red: '#E93D66',
+      orange: '#F57842',
+      yellow: '#F5B242',
+      green: '#00C38E',
+       tagTextOrange: '#FF9800',
     tagBgOrange: 'rgba(255, 243, 229, 1)',
     hoverOrange: 'rgba(255, 152, 0, 0.4)',
 
@@ -66,49 +86,8 @@ export const theme = {
     tagTextGrey: '#D3D3D3',
     tagBgGrey: 'rgba(250, 250, 250, 1)',
     hoverGrey: 'rgba(211, 211, 211, 0.4)',
-
-    // Rainbow color
-    rainbowColors
-  },
-
-  fontSize: {
-    xs: ['0.75rem', '1.5'],
-    sm: ['0.875rem', '1.5'],
-    base: ['1rem', '1.5'],
-    lg: [
-      '1.25rem',
-      {
-        lineHeight: '1.5',
-        fontWeight: '600',
-      },
-    ],
-    xl: [
-      '1.5rem',
-      {
-        lineHeight: '1.5',
-        fontWeight: '700',
-      },
-    ],
-    '2xl': [
-      '2rem',
-      {
-        lineHeight: '1.5',
-        fontWeight: '600',
-      },
-    ],
-    '3xl': [
-      '2.5rem',
-      {
-        lineHeight: '1.2',
-        fontWeight: '600',
-      },
-    ],
-  },
-
-  // We keep Tailwind's original sizing scale but make it more granular (with 0.25rem steps) and
-  // extend it to bigger values
-  spacing: new Array(200).fill(undefined).map((_, index) => `${index * 0.25}rem`),
-  extend: {
+      rainbowColors,
+    },
     backgroundImage: {
       'gradient-background': 'linear-gradient(to bottom right, #FCF9F1, #E2ECFA)',
       'rainbow-horizontal': `linear-gradient(to right, ${Object.values(rainbowColors).join(', ')})`,
@@ -117,3 +96,5 @@ export const theme = {
     },
   },
 };
+
+export default theme;

@@ -63,7 +63,7 @@ export const ActiveVotingProgress: React.FC<ActiveVotingProgressProps> = ({
         label: t('vote.against'),
         value: getValueString({ valueMantissa: votedAgainstMantissa, xvs }),
         progressBarProps: {
-          progressBarColor: theme.colors.red,
+          progressBarColor: theme.extend.colors.red,
           ariaLabel: t('voteProposalUi.statusCard.ariaLabelAgainst'),
           value:
             votedAgainstMantissa
@@ -77,7 +77,7 @@ export const ActiveVotingProgress: React.FC<ActiveVotingProgressProps> = ({
         label: t('vote.abstain'),
         value: getValueString({ valueMantissa: abstainedMantissa, xvs }),
         progressBarProps: {
-          progressBarColor: theme.colors.grey,
+          progressBarColor: theme.extend.colors.grey,
           ariaLabel: t('voteProposalUi.statusCard.ariaLabelAbstain'),
           value:
             abstainedMantissa
