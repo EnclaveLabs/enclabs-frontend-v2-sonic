@@ -14,15 +14,15 @@ export const parameters = {
     values: [
       {
         name: 'Default',
-        value: theme.colors.cards,
+        value: theme.extend.colors.cards,
       },
       {
         name: 'Primary',
-        value: theme.colors.background,
+        value: theme.extend.colors.background,
       },
       {
         name: 'White',
-        value: theme.colors.lightBlack,
+        value: theme.extend.colors.lightBlack,
       },
     ],
   },

@@ -347,13 +347,13 @@ const Rewards: React.FC = () => {
               name="Supply Points"
               dataKey="supply_points_number"
               radius={[5, 5, 0, 0]}
-              fill={theme.colors.blue}
+              fill={theme.extend.colors.blue}
             />
             <Bar
               name="Borrow Points"
               dataKey="borrow_points_number"
               radius={[5, 5, 0, 0]}
-              fill={theme.colors.orange}
+              fill={theme.extend.colors.orange}
             />
             <Legend />
           </BarChart>

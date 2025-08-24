@@ -13,19 +13,18 @@ const SwapOdosPage: React.FC = () => {
   const theme = {
     maxWidth: 1500,
     fontFamily: "ProximaNova, Arial, sans-serif",
-    textColor100: "#001F3F",
-    textColor200: "#4F5B66",
-    accentTextColor: "#FFFFFF",
-    accentColor: "#004AAD",//button
-    successColor: "#24B47E",
-    errorColor: "#FF4D4F",
-    warningColor: "#FFA500",
-    textColor300: "#7D899B",
-    backgroundColor100: "#FFFFFF",
-    backgroundColor200: "#FFFFFF",
-    backgroundColor300: "#FFFFFF", //inputs
-    backgroundColor400: "#FCF9F1",
-    wcThemeMode: "dark",
+    textColor100: "rgb(var(--color-black))",
+    textColor200: "rgb(var(--color-lightBlack))",
+    accentTextColor: "rgb(var(--color-white))",
+    accentColor: "rgb(var(--color-primary))",
+    successColor: "rgb(var(--tag-green-text))",
+    errorColor: "rgb(var(--tag-green-red))",
+    warningColor: "rgb(var(--tag-green-yellow))",
+    textColor300: "rgb(var(--color-lightBlack))",
+    backgroundColor100: "rgb(var(--color-primary))",
+    backgroundColor200: "rgb(var(--color-cards))",
+    backgroundColor300: "rgb(var(--color-background))",
+    backgroundColor400: "rgb(var(--color-cards))",
     };
   const referal = 2149550664;  
   return (

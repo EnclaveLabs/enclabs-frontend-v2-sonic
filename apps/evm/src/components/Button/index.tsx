@@ -124,7 +124,7 @@ export const Button = ({
 
     <span
       className={cn(
-        'inline-flex items-center text-inherit',
+        'inline-flex items-center text-inherit color-white',
         variant !== 'primary' && variant !== 'secondary' && 'text-sm',
         contentClassName,
       )}

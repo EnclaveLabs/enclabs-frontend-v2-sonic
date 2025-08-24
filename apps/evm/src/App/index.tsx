@@ -14,6 +14,7 @@ import { MAIN_PRODUCTION_HOST } from 'constants/production';
 import { safeLazyLoad } from 'utilities';
 import Routes from './Routes';
 import EnclapsMerklWrapper from "../libs/merkl";
+import DarkModeTest from 'components/DarkModeTest.tsx';
 
 const NotificationCenter = safeLazyLoad(() => import('libs/notifications/NotificationCenter'));
 const AppVersionChecker = safeLazyLoad(() => import('containers/AppVersionChecker'));
@@ -41,6 +42,7 @@ const App = () => (
             <Web3Wrapper>
               <AnalyticProvider>
                 <EnclapsMerklWrapper>
+                   <DarkModeTest/>
                   <Routes />
 
                   <Suspense>

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { VeNftSelect } from "./VeNftSelect";
 import { useAccountAddress, useSigner } from "libs/wallet";
 import { ConnectButton } from "containers/Layout/ConnectButton";
+import { GradientBorder } from "components/GradientBorder";
 
 const VeTrevee: React.FC = () => {
   const styles = useStyles();
@@ -71,7 +72,14 @@ const VeTrevee: React.FC = () => {
     <Page indexWithSearchEngines={false}>
       <div css={styles.root}>
         {/*<VeTreveeDashboard treveeWraping={treveeWraping} />*/}
-        <p css={styles.multicolorBorder}>
+        <GradientBorder className="hidden md:flex md:flex-col md:items-center md:w-20 xl:w-56 rounded-none px-4 py-[1px]">
+             <div className="bg-cards hidden p-1 md:flex md:flex-col md:items-center md:w-20 xl:w-56 h-full">
+              <p>test</p>
+             </div>
+           </GradientBorder>
+        <p className={cn(
+            "color-white"
+          )} css={styles.multicolorBorder}>
           Wrap / Unwrap your Trevee ve NFT and use it as collateral on Enclabs
           to borrow assets.
         </p>
