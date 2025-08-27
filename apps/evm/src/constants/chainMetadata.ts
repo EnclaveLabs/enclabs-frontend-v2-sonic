@@ -17,7 +17,7 @@ export const CHAIN_METADATA: {
     lstPoolComptrollerContractAddress: '0xf27f74f5878bc0dA077FCc0933FAEe49216B5bBA',
     lstPoolVWstEthContractAddress: '0x9df6B5132135f14719696bBAe3C54BAb272fDb16',
     nativeToken: getToken({ chainId: ChainId.SONIC_MAINNET, symbol: 'S' })!,
-    rpcUrl: 'https://rpc.soniclabs.com',
+    rpcUrl: 'https://sonic-rpc.publicnode.com:443',
     marketsSubgraphUrl:
      'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest',
   }
