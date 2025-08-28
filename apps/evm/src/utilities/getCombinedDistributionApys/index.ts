@@ -99,6 +99,7 @@ const getCombinedDistributionApys = ({
     }
   }
 
+  console.log('>>', asset.vToken.underlyingToken, asset.supplyDistributions);
   if (!!asset.vToken.underlyingToken?.intrinsicSupplyApy &&
     !asset.supplyDistributions.find((d) => d.type === "intrinsic")
   ) {

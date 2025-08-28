@@ -1,9 +1,12 @@
-/** @jsxImportSource @emotion/react */
 import { pointType } from "../../constants/borrowPoints";
-import { PointsProps } from './types';
 import { pointTypeInfo } from 'constants/borrowPoints';
 import { Icon, Tooltip } from 'components';
 import { Link } from 'containers/Link';
+
+interface PointsProps {
+  address: string;
+  iconSize?: number;
+}
 
 
 export const getTokenPoints = (address: string) => {
@@ -16,15 +19,15 @@ export const getTokenPoints = (address: string) => {
     return pointsTypeInfos.length > 0 ? pointsTypeInfos : ''; 
   };
 
-export const Points = ({ text }: PointsProps) => {
-    const tokenPoints = getTokenPoints(text);
+export const Points = ({ address, iconSize = 5 }: PointsProps) => {
+    const tokenPoints = getTokenPoints(address);
     
     return <Tooltip placement="right" title={<div className="flex flex-col gap-1"> 
           {Array.isArray(tokenPoints) ? (
             tokenPoints.map((point, index) => (
               <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">     
           <p>{point.multiplier}</p>
-          <img src={point.logo} className="w-5 max-w-none flex-none" />
+          <img src={point.logo} className={`w-${iconSize} max-w-none flex-none`} />
         
         <Tooltip
         placement="right"
@@ -48,7 +51,7 @@ export const Points = ({ text }: PointsProps) => {
       {
         Array.isArray(tokenPoints) ? tokenPoints.map((point, index) => {
           return <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">
-          <img src={point.logo} className="w-4 max-w-none flex-none" />
+          <img src={point.logo} className={`w-${iconSize - 1} max-w-none flex-none`} />
           </div>
         }) : <p>{tokenPoints}</p>
       }

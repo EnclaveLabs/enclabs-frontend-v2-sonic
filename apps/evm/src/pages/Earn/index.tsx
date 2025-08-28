@@ -5,16 +5,19 @@ import { useAccountAddress } from "libs/wallet";
 import { useGetPool } from "clients/api";
 import BigNumber from "bignumber.js";
 import {
+  cn,
   formatCentsToReadableValue,
   formatPercentageToReadableValue,
   formatTokensToReadableValue,
+  isAssetPaused
 } from "utilities";
 import { TokenIcon } from "components/TokenIcon";
 import { getTokenType } from "components/Tag";
 import { tokenTypeInfo } from "constants/tokenType";
-import { getTokenPoints } from "components/Points";
+import { Points } from "components/Points";
 import EarnSupplyWithdrawModal from "./EarnSupplyWithdrawModal";
 import { useState } from "react";
+import { Apy } from "containers/MarketTable/Apy";
 
 const Earn: React.FC = () => {
   const { accountAddress } = useAccountAddress();
@@ -74,6 +77,10 @@ const Earn: React.FC = () => {
           .map((asset) => {
             const tagType = getTokenType(asset.vToken.underlyingToken.address);
             const info = tokenTypeInfo[tagType];
+            const isPaused = isAssetPaused({
+                          disabledTokenActions: asset.disabledTokenActions,
+                        });
+
             return (
               <Card
                 key={asset.vToken.address}
@@ -86,6 +93,7 @@ const Earn: React.FC = () => {
                   />
                 </div>
                 <div className="text-center mb-5">
+              
                   <p className="text-sm text-lightBlack">
                     {formatTokensToReadableValue({
                       value: asset.userSupplyBalanceTokens,
@@ -102,11 +110,7 @@ const Earn: React.FC = () => {
                 <div className="bg-background rounded-xl p-4 space-y-3 mb-4 min-h-[140px]">
                   <div className="flex items-center justify-between">
                     <p className="text-lightBlack">APR</p>
-                    <span className="font-semibold">
-                      {formatPercentageToReadableValue(
-                        asset.supplyApyPercentage
-                      )}
-                    </span>
+                    <Apy className={cn('font-semi-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={asset} column={'supplyApy'} />
                   </div>
                   <div className="flex items-center justify-between">
                     <p className="text-lightBlack">Total supply</p>
@@ -118,22 +122,7 @@ const Earn: React.FC = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <p className="text-lightBlack">Points</p>
-                    <div className="flex items-center gap-3 justify-end min-h-[28px] max-w-[70%] overflow-x-auto">
-                      {(() => {
-                        const pts: any = getTokenPoints(asset.vToken.address);
-                        return Array.isArray(pts)
-                          ? pts.map((p: any, i: number) => (
-                              <div
-                                key={i}
-                                className="inline-flex items-center gap-1 whitespace-nowrap"
-                              >
-                                <span className="text-sm">{p.multiplier}</span>
-                                <img src={p.logo} className="w-5 h-5" />
-                              </div>
-                            ))
-                          : null;
-                      })()}
-                    </div>
+                    <Points address={asset.vToken.address} displayMultiplier={true} />
                   </div>
                 </div>
 

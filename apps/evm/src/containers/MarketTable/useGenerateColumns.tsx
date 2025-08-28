@@ -160,8 +160,8 @@ const useGenerateColumns = ({
               return (
                 <>
                  <Apy className={cn('text-blue font-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={poolAsset} column={column} />
-                 {['supplyApy', 'labeledSupplyApy'].includes(column) && <Points text={poolAsset.vToken.address} />}
-                 {['borrowApy', 'labeledBorrowApy'].includes(column) && <BorrowPoints text={poolAsset.vToken.address} />}
+                 {['supplyApy', 'labeledSupplyApy'].includes(column) && <Points address={poolAsset.vToken.address} />}
+                 {['borrowApy', 'labeledBorrowApy'].includes(column) && <BorrowPoints address={poolAsset.vToken.address} />}
                 </>
               );
             }
@@ -334,12 +334,12 @@ const useGenerateColumns = ({
             }
             /*if(column == 'points'){
               return (
-                <Points text={poolAsset.vToken.address} />
+                <Points address={poolAsset.vToken.address} />
               );
             }
             if(column == 'borrowPoints'){
               return (
-                <BorrowPoints text={poolAsset.vToken.address} />
+                <BorrowPoints address={poolAsset.vToken.address} />
               );
             }*/
           },
