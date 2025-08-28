@@ -195,6 +195,7 @@ export const Apy: React.FC<ApyProps> = ({
     });
 
   // Display supply APY
+  console.log('>>', asset.vToken.underlyingToken.symbol, distributionApyRows.length)
 
   if (type === "supply") {
     const isCampain = distributions.some(d => d.type === 'merkl');
