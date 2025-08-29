@@ -83,7 +83,7 @@ export const Points = ({ address, iconSize = 5, displayMultiplier }: PointsProps
       {
         Array.isArray(tokenPoints) ? tokenPoints.map((point, index) => {
           return <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">
-          <img src={point.logo} className={`w-${iconSize} max-w-none flex-none`} />
+          <img src={point.logo} className={`w-${iconSize - 1} max-w-none flex-none`} />
           </div>
         }) : <p>{tokenPoints}</p>
       }
