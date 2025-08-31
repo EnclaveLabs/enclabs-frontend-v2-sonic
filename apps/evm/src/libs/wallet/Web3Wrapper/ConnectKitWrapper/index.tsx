@@ -28,7 +28,7 @@ export const ConnectKitWrapper: React.FC<ConnectKitWrapperProps> = ({ children }
         '--ck-overlay-background': 'rgba(0, 0, 0, 0.5)',
 
         // Wallet buttons
-         "--ck-body-background": theme.extend.colors.background,
+        "--ck-body-background": '#ffffff',
         '--ck-primary-button-box-shadow': '0px 8px 6px 0px rgba(0, 0, 0, 0.05)',
         '--ck-primary-button-border-radius': '0.5rem',
         '--ck-primary-button-hover-border-radius': '0.5rem',
@@ -71,8 +71,6 @@ export const ConnectKitWrapper: React.FC<ConnectKitWrapperProps> = ({ children }
         
 
         '--ck-body-background-tertiary': theme.extend.colors.blue,
-
-        '--ck-body-background': theme.extend.colors.background,
       }}
     >
       <AuthHandler />

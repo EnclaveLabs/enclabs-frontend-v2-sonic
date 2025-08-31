@@ -26,7 +26,7 @@ export const Points = ({ address, iconSize = 5 }: PointsProps) => {
           {Array.isArray(tokenPoints) ? (
             tokenPoints.map((point, index) => (
               <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">     
-          <p>{point.multiplier}</p>
+          <p className='text-white'>{point.multiplier}</p>
           <img src={point.logo} className={`w-${iconSize} max-w-none flex-none`} />
         
         <Tooltip
