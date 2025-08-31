@@ -14,6 +14,7 @@ import useGetMenuItems from 'containers/Layout/useGetMenuItems';
 import { useIsOnMarketPage } from '../../useIsOnMarketPage';
 import { ChainSelect } from '../ChainSelect';
 import { NavLink } from './NavLink';
+import DarkModeButton from 'components/DarkModeTest.tsx';
 
 export const XsControls: React.FC = () => {
   const { t } = useTranslation();
@@ -42,6 +43,7 @@ export const XsControls: React.FC = () => {
         </Link>
 
         <div className="flex flex-1 items-center justify-center">
+           
           <ChainSelect
             className="mr-4"
             buttonClassName="h-9"
@@ -78,6 +80,10 @@ export const XsControls: React.FC = () => {
           {menuItems.map(menuItem => (
             <NavLink onClick={toggleMobileMenu} key={menuItem.i18nKey} {...menuItem} />
           ))}
+
+          <div className='flex justify-center mt-8'>
+            <DarkModeButton/>
+          </div>
         </div>
 
         <div className="px-4">
