@@ -1,16 +1,14 @@
 import { css } from "@emotion/react";
-import { useTheme } from "@mui/material";
+import { theme } from "../../theme";
 
 export const useStyles = () => {
-  const theme = useTheme();
-
   return {
     root: css`
       margin: 0 auto;
       max-width: 480px;
     `,
     container: css`
-      margin-top: ${theme.spacing(8)};
+      margin-top: 12px;
     `,
     multicolorBorder: css`
       width: fit-content;
@@ -20,8 +18,8 @@ export const useStyles = () => {
       border-radius: var(--radius);
       border: var(--border) solid transparent;
       background: /* fond intérieur (SOLIDE via gradient) */ linear-gradient(
-            #fff,
-            #fff
+            ${theme.extend.colors.cards},
+            ${theme.extend.colors.cards}
           )
           padding-box,
         /* bordure dégradée */

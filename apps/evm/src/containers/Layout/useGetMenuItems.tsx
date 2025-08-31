@@ -55,6 +55,7 @@ const useGetMenuItems = () => {
         // t('layout.menuItems.earn')
         i18nKey: "layout.menuItems.earn",
         iconName: "vault",
+        isNew: true
       });
 
     // Other items follow
@@ -90,6 +91,7 @@ const useGetMenuItems = () => {
       // t('layout.menuItems.account')
       i18nKey: "veTrevee",
       iconName: "treeve",
+       isNew: true
     });
 
     // if (lstPoolComptrollerContractAddress && lstPoolVWstEthContractAddress) {

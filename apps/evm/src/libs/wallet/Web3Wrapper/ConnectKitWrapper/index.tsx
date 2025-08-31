@@ -28,7 +28,8 @@ export const ConnectKitWrapper: React.FC<ConnectKitWrapperProps> = ({ children }
         '--ck-overlay-background': 'rgba(0, 0, 0, 0.5)',
 
         // Wallet buttons
-        "--ck-body-background": '#ffffff',
+        "--ck-body-background": theme.extend.colors.cards,
+        "--ck-body-color": theme.extend.colors.black,
         '--ck-primary-button-box-shadow': '0px 8px 6px 0px rgba(0, 0, 0, 0.05)',
         '--ck-primary-button-border-radius': '0.5rem',
         '--ck-primary-button-hover-border-radius': '0.5rem',
@@ -60,7 +61,6 @@ export const ConnectKitWrapper: React.FC<ConnectKitWrapperProps> = ({ children }
         '--ck-tooltip-color': theme.extend.colors.white,
 
         // Title + scrollbar
-        '--ck-body-color': theme.extend.colors.lightBlack,
         '--ck-body-color-muted': theme.extend.colors.lightBlack,
         '--ck-body-divider': theme.extend.colors.lightBlack,
 
@@ -70,7 +70,7 @@ export const ConnectKitWrapper: React.FC<ConnectKitWrapperProps> = ({ children }
         '--ck-qr-border-radius': '0.5rem',
         
 
-        '--ck-body-background-tertiary': theme.extend.colors.blue,
+        '--ck-body-background-tertiary': theme.extend.colors.background,
       }}
     >
       <AuthHandler />

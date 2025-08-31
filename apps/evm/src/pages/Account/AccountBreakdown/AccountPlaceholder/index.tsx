@@ -11,7 +11,7 @@ const AccountPlaceholder: React.FC = () => {
       <h4 className="text-lg mb-6">{t('accountPlaceholder.assetsWillAppearHere')}</h4>
 
       <ButtonWrapper asChild>
-        <Link to={routes.dashboard.path} className="text-lightBlack hover:no-underline">
+        <Link to={routes.dashboard.path} className="hover:no-underline">
           {t('accountPlaceholder.letsGetStarted')}
         </Link>
       </ButtonWrapper>

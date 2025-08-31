@@ -137,8 +137,6 @@ const Rewards: React.FC = () => {
               new Date(a.created_at).getTime() -
               new Date(b.created_at).getTime()
           );
-          console.log("data");
-          console.log(data);
           data.forEach((item: MarketSnapshotHistory) => {
             const date = item.created_at;
             const suppliedOrBorrowedUSD = Number.parseFloat(
