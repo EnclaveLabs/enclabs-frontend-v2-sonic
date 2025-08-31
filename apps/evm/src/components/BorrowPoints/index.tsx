@@ -33,13 +33,13 @@ export const Points = ({ address, iconSize = 5 }: PointsProps) => {
         placement="right"
           title={ 
           <div className="space-y-2">
-            <p>{point.tooltiptext}</p>
-            <p>Learn more about this point program: <Link target="_blank" href={point.tooltipLink} onClick={e => e.stopPropagation()} className="text-white underline">here</Link></p>
+            <p className='text-white'>{point.tooltiptext}</p>
+            <p className='text-white'>Learn more about this point program: <Link target="_blank" href={point.tooltipLink} onClick={e => e.stopPropagation()} className="text-white underline">here</Link></p>
             </div>
           }
           className="inline-flex"
         >
-          <Icon name="info" className="text-white" />
+          <Icon name="info" className="reverse-color" />
         </Tooltip>
       </div>
             ))

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useTheme } from '@mui/material';
+import { theme as cssTheme } from '../../theme';
 
 export const useStyles = () => {
   const theme = useTheme();
@@ -12,6 +13,7 @@ export const useStyles = () => {
         font-size: ${theme.typography.small2.fontSize};
         font-weight: ${theme.typography.small2.fontWeight};
         padding: ${theme.spacing(3)};
+        color: ${cssTheme.extend.colors.white};
       }
       .MuiTooltip-arrow {
         color: ${theme.palette.secondary.light};
