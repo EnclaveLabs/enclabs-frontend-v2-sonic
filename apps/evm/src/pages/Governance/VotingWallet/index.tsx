@@ -211,7 +211,7 @@ const VotingWallet: React.FC<VotingWalletProps> = ({ className }) => {
                 components={{
                   Anchor: (
                     <span
-                      className="text-blue hover:cursor-pointer hover:underline"
+                      className="text-primary hover:cursor-pointer hover:underline"
                       role="button"
                       aria-pressed="false"
                       tabIndex={0}

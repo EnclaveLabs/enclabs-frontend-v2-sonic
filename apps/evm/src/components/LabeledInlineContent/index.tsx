@@ -23,7 +23,7 @@ export const LabeledInlineContent = ({
   invertTextColors = false,
   children,
   disclaimer,
-  className = 'text-blue',
+  className = 'text-primary',
   ...otherContainerProps
 }: LabeledInlineContentProps) => (
     <>

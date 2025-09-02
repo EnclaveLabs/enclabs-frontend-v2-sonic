@@ -28,8 +28,8 @@ const getVariantClasses = ({ variant, active, tokenAddress = '' }: { variant: Va
     // Connect button when connected
     case 'secondary':
       return cn(
-        'border-mediumBlue hover:border-blue hover:bg-blue hover:text-white active:border-mediumBlue active:bg-mediumBlue disabled:border-lightGrey disabled:bg-transparent',
-        active && 'border-blue bg-blue',
+        'border-mediumBlue hover:border-blue hover:bg-primary hover:text-white active:border-mediumBlue active:bg-mediumBlue disabled:border-lightGrey disabled:bg-transparent',
+        active && 'border-blue bg-primary',
       );
     // Buttons in token view
     case 'tertiary':
@@ -46,8 +46,8 @@ const getVariantClasses = ({ variant, active, tokenAddress = '' }: { variant: Va
     case 'quinary':
       // Filter group buttons
       return cn(
-        'border-cards border-lightGrey bg-cards active:border-blue active:bg-blue disabled:border-background disabled:bg-background h-8 rounded-full px-5 py-1',
-        active ? 'border-blue bg-blue text-white' : 'hover:border-blue hover:bg-blue hover:text-white',
+        'border-cards border-lightGrey bg-cards active:border-blue active:bg-primary disabled:border-background disabled:bg-background h-8 rounded-full px-5 py-1',
+        active ? 'border-blue bg-primary text-white' : 'hover:border-blue hover:bg-primary hover:text-white',
       );
     case 'senary':
       return cn(
@@ -56,14 +56,14 @@ const getVariantClasses = ({ variant, active, tokenAddress = '' }: { variant: Va
       );
     case 'text':
       return cn(
-        'active:mediumBlue text-blue hover:text-mediumBlue bg-transparent p-0',
+        'active:mediumBlue text-primary hover:text-mediumBlue bg-transparent p-0',
         active && 'text-mediumBlue',
       );
     // primary
     default:
       // Connect button
       return cn(
-        'border-blue bg-blue text-white active:border-darkBlue active:bg-darkBlue disabled:border-lightGrey disabled:bg-lightGrey',
+        'border-blue bg-primary text-white active:border-darkBlue active:bg-darkBlue disabled:border-lightGrey disabled:bg-lightGrey',
         active ? 'border-mediumBlue bg-mediumBlue' : 'hover:border-mediumBlue hover:bg-mediumBlue',
       );
   }

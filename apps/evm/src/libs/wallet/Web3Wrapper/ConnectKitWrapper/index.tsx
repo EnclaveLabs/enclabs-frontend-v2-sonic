@@ -29,19 +29,18 @@ export const ConnectKitWrapper: React.FC<ConnectKitWrapperProps> = ({ children }
 
         // Wallet buttons
         "--ck-body-background": theme.extend.colors.cards,
-        "--ck-body-color": theme.extend.colors.black,
         '--ck-primary-button-box-shadow': '0px 8px 6px 0px rgba(0, 0, 0, 0.05)',
         '--ck-primary-button-border-radius': '0.5rem',
         '--ck-primary-button-hover-border-radius': '0.5rem',
         '--ck-primary-button-active-border-radius': '0.5rem',
         '--ck-primary-button-background': theme.extend.colors.cards,
-        '--ck-primary-button-color': theme.extend.colors.blue,
+        '--ck-primary-button-color': theme.extend.colors.primary,
         '--ck-primary-button-hover-color': theme.extend.colors.white,
-        '--ck-primary-button-hover-background': theme.extend.colors.blue,
-        '--ck-primary-button-active-background': theme.extend.colors.blue,
+        '--ck-primary-button-hover-background': theme.extend.colors.primary,
+        '--ck-primary-button-active-background': theme.extend.colors.primary,
 
         // Copy to clipboard button
-        '--ck-secondary-button-background': theme.extend.colors.blue,
+        '--ck-secondary-button-background': theme.extend.colors.primary,
         '--ck-secondary-button-hover-background': theme.extend.colors.mediumBlue,
         '--ck-secondary-button-hover-color': theme.extend.colors.white,
         '--ck-secondary-button-active-background': theme.extend.colors.white,
@@ -57,7 +56,7 @@ export const ConnectKitWrapper: React.FC<ConnectKitWrapperProps> = ({ children }
         '--ck-body-background-secondary': theme.extend.colors.white,
 
         // More available tooltip
-        '--ck-tooltip-background': theme.extend.colors.blue,
+        '--ck-tooltip-background': theme.extend.colors.primary,
         '--ck-tooltip-color': theme.extend.colors.white,
 
         // Title + scrollbar

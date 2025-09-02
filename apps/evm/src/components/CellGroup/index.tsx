@@ -49,7 +49,7 @@ export const CellGroup: React.FC<CellGroupProps> = ({
             key={`cell-group-item-${label}`}
           >
             <div className="flex items-center">
-              <span className={cn("text-blue", smallValues && "text-sm")}>
+              <span className={cn("text-primary", smallValues && "text-sm")}>
                 {label}
               </span>
 

@@ -316,7 +316,7 @@ const BridgePage: React.FC = () => {
                 disabled={formState.isSubmitting}
                 data-testid={TEST_IDS.switchChainsButton}
               >
-                <Icon name="convert" className="text-blue h-6 w-6 rotate-90 md:rotate-0" />
+                <Icon name="convert" className="text-primary h-6 w-6 rotate-90 md:rotate-0" />
               </TextButton>
 
               <Controller

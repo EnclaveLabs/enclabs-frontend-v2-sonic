@@ -7,7 +7,7 @@ import { theme } from 'theme';
 const getHoverBackgroundColor = (tokenAddress: string | undefined) : any => {
 
   let tokenTypeInfos = {
-    color: theme.extend.colors.blue,
+    color: theme.extend.colors.primary,
     hoverColor: theme.extend.colors.hoverBlue,
   };
   if(tokenAddress){

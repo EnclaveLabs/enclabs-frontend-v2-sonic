@@ -1,4 +1,4 @@
-import { Card } from "components";
+import { Button, Card } from "components";
 import { Page } from "components";
 import { useGetChainMetadata } from "hooks/useGetChainMetadata";
 import { useAccountAddress } from "libs/wallet";
@@ -126,12 +126,13 @@ const Earn: React.FC = () => {
                   </div>
                 </div>
 
-                <button
-                  className="bg-blue text-white w-full py-3 rounded-xl font-semibold"
+                <Button
+                  variant="primary"
+                  className="w-full"
                   onClick={() => setSelectedVTokenAddress(asset.vToken.address)}
                 >
                   Start earning
-                </button>
+                </Button>
               </Card>
             );
           })}

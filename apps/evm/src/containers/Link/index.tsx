@@ -13,7 +13,7 @@ export const Link: React.FC<LinkProps> = forwardRef<HTMLAnchorElement, LinkProps
     const { formatTo } = useFormatTo();
     const formattedTo = 'to' in otherProps ? formatTo({ to: otherProps.to }) : undefined;
 
-    const classes = cn('text-blue hover:underline', className);
+    const classes = cn('text-primary hover:underline', className);
 
     return formattedTo ? (
       <RRLink {...otherProps} className={classes} to={formattedTo} ref={ref}>

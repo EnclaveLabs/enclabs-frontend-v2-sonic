@@ -31,7 +31,7 @@ export const Notice = ({
       variant === 'error' && 'border-red bg-red/5',
       variant === 'success' && 'border-green bg-green/5',
       variant === 'warning' && 'border-orange bg-orange/5',
-      variant === 'info' && 'border-blue bg-blue/5',
+      variant === 'info' && 'border-blue bg-primary/5',
       className,
     )}
     {...otherProps}
@@ -43,7 +43,7 @@ export const Notice = ({
         <Icon
           className={cn(
             'mr-3 h-5 w-5 shrink-0',
-            variant === 'info' && 'text-blue',
+            variant === 'info' && 'text-primary',
             variant === 'error' && 'text-red',
             variant === 'success' && 'text-green',
             variant === 'warning' && 'text-orange',
