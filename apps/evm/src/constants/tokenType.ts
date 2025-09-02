@@ -64,7 +64,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextOrange,
         backgroundColor: theme.extend.colors.tagBgOrange,
         hoverColor: theme.extend.colors.hoverOrange,
-        buttonClassName: 'bg-tagTextOrange bg-tagTextOrange border-tagTextOrange hover:border-tagTextOrange hover:bg-hoverOrange text-lightBlack',
+        buttonClassName: 'bg-tagBgOrange border-tagTextOrange hover:border-tagTextOrange hover:bg-hoverOrange text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverOrange',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
@@ -74,7 +74,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextGreen,
         backgroundColor: theme.extend.colors.tagBgGreen,
         hoverColor: theme.extend.colors.hoverGreen,
-        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        buttonClassName: 'bg-tagBgGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGreen',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
@@ -84,7 +84,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextGreen,
         backgroundColor: theme.extend.colors.tagBgGreen,
         hoverColor: theme.extend.colors.hoverGreen,
-        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        buttonClassName: 'bg-tagBgGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGreen',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
@@ -94,7 +94,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextGreen,
         backgroundColor: theme.extend.colors.tagBgGreen,
         hoverColor: theme.extend.colors.hoverGreen,
-        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        buttonClassName: 'bg-tagBgGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGreen',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
@@ -104,7 +104,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextGreen,
         backgroundColor: theme.extend.colors.tagBgGreen,
         hoverColor: theme.extend.colors.hoverGreen,
-        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        buttonClassName: 'bg-tagBgGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGreen',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
@@ -114,7 +114,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextYellow,
         backgroundColor: theme.extend.colors.tagBgYellow,
         hoverColor: theme.extend.colors.hoverYellow,
-        buttonClassName: 'bg-tagTextYellow bg-tagTextYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
+        buttonClassName: 'bg-tagBgYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverYellow',
         getUrl: (tokenAddress: string, chain: string) =>
             `swap`,
@@ -124,7 +124,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextYellow,
         backgroundColor: theme.extend.colors.tagBgYellow,
         hoverColor: theme.extend.colors.hoverYellow,
-        buttonClassName: 'bg-tagTextYellow bg-tagTextYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
+        buttonClassName: 'bg-tagBgYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverYellow',
         getUrl: (tokenAddress: string, chain: string) =>
             `swap`,
@@ -134,7 +134,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextRed,
         backgroundColor: theme.extend.colors.tagBgRed,
         hoverColor: theme.extend.colors.hoverRed,
-        buttonClassName: 'bg-tagTextRed bg-tagTextRed border-tagTextRed hover:border-tagTextRed hover:bg-hoverRed text-lightBlack',
+        buttonClassName: 'bg-tagBgRed border-tagTextRed hover:border-tagTextRed hover:bg-hoverRed text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverRed',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
@@ -144,7 +144,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextBlue,
         backgroundColor: theme.extend.colors.tagBgBlue,
         hoverColor: theme.extend.colors.hoverBlue,
-        buttonClassName: 'bg-tagTextBlue bg-tagTextBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
+        buttonClassName: 'bg-tagBgBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverBlue',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
@@ -154,7 +154,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextBlue,
         backgroundColor: theme.extend.colors.tagBgBlue,
         hoverColor: theme.extend.colors.hoverBlue,
-        buttonClassName: 'bg-tagTextBlue bg-tagTextBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
+        buttonClassName: 'bg-tagBgBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverBlue',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
@@ -164,7 +164,7 @@ export const tokenTypeInfo: {
         borderColor: theme.extend.colors.tagTextRed,
         backgroundColor: theme.extend.colors.tagBgGrey,
         hoverColor: theme.extend.colors.hoverGrey,
-        buttonClassName: 'bg-tagTextGrey bg-tagTextGrey border-tagTextGrey hover:border-tagTextGrey hover:bg-hoverGrey text-lightBlack',
+        buttonClassName: 'bg-tagBgGrey border-tagTextGrey hover:border-tagTextGrey hover:bg-hoverGrey text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGrey',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,

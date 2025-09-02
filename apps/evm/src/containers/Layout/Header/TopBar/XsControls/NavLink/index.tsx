@@ -23,8 +23,8 @@ export const NavLink: React.FC<NavLinkProps> = ({
     <RRNavLink
       className={({ isActive }) =>
         cn(
-          'hover:bg-mediumBlue hover:text-white active:bg-blue flex items-center justify-center whitespace-nowrap px-6 py-4',
-          isActive  ? 'bg-blue text-white xl:before:bg-blue xl:before:absolute xl:before:bottom-0 xl:before:left-0 xl:before:top-0 xl:before:w-1 xl:before:rounded-br-lg xl:before:rounded-tr-lg'
+          'hover:bg-mediumBlue hover:text-white active:bg-primary flex items-center justify-center whitespace-nowrap px-6 py-4',
+          isActive  ? 'bg-primary text-white xl:before:bg-primary xl:before:absolute xl:before:bottom-0 xl:before:left-0 xl:before:top-0 xl:before:w-1 xl:before:rounded-br-lg xl:before:rounded-tr-lg'
           : 'text-lightBlack',
           className,
         )

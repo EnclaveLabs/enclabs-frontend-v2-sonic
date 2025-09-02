@@ -5,7 +5,7 @@ import { cn } from 'utilities';
 import { useIsOnMarketPage } from '../../useIsOnMarketPage';
 import { ChainSelect } from '../ChainSelect';
 import { GaslessStatus } from '../GaslessStatus';
-import DarkModeButton from 'components/DarkModeTest.tsx';
+import DarkModeButton from 'components/DarkModeButton';
 
 export const MdUpControls: React.FC = () => {
   const isOnMarketPage = useIsOnMarketPage();

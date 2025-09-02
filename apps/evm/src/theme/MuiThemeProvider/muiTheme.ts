@@ -29,12 +29,12 @@ export const PALETTE = {
     disabled: 'rgba(161, 161, 161, 1)',
   },
   button: {
-    main: theme.extend.colors.blue,
+    main: theme.extend.colors.primary,
     medium: theme.extend.colors.mediumBlue,
     dark: theme.extend.colors.darkBlue,
   },
   interactive: {
-    primary: theme.extend.colors.blue,
+    primary: theme.extend.colors.primary,
     success: theme.extend.colors.green,
     success10: 'rgba(24, 223, 139, 0.1)',
     success50: 'rgba(24, 223, 139, 0.5)',
@@ -43,7 +43,7 @@ export const PALETTE = {
     tan: 'rgba(255, 231, 206, 1)',
     delimiter: 'rgba(33, 41, 58, 1)',
     warning: theme.extend.colors.orange,
-    hover: theme.extend.colors.blue,
+    hover: theme.extend.colors.primary,
   },
 };
 

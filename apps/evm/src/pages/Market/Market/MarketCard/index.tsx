@@ -68,7 +68,7 @@ export const MarketCard: React.FC<MarketCardProps> = ({
               <div
                 className={cn('mr-1 h-2 w-2 shrink-0 rounded-full', {
                   'bg-red': legend.color === 'red',
-                  'bg-blue': legend.color === 'blue',
+                  'bg-primary': legend.color === 'blue',
                   'bg-green': legend.color === 'green',
                 })}
               />

@@ -163,7 +163,7 @@ export const useStyles = () => {
 
       &.MuiTableSortLabel-root {
         span {
-          color: ${theme.extend.colors.blue};
+          color: ${theme.extend.colors.primary};
         }
       }
 

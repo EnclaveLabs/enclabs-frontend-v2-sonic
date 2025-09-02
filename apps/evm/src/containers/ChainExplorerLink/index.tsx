@@ -46,7 +46,7 @@ export const ChainExplorerLink: React.FC<ChainExplorerLinkProps> = ({
   }, [url, text, ellipseBreakpoint, t]);
 
   return (
-    <div className={cn('text-blue inline-block text-sm font-semibold', className)}>
+    <div className={cn('text-primary inline-block text-sm font-semibold', className)}>
       <Link href={url} className="flex items-center">
         {content}
 
