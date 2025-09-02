@@ -21,6 +21,7 @@ export const pointType = {
     "0x05C132E75D2775Ca4257FCf824169d99d593eBF1", //hlp0
     "0xf50466320de462627f929f7F631206653c10C0b7", //goglz ecosystem
     "0xdDe5262d257BB26DCd6Ea482f489078eD020CD7C", //snake ecosystem
+    "0x0e528ae2376Bf60B5c6e4c62aE461F422052b457" //u$d core
   ],
   enclabsPointsX2: [],
   enclabsPointsX4: [

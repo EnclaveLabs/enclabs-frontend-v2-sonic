@@ -24,6 +24,7 @@ import enclabsVeETHLogo from "libs/tokens/img/veEnclabs-scETH.svg";
 import hlp0Logo from "libs/tokens/img/logoHLP0.svg";
 import snakeLogo from "libs/tokens/img/snake.svg";
 import goglzLogo from "libs/tokens/img/goglz.svg";
+import u$dLogo from "libs/tokens/img/u$d_logo.svg";
 import type { Token } from "types";
 
 const ethToken: Token = {
@@ -162,6 +163,13 @@ export const tokens: Token[] = [
     decimals: 6,
     symbol: "HLP0+",
     asset: hlp0Logo,
+    intrinsicSupplyApy: 11
+  },
+  {
+    address: "0xC326D1505ce0492276f646B03FE460c43A892185",
+    decimals: 6,
+    symbol: "U$D",
+    asset: u$dLogo,
     intrinsicSupplyApy: 11
   },
   {
