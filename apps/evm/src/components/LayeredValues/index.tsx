@@ -11,7 +11,7 @@ export const LayeredValues: React.FC<LayeredValuesProps> = ({
   topValue,
   bottomValue,
   className,
-  classNameBottomValue = 'text-blue'
+  classNameBottomValue = 'text-primary'
 }) => (
   <div >
     <EllipsisText className={className}>{topValue}</EllipsisText>

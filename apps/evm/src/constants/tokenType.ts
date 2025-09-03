@@ -60,111 +60,111 @@ export const tokenTypeInfo: {
     };
 } = {
     LST: {
-        color: theme.colors.tagTextOrange, // Orange
-        borderColor: theme.colors.tagTextOrange,
-        backgroundColor: theme.colors.tagBgOrange,
-        hoverColor: theme.colors.hoverOrange,
-        buttonClassName: 'bg-tagTextOrange bg-tagTextOrange border-tagTextOrange hover:border-tagTextOrange hover:bg-hoverOrange text-lightBlack',
+        color: theme.extend.colors.tagTextOrange, // Orange
+        borderColor: theme.extend.colors.tagTextOrange,
+        backgroundColor: theme.extend.colors.tagBgOrange,
+        hoverColor: theme.extend.colors.hoverOrange,
+        buttonClassName: 'bg-tagBgOrange border-tagTextOrange hover:border-tagTextOrange hover:bg-hoverOrange text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverOrange',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
     PT: {
-        color: theme.colors.tagTextGreen, // Green
-        borderColor: theme.colors.tagTextGreen,
-        backgroundColor: theme.colors.tagBgGreen,
-        hoverColor: theme.colors.hoverGreen,
-        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        color: theme.extend.colors.tagTextGreen, // Green
+        borderColor: theme.extend.colors.tagTextGreen,
+        backgroundColor: theme.extend.colors.tagBgGreen,
+        hoverColor: theme.extend.colors.hoverGreen,
+        buttonClassName: 'bg-tagBgGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGreen',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
     "Spectra PT": {
-        color: theme.colors.tagTextGreen, // Green
-        borderColor: theme.colors.tagTextGreen,
-        backgroundColor: theme.colors.tagBgGreen,
-        hoverColor: theme.colors.hoverGreen,
-        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        color: theme.extend.colors.tagTextGreen, // Green
+        borderColor: theme.extend.colors.tagTextGreen,
+        backgroundColor: theme.extend.colors.tagBgGreen,
+        hoverColor: theme.extend.colors.hoverGreen,
+        buttonClassName: 'bg-tagBgGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGreen',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
     "Pendle PT": {
-        color: theme.colors.tagTextGreen, // Green
-        borderColor: theme.colors.tagTextGreen,
-        backgroundColor: theme.colors.tagBgGreen,
-        hoverColor: theme.colors.hoverGreen,
-        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        color: theme.extend.colors.tagTextGreen, // Green
+        borderColor: theme.extend.colors.tagTextGreen,
+        backgroundColor: theme.extend.colors.tagBgGreen,
+        hoverColor: theme.extend.colors.hoverGreen,
+        buttonClassName: 'bg-tagBgGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGreen',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
     "StableJack YieldToken": {
-        color: theme.colors.tagTextGreen, // Green
-        borderColor: theme.colors.tagTextGreen,
-        backgroundColor: theme.colors.tagBgGreen,
-        hoverColor: theme.colors.hoverGreen,
-        buttonClassName: 'bg-tagTextGreen bg-tagTextGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
+        color: theme.extend.colors.tagTextGreen, // Green
+        borderColor: theme.extend.colors.tagTextGreen,
+        backgroundColor: theme.extend.colors.tagBgGreen,
+        hoverColor: theme.extend.colors.hoverGreen,
+        buttonClassName: 'bg-tagBgGreen border-tagTextGreen hover:border-tagTextGreen hover:bg-hoverGreen text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGreen',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
     Wrapped: {
-        color: theme.colors.tagTextYellow, // Yellow
-        borderColor: theme.colors.tagTextYellow,
-        backgroundColor: theme.colors.tagBgYellow,
-        hoverColor: theme.colors.hoverYellow,
-        buttonClassName: 'bg-tagTextYellow bg-tagTextYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
+        color: theme.extend.colors.tagTextYellow, // Yellow
+        borderColor: theme.extend.colors.tagTextYellow,
+        backgroundColor: theme.extend.colors.tagBgYellow,
+        hoverColor: theme.extend.colors.hoverYellow,
+        buttonClassName: 'bg-tagBgYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverYellow',
         getUrl: (tokenAddress: string, chain: string) =>
             `swap`,
     },
      "Ecosystem tokens": {
-        color: theme.colors.tagTextYellow, // Yellow
-        borderColor: theme.colors.tagTextYellow,
-        backgroundColor: theme.colors.tagBgYellow,
-        hoverColor: theme.colors.hoverYellow,
-        buttonClassName: 'bg-tagTextYellow bg-tagTextYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
+        color: theme.extend.colors.tagTextYellow, // Yellow
+        borderColor: theme.extend.colors.tagTextYellow,
+        backgroundColor: theme.extend.colors.tagBgYellow,
+        hoverColor: theme.extend.colors.hoverYellow,
+        buttonClassName: 'bg-tagBgYellow border-tagTextYellow hover:border-tagTextYellow hover:bg-hoverYellow text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverYellow',
         getUrl: (tokenAddress: string, chain: string) =>
             `swap`,
     },
     aToken: {
-        color: theme.colors.tagTextRed, // Red
-        borderColor: theme.colors.tagTextRed,
-        backgroundColor: theme.colors.tagBgRed,
-        hoverColor: theme.colors.hoverRed,
-        buttonClassName: 'bg-tagTextRed bg-tagTextRed border-tagTextRed hover:border-tagTextRed hover:bg-hoverRed text-lightBlack',
+        color: theme.extend.colors.tagTextRed, // Red
+        borderColor: theme.extend.colors.tagTextRed,
+        backgroundColor: theme.extend.colors.tagBgRed,
+        hoverColor: theme.extend.colors.hoverRed,
+        buttonClassName: 'bg-tagBgRed border-tagTextRed hover:border-tagTextRed hover:bg-hoverRed text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverRed',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
     "Yield bearing Stable": {
-        color: theme.colors.tagTextBlue, // Blue
-        borderColor: theme.colors.tagTextBlue,
-        backgroundColor: theme.colors.tagBgBlue,
-        hoverColor: theme.colors.hoverBlue,
-        buttonClassName: 'bg-tagTextBlue bg-tagTextBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
+        color: theme.extend.colors.tagTextBlue, // Blue
+        borderColor: theme.extend.colors.tagTextBlue,
+        backgroundColor: theme.extend.colors.tagBgBlue,
+        hoverColor: theme.extend.colors.hoverBlue,
+        buttonClassName: 'bg-tagBgBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverBlue',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
     Stable: {
-        color: theme.colors.tagTextBlue, // Blue
-        borderColor: theme.colors.tagTextBlue,
-        backgroundColor: theme.colors.tagBgBlue,
-        hoverColor: theme.colors.hoverBlue,
-        buttonClassName: 'bg-tagTextBlue bg-tagTextBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
+        color: theme.extend.colors.tagTextBlue, // Blue
+        borderColor: theme.extend.colors.tagTextBlue,
+        backgroundColor: theme.extend.colors.tagBgBlue,
+        hoverColor: theme.extend.colors.hoverBlue,
+        buttonClassName: 'bg-tagBgBlue border-tagTextBlue hover:border-tagTextBlue hover:bg-hoverBlue text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverBlue',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,
     },
     Unknown: {
-        color: theme.colors.tagTextGrey,
-        borderColor: theme.colors.tagTextRed,
-        backgroundColor: theme.colors.tagBgGrey,
-        hoverColor: theme.colors.hoverGrey,
-        buttonClassName: 'bg-tagTextGrey bg-tagTextGrey border-tagTextGrey hover:border-tagTextGrey hover:bg-hoverGrey text-lightBlack',
+        color: theme.extend.colors.tagTextGrey,
+        borderColor: theme.extend.colors.tagTextRed,
+        backgroundColor: theme.extend.colors.tagBgGrey,
+        hoverColor: theme.extend.colors.hoverGrey,
+        buttonClassName: 'bg-tagBgGrey border-tagTextGrey hover:border-tagTextGrey hover:bg-hoverGrey text-lightBlack',
         shadowClassName: 'shadow-md shadow-hoverGrey',
         getUrl:  (tokenAddress: string, chain: string) => 
             `swap`,

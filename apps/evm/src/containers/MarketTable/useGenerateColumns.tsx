@@ -159,7 +159,7 @@ const useGenerateColumns = ({
             ) {
               return (
                 <>
-                 <Apy className={cn('text-blue font-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={poolAsset} column={column} />
+                 <Apy className={cn('text-primary font-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={poolAsset} column={column} />
                  {['supplyApy', 'labeledSupplyApy'].includes(column) && <Points address={poolAsset.vToken.address}/>}
                  {['borrowApy', 'labeledBorrowApy'].includes(column) && <BorrowPoints address={poolAsset.vToken.address}/>}
                 </>
@@ -216,7 +216,7 @@ const useGenerateColumns = ({
                   <EllipsisLink
                   to={to}
                   className={cn(
-                    'hover:text-blue text-sm',
+                    'hover:text-primary text-sm',
                     isPaused ? 'text-grey' : 'text-lightBlack',
                   )}>
                   {poolAsset.pool.name}

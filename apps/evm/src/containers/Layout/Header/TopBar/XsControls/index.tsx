@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import venusLogoSrc from 'assets/img/venusLogo.svg';
 import { Icon } from 'components';
 import { PAGE_CONTAINER_ID } from 'constants/layout';
 import { routes } from 'constants/routing';
@@ -14,6 +13,7 @@ import useGetMenuItems from 'containers/Layout/useGetMenuItems';
 import { useIsOnMarketPage } from '../../useIsOnMarketPage';
 import { ChainSelect } from '../ChainSelect';
 import { NavLink } from './NavLink';
+import DarkModeButton from 'components/DarkModeButton';
 
 export const XsControls: React.FC = () => {
   const { t } = useTranslation();
@@ -38,10 +38,11 @@ export const XsControls: React.FC = () => {
           className="mr-5 flex h-full flex-none items-center justify-center pl-4"
           to={routes.dashboard.path}
         >
-          <img src={venusLogoSrc} alt={t('layout.menu.venusLogoAlt')} className="h-7" />
+          <Icon name='enclabs' className="w-7"/>
         </Link>
 
         <div className="flex flex-1 items-center justify-center">
+           
           <ChainSelect
             className="mr-4"
             buttonClassName="h-9"
@@ -58,7 +59,7 @@ export const XsControls: React.FC = () => {
           onClick={toggleMobileMenu}
           type="button"
           className={cn(
-            'bg-blue hover:bg-mediumBlue active:bg-mediumBlue ml-5 flex h-9 w-9 flex-none items-center justify-center rounded-lg p-0',
+            'bg-primary hover:bg-mediumBlue active:bg-mediumBlue ml-5 flex h-9 w-9 flex-none items-center justify-center rounded-lg p-0',
           )}
         >
           <Icon
@@ -78,6 +79,10 @@ export const XsControls: React.FC = () => {
           {menuItems.map(menuItem => (
             <NavLink onClick={toggleMobileMenu} key={menuItem.i18nKey} {...menuItem} />
           ))}
+
+          <div className='flex justify-center mt-8'>
+            <DarkModeButton/>
+          </div>
         </div>
 
         <div className="px-4">

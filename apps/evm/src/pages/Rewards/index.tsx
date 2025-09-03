@@ -137,8 +137,6 @@ const Rewards: React.FC = () => {
               new Date(a.created_at).getTime() -
               new Date(b.created_at).getTime()
           );
-          console.log("data");
-          console.log(data);
           data.forEach((item: MarketSnapshotHistory) => {
             const date = item.created_at;
             const suppliedOrBorrowedUSD = Number.parseFloat(
@@ -220,7 +218,7 @@ const Rewards: React.FC = () => {
           <div
             className={` ${
               user_address.toLowerCase() === accountAddress?.toLowerCase()
-                ? "font-bold text-blue"
+                ? "font-bold text-primary"
                 : ""
             }`}
           >
@@ -237,7 +235,7 @@ const Rewards: React.FC = () => {
           <div
             className={`wordBreak: 'break-all' ${
               user_address.toLowerCase() === accountAddress?.toLowerCase()
-                ? "font-bold text-blue"
+                ? "font-bold text-primary"
                 : ""
             }`}
           >
@@ -254,7 +252,7 @@ const Rewards: React.FC = () => {
           <div
             className={` ${
               user_address.toLowerCase() === accountAddress?.toLowerCase()
-                ? "font-bold text-blue"
+                ? "font-bold text-primary"
                 : ""
             }`}
           >
@@ -270,7 +268,7 @@ const Rewards: React.FC = () => {
     <Page indexWithSearchEngines={false}>
       <Card className="flex h-full flex-col justify-center items-center space-y-4 lg:space-y-6 shadow-xl">
         <div className="text-lg font-semibold">Your rewards:</div>
-        <div className="text-xl font-bold text-blue">
+        <div className="text-xl font-bold text-primary">
           {new BigNumber(currentUserPoints).toFormat(0)} points
         </div>
         <div className="text-s ">Warning: Borrow Points are discontinued since 03/09/2025.</div>
@@ -347,13 +345,13 @@ const Rewards: React.FC = () => {
               name="Supply Points"
               dataKey="supply_points_number"
               radius={[5, 5, 0, 0]}
-              fill={theme.colors.blue}
+              fill={theme.extend.colors.primary}
             />
             <Bar
               name="Borrow Points"
               dataKey="borrow_points_number"
               radius={[5, 5, 0, 0]}
-              fill={theme.colors.orange}
+              fill={theme.extend.colors.orange}
             />
             <Legend />
           </BarChart>

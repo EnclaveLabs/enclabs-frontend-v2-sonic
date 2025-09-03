@@ -233,7 +233,6 @@ async function saveDataToDb() {
 
 async function runScript() {
   const data = await fetchGraphData();
-  console.log(data);
   await getPointsRewardFromDb();
   await calculatePointsRewards(data.markets);
   await saveDataToDb();

@@ -28,7 +28,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
         {
           if(tokenAddress == ''){
             className = index === activeButtonIndex ? 
-              'bg-blue text-white':
+              'bg-primary text-white':
               '';
           }
 

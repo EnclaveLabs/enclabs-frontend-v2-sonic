@@ -27,7 +27,7 @@ export const Layout: React.FC = () => {
   };
 
   return (
-    <div className="h-dvh flex flex-col">
+    <div className="h-dvh flex flex-col bg-background">
       <TestEnvWarning />
 
       <div className="flex flex-1 flex-col overflow-hidden md:flex-row">

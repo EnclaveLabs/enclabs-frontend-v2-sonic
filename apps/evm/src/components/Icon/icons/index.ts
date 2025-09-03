@@ -60,3 +60,5 @@ export { default as gasSad } from "./gasSad";
 export { default as rewards } from "./rewards";
 export { default as distribution } from "./distribution";
 export { default as treeve } from "./treeve";
+export { default as enclabs } from "./enclabs";
+export { default as enclabsWithText } from "./enclabsWithText";

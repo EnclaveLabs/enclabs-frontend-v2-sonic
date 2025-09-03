@@ -15,7 +15,7 @@ const getHoverBackgroundColor = (tokenAddress: string): string => {
     return tokenTypeInfos.hoverColor;
   }
 
-  return theme.colors.lightGrey;
+  return theme.extend.colors.lightGrey;
 }
 
 export const useStyles = () => {
@@ -139,7 +139,7 @@ export const useStyles = () => {
 
       .MuiTableRow-root:first-of-type,
       .MuiTableRow-root:not(:last-child) {
-        border-bottom: 2px solid #faf8f0;
+        border-bottom: 2px solid rgb(var(--color-background));
       }
 
       .MuiTableCell-root {
@@ -163,7 +163,7 @@ export const useStyles = () => {
 
       &.MuiTableSortLabel-root {
         span {
-          color: ${theme.colors.blue};
+          color: ${theme.extend.colors.primary};
         }
       }
 

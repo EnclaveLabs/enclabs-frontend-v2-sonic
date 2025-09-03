@@ -14,7 +14,7 @@ const getBackgroundColor = (tokenAddress: string) : string => {
   }
   else{
 
-    return theme.colors.lightGrey;
+    return theme.extend.colors.lightGrey;
   }
 }
 
@@ -46,7 +46,7 @@ export const useStyles = ({
       }
       .MuiSlider-rail {
         height: ${usedTheme.spacing(2)};
-        color: ${theme.colors.lightGrey};
+        color: ${theme.extend.colors.lightGrey};
         opacity: 1;
       }
     `,
