@@ -16,14 +16,17 @@ export const pointType = {
     "0xe544e51bf20ab186b6b7b1a9095c8bc1e3f203f5", //sts core
     "0x2df4dC7cf362E56e128816BE0f1F4CEb07904Bb0", //PT pendle wstkscusd
     "0xAb1fbEE94D9ba79269B3e479cE5D78C60F148716", //YT scusd stablejack
-    "0x13d79435F306D155CA2b9Af77234c84f80506045", //xusd core
+    
     "0x1D801dC616C79c499C5d38c998Ef2D0D6Cf868e8", //wmetausd
     "0x05C132E75D2775Ca4257FCf824169d99d593eBF1", //hlp0
     "0xf50466320de462627f929f7F631206653c10C0b7", //goglz ecosystem
     "0xdDe5262d257BB26DCd6Ea482f489078eD020CD7C", //snake ecosystem
-    "0x0e528ae2376Bf60B5c6e4c62aE461F422052b457" //u$d core
+    
   ],
-  enclabsPointsX2: [],
+  enclabsPointsX2: [
+    "0x0e528ae2376Bf60B5c6e4c62aE461F422052b457", //u$d core
+    "0x13d79435F306D155CA2b9Af77234c84f80506045", //xusd core
+  ],
   enclabsPointsX4: [
     "0xb64b8585cece0e314d344c7f6437d97bf1eb0fe7", //usdc slst
     "0x04568dB12221D60C93e1db9Cb7933aD6b7c4280C", //sceth core pool
@@ -41,6 +44,8 @@ export const pointType = {
     "0x8bC35Aee955E2D05C13e4Ff503294676508668B5", //sceth spectrapool
     "0x876e062420fb9a4861968ec2e0ff91be88142343", // ws slst
     "0x6fFD0B54E2B74FdaFBceC853145372066FE98fC1", //eurc core
+    "0x44D5602E26c1C1fD5F284036023e2750F3d855a0", //veusd
+    "0x14515De791C58C430b85D837df3E3ac455B88fEd", //veeth
   ],
 
   SonicPointsX2: [

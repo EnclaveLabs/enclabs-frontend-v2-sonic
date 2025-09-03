@@ -273,7 +273,7 @@ const Rewards: React.FC = () => {
         <div className="text-xl font-bold text-blue">
           {new BigNumber(currentUserPoints).toFormat(0)} points
         </div>
-
+        <div className="text-s ">Warning: Borrow Points are discontinued since 03/09/2025.</div>
         <ResponsiveContainer className="min-h-80">
           <BarChart
             data={historyData}

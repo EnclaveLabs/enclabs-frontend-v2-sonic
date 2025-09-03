@@ -128,13 +128,14 @@ async function calculatePointsRewards(markets: Market[]) {
         SUPPLY_BONUS_MULTIPLICATOR
       );
 
-      const borrowPointsEarned = createMarketHistoryItem(
-        market,
-        LiquidityType.BORROW,
-        acc,
-        BORROW_POINT_THRESHOLD,
-        BORROW_BONUS_MULTIPLICATOR
-      );
+      // const borrowPointsEarned = createMarketHistoryItem(
+      //   market,
+      //   LiquidityType.BORROW,
+      //   acc,
+      //   BORROW_POINT_THRESHOLD,
+      //   BORROW_BONUS_MULTIPLICATOR
+      // );
+      const borrowPointsEarned = 0;
 
       // Add cumulated points
       if (supplyPointsEarned > 0 || borrowPointsEarned > 0) {
