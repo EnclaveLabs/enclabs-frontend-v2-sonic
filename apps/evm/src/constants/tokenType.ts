@@ -43,6 +43,7 @@ export const tokenType = {
        
         "0x3a516e01f82c1e18916ED69a81Dd498eF64bB157", // snake
         "0x9fDbC3f8Abc05Fa8f3Ad3C17D2F806c1230c4564", //goglz
+        "0xA04BC7140c26fc9BB1F36B1A604C7A5a88fb0E70", //swpx
         
     ],
   

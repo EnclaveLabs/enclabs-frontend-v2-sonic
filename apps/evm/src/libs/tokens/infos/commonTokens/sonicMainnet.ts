@@ -25,6 +25,7 @@ import hlp0Logo from "libs/tokens/img/logoHLP0.svg";
 import snakeLogo from "libs/tokens/img/snake.svg";
 import goglzLogo from "libs/tokens/img/goglz.svg";
 import u$dLogo from "libs/tokens/img/u$d_logo.svg";
+import swpxLogo from "libs/tokens/img/swpx.svg";
 import type { Token } from "types";
 
 const ethToken: Token = {
@@ -189,6 +190,12 @@ export const tokens: Token[] = [
     decimals: 18,
     symbol: "SNAKE",
     asset: snakeLogo,
+  },
+   {
+    address: "0xA04BC7140c26fc9BB1F36B1A604C7A5a88fb0E70",
+    decimals: 18,
+    symbol: "SWPx",
+    asset: swpxLogo,
   },
   {
     address: "0x9fDbC3f8Abc05Fa8f3Ad3C17D2F806c1230c4564",
