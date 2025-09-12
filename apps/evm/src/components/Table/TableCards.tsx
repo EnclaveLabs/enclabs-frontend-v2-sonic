@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { Typography } from '@mui/material';
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { Spinner } from 'components/Spinner';
 import { useFormatTo } from 'hooks/useFormatTo';
@@ -11,7 +11,10 @@ import { Card } from 'components';
 import { Delimiter } from '../Delimiter';
 import { Select, type SelectOption, type SelectProps } from '../Select';
 import { useStyles } from './styles';
+import { hasAcceptedPoolDisclaimer, isPoolDisclaimed } from 'utilities/disclaimedPools';
+import { PoolDisclaimerModal } from 'components/PoolDisclaimer';
 import type { Order, TableProps } from './types';
+import { Pool } from 'types';
 
 interface TableCardProps<R>
   extends Pick<
@@ -45,7 +48,8 @@ export function TableCards<R>({
   const styles = useStyles();
   const navigate = useNavigate();
   const { formatTo } = useFormatTo();
-
+  const [rowClicked, setRowClicked] = useState<R | undefined>(undefined);
+  const [modalOpen, setModalOpen] = useState(false);
   const [titleColumn, ...otherColumns] = columns;
 
   const selectOptions = useMemo(
@@ -138,6 +142,20 @@ export function TableCards<R>({
             if (target?.closest('a')) {
               return;
             }
+
+            setRowClicked(row);
+            let authorizedToNavigate = true;
+            const poolIsDiclaimed = (row as any).pool?.comptrollerAddress && isPoolDisclaimed(((row as any).pool) as Pool);
+
+            if (poolIsDiclaimed) {
+              authorizedToNavigate = hasAcceptedPoolDisclaimer((row as any).pool.comptrollerAddress)
+              !authorizedToNavigate && setModalOpen(true);
+            }
+
+            if (!authorizedToNavigate) {
+              return;
+            }
+
             navigate(formatTo({ to: getRowHref(row) }));
           };
 
@@ -153,6 +171,11 @@ export function TableCards<R>({
           );
         })}
       </div>
+
+      <PoolDisclaimerModal isOpen={modalOpen} onAgree={() => {
+        setModalOpen(false);
+        getRowHref && navigate(formatTo({ to: getRowHref(rowClicked as R) }));
+      }} onClose={() => setModalOpen(false)} poolAddress={(rowClicked as any)?.pool?.comptrollerAddress ?? ''} />
     </div>
   );
 }
