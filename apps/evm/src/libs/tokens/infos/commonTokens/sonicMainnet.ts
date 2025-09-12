@@ -171,7 +171,7 @@ export const tokens: Token[] = [
     decimals: 6,
     symbol: "U$D",
     asset: u$dLogo,
-    intrinsicSupplyApy: 11
+    intrinsicSupplyApy: 33
   },
   {
     address: "0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57",
