@@ -35,12 +35,10 @@ export const useModalStyles = ({
     `,
     titleWrapper: css`
       padding: ${theme.spacing(6, 6, hasTitleComponent ? 6 : 0, 6)};
-      border-bottom: ${hasTitleComponent ? `1px solid ${theme.palette.secondary.light}` : 0};
       position: sticky;
       top: 0;
       z-index: 10;
       background-color: ${hasTitleComponent ? theme.palette.background.paper : 'transparent'};
-      margin-bottom: ${hasTitleComponent ? theme.spacing(6) : 0};
       display: flex;
       align-items: center;
       justify-content: center;
