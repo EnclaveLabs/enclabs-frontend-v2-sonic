@@ -185,5 +185,13 @@ export default createTheme({
         },
       },
     },
-  },
+    MuiCheckbox: {
+      styleOverrides: {
+        colorPrimary: {
+          '&.Mui-checked': { color: theme.extend.colors.primary },
+          '&.MuiCheckbox-indeterminate': { color: theme.extend.colors.primary },
+        }
+      },
+    }
+  }
 } as ThemeOptions);

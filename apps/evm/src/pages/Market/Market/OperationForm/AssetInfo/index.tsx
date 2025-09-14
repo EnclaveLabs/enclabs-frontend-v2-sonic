@@ -54,8 +54,9 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
     toTokenAmountTokens,
   });
 
+  const { data: merkl } = useGetMerkl();
+
   const { totalBorrowApyPercentage, totalSupplyApyPercentage } = useMemo(() => {
-    const { data: merkl } = useGetMerkl();
     const combinedDistributionApys = getCombinedDistributionApys({
       asset,
       merkl,
