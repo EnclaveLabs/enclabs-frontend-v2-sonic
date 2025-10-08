@@ -29,10 +29,12 @@ export type Network =
 
 export enum ChainId {
   SONIC_MAINNET = 146,
+  PLASMMA_MAINET = 9745
 }
 
 export enum ChainName {
   SONIC_MAINNET = "Sonic",
+  PLASMMA_MAINET = "Plasma",
 }
 
 export type TransactionType = "chain" | "layerZero";

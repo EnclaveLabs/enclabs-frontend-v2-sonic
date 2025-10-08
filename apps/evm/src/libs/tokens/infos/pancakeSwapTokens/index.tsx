@@ -12,6 +12,7 @@ import { tokens as opBnbTestnetTokens } from './opBnbTestnet';
 import { tokens as optimismMainnetTokens } from './optimismMainnet';
 import { tokens as optimismSepoliaTokens } from './optimismSepolia';
 import { tokens as sepoliaTokens } from './sepolia';
+import { tokens as plasmaTokens } from './plasma';
 import { tokens as zkSyncMainnetTokens } from './zkSyncMainnet';
 import { tokens as zkSyncSepoliaTokens } from './zkSyncSepolia';
 
@@ -25,6 +26,7 @@ export const pancakeSwapTokens: TokenMapping = {
   [ChainId.ARBITRUM_SEPOLIA]: arbitrumSepoliaTokens,
   [ChainId.ARBITRUM_ONE]: arbitrumOneTokens,
   [ChainId.SONIC_MAINNET]: sonicTokens,
+  [ChainId.PLASMMA_MAINET]: plasmaTokens,
   [ChainId.ZKSYNC_SEPOLIA]: zkSyncSepoliaTokens,
   [ChainId.ZKSYNC_MAINNET]: zkSyncMainnetTokens,
   [ChainId.OPTIMISM_MAINNET]: optimismMainnetTokens,
