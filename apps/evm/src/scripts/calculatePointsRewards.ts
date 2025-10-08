@@ -120,7 +120,7 @@ async function calculatePointsRewards(markets: Market[]) {
 
     market.accounts.forEach(acc => {
 
-      const supplyPointsEarned = createMarketHistoryItem(
+      const estimatedDailySupplyPointsEarned = createMarketHistoryItem(
         market,
         LiquidityType.SUPPLY,
         acc,
@@ -136,7 +136,7 @@ async function calculatePointsRewards(markets: Market[]) {
       //   BORROW_BONUS_MULTIPLICATOR
       // );
       const borrowPointsEarned = 0;
-
+      const supplyPointsEarned = Math.floor(estimatedDailySupplyPointsEarned / 4);
       // Add cumulated points
       if (supplyPointsEarned > 0 || borrowPointsEarned > 0) {
         userPoints[acc.account.id] = (userPoints[acc.account.id] || 0) + supplyPointsEarned + borrowPointsEarned;

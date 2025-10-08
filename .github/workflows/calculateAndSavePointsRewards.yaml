@@ -2,7 +2,7 @@ name: Calculate and save users rewards points to remote database
 
 on:
   schedule:
-    - cron: '0 18 * * *'  # 9;30 every day
+    - cron: '0 0,6,12,18 * * *'  # 00h, 06h, 12h et 18h 
 
 jobs:
   run-script:
