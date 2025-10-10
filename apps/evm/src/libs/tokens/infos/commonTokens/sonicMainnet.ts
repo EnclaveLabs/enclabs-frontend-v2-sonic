@@ -182,7 +182,7 @@ export const tokens: Token[] = [
   {
     address: "0xAaAaaAAac311D0572Bffb4772fe985A750E88805",
     decimals: 18,
-    symbol: "wmetaUSD (Stability)",
+    symbol: "wmetaUSD v2 (Stability)",
     asset: wmetaUSDlogo,
   },
   {

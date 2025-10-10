@@ -17,7 +17,7 @@ export const pointType = {
     "0x2df4dC7cf362E56e128816BE0f1F4CEb07904Bb0", //PT pendle wstkscusd
     "0xAb1fbEE94D9ba79269B3e479cE5D78C60F148716", //YT scusd stablejack
     
-    "0x1D801dC616C79c499C5d38c998Ef2D0D6Cf868e8", //wmetausd
+    "0xAdB266a641F418DEdFE57fD9dC56dE53909B69E7", //wmetausdv2
     "0x05C132E75D2775Ca4257FCf824169d99d593eBF1", //hlp0
     "0xf50466320de462627f929f7F631206653c10C0b7", //goglz ecosystem
     "0xdDe5262d257BB26DCd6Ea482f489078eD020CD7C", //snake ecosystem

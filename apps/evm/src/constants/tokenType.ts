@@ -35,7 +35,7 @@ export const tokenType = {
     "Yield bearing Stable": [
        
         "0x6202b9f02e30e5e1c62cc01e4305450e5d83b926", //xUSD
-        "0xaaaaaaaac311d0572bffb4772fe985a750e88805", //wMetaUSD
+        "0xaaaaaaaac311d0572bffb4772fe985a750e88805", //wMetaUSDv2
         "0x3D75F2BB8aBcDBd1e27443cB5CBCE8A668046C81", //hlp0
         "0xC326D1505ce0492276f646B03FE460c43A892185", //u$d
     ],
