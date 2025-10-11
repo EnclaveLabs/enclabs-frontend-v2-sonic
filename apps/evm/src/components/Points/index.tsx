@@ -3,6 +3,7 @@ import { pointType } from "../../constants/points";
 import { pointTypeInfo } from 'constants/points';
 import { Icon, Tooltip } from 'components';
 import { Link } from 'containers/Link';
+import { useChainId } from "libs/wallet";
 
 interface PointsProps {
   address: string;
@@ -27,12 +28,14 @@ const ProgramDetails = ({point}: {point: ReturnType<typeof getTokenPoints>}) => 
 
 export const Points = ({ address, iconSize = 5, displayMultiplier }: PointsProps) => {
     const tokenPoints = getTokenPoints(address);
+    const { chainId } = useChainId();
 
     if (displayMultiplier) {
       return <div className="flex gap-2"> 
           {Array.isArray(tokenPoints) ? (
             tokenPoints.map((point, index) => (
         <Tooltip
+        key={`${chainId}-${index}`}
         placement="top"
           title={ 
           <div className="space-y-2">
@@ -57,7 +60,7 @@ export const Points = ({ address, iconSize = 5, displayMultiplier }: PointsProps
     return <Tooltip placement="right" title={<div className="flex flex-col gap-1"> 
           {Array.isArray(tokenPoints) ? (
             tokenPoints.map((point, index) => (
-              <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">     
+              <div key={`${chainId}-${index}`} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">     
           <p className='text-white'>{point.multiplier}</p>
           <img src={point.logo} className={`w-${iconSize} max-w-none flex-none`} />
         
@@ -82,7 +85,7 @@ export const Points = ({ address, iconSize = 5, displayMultiplier }: PointsProps
       <div className={"flex gap-1 justify-start lg:justify-end"}>
       {
         Array.isArray(tokenPoints) ? tokenPoints.map((point, index) => {
-          return <div key={index} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">
+          return <div key={`${chainId}-${index}`} className="flex items-center space-x-2 justify-start xl:justify-end lg:justify-end">
           <img src={point.logo} className={`w-${iconSize - 1} max-w-none flex-none`} />
           </div>
         }) : <p>{tokenPoints}</p>

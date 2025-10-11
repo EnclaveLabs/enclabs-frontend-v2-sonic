@@ -124,6 +124,9 @@ export const featureFlags = {
     ChainId.OPTIMISM_SEPOLIA,
   ],
   gaslessTransactions: [ChainId.ZKSYNC_SEPOLIA, ChainId.ZKSYNC_MAINNET],
+  rewards: [ChainId.SONIC_MAINNET],
+  swapOdos: [ChainId.SONIC_MAINNET],
+  trevee: [ChainId.SONIC_MAINNET]
 };
 
 export type FeatureFlag = keyof typeof featureFlags;

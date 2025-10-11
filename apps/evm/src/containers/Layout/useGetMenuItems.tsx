@@ -17,6 +17,15 @@ const useGetMenuItems = () => {
   const isolatedPoolsRouteEnabled = useIsFeatureEnabled({
     name: "isolatedPools",
   });
+  const isRewardsRouteEnabled = useIsFeatureEnabled({
+    name: "rewards",
+  });
+  const isSwapOdosRouteEnabled = useIsFeatureEnabled({
+    name: "swapOdos",
+  });
+  const isTreveeRouteEnabled = useIsFeatureEnabled({
+    name: "trevee",
+  });
 
   // Keep currently unused flags/addresses referenced to satisfy linter without changing behavior
   const __keep = {
@@ -29,7 +38,7 @@ const useGetMenuItems = () => {
   void __keep;
 
   return useMemo(() => {
-  const menuItems: MenuItem[] = [];
+    const menuItems: MenuItem[] = [];
     // 1) Account (always visible)
     menuItems.push({
       to: routes.account.path,
@@ -49,14 +58,13 @@ const useGetMenuItems = () => {
     });
 
     // 3) Earn
-      menuItems.push({
-        to: routes.earn.path,
-        // Translation key: do not remove this comment
-        // t('layout.menuItems.earn')
-        i18nKey: "layout.menuItems.earn",
-        iconName: "vault",
-        isNew: true
-      });
+    menuItems.push({
+      to: routes.earn.path,
+      // Translation key: do not remove this comment
+      // t('layout.menuItems.earn')
+      i18nKey: "layout.menuItems.earn",
+      iconName: "vault",
+    });
 
     // Other items follow
     if (isolatedPoolsRouteEnabled) {
@@ -69,7 +77,7 @@ const useGetMenuItems = () => {
       });
     }
 
-    menuItems.push({
+    isRewardsRouteEnabled && menuItems.push({
       to: routes.rewards.path,
       // Translation key: do not remove this comment
       // t('layout.menuItems.account')
@@ -77,7 +85,7 @@ const useGetMenuItems = () => {
       iconName: "rewards",
     });
 
-    menuItems.push({
+    isSwapOdosRouteEnabled && menuItems.push({
       to: routes.swapodos.path,
       // Translation key: do not remove this comment
       // t('layout.menuItems.account')
@@ -85,13 +93,12 @@ const useGetMenuItems = () => {
       iconName: "convert",
     });
 
-    menuItems.push({
+    isTreveeRouteEnabled && menuItems.push({
       to: routes.veTrevee.path,
       // Translation key: do not remove this comment
       // t('layout.menuItems.account')
       i18nKey: "veTrevee",
       iconName: "treeve",
-       isNew: true
     });
 
     // if (lstPoolComptrollerContractAddress && lstPoolVWstEthContractAddress) {
@@ -159,7 +166,7 @@ const useGetMenuItems = () => {
     // }
 
     return menuItems;
-  }, [isolatedPoolsRouteEnabled]);
+  }, [isolatedPoolsRouteEnabled, isRewardsRouteEnabled, isSwapOdosRouteEnabled, isTreveeRouteEnabled]);
 };
 
 export default useGetMenuItems;

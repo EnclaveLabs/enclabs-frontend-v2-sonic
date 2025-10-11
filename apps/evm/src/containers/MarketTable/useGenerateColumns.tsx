@@ -32,9 +32,10 @@ import { useStyles } from './styles';
 import type { ColumnKey, PoolAsset } from './types';
 import { getTokenType, Tag } from 'components/Tag';
 import { getTokenPoints, Points } from 'components/Points';
-import { getTokenPoints as getTokenBorrowPoints , Points as BorrowPoints } from 'components/BorrowPoints';
+import { getTokenPoints as getTokenBorrowPoints, Points as BorrowPoints } from 'components/BorrowPoints';
 import EllipsisText from 'components/EllipsisText';
 import EllipsisLink from 'components/EllipsisLink';
+import { useIsFeatureEnabled } from 'hooks/useIsFeatureEnabled';
 
 // Translation keys: do not remove this comment
 // t('marketTable.columnKeys.asset')
@@ -85,6 +86,10 @@ const useGenerateColumns = ({
   const { corePoolComptrollerContractAddress } = useGetChainMetadata();
   const { t, Trans } = useTranslation();
   const styles = useStyles();
+  const isRewardsRouteEnabled = useIsFeatureEnabled({
+    name: "rewards",
+  });
+
   const columns: TableColumn<PoolAsset>[] = useMemo(
     () =>
       columnKeys.map((column, index) => {
@@ -138,7 +143,7 @@ const useGenerateColumns = ({
             if (column === 'asset') {
               return (
                 <div className="flex items-center space-x-2 min-w-0">
-                  <TokenIconWithSymbol token={poolAsset.vToken.underlyingToken} className='min-w-0'/>
+                  <TokenIconWithSymbol token={poolAsset.vToken.underlyingToken} className='min-w-0' />
 
                   {isPaused && (
                     <InfoIcon
@@ -159,9 +164,9 @@ const useGenerateColumns = ({
             ) {
               return (
                 <>
-                 <Apy className={cn('text-primary font-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={poolAsset} column={column} />
-                 {['supplyApy', 'labeledSupplyApy'].includes(column) && <Points address={poolAsset.vToken.address}/>}
-                 {['borrowApy', 'labeledBorrowApy'].includes(column) && <BorrowPoints address={poolAsset.vToken.address}/>}
+                  <Apy className={cn('text-primary font-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={poolAsset} column={column} />
+                  {['supplyApy', 'labeledSupplyApy'].includes(column) && isRewardsRouteEnabled && <Points address={poolAsset.vToken.address} />}
+                  {['borrowApy', 'labeledBorrowApy'].includes(column) && isRewardsRouteEnabled && <BorrowPoints address={poolAsset.vToken.address} />}
                 </>
               );
             }
@@ -214,12 +219,12 @@ const useGenerateColumns = ({
               return (
                 <div>
                   <EllipsisLink
-                  to={to}
-                  className={cn(
-                    'hover:text-primary text-sm',
-                    isPaused ? 'text-grey' : 'text-lightBlack',
-                  )}>
-                  {poolAsset.pool.name}
+                    to={to}
+                    className={cn(
+                      'hover:text-primary text-sm',
+                      isPaused ? 'text-grey' : 'text-lightBlack',
+                    )}>
+                    {poolAsset.pool.name}
                   </EllipsisLink>
                 </div>
               );
@@ -320,14 +325,14 @@ const useGenerateColumns = ({
               );
             }
 
-            if(column == 'ltv'){
-              
+            if (column == 'ltv') {
+
               return (
                 <ApyPercent asset={poolAsset} />
               );
             }
-            
-            if(column == 'type'){
+
+            if (column == 'type') {
               return (
                 <Tag text={poolAsset.vToken.underlyingToken.address} />
               );
@@ -347,97 +352,97 @@ const useGenerateColumns = ({
             column === 'asset'
               ? undefined
               : (rowA, rowB, direction) => {
-                  if (column === 'borrowApy' || column === 'labeledBorrowApy') {
-                    const roaABorrowApy = rowA.borrowApyPercentage.minus(
-                      getCombinedDistributionApys({ asset: rowA }).totalBorrowApyPercentage,
-                    );
-                    const roaBBorrowApy = rowB.borrowApyPercentage.minus(
-                      getCombinedDistributionApys({ asset: rowB }).totalBorrowApyPercentage,
-                    );
+                if (column === 'borrowApy' || column === 'labeledBorrowApy') {
+                  const roaABorrowApy = rowA.borrowApyPercentage.minus(
+                    getCombinedDistributionApys({ asset: rowA }).totalBorrowApyPercentage,
+                  );
+                  const roaBBorrowApy = rowB.borrowApyPercentage.minus(
+                    getCombinedDistributionApys({ asset: rowB }).totalBorrowApyPercentage,
+                  );
 
-                    return compareBigNumbers(roaABorrowApy, roaBBorrowApy, direction);
-                  }
+                  return compareBigNumbers(roaABorrowApy, roaBBorrowApy, direction);
+                }
 
-                  if (column === 'supplyApy' || column === 'labeledSupplyApy' || column === 'ltv') {
-                    const roaASupplyApy = rowA.supplyApyPercentage.plus(
-                      getCombinedDistributionApys({ asset: rowA }).totalSupplyApyPercentage,
-                    );
-                    const roaBSupplyApy = rowB.supplyApyPercentage.plus(
-                      getCombinedDistributionApys({ asset: rowB }).totalSupplyApyPercentage,
-                    );
+                if (column === 'supplyApy' || column === 'labeledSupplyApy' || column === 'ltv') {
+                  const roaASupplyApy = rowA.supplyApyPercentage.plus(
+                    getCombinedDistributionApys({ asset: rowA }).totalSupplyApyPercentage,
+                  );
+                  const roaBSupplyApy = rowB.supplyApyPercentage.plus(
+                    getCombinedDistributionApys({ asset: rowB }).totalSupplyApyPercentage,
+                  );
 
-                    return compareBigNumbers(roaASupplyApy, roaBSupplyApy, direction);
-                  }
+                  return compareBigNumbers(roaASupplyApy, roaBSupplyApy, direction);
+                }
 
-                  // Put rows of tokens that can't be enabled as collateral at the
-                  // bottom of the list
-                  if (column === 'collateral' && rowA.collateralFactor === 0) return 1;
-                  if (column === 'collateral' && rowB.collateralFactor === 0) return -1;
-                  // Sort other rows normally
-                  if (column === 'collateral') {
-                    return compareBooleans(
-                      rowA.isCollateralOfUser,
-                      rowB.isCollateralOfUser,
-                      direction,
-                    );
-                  }
+                // Put rows of tokens that can't be enabled as collateral at the
+                // bottom of the list
+                if (column === 'collateral' && rowA.collateralFactor === 0) return 1;
+                if (column === 'collateral' && rowB.collateralFactor === 0) return -1;
+                // Sort other rows normally
+                if (column === 'collateral') {
+                  return compareBooleans(
+                    rowA.isCollateralOfUser,
+                    rowB.isCollateralOfUser,
+                    direction,
+                  );
+                }
 
-                  if (column === 'liquidity') {
-                    return compareBigNumbers(rowA.liquidityCents, rowB.liquidityCents, direction);
-                  }
+                if (column === 'liquidity') {
+                  return compareBigNumbers(rowA.liquidityCents, rowB.liquidityCents, direction);
+                }
 
-                  if (column === 'pool') {
-                    return compareStrings(rowA.pool.name, rowB.pool.name, direction);
-                  }
+                if (column === 'pool') {
+                  return compareStrings(rowA.pool.name, rowB.pool.name, direction);
+                }
 
-                  if (column === 'type') {
-                    const typeA = getTokenType(rowA.vToken.underlyingToken.address);
-                    const typeB = getTokenType(rowB.vToken.underlyingToken.address);
-                    return compareStrings(typeA, typeB, direction);
-                  }
+                if (column === 'type') {
+                  const typeA = getTokenType(rowA.vToken.underlyingToken.address);
+                  const typeB = getTokenType(rowB.vToken.underlyingToken.address);
+                  return compareStrings(typeA, typeB, direction);
+                }
 
-                  if (column === 'userWalletBalance') {
-                    return compareBigNumbers(
-                      rowA.userWalletBalanceCents,
-                      rowB.userWalletBalanceCents,
-                      direction,
-                    );
-                  }
+                if (column === 'userWalletBalance') {
+                  return compareBigNumbers(
+                    rowA.userWalletBalanceCents,
+                    rowB.userWalletBalanceCents,
+                    direction,
+                  );
+                }
 
-                  if (column === 'userSupplyBalance') {
-                    return compareBigNumbers(
-                      rowA.userSupplyBalanceCents,
-                      rowB.userSupplyBalanceCents,
-                      direction,
-                    );
-                  }
+                if (column === 'userSupplyBalance') {
+                  return compareBigNumbers(
+                    rowA.userSupplyBalanceCents,
+                    rowB.userSupplyBalanceCents,
+                    direction,
+                  );
+                }
 
-                  if (column === 'userBorrowBalance' || column === 'userPercentOfLimit') {
-                    return compareBigNumbers(
-                      rowA.userBorrowBalanceCents,
-                      rowB.userBorrowBalanceCents,
-                      direction,
-                    );
-                  }
+                if (column === 'userBorrowBalance' || column === 'userPercentOfLimit') {
+                  return compareBigNumbers(
+                    rowA.userBorrowBalanceCents,
+                    rowB.userBorrowBalanceCents,
+                    direction,
+                  );
+                }
 
-                  if (column === 'supplyBalance') {
-                    return compareBigNumbers(
-                      rowA.supplyBalanceCents,
-                      rowB.supplyBalanceCents,
-                      direction,
-                    );
-                  }
+                if (column === 'supplyBalance') {
+                  return compareBigNumbers(
+                    rowA.supplyBalanceCents,
+                    rowB.supplyBalanceCents,
+                    direction,
+                  );
+                }
 
-                  if (column === 'borrowBalance') {
-                    return compareBigNumbers(
-                      rowA.borrowBalanceCents,
-                      rowB.borrowBalanceCents,
-                      direction,
-                    );
-                  }
+                if (column === 'borrowBalance') {
+                  return compareBigNumbers(
+                    rowA.borrowBalanceCents,
+                    rowB.borrowBalanceCents,
+                    direction,
+                  );
+                }
 
-                  return 0;
-                },
+                return 0;
+              },
         };
       }),
     [corePoolComptrollerContractAddress, columnKeys, Trans, t, collateralOnChange, styles],

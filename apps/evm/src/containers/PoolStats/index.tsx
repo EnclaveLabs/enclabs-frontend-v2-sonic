@@ -18,6 +18,8 @@ import {
   formatTokensToReadableValue,
   indexBy,
 } from 'utilities';
+import formatNumberWithCommas from 'utilities/formatCentsToSpacedValue';
+import useFormatCentsToSpacedValue from 'utilities/formatCentsToSpacedValue';
 
 type PoolStat =
   | 'supply'
@@ -173,7 +175,7 @@ export const PoolStats: React.FC<PoolStatsProps> = ({ pools, stats, ...otherProp
       if (stat === 'supply') {
         return {
           label: t('poolsStats.cell.totalSupplyLabel'),
-          value: formatCentsToReadableValue({
+          value: useFormatCentsToSpacedValue({
             value: totalSupplyCents,
           }),
         };
@@ -182,7 +184,7 @@ export const PoolStats: React.FC<PoolStatsProps> = ({ pools, stats, ...otherProp
       if (stat === 'borrow') {
         return {
           label: t('poolsStats.cell.totalBorrowLabel'),
-          value: formatCentsToReadableValue({
+          value: formatNumberWithCommas({
             value: totalBorrowCents,
           }),
         };
@@ -191,7 +193,7 @@ export const PoolStats: React.FC<PoolStatsProps> = ({ pools, stats, ...otherProp
       if (stat === 'liquidity') {
         return {
           label: t('poolsStats.cell.availableLiquidityLabel'),
-          value: formatCentsToReadableValue({
+          value: formatNumberWithCommas({
             value: availableLiquidityCents,
           }),
         };
@@ -200,7 +202,7 @@ export const PoolStats: React.FC<PoolStatsProps> = ({ pools, stats, ...otherProp
       if (stat === 'treasury') {
         return {
           label: t('poolsStats.cell.treasuryLabel'),
-          value: formatCentsToReadableValue({
+          value: formatNumberWithCommas({
             value: treasuryCents,
           }),
         };
