@@ -85,13 +85,13 @@ const useGetMenuItems = () => {
       iconName: "rewards",
     });
 
-    isSwapOdosRouteEnabled && menuItems.push({
+    /*isSwapOdosRouteEnabled && menuItems.push({
       to: routes.swapodos.path,
       // Translation key: do not remove this comment
       // t('layout.menuItems.account')
       i18nKey: "layout.menuItems.swap",
       iconName: "convert",
-    });
+    });*/
 
     isTreveeRouteEnabled && menuItems.push({
       to: routes.veTrevee.path,

@@ -240,14 +240,14 @@ const AppRoutes = () => {
           }
         />
 
-        {isSwapOdosRouteEnabled && <Route
+        {/*isSwapOdosRouteEnabled && <Route
           path={`${routes.swapodos.path}/*`}
           element={
             <PageSuspense>
               <SwapOdos />
             </PageSuspense>
           }
-        />}
+        />*/}
 
         <Route
           path={routes.governanceLeaderBoard.path}

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useGetVaults } from 'clients/api';
+/*import { useGetVaults } from 'clients/api';
 import { Page, Spinner } from 'components';
 import { useAccountAddress } from 'libs/wallet';
 import { OdosSwapWidget } from "odos-widgets";
@@ -37,4 +37,4 @@ const SwapOdosPage: React.FC = () => {
   );
 };
 
-export default SwapOdosPage;
+export default SwapOdosPage;*/
