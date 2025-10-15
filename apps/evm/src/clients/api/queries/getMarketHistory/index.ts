@@ -1,5 +1,5 @@
 import { VError } from 'libs/errors';
-import type { MarketSnapshot, VToken } from 'types';
+import type { ChainId, MarketSnapshot, VToken } from 'types';
 import { restService } from 'utilities';
 import config from 'config';
 import { createClient } from '@supabase/supabase-js';
@@ -17,6 +17,7 @@ export interface GetMarketHistoryResponse {
 export interface GetMarketHistoryInput {
   vToken: VToken;
   period: MarketHistoryPeriodType;
+  chainId: ChainId;
 }
 
 export type GetMarketHistoryOutput = {
@@ -28,6 +29,7 @@ const supabase = createClient(config.database.dbUrl, config.database.dbApiKey);
 const getMarketHistory = async ({
   vToken,
   period,
+  chainId
 }: GetMarketHistoryInput): Promise<GetMarketHistoryOutput> => {
   // const endpoint = `/markets/history?asset=${vToken.address}&period=${period}`;
   
@@ -56,6 +58,7 @@ const getMarketHistory = async ({
     .select()
     // Filters
     .eq('market_address', vToken.address.toLowerCase())
+    .eq('chain_id', chainId)
     .gte('created_at', startDate.toISOString());;
 
   if(!data || error){
