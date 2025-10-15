@@ -105,7 +105,7 @@ const Dashboard: React.FC = () => {
           )}
 
           <TextField
-            className="lg:w-[300px]"
+            className="lg:w-[150px]"
             isSmall
             value={searchValue}
             onChange={handleSearchInputChange}
