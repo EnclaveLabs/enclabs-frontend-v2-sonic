@@ -799,6 +799,10 @@ export const contracts: ContractConfig[] = [
           isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_SonicEcosystemPool.toLowerCase(),
 
       },
+      [ChainId.PLASMMA_MAINET]: {
+        [isolatedPoolsPlasmaDeployments.addresses.Comptroller_Core_Plasma.toLowerCase()]:
+          isolatedPoolsPlasmaDeployments.addresses.NativeTokenGateway_vWXPL_Core.toLowerCase(),
+      },
     },
   },
 ];
