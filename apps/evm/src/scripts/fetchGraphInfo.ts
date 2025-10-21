@@ -153,7 +153,8 @@ async function saveDataToSupabase(markets: FetchedMarketData[]) {
             total_borrow_token: SupplyBorrowValues.totalBorrowTokens,
             total_borrow_price_usd: SupplyBorrowValues.totalBorrowInUSD,
             total_liquidity_token: SupplyBorrowValues.totalLiquidityTokens,
-            total_liquidity_price_usd: SupplyBorrowValues.totalLiquidityInUSD
+            total_liquidity_price_usd: SupplyBorrowValues.totalLiquidityInUSD,
+            chain_id: 146 // SONIC MAINNET
         };
     });
 

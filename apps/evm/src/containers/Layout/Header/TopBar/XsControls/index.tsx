@@ -86,10 +86,10 @@ export const XsControls: React.FC = () => {
         </div>
 
         <div className="px-4">
-          <ClaimRewardButton
+          {/*<ClaimRewardButton
             className="w-full"
             variant={isOnMarketPage && !isMobileMenuOpened ? 'secondary' : 'primary'}
-          />
+          />*/}
         </div>
       </div>
     </div>

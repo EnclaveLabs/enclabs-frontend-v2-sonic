@@ -50,13 +50,22 @@ const AppRoutes = () => {
   const primeCalculatorEnabled = useIsFeatureEnabled({
     name: "primeCalculator",
   });
+  const isRewardsRouteEnabled = useIsFeatureEnabled({
+    name: "rewards",
+  });
+  const isSwapOdosRouteEnabled = useIsFeatureEnabled({
+    name: "swapOdos",
+  });
+  const isTreveeRouteEnabled = useIsFeatureEnabled({
+    name: "trevee",
+  });
   const location = useLocation();
 
-  // Scroll to the top of the page on route change
-  // biome-ignore lint/correctness/useExhaustiveDependencies:
-  useEffect(() => {
-    document.getElementById(PAGE_CONTAINER_ID)?.scrollTo(0, 0);
-  }, [location]);
+    // Scroll to the top of the page on route change
+    // biome-ignore lint/correctness/useExhaustiveDependencies:
+    useEffect(() => {
+      document.getElementById(PAGE_CONTAINER_ID)?.scrollTo(0, 0);
+    }, [location]);
 
   return (
     <Routes>
@@ -107,14 +116,14 @@ const AppRoutes = () => {
           )}
         </Route>
 
-        <Route
+        {isRewardsRouteEnabled && <Route
           path={Subdirectory.REWARDS}
           element={
             <PageSuspense>
               <Rewards />
             </PageSuspense>
           }
-        />
+        />}
 
         <Route
           path={Subdirectory.EARN}
@@ -125,14 +134,14 @@ const AppRoutes = () => {
           }
         />
 
-        <Route
+        {isTreveeRouteEnabled && <Route
           path={Subdirectory.VE_TREVEE}
           element={
             <PageSuspense>
               <VeTrevee />
             </PageSuspense>
           }
-        />
+        />}
 
         <Route path={Subdirectory.ISOLATED_POOLS}>
           <Route
@@ -231,14 +240,14 @@ const AppRoutes = () => {
           }
         />
 
-        <Route
+        {/*isSwapOdosRouteEnabled && <Route
           path={`${routes.swapodos.path}/*`}
           element={
             <PageSuspense>
               <SwapOdos />
             </PageSuspense>
           }
-        />
+        />*/}
 
         <Route
           path={routes.governanceLeaderBoard.path}

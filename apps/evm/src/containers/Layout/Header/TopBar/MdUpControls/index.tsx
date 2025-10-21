@@ -13,10 +13,10 @@ export const MdUpControls: React.FC = () => {
 
   return (
     <div className="hidden md:flex md:h-12 md:items-center md:space-x-4 md:pl-6">
-      <ClaimRewardButton
+      {/*<ClaimRewardButton
         variant={isOnMarketPage ? 'secondary' : 'primary'}
         className="flex-none md:whitespace-nowrap"
-      />
+      />*/}
 
       <GaslessStatus
         wrapWithTooltip

@@ -120,9 +120,9 @@ export const CapThreshold: React.FC<CapThresholdProps> = ({
                 y2="6.11727"
                 gradientUnits="userSpaceOnUse"
               >
-                {/* <stop stop-color={theme.extend.colors.primary} /> */}
-                <stop stop-color={tokenTypeInfos.color} />
-                <stop offset="1" stop-color="#5CFFA2" />
+                {/* <stop stopColor={theme.extend.colors.primary} /> */}
+                <stop stopColor={tokenTypeInfos.color} />
+                <stop offset="1" stopColor="#5CFFA2" />
               </linearGradient>
             }
           />

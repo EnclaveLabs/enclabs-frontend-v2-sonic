@@ -16,6 +16,9 @@ import venusProtocolArbitrumOneDeployments from "./abis/arbitrumone_addresses.js
 import isolatedPoolsSonicDeployments from "./abis/sonic_addresses.json";
 import venusOracleSonicMainnetDeployments from "./abis/sonic_addresses.json";
 import venusProtocolSonicDeployments from "./abis/sonic_addresses.json";
+import isolatedPoolsPlasmaDeployments from "./abis/plasma_addresse.json";
+import venusOraclePlasmaMainnetDeployments from "./abis/plasma_addresse.json";
+import venusProtocolPlasmaDeployments from "./abis/plasma_addresse.json";
 import isolatedPoolsArbitrumSepoliaDeployments from "@venusprotocol/isolated-pools/deployments/arbitrumsepolia_addresses.json";
 import isolatedPoolsBscMainnetDeployments from "@venusprotocol/isolated-pools/deployments/bscmainnet_addresses.json";
 import isolatedPoolsBscTestnetDeployments from "@venusprotocol/isolated-pools/deployments/bsctestnet_addresses.json";
@@ -169,6 +172,7 @@ export const contracts: ContractConfig[] = [
       [ChainId.OPTIMISM_MAINNET]:
         isolatedPoolsOptimismMainnetDeployments.addresses.PoolLens,
       [ChainId.SONIC_MAINNET]: isolatedPoolsSonicDeployments.addresses.PoolLens,
+      [ChainId.PLASMMA_MAINET]: isolatedPoolsPlasmaDeployments.addresses.PoolLens,
     },
   },
   {
@@ -201,6 +205,7 @@ export const contracts: ContractConfig[] = [
         isolatedPoolsOptimismMainnetDeployments.addresses.PoolRegistry_Proxy,
       [ChainId.SONIC_MAINNET]:
         isolatedPoolsSonicDeployments.addresses.PoolRegistry_Proxy,
+      [ChainId.PLASMMA_MAINET]: isolatedPoolsPlasmaDeployments.addresses.PoolRegistry_Proxy,
     },
   },
   {
@@ -370,6 +375,7 @@ export const contracts: ContractConfig[] = [
       [ChainId.OPTIMISM_SEPOLIA]: "0xd130B43062D875a4B7aF3f8fc036Bc6e9D3E1B3E",
 
       [ChainId.SONIC_MAINNET]: "0xd130B43062D875a4B7aF3f8fc036Bc6e9D3E1B3E",
+      [ChainId.PLASMMA_MAINET]: "0xd130B43062D875a4B7aF3f8fc036Bc6e9D3E1B3E",
     },
   },
   {
@@ -389,6 +395,7 @@ export const contracts: ContractConfig[] = [
       [ChainId.OPTIMISM_MAINNET]: "0xca11bde05977b3631167028862be2a173976ca11",
       [ChainId.OPTIMISM_SEPOLIA]: "0xca11bde05977b3631167028862be2a173976ca11",
       [ChainId.SONIC_MAINNET]: "0xca11bde05977b3631167028862be2a173976ca11",
+      [ChainId.PLASMMA_MAINET]: "0xca11bde05977b3631167028862be2a173976ca11",
     },
   },
   {
@@ -421,6 +428,7 @@ export const contracts: ContractConfig[] = [
         venusOracleOptimismMainnetDeployments.addresses.ResilientOracle,
       [ChainId.SONIC_MAINNET]:
         venusOracleSonicMainnetDeployments.addresses.ResilientOracle,
+      [ChainId.PLASMMA_MAINET]: isolatedPoolsPlasmaDeployments.addresses.ResilientOracle,
     },
   },
   {
@@ -467,13 +475,12 @@ export const contracts: ContractConfig[] = [
       [ChainId.OPBNB_TESTNET]:
         venusProtocolOpBnbTestnetDeployments.addresses.VTreasuryV8,
       [ChainId.ARBITRUM_SEPOLIA]:
-        venusProtocolArbitrumSepoliaDeployments.addresses.VTreasuryV8,
+        venusProtocolArbitrumSepoliaDeployments.addresses.VTreasurypV8,
       [ChainId.ARBITRUM_ONE]:
         venusProtocolArbitrumOneDeployments.addresses.VTreasuryV8,
       [ChainId.SONIC_MAINNET]:
         venusProtocolSonicDeployments.addresses.VTreasuryV8,
-      [ChainId.ZKSYNC_SEPOLIA]:
-        venusProtocolZkSyncSepoliaDeployments.addresses.VTreasuryV8,
+      [ChainId.PLASMMA_MAINET]: isolatedPoolsPlasmaDeployments.addresses.VTreasuryV8,
       [ChainId.ZKSYNC_MAINNET]:
         venusProtocolZkSyncMainnetDeployments.addresses.VTreasuryV8,
       [ChainId.OPTIMISM_SEPOLIA]:
@@ -783,19 +790,6 @@ export const contracts: ContractConfig[] = [
           isolatedPoolsOptimismSepoliaDeployments.addresses
             .NativeTokenGateway_vWETH_Core,
       },
-
-      // [ChainId.SONIC_MAINNET]: {
-      //   [isolatedPoolsSonicDeployments.addresses.Comptroller_Core_Sonic.toLowerCase()]:
-      //   isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_Core,
-      //   [isolatedPoolsSonicDeployments.addresses[
-      //     'Comptroller_Liquid Staked ETH'
-      //   ].toLowerCase()]:
-      //   isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
-      //     [isolatedPoolsSonicDeployments.addresses[
-      //       'Comptroller_Pendle'
-      //     ].toLowerCase()]:
-      //     isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vWETH_LiquidStakedETH,
-      // },
       [ChainId.SONIC_MAINNET]: {
         [isolatedPoolsSonicDeployments.addresses.Comptroller_Core_Sonic.toLowerCase()]:
           isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_Core.toLowerCase(),
@@ -803,7 +797,7 @@ export const contracts: ContractConfig[] = [
           isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_LiquidStakedS.toLowerCase(),
         [isolatedPoolsSonicDeployments.addresses.Comptroller_LiquidStakedS.toLowerCase()]:
           isolatedPoolsSonicDeployments.addresses.NativeTokenGateway_vwS_SonicEcosystemPool.toLowerCase(),
-          
+
       },
     },
   },

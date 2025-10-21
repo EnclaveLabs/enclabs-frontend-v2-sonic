@@ -6,11 +6,13 @@ import type { ApyChartProps } from 'components/charts/ApyChart';
 import { useIsFeatureEnabled } from 'hooks/useIsFeatureEnabled';
 import type { VToken } from 'types';
 import { LiquidityChartProps } from 'components/charts/LiquidityChart';
+import { useChainId } from 'libs/wallet';
 
 const useGetChartData = ({
   vToken,
   period,
 }: { vToken: VToken; period: MarketHistoryPeriodType }) => {
+  const { chainId } = useChainId();
   const isApyChartsFeatureEnabled = useIsFeatureEnabled({ name: 'apyCharts' });
   const {
     isLoading,
@@ -21,6 +23,7 @@ const useGetChartData = ({
     {
       vToken,
       period,
+      chainId 
     },
     {
       enabled: isApyChartsFeatureEnabled,

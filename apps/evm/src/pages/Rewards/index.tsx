@@ -8,7 +8,7 @@ import { useStyles as useSharedStyles } from "components/charts/styles";
 import config from "config";
 import { useUrlPagination } from "hooks/useUrlPagination";
 import { t } from "i18next";
-import { useAccountAddress } from "libs/wallet";
+import { useAccountAddress, useChainId } from "libs/wallet";
 import { useEffect, useMemo, useState } from "react";
 import {
   Bar,
@@ -65,6 +65,7 @@ const Rewards: React.FC = () => {
   const [historyData, setHistoryData] = useState<HistoryData[]>();
   const sharedStyles = useSharedStyles();
   const { currentPage, setCurrentPage } = useUrlPagination();
+  const { chainId } = useChainId();
 
   const supabase = createClient(
     config.database.dbUrl,
@@ -75,7 +76,7 @@ const Rewards: React.FC = () => {
   useEffect(() => {
     const fetchUserRewardsPoints = async () => {
       try {
-        const { data, error } = await supabase.from("PointsRewards").select();
+        const { data, error } = await supabase.from("PointsRewards").select().eq('chain_id', chainId);
 
         if (error) {
           throw error;
@@ -110,6 +111,7 @@ const Rewards: React.FC = () => {
         const { data, error } = await supabase
           .from("HistoryPointsRewards")
           .select()
+          .eq('chain_id', chainId)
           // Filters
           .eq(
             "user_address",
@@ -198,7 +200,7 @@ const Rewards: React.FC = () => {
 
     fetchUserRewardsPoints();
     fetchUserHistoryRewardsPoints();
-  }, [accountAddress, supabase]);
+  }, [accountAddress, chainId, supabase]);
 
   useEffect(() => {
     const ITEMS_PER_PAGE = 10;

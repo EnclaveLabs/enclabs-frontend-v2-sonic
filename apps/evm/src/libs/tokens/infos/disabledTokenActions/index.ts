@@ -3,6 +3,7 @@ import { ChainId } from 'types';
 import type { DisabledTokenActionMapping } from '../../types';
 import { disabledTokenActions as arbitrumOneDisabledTokenActions } from './arbitrumOne';
 import { disabledTokenActions as sonicDisabledTokenActions } from './sonic';
+import { disabledTokenActions as plasmaDisabledTokenActions } from './plasma';
 import { disabledTokenActions as arbitrumSepoliaDisabledTokenActions } from './arbitrumSepolia';
 import { disabledTokenActions as bscMainnetDisabledTokenActions } from './bscMainnet';
 import { disabledTokenActions as bscTestnetDisabledTokenActions } from './bscTestnet';
@@ -24,6 +25,7 @@ const disabledTokenActions: DisabledTokenActionMapping = {
   [ChainId.SEPOLIA]: sepoliaDisabledTokenActions,
   [ChainId.ARBITRUM_ONE]: arbitrumOneDisabledTokenActions,
   [ChainId.SONIC_MAINNET]: sonicDisabledTokenActions,
+  [ChainId.PLASMMA_MAINET]: plasmaDisabledTokenActions,
   [ChainId.ARBITRUM_SEPOLIA]: arbitrumSepoliaDisabledTokenActions,
   [ChainId.ZKSYNC_MAINNET]: zkSyncMainnetDisabledTokenActions,
   [ChainId.ZKSYNC_SEPOLIA]: zkSyncSepoliaDisabledTokenActions,

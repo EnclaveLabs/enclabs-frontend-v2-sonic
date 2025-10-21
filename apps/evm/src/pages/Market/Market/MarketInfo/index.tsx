@@ -137,7 +137,7 @@ const MarketInfo: React.FC<MarketInfoProps> = ({ asset }) => {
           value: asset.liquidityCents,
         }),
       },
-      ...participantCountRows,
+      // ...participantCountRows,
       {
         label: t('market.marketInfo.stats.dailySupplyingInterestsLabel'),
         value: formatCentsToReadableValue({
@@ -151,13 +151,13 @@ const MarketInfo: React.FC<MarketInfoProps> = ({ asset }) => {
         }),
       },
       ...distributionRows,
-      {
+      /*{
         label: t('market.marketInfo.stats.reserveTokensLabel'),
         value: formatTokensToReadableValue({
           value: asset.reserveTokens,
           token: asset.vToken.underlyingToken,
         }),
-      },
+      },*/
       {
         label: t('market.marketInfo.stats.reserveFactorLabel'),
         value: formatPercentageToReadableValue(asset.reserveFactor && asset.reserveFactor * 100),

@@ -17,10 +17,9 @@ const Dashboard: React.FC = () => {
   const { t } = useTranslation();
   const { accountAddress } = useAccountAddress();
 
-  const [selectedPoolTagIndex, setSelectedPoolTagIndex] = useState<number>(0);
+  const [selectedPoolTagIndex, setSelectedPoolTagIndex] = useState<number>(1);
   const [shouldDisplayPausedAssets, setShouldDisplayPausedAssets] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-
   const handleSearchInputChange: InputHTMLAttributes<HTMLInputElement>['onChange'] = changeEvent =>
     setSearchValue(changeEvent.currentTarget.value);
 
@@ -46,8 +45,10 @@ const Dashboard: React.FC = () => {
     pools,
     searchValue,
     shouldDisplayPausedAssets,
-    selectedPoolIndex: selectedPoolTagIndex - 1,
+    selectedPoolIndex: isGetPoolsLoading ? -1 : selectedPoolTagIndex - 1,
   });
+
+
 
   const poolTags: Tag[] = useMemo(
     () =>
@@ -71,7 +72,7 @@ const Dashboard: React.FC = () => {
 
       <PoolStats
         pools={pools}
-        className="mb-6 xl:shadow-lg xl:rounded-xl"
+        className="mb-6"
         stats={
           ['supply', 
             'borrow', 
@@ -104,7 +105,7 @@ const Dashboard: React.FC = () => {
           )}
 
           <TextField
-            className="lg:w-[300px]"
+            className="lg:w-[150px]"
             isSmall
             value={searchValue}
             onChange={handleSearchInputChange}

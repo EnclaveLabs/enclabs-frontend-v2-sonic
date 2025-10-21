@@ -15,9 +15,10 @@ import {
 } from 'wagmi/chains';
 
 import localConfig from 'config';
+import { ChainId } from 'types';
 
 export const sonicMainnet: Chain = {
-  id: 146,
+  id: ChainId.SONIC_MAINNET,
   name: 'Sonic Mainnet',
   nativeCurrency: {
     name: 'Sonic',
@@ -37,15 +38,38 @@ export const sonicMainnet: Chain = {
   },
 };
 
+export const plasmaMainnet: Chain = {
+  id: ChainId.PLASMMA_MAINET,
+  name: 'Plasma Mainnet',
+  nativeCurrency: {
+    name: 'Plasma',
+    symbol: 'XPL',
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://rpc.plasma.to'],
+    },
+    public: {
+      http: ['https://rpc.plasma.to'],
+    },
+  },
+  blockExplorers: {
+    default: { name: 'PlasmaScan', url: 'https://plasmascan.to/' },
+  },
+};
+
 const getSupportedChains = (): [Chain, ...Chain[]] => {
   if (localConfig.network === 'testnet') {
     return [
-      sonicMainnet
+      sonicMainnet,
+      plasmaMainnet
     ];
   }
 
   return [
-    sonicMainnet
+    sonicMainnet,
+    plasmaMainnet
   ];
 };
 

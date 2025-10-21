@@ -45,11 +45,13 @@ type MarketSnapshotHistory = {
   bonus_multiplicator: number;
   suppliedOrBorrowed_usd: string;
   points_number: number;
+  chain_id: number;
 }
 
 type PointsRewardsData = {
   user_address: string;
   points_number: number;
+  chain_id: number;
 }
 
 let userPoints: Record<string, number> = {};
@@ -95,7 +97,8 @@ async function getPointsRewardFromDb() {
 
   const { data: existingPoints, error: fetchError } = await sb
     .from('PointsRewards')
-    .select('user_address, points_number');
+    .select('user_address, points_number')
+    .eq('chain_id', 146) // SONIC MAINNET;
 
   if (fetchError) {
     console.error('Error when getting data from supabase:', fetchError);
@@ -167,7 +170,8 @@ function createMarketHistoryItem(
     suppliedOrBorrowed_usd: "",
     points_threshold: points_threshold,
     bonus_multiplicator: bonus_multiplicator,
-    points_number: 0
+    points_number: 0,
+    chain_id: 146 // SONIC MAINNET
   };
 
   // Price per token
@@ -204,6 +208,7 @@ async function saveDataToDb() {
   const pointsRewardsData: PointsRewardsData[] = Object.entries(userPoints).map(([user_address, points_number]) => ({
     user_address,
     points_number: points_number,
+    chain_id: 146 // SONIC MAINNET
   }));
 
   //Save points reward in Database

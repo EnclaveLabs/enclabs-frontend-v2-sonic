@@ -33,18 +33,18 @@ export const CellGroup: React.FC<CellGroupProps> = ({
           "gap-2 bg-transparent p-0",
           variant === "secondary"
             ? "flex overflow-y-auto scrollbar-hidden"
-            : "grid grid-cols-1 sm:grid-cols-2 xl:bg-cards xl:flex xl:p-4 xl:flex-wrap xl:rounded-xl xl:gap-x-0 xl:m-[.5px] xl:mr-[.5px]"
+            : "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 xl:shadow-none"
         )}
         {...containerProps}
       >
         {cells.map(({ label, value, tooltip, color }) => (
           <div
             className={cn(
-              "flex flex-col gap-y-1 whitespace-nowrap justify-center xl: xl:bg-transparent shadow-lg xl:shadow-none",
+              "flex flex-col gap-y-1 whitespace-nowrap justify-center shadow-lg",
               isOnMarketPage ? "shadow-none" : "",
               variant === "secondary"
                 ? "px-4 md:px-6 first-of-type:pl-0 last-of-type:pr-0 border-r border-r-lightGrey last-of-type:border-r-0"
-                : "bg-cards rounded-xl p-3 xl:py-0 xl:px-4 xl:rounded-none xl:first-of-type:pl-0 xl:last-of-type:pr-0 xl:border-r xl:last-of-type:border-r-0 xl:border-lightBlack"
+                : "bg-cards rounded-xl p-3"
             )}
             key={`cell-group-item-${label}`}
           >

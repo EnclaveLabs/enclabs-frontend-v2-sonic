@@ -18,6 +18,7 @@ import { Points } from "components/Points";
 import EarnSupplyWithdrawModal from "./EarnSupplyWithdrawModal";
 import { useState } from "react";
 import { Apy } from "containers/MarketTable/Apy";
+import { useIsFeatureEnabled } from "hooks/useIsFeatureEnabled";
 
 const Earn: React.FC = () => {
   const { accountAddress } = useAccountAddress();
@@ -47,6 +48,10 @@ const Earn: React.FC = () => {
   const selectedAsset = assets.find(
     (a) => a.vToken.address === selectedVTokenAddress
   );
+
+  const isRewardsRouteEnabled = useIsFeatureEnabled({
+    name: "rewards",
+  });
 
   return (
     <Page>
@@ -107,7 +112,7 @@ const Earn: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="bg-background rounded-xl p-4 space-y-3 mb-4 min-h-[140px]">
+                <div className="bg-background rounded-xl p-4 space-y-3 mb-4">
                   <div className="flex items-center justify-between">
                     <p className="text-lightBlack">APR</p>
                     <Apy className={cn('font-semi-bold', isPaused && 'text-grey')} classNameBottomValue='text-black' asset={asset} column={'supplyApy'} />
@@ -120,10 +125,10 @@ const Earn: React.FC = () => {
                       })}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  {isRewardsRouteEnabled && <div className="flex items-center justify-between">
                     <p className="text-lightBlack">Points</p>
                     <Points address={asset.vToken.address} displayMultiplier={true} />
-                  </div>
+                  </div>}
                 </div>
 
                 <Button
