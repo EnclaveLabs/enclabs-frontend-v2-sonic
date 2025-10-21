@@ -1,10 +1,10 @@
-# Venus Protocol Frontend
+# Enclabs Protocol Frontend
 
 <p align="center">
-  <img src="https://venus.io/share.png">
+  <img src="https://pbs.twimg.com/profile_images/1842107609077182464/4yrzsKWt_400x400.jpg">
 </p>
 
-Official repository for the [Venus protocol](https://venus.io) application.
+Official repository for the [Enclabs protocol](https://www.enclabs.finance/) application.
 
 
 ## Getting started
