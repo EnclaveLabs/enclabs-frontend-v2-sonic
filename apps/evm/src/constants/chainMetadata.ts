@@ -31,7 +31,7 @@ export const CHAIN_METADATA: {
     lstPoolComptrollerContractAddress: '0xf27f74f5878bc0dA077FCc0933FAEe49216B5bBA', // TODO plasma
     lstPoolVWstEthContractAddress: '0x9df6B5132135f14719696bBAe3C54BAb272fDb16', // TODO plasma
     nativeToken: getToken({ chainId: ChainId.PLASMMA_MAINET, symbol: 'XPL' })!,
-    rpcUrl: 'https://rpc.plasma.to',
+    rpcUrl: 'https://plasma.drpc.org',
     marketsSubgraphUrl:
       'https://api.studio.thegraph.com/query/101127/enclabs-isolated-sonic/version/latest',
   }
