@@ -50,7 +50,7 @@ export const tokens: Token[] = [
     asset: wethLogo
   },
   {
-    symbol: "XUSD",
+    symbol: "xUSD",
     decimals: 6,
     address: "0x6eAf19b2FC24552925dB245F9Ff613157a7dbb4C",
     asset: xusdLogo
