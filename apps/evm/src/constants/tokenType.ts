@@ -62,7 +62,8 @@ export const tokenType = {
         // == SONIC ==  //
 
         // PLASMA //
-         "0x211Cc4DD073734dA055fbF44a2b4667d5E5fE5d2" // sUSDe
+         "0x211Cc4DD073734dA055fbF44a2b4667d5E5fE5d2", // sUSDe
+         "0x6eAf19b2FC24552925dB245F9Ff613157a7dbb4C" //xusd
          // == PLASMA ==  //
     ],
     "Ecosystem tokens": [
