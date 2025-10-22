@@ -9,7 +9,7 @@ export type MerklAction = "LEND" | "BORROW";
 export type Merkl = Awaited<ReturnType<typeof merkl.opportunities.index.get>>;
 
 export interface getMerklDistributionsInput {
-  merkl: Merkl;
+  merklChainData: Merkl['data'];
   asset: Asset;
 }
 

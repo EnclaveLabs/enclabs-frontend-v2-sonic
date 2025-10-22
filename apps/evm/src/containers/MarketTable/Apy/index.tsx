@@ -24,6 +24,7 @@ import type { ColumnKey } from "../types";
 import { t } from "i18next";
 import { useGetMerkl } from "../../../clients/api/queries/getMerkl/useGetMerkl";
 import { Link } from "containers/Link";
+import { useChainId } from "libs/wallet";
 
 export interface ApyProps {
   asset: Asset;
@@ -61,8 +62,9 @@ export const Apy: React.FC<ApyProps> = ({
   //   symbol: 'XVS',
   // });
   const { data: merkl } = useGetMerkl();
+  const { chainId } = useChainId();
   const combinedDistributionApys = useMemo(
-    () => getCombinedDistributionApys({ asset, merkl }),
+    () => getCombinedDistributionApys({ asset, merklChainData: merkl?.data?.filter((d) => d.chainId === chainId)}),
     [asset, merkl]
   );
 

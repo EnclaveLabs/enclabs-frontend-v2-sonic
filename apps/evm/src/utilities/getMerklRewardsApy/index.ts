@@ -12,12 +12,12 @@ const calculApyFromApr = ({ apr }: { apr: number }): number => {
 };
 
 const getMerklDistributions = ({
-  merkl,
+  merklChainData,
   asset,
 }: getMerklDistributionsInput): getMerklDistributionsOutput => {
   const tokenAddress = asset.vToken.address;
-  const merklBorrowInfos = merkl?.data?.find((m) => m.action === "BORROW");
-  const merklSupplyInfos = merkl?.data?.find((m) => m.action === "LEND");
+  const merklBorrowInfos = merklChainData?.find((m) => m.action === "BORROW");
+  const merklSupplyInfos = merklChainData?.find((m) => m.action === "LEND");
   let supplyDistribution: MerklDistribution | undefined;
   let borrowDistribution: MerklDistribution | undefined;
 
@@ -48,7 +48,7 @@ const getMerklDistributions = ({
 
   if (!!supplyMatch && !!merklSupplyInfos) {
     const merklSuppplyApy = calculApyFromApr({
-      apr: merklSupplyInfos.apr, // Replace with 1 to test code
+       apr: merklSupplyInfos.apr, // Replace with 1 to test code
     });
 
     supplyDistribution = {

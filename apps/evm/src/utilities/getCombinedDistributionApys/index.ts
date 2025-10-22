@@ -71,17 +71,17 @@ const aggregatePercentages = ({ distributions }: AggregatePercentagesInput) =>
 
 export interface GetCombinedDistributionApysInput {
   asset: Asset;
-  merkl?: Merkl;
+  merklChainData?: Merkl['data'];
 }
 
 const getCombinedDistributionApys = ({
   asset,
-  merkl,
+  merklChainData,
 }: GetCombinedDistributionApysInput) => {
-  if (merkl) {
+  if (merklChainData) {
     const { supplyDistribution, borrowDistribution } = getMerklDistributions({
       asset,
-      merkl,
+      merklChainData,
     });
 
     if (
