@@ -17,6 +17,7 @@ import {
   getSwapToTokenAmountReceivedTokens,
 } from "utilities";
 import { useGetMerkl } from "../../../../../clients/api/queries/getMerkl/useGetMerkl";
+import { useChainId } from "libs/wallet";
 
 export interface AssetInfoProps {
   asset: Asset;
@@ -53,13 +54,13 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
     action,
     toTokenAmountTokens,
   });
-
+  const { chainId } = useChainId();
   const { data: merkl } = useGetMerkl();
 
   const { totalBorrowApyPercentage, totalSupplyApyPercentage } = useMemo(() => {
     const combinedDistributionApys = getCombinedDistributionApys({
       asset,
-      merkl,
+      merklChainData: merkl?.data?.filter((d) => d.chainId === chainId),
     });
 
     let tempTotalDistributionBorrowApyPercentage =
@@ -89,7 +90,7 @@ export const AssetInfo: React.FC<AssetInfoProps> = ({
         tempTotalDistributionSupplyApyPercentage
       ),
     };
-  }, [asset, hypotheticalUserPrimeApys]);
+  }, [asset, hypotheticalUserPrimeApys, merkl, chainId]);
 
   const rows = useMemo(() => {
     const apyBreakdownRows: LabeledInlineContentProps[] = [
