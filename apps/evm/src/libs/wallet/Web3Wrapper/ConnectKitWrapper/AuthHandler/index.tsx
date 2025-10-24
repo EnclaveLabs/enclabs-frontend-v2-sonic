@@ -60,18 +60,15 @@ export const AuthHandler: React.FC = () => {
   ): SupportedChainId => {
     // Priorité 1 : Query param valide
     if (isSupportedChainId(urlChainId)) {
-      console.log('✅ Using chainId from URL:', urlChainId);
       return urlChainId;
     }
 
     // Priorité 2 : Chaîne du wallet si supportée
     if (isSupportedChainId(walletChainId)) {
-      console.log('✅ Using chainId from wallet:', walletChainId);
       return walletChainId;
     }
 
     // Priorité 3 : Chaîne par défaut
-    console.log('⚠️ No valid chainId found, using default:', defaultChain.id);
     return defaultChain.id as SupportedChainId;
   };
 
@@ -84,7 +81,6 @@ export const AuthHandler: React.FC = () => {
     currentWalletChainId: number | undefined
   ) => {
     if (isProcessingRef.current) {
-      console.log('⏸️ Already processing, skipping sync');
       return;
     }
 
@@ -93,28 +89,23 @@ export const AuthHandler: React.FC = () => {
     try {
       // Étape 1 : Mettre à jour l'URL si nécessaire
       if (currentUrlChainId !== targetChainId) {
-        console.log('🔄 Updating URL from', currentUrlChainId, 'to', targetChainId);
         await updateUrlChainId({ chainId: targetChainId });
       }
 
       // Étape 2 : Switcher le wallet si nécessaire
       if (isConnected && currentWalletChainId !== targetChainId) {
         if (switchChain) {
-          console.log('🔄 Switching wallet from', currentWalletChainId, 'to', targetChainId);
           try {
             switchChain({ chainId: targetChainId });
           } catch (error) {
-            console.error('❌ Failed to switch chain:', error);
             // Si le switch échoue et que le wallet est sur une chaîne non supportée, on déconnecte
             if (!isSupportedChainId(currentWalletChainId)) {
-              console.log('❌ Wallet on unsupported chain, disconnecting');
               disconnect();
             }
           }
         } else {
           // Si switchChain n'est pas disponible et que le wallet est sur une chaîne non supportée
           if (!isSupportedChainId(currentWalletChainId)) {
-            console.log('❌ Cannot switch chain and wallet on unsupported chain, disconnecting');
             disconnect();
           }
         }
@@ -127,7 +118,6 @@ export const AuthHandler: React.FC = () => {
         !isSupportedChainId(currentWalletChainId) &&
         currentWalletChainId !== targetChainId
       ) {
-        console.log('❌ Wallet remains on unsupported chain after sync attempts, disconnecting');
         disconnect();
       }
     } finally {
@@ -142,11 +132,6 @@ export const AuthHandler: React.FC = () => {
    */
   useAccountEffect({
     onConnect(data) {
-      console.log('✅ Wallet connected:', {
-        address: data.address,
-        chainId: data.chain?.id,
-      });
-
       // Redirection vers account page si on arrive sur le dashboard
       if (
         initialLocationRef.current.pathname === routes.dashboard.path &&
@@ -163,7 +148,6 @@ export const AuthHandler: React.FC = () => {
       }
     },
     onDisconnect() {
-      console.log('❌ Wallet disconnected');
       hasInitialSyncRef.current = false;
     },
   });
@@ -174,21 +158,12 @@ export const AuthHandler: React.FC = () => {
   useEffect(() => {
     // Attendre que le wallet soit prêt (ou qu'il soit clairement déconnecté)
     if (status === 'connecting' || status === 'reconnecting') {
-      console.log('⏳ Wallet status:', status, '- waiting...');
       return;
     }
 
     const performSync = async () => {
       const { chainId: urlChainId } = getUnsafeChainIdFromSearchParams({ searchParams });
       const walletChainId = connectedChain?.id;
-
-      console.log('🔍 Chain sync check:', {
-        urlChainId,
-        walletChainId,
-        isConnected,
-        status,
-        hasInitialSync: hasInitialSyncRef.current,
-      });
 
       // Résoudre le chainId à utiliser
       const targetChainId = resolveChainId(urlChainId, walletChainId);
@@ -210,18 +185,15 @@ export const AuthHandler: React.FC = () => {
       onChange: async ({ chain: walletChain }) => {
         // Ignorer si pas encore initialisé
         if (!hasInitialSyncRef.current) {
-          console.log('⏸️ Not initialized yet, skipping wallet change');
           return;
         }
 
         // Ignorer pendant le processing
         if (isProcessingRef.current) {
-          console.log('⏸️ Processing in progress, skipping wallet change');
           return;
         }
 
         if (!walletChain) {
-          console.log('❌ Wallet disconnected via watchAccount');
           disconnect();
           return;
         }
@@ -229,21 +201,14 @@ export const AuthHandler: React.FC = () => {
         const walletChainId = walletChain.id;
         const { chainId: urlChainId } = getUnsafeChainIdFromSearchParams({ searchParams });
 
-        console.log('💼 Wallet chain changed:', {
-          walletChainId,
-          urlChainId,
-        });
-
         // Si l'utilisateur change manuellement vers une chaîne non supportée
         if (!isSupportedChainId(walletChainId)) {
-          console.log('❌ User switched to unsupported chain, disconnecting');
           disconnect();
           return;
         }
 
         // Si l'utilisateur change vers une chaîne supportée différente de l'URL
         if (walletChainId !== urlChainId) {
-          console.log('🔄 User changed wallet chain, updating URL to', walletChainId);
           isProcessingRef.current = true;
           await updateUrlChainId({ chainId: walletChainId });
           setTimeout(() => {
