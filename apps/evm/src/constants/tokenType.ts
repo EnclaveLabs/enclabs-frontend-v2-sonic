@@ -51,6 +51,7 @@ export const tokenType = {
          // PLASMA //
          "0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb", // USDT0
          "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34", // USDe
+         "0xf91c31299E998C5127Bc5F11e4a657FC0cF358CD", // plUSD
          // == PLASMA ==  //
     ],
     "Yield bearing Stable": [
@@ -63,7 +64,8 @@ export const tokenType = {
 
         // PLASMA //
          "0x211Cc4DD073734dA055fbF44a2b4667d5E5fE5d2", // sUSDe
-         "0x6eAf19b2FC24552925dB245F9Ff613157a7dbb4C" //xusd
+         "0x6eAf19b2FC24552925dB245F9Ff613157a7dbb4C", //xusd
+         "0x616185600989Bf8339b58aC9e539d49536598343" //splUSD
          // == PLASMA ==  //
     ],
     "Ecosystem tokens": [

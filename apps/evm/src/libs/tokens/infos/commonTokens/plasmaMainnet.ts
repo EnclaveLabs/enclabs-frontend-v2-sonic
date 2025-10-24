@@ -6,6 +6,8 @@ import susdeLogo from "libs/tokens/img/susde.svg";
 import wethLogo from "libs/tokens/img/weth.svg";
 import xvsLogo from "libs/tokens/img/xvs.svg";
 import xusdLogo from "libs/tokens/img/xusd.svg";
+import plusdLogo from "libs/tokens/img/plusd.svg";
+import splusdLogo from "libs/tokens/img/splusd.svg";
 import type { Token } from "types";
 
 const xplToken: Token = {
@@ -48,6 +50,18 @@ export const tokens: Token[] = [
     decimals: 18,
     address: "0x9895D81bB462A195b4922ED7De0e3ACD007c32CB",
     asset: wethLogo
+  },
+  {
+    symbol: "plUSD",
+    decimals: 18,
+    address: "0xf91c31299E998C5127Bc5F11e4a657FC0cF358CD",
+    asset: plusdLogo
+  },
+  {
+    symbol: "splUSD",
+    decimals: 18,
+    address: "0x616185600989Bf8339b58aC9e539d49536598343",
+    asset: splusdLogo
   },
   {
     symbol: "xUSD",
