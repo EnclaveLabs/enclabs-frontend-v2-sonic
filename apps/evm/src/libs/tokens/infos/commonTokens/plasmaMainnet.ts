@@ -37,13 +37,13 @@ export const tokens: Token[] = [
     symbol: "sUSDe",
     decimals: 18,
     address: "0x211Cc4DD073734dA055fbF44a2b4667d5E5fE5d2",
-    asset: usdeLogo
+    asset: susdeLogo
   },
   {
     symbol: "USDe",
     decimals: 18,
     address: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
-    asset: susdeLogo
+    asset: usdeLogo
   },
   {
     symbol: "WETH",
